@@ -9,7 +9,7 @@ Trabajo Práctico número 2 de la materia Algoritmos y Programación III de FIUB
 * **Nazareno Hernán Quintero** - [NazaQuintero](https://github.com/NazaQuintero)
 * **Eduardo Martín Bocanegra** - [martinboca](https://github.com/martinboca)
 * **Juan Ignacio Medone Sabatini** - [juanimedone](https://github.com/juanimedone)
-* **Integrante 4** - [integrante4](https://github.com/integrante4)
+* **Franco Patiño** - [mrinkspot](https://github.com/mrinkspot)
 
 Corrector: **{Corrector}**
 
