@@ -10,6 +10,7 @@ Trabajo Práctico número 2 de la materia Algoritmos y Programación III de FIUB
 * **Eduardo Martín Bocanegra** - [martinboca](https://github.com/martinboca)
 * **Juan Ignacio Medone Sabatini** - [juanimedone](https://github.com/juanimedone)
 * **Franco Patiño** - [mrinkspot](https://github.com/mrinkspot)
+* **Camila Bartocci** - [camilabartocci](https://github.com/camilabartocci)
 
 Corrector: **{Corrector}**
 
