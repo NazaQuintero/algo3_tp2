@@ -4,7 +4,7 @@
 
 Trabajo Práctico número 2 de la materia Algoritmos y Programación III de FIUBA
 
-## Grupo {N}
+## Grupo 15
 
 * **Nazareno Hernán Quintero** - [NazaQuintero](https://github.com/NazaQuintero)
 * **Eduardo Martín Bocanegra** - [martinboca](https://github.com/martinboca)
@@ -12,7 +12,7 @@ Trabajo Práctico número 2 de la materia Algoritmos y Programación III de FIUB
 * **Franco Patiño** - [mrinkspot](https://github.com/mrinkspot)
 * **Camila Bartocci** - [camilabartocci](https://github.com/camilabartocci)
 
-Corrector: **{Corrector}**
+Corrector: **Pablo Suárez**
 
 ## Aplicación
 
