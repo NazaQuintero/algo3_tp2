@@ -1,13 +1,14 @@
 @startuml
 
 
-interface Objetivo {}
-
-class Secreto {}
+interface Objetivo {
+    {abstract} +estaCumplido()
+}
 
 class General {}
 
 Objetivo <|.. Secreto
 Objetivo <|.. General
+
 
 @enduml

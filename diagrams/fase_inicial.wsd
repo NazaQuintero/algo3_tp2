@@ -15,11 +15,13 @@ class Color {}
 
 class Continente {}
 
-abstract Pais {}
+class Pais {}
 
 class Tablero {}
 
-class Juego {}
+class Juego {
+       +atacarDesdeA(Pais paisAtacante, Pais paisDefensor, int cantidadEjercitos)
+}
 
 Juego *- Tablero
 
@@ -29,7 +31,7 @@ Tablero *- "50" Pais
 
 Tablero *-- "6" Continente
 
-Continente o- "*" Pais
+Continente -> "*" Pais
 
 Pais o- "1 ..*" Ejercito
 
