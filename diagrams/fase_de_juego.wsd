@@ -1,7 +1,8 @@
 @startuml
 
-abstract Pais {}
-abstract Ronda {}
+class Pais {}
+
+interface Ronda {}
 
 class Ataque {}
 
@@ -9,14 +10,11 @@ class Reagrupamiento {}
 
 class Colocacion {}
 
-Ronda <|-- Ataque
-Ronda <|-- Reagrupamiento
-Ronda <|-- Colocacion
+Ronda <|.. Ataque
+Ronda <|.. Reagrupamiento
+Ronda <|.. Colocacion
 
-class Defensa {}
-class Dado {}
-
-abstract Tarjeta {}
+class Tarjeta {}
 
 interface EstadoTarjeta {}
 
@@ -29,10 +27,10 @@ Tarjeta *- Pais
 Tarjeta *- EstadoTarjeta
 
 class TarjetaActivada {}
-class TarjetaIncativa {}
+class TarjetaInactiva {}
 
 EstadoTarjeta <|.. TarjetaActivada
-EstadoTarjeta <|.. TarjetaIncativa
+EstadoTarjeta <|.. TarjetaInactiva
 
 
 @enduml
