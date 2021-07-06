@@ -19,7 +19,9 @@ class Pais {}
 
 class Tablero {}
 
-class Juego {}
+class Juego {
+       +atacarDesdeA(Pais paisAtacante, Pais paisDefensor, int cantidadEjercitos)
+}
 
 Juego *- Tablero
 
