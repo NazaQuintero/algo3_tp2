@@ -1,0 +1,42 @@
+@startuml
+
+
+class Turno {}
+
+class Jugador {}
+
+Juego *- "2 ..6" Jugador
+
+Juego *-- "*" Turno
+
+interface Objetivo {}
+
+class Color {}
+
+class Continente {}
+
+abstract Pais {}
+
+class Tablero {}
+
+class Juego {}
+
+Juego *- Tablero
+
+class Ejercito {}
+
+Tablero *- "50" Pais
+
+Tablero *-- "6" Continente
+
+Continente o- "*" Pais
+
+Pais o- "1 ..*" Ejercito
+
+Jugador *- Objetivo
+
+Jugador *-- "*" Ejercito
+Jugador *- Color
+
+
+@enduml

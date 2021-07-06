@@ -1,0 +1,13 @@
+@startuml
+
+
+interface Objetivo {}
+
+class Secreto {}
+
+class General {}
+
+Objetivo <|.. Secreto
+Objetivo <|.. General
+
+@enduml

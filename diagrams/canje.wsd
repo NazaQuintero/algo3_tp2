@@ -1,0 +1,20 @@
+@startuml
+
+
+class Jugador {}
+
+interface Canje {}
+
+Jugador *- Canje
+
+class PrimerCanje {}
+class SegundoCanje {}
+class TercerCanje {}
+class CuartoCanje {}
+
+Canje <|.. PrimerCanje
+Canje <|.. SegundoCanje
+Canje <|.. TercerCanje
+Canje <|.. CuartoCanje
+
+@enduml
