@@ -6,18 +6,14 @@ public class Juego {
     private ArrayList<Jugador> jugadores;
 
     public Juego() {
-        jugadores = new ArrayList<Jugador>();
+        jugadores = new ArrayList<>();
     }
 
-    public void agregarJugador(String color) {
-
-        Jugador nuevoJugador = new Jugador(color);
-
-        jugadores.add(nuevoJugador);
+    public void agregarJugador(Jugador unJugador) {
+        jugadores.add(unJugador);
     }
 
-    public void comenzar() throws CantidadInsuficienteException {
-
-        throw new CantidadInsuficienteException();
+    public void comenzar() throws CantidadDeJugadoresInsuficienteException {
+        throw new CantidadDeJugadoresInsuficienteException();
     }
 }

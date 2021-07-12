@@ -11,21 +11,20 @@ public class JuegoTest {
 
         Juego juego = new Juego();
 
-        juego.agregarJugador("color");
+        juego.agregarJugador(new Jugador());
 
-        assertThrows(CantidadInsuficienteException.class, juego::comenzar);
-
+        assertThrows(CantidadDeJugadoresInsuficienteException.class, juego::comenzar);
     }
 
 
     @Test
-    public void seColocan5EjercitosEnElMismoPais() {
+    public void seColocan5EjercitosEnElMismoPais() throws PaisOcupadoPorOtroJugadorException {
 
         Juego juego = new Juego();
-        Jugador jugador = new Jugador("rosa");
+        Jugador jugador = new Jugador();
         Pais pais = new Pais("Argentina");
 
-        juego.agregarJugador("rosa");
+        juego.agregarJugador(jugador);
 
         jugador.colocarEjercitos(5, pais);
 
