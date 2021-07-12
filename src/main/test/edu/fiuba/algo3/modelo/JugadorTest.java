@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.modelo;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -46,6 +47,12 @@ public class JugadorTest {
         Jugador jugador = new Jugador();
 
         assertNotNull(jugador.obtenerObjetivoGeneral());
+    }
+
+    @Test
+    public void porDefectoElObjetivoGeneralNoEstaCumplido() {
+        Jugador jugador = new Jugador();
+        assertFalse(jugador.obtenerObjetivoGeneral().estaCumplido());
     }
 
 

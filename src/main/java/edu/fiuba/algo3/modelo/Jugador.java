@@ -1,7 +1,6 @@
 package edu.fiuba.algo3.modelo;
 
 public class Jugador {
-
     private String color = "";
     private int cantidadPaisesDominados = 0;
     private Objetivo secreto;

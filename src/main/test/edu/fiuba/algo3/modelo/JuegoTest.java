@@ -33,4 +33,20 @@ public class JuegoTest {
 
     }
 
+    @Test
+    public void esTuTurnoDeCodearYYoMeLaRascoOK() {
+        Juego juego = new Juego();
+        Jugador unJugador = new Jugador();
+        Jugador otroJugador = new Jugador();
+        juego.agregarPais("Brasil");
+        juego.agregarPais("Chile");
+        juego.agregarPais("Argentina");
+        juego.agregarPais("Bolivia");
+        juego.agregarPais("Uruguay");
+        juego.agregarPais("Paraguay");
+
+        juego.agregarJugador(unJugador);
+        juego.agregarJugador(otroJugador);
+        juego.repartirPaises();
+    }
 }
