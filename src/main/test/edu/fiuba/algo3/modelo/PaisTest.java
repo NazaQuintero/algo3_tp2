@@ -68,4 +68,17 @@ public class PaisTest {
         assertThrows(PaisOcupadoPorOtroJugadorException.class, () -> unPais.colocarEjercitos(3, otroJugador));
     }
 
+    @Test
+    public void dosPaisesPorDefectoNoSonLimitrofes() {
+        Pais unPais = new Pais("Argentina");
+        Pais otroPais = new Pais("Brasil");
+
+        assertFalse(unPais.esLimitrofeCon(otroPais));
+
+        unPais.limitaCon(otroPais); // aca establecemos que son limitrofes
+
+        assertTrue(unPais.esLimitrofeCon(otroPais));
+
+    }
+
 }

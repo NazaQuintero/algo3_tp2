@@ -1,0 +1,5 @@
+Argentina:Brasil,Chile,Peru,Uruguay
+Brasil:Argentina,Uruguay,Peru,Colombia
+Chile:Argentina,Peru
+Peru:Argentina,Brasil,Chile,Colombia
+Uruguay:Argentina,Brasil
