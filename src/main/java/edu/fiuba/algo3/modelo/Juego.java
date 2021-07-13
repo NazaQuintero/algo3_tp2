@@ -19,14 +19,14 @@ public class Juego {
         jugadores.add(unJugador);
     }
 
-    public void comenzar() throws CantidadDeJugadoresInsuficienteException {
+    public void comenzar() throws CantidadDeJugadoresInsuficienteException, PaisOcupadoPorOtroJugadorException {
         inicializarPaisesDesdeArchivo(NOMBRE_ARCHIVO);
         if (jugadores.size() < 2) throw new CantidadDeJugadoresInsuficienteException();
         else tablero.repartirPaises(jugadores);
 
     }
 
-    public void repartirPaises() {
+    public void repartirPaises() throws PaisOcupadoPorOtroJugadorException {
 
         tablero.repartirPaises(jugadores);
 

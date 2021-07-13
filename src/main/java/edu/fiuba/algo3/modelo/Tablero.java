@@ -17,7 +17,7 @@ public class Tablero {
         nombresPaises.add(nombrePais);
     }
 
-    public void repartirPaises(ArrayList<Jugador> jugadores) {
+    public void repartirPaises(ArrayList<Jugador> jugadores) throws PaisOcupadoPorOtroJugadorException {
         Random r = new Random();
         int numeroJugador = 0; // seria el jugador 1 xd
         String nombrePaisActual;

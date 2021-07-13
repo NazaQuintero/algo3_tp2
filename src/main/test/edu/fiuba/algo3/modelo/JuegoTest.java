@@ -51,7 +51,7 @@ public class JuegoTest {
     }*/
 
     @Test
-    public void seRepartenEquitativamenteSeisPaisesEntreDosJugadores() throws CantidadDeJugadoresInsuficienteException {
+    public void seRepartenEquitativamenteSeisPaisesEntreDosJugadores() throws CantidadDeJugadoresInsuficienteException, PaisOcupadoPorOtroJugadorException {
         Juego juego = new Juego();
         Jugador jugadorUno = new Jugador();
         Jugador jugadorDos = new Jugador();
