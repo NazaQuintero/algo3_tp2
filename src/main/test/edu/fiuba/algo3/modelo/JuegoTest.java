@@ -33,7 +33,7 @@ public class JuegoTest {
 
     }
 
-    @Test
+    /*@Test
     public void esTuTurnoDeCodearYYoMeLaRascoOK() {
         Juego juego = new Juego();
         Jugador unJugador = new Jugador();
@@ -48,5 +48,18 @@ public class JuegoTest {
         juego.agregarJugador(unJugador);
         juego.agregarJugador(otroJugador);
         juego.repartirPaises();
+    }*/
+
+    @Test
+    public void seRepartenEquitativamenteSeisPaisesEntreDosJugadores() throws CantidadDeJugadoresInsuficienteException {
+        Juego juego = new Juego();
+        Jugador jugadorUno = new Jugador();
+        Jugador jugadorDos = new Jugador();
+        juego.agregarJugador(jugadorUno);
+        juego.agregarJugador(jugadorDos);
+        juego.comenzar();
+
+        assertEquals(3,jugadorUno.cantidadPaisesDominados());
+        assertEquals(3,jugadorDos.cantidadPaisesDominados());
     }
 }

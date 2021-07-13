@@ -21,16 +21,12 @@ public class Pais {
         return this.jugadorDominante;
     }
 
-    public void colocarEjercitos(int cantidadDeEjercitos, Jugador jugador) throws PaisOcupadoPorOtroJugadorException {
+    public void colocarEjercitos(int cantidadDeEjercitos, Jugador jugador) {
+
         if (this.jugadorDominante == null) {
             this.jugadorDominante = jugador;
             this.cantidadEjercitos += cantidadDeEjercitos;
-        } else if (this.jugadorDominante == jugador) {
-            this.cantidadEjercitos += cantidadDeEjercitos;
-        } else {
-            throw new PaisOcupadoPorOtroJugadorException();
-        }
-
+        } else this.cantidadEjercitos += cantidadDeEjercitos;
     }
 
     public boolean esLimitrofeCon(Pais otroPais) {
