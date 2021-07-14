@@ -7,12 +7,12 @@ public class Pais {
 
     Jugador jugadorDominante;
     private int cantidadEjercitos;
-    private ArrayList<Pais> paisesLimitrofes;
+    private final ArrayList<Pais> paisesLimitrofes;
 
     public Pais(String nombre) {
 
         this.cantidadEjercitos = 0;
-        this.paisesLimitrofes = new ArrayList();
+        this.paisesLimitrofes = new ArrayList<>();
 
     }
 
