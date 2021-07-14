@@ -12,7 +12,7 @@ public class Pais {
     public Pais(String nombre) {
 
         this.cantidadEjercitos = 0;
-        this.paisesLimitrofes = new ArrayList<>();
+        this.paisesLimitrofes = new ArrayList();
 
     }
 
