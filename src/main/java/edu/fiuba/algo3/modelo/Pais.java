@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.modelo;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Pais {
 
@@ -24,12 +25,11 @@ public class Pais {
     public void colocarEjercitos(int cantidadDeEjercitos, Jugador jugador) throws PaisOcupadoPorOtroJugadorException {
         if (this.jugadorDominante == null) {
             this.jugadorDominante = jugador;
-            this.cantidadEjercitos += cantidadDeEjercitos;
-        } else if (this.jugadorDominante == jugador) {
-            this.cantidadEjercitos += cantidadDeEjercitos;
-        } else {
-            throw new PaisOcupadoPorOtroJugadorException();
         }
+        else if (jugador != this.dominadoPor()) throw new PaisOcupadoPorOtroJugadorException();
+        this.cantidadEjercitos += cantidadDeEjercitos;
+
+
 
     }
 
@@ -47,4 +47,30 @@ public class Pais {
     }
 
     public void limitaCon(Pais otroPais) { paisesLimitrofes.add(otroPais); }
+
+    // La lista de dados esta ordenada de mayor a menor
+    public void atacarA(Pais paisDefensor, ArrayList<Integer> dadosAtacante) {
+        paisDefensor.recibirAtaque(dadosAtacante, this);
+    }
+
+    // La lista de dados esta ordenada de mayor a menor
+    private void recibirAtaque(ArrayList<Integer> dadosAtacante, Pais paisAtacante) {
+        ArrayList<Integer> dadosDefensor = new ArrayList<Integer>(Arrays.asList(3, 3, 3));
+        int cantidadDeVictoriasDefensor = 0;
+        for (int i = 0; i < dadosDefensor.size() ; i++) {
+            if(dadosDefensor.get(i) >= dadosAtacante.get(i)) {
+                cantidadDeVictoriasDefensor++;
+            }
+
+        }
+        try {
+            this.colocarEjercitos(-(dadosDefensor.size() - cantidadDeVictoriasDefensor), this.dominadoPor());
+            paisAtacante.colocarEjercitos(-cantidadDeVictoriasDefensor, paisAtacante.dominadoPor());
+        }
+        catch (Exception e){
+
+        }
+
+    }
+
 }

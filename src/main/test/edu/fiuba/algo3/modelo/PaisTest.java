@@ -2,6 +2,9 @@ package edu.fiuba.algo3.modelo;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class PaisTest {
@@ -23,6 +26,15 @@ public class PaisTest {
     }
 
     @Test
+    public void laCantidadDeEjercitosColocadaEsCorrecta() throws PaisOcupadoPorOtroJugadorException {
+
+        Pais unPais = new Pais("Argentina");
+        unPais.colocarEjercitos(3, new Jugador());
+        assertEquals(3, unPais.cantidadEjercitos());
+
+    }
+
+    @Test
     public void alColocarseEjercitosEstaDominadoPorUnJugador() throws PaisOcupadoPorOtroJugadorException {
 
         Jugador unJugador = new Jugador();
@@ -30,16 +42,6 @@ public class PaisTest {
         unPais.colocarEjercitos(1, unJugador);
 
         assertEquals(unJugador, unPais.dominadoPor());
-    }
-
-    @Test
-    public void unPaisTiene1EjercitoLuegoDeQueSeColoqueEjercitoPorPrimeraVez() throws PaisOcupadoPorOtroJugadorException {
-
-        Jugador unJugador = new Jugador();
-        Pais unPais = new Pais("Argentina");
-        unPais.colocarEjercitos(1, unJugador);
-
-        assertEquals(1, unPais.cantidadEjercitos());
     }
 
     @Test
@@ -81,4 +83,36 @@ public class PaisTest {
 
     }
 
+    @Test
+    public void ataqueEntrePaisesGanaDefensor() throws PaisOcupadoPorOtroJugadorException {
+
+        Pais paisAtacante = new Pais("Argentina");
+        paisAtacante.colocarEjercitos(3, new Jugador());
+
+        Pais paisDefensor = new Pais("Brasil");
+        paisDefensor.colocarEjercitos(3, new Jugador());
+
+        ArrayList<Integer> dadosAtacante = new ArrayList<Integer>(Arrays.asList(2, 2, 2));
+        paisAtacante.atacarA(paisDefensor, dadosAtacante);
+
+        assertEquals(0, paisAtacante.cantidadEjercitos());
+
+    }
+
+
+    @Test
+    public void ataqueEntrePaisesGanaAtacante() throws PaisOcupadoPorOtroJugadorException {
+        Pais paisAtacante = new Pais("Argentina");
+        paisAtacante.colocarEjercitos(5, new Jugador());
+
+        Pais paisDefensor = new Pais("Brasil");
+        paisDefensor.colocarEjercitos(3, new Jugador());
+
+        ArrayList<Integer> dadosAtacante = new ArrayList<Integer>(Arrays.asList(6, 6, 6));
+        paisAtacante.atacarA(paisDefensor, dadosAtacante);
+
+        assertEquals(0, paisDefensor.cantidadEjercitos());
+
+
+    }
 }
