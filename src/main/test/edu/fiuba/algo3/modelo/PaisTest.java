@@ -92,7 +92,7 @@ public class PaisTest {
         Pais paisDefensor = new Pais("Brasil");
         paisDefensor.colocarEjercitos(3, new Jugador());
 
-        ArrayList<Integer> dadosAtacante = new ArrayList<Integer>(Arrays.asList(2, 2, 2));
+        ArrayList<Integer> dadosAtacante = new ArrayList<>(Arrays.asList(2, 2, 2));
         paisAtacante.atacarA(paisDefensor, dadosAtacante);
 
         assertEquals(0, paisAtacante.cantidadEjercitos());
@@ -108,10 +108,13 @@ public class PaisTest {
         Pais paisDefensor = new Pais("Brasil");
         paisDefensor.colocarEjercitos(3, new Jugador());
 
-        ArrayList<Integer> dadosAtacante = new ArrayList<Integer>(Arrays.asList(6, 6, 6));
+        ArrayList<Integer> dadosAtacante = new ArrayList<>(Arrays.asList(6, 6, 6));
         paisAtacante.atacarA(paisDefensor, dadosAtacante);
 
         assertEquals(0, paisDefensor.cantidadEjercitos());
+
+        paisDefensor.colocarEjercitos(1, paisAtacante.dominadoPor());
+        assertEquals(paisAtacante.dominadoPor(), paisDefensor.dominadoPor());
 
 
     }

@@ -29,7 +29,7 @@ public class Pais {
         else if (jugador != this.dominadoPor()) throw new PaisOcupadoPorOtroJugadorException();
         this.cantidadEjercitos += cantidadDeEjercitos;
 
-
+        if (this.cantidadEjercitos() == 0) this.jugadorDominante = null;
 
     }
 
@@ -55,8 +55,10 @@ public class Pais {
 
     // La lista de dados esta ordenada de mayor a menor
     private void recibirAtaque(ArrayList<Integer> dadosAtacante, Pais paisAtacante) {
-        ArrayList<Integer> dadosDefensor = new ArrayList<Integer>(Arrays.asList(3, 3, 3));
+        ArrayList<Integer> dadosDefensor = new ArrayList<>(Arrays.asList(3, 3, 3));
         int cantidadDeVictoriasDefensor = 0;
+
+        // Tiene que iterar sobre la lista de dados mas chica
         for (int i = 0; i < dadosDefensor.size() ; i++) {
             if(dadosDefensor.get(i) >= dadosAtacante.get(i)) {
                 cantidadDeVictoriasDefensor++;
@@ -67,7 +69,8 @@ public class Pais {
             this.colocarEjercitos(-(dadosDefensor.size() - cantidadDeVictoriasDefensor), this.dominadoPor());
             paisAtacante.colocarEjercitos(-cantidadDeVictoriasDefensor, paisAtacante.dominadoPor());
         }
-        catch (Exception e){
+
+        catch (Exception ignored){
 
         }
 
