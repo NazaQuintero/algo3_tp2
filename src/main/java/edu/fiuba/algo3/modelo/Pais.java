@@ -5,32 +5,28 @@ import java.util.Arrays;
 
 public class Pais {
 
-    Jugador jugadorDominante;
-    private int cantidadEjercitos;
+    //Jugador jugadorDominante;
+    //private int cantidadEjercitos;
+    Fichas ejercito;
     private ArrayList<Pais> paisesLimitrofes;
 
     public Pais(String nombre) {
-
-        this.cantidadEjercitos = 0;
         this.paisesLimitrofes = new ArrayList<Pais>();
-
+        this.ejercito = new EjercitoNulo();
     }
 
-    public int cantidadEjercitos() { return this.cantidadEjercitos; }
+    public int cantidadEjercitos() { return this.ejercito.obtenerCantidad(); }
 
     public Jugador dominadoPor() {
-        return this.jugadorDominante;
+        return this.ejercito.obtenerJugador();
     }
 
-    public void colocarEjercitos(int cantidadDeEjercitos, Jugador jugador) throws PaisOcupadoPorOtroJugadorException {
-        if (this.jugadorDominante == null) {
-            this.jugadorDominante = jugador;
-        }
-        else if (jugador != this.dominadoPor()) throw new PaisOcupadoPorOtroJugadorException();
-        this.cantidadEjercitos += cantidadDeEjercitos;
+    public void colocarEjercito(Fichas unEjercito) {
+        this.ejercito = unEjercito;
+    }
 
-        if (this.cantidadEjercitos() == 0) this.jugadorDominante = null;
-
+    public void agregarEjercito(int unaCantidad) {
+        this.ejercito.agregarCantidad(unaCantidad);
     }
 
     public boolean esLimitrofeCon(Pais otroPais) {
@@ -65,15 +61,12 @@ public class Pais {
             }
 
         }
-        try {
-            this.colocarEjercitos(-(dadosDefensor.size() - cantidadDeVictoriasDefensor), this.dominadoPor());
-            paisAtacante.colocarEjercitos(-cantidadDeVictoriasDefensor, paisAtacante.dominadoPor());
-        }
 
-        catch (Exception ignored){
-
-        }
-
+        this.agregarEjercito(-(dadosDefensor.size() - cantidadDeVictoriasDefensor));
+        paisAtacante.agregarEjercito(-cantidadDeVictoriasDefensor);
     }
 
+    public Fichas obtenerEjercito() {
+        return this.ejercito;
+    }
 }

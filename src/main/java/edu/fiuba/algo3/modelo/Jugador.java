@@ -16,7 +16,7 @@ public class Jugador {
     }
 
     public void colocarEjercitos(int cantidadDeEjercitos, Pais pais) throws PaisOcupadoPorOtroJugadorException {
-        pais.colocarEjercitos(cantidadDeEjercitos, this);
+        pais.colocarEjercito(new Ejercito(this, cantidadDeEjercitos));
         cantidadPaisesDominados++;
     }
 
