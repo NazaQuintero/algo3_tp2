@@ -2,6 +2,7 @@ package edu.fiuba.algo3.modelo;
 
 import org.junit.jupiter.api.Test;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -11,8 +12,9 @@ import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.mock;
 
 public class BatallaTest {
+// TODO: testear batalla en lugar de pais xd
 
-    @Test
+    /*@Test
     public void ArgentinaAtacaABrasilCon3EjercitosYGanaLaBatallaColocando1EjercitoEnBrasil() {
         Pais paisAtacante = new Pais("Argentina");
         Pais paisDefensor = new Pais("Brasil");
@@ -21,21 +23,24 @@ public class BatallaTest {
         Jugador jugadorDefensorMock = mock(Jugador.class);
 
 
-        Dados dadosAtacanteMock = mock(Dados.class); // serian dados que le pedimos a los jugadores
-        LanzadaDeDados lanzadaAtacanteMock = mock(LanzadaDeDados.class);
+        Dado dadoAtacanteMock = mock(Dado.class); // serian dados que le pedimos a los ju
+        when(dadoAtacanteMock.obtenerValor()).thenReturn(6);
 
-        Dados dadosDefensorMock = mock(Dados.class);
-        LanzadaDeDados lanzadaDefensorMock = mock(LanzadaDeDados.class);
+        Dado dadoDefensorMock = mock(Dado.class);
+        when(dadoDefensorMock.obtenerValor()).thenReturn(1);
 
-        ArrayList<Integer> valoresResultado = new ArrayList<>(Arrays.asList(1,1,1));
+        ArrayList<Dado> dadosAtacante = new ArrayList<>();
+        dadosAtacante.add(dadoAtacanteMock);
+        dadosAtacante.add(dadoAtacanteMock);
+        dadosAtacante.add(dadoAtacanteMock);
 
-        when(dadosAtacanteMock.lanzar()).thenReturn(lanzadaAtacanteMock);
-        when(dadosDefensorMock.lanzar()).thenReturn(lanzadaDefensorMock);
+        ArrayList<Dado> dadosDefensor = new ArrayList<>();
+        dadosDefensor.add(dadoDefensorMock);
+        dadosDefensor.add(dadoDefensorMock);
+        dadosDefensor.add(dadoDefensorMock);
 
-        when(lanzadaAtacanteMock.compararDadosCon(lanzadaDefensorMock)).thenReturn(valoresResultado);
-
-        when(jugadorAtacanteMock.tirarDados(3)).thenReturn(dadosAtacanteMock);
-        when(jugadorDefensorMock.tirarDados(3)).thenReturn(dadosDefensorMock);
+        when(jugadorAtacanteMock.tirarDados(3)).thenReturn(dadosAtacante);
+        when(jugadorDefensorMock.tirarDados(3)).thenReturn(dadosDefensor);
 
         Ejercito ejercitoAtacante = new Ejercito(jugadorAtacanteMock, 5);
         Ejercito ejercitoDefensor = new Ejercito(jugadorDefensorMock, 3);
@@ -43,11 +48,10 @@ public class BatallaTest {
         paisAtacante.colocarEjercito(ejercitoAtacante);
         paisDefensor.colocarEjercito(ejercitoDefensor);
 
-        Batalla unaBatalla = new Batalla(paisAtacante, 3, paisDefensor);
-        unaBatalla.batallar(dadosAtacanteMock, dadosDefensorMock);
+        paisAtacante.atacarA(paisDefensor,3);
 
         assertEquals(1, paisDefensor.cantidadEjercitos());
         assertEquals(jugadorAtacanteMock, paisDefensor.dominadoPor());
-    }
+    }*/
 
 }

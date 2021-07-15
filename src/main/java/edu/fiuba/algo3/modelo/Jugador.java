@@ -1,5 +1,7 @@
 package edu.fiuba.algo3.modelo;
 
+import java.util.ArrayList;
+
 public class Jugador {
     private String color = "";
     private int cantidadPaisesDominados = 0;
@@ -32,8 +34,16 @@ public class Jugador {
         return this.general;
     }
 
-    public Dados tirarDados(int cantidadEjercitos) {
-        return new Dados(cantidadEjercitos);
+    public ArrayList<Dado> tirarDados(int cantidadEjercitos) {
+        ArrayList<Dado> dados = new ArrayList<>();
+        if (cantidadEjercitos > 3) cantidadEjercitos = 3;
+
+        for (int i = 0; i < cantidadEjercitos; i++) {
+            Dado unDado = new Dado();
+            unDado.lanzar();
+            dados.add(unDado);
+        }
+        return dados;
     }
 
 }
