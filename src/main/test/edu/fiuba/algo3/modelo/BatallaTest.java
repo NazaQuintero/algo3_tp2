@@ -22,11 +22,17 @@ public class BatallaTest {
 
 
         Dados dadosAtacanteMock = mock(Dados.class); // serian dados que le pedimos a los jugadores
+        LanzadaDeDados lanzadaAtacanteMock = mock(LanzadaDeDados.class);
+
         Dados dadosDefensorMock = mock(Dados.class);
+        LanzadaDeDados lanzadaDefensorMock = mock(LanzadaDeDados.class);
 
         ArrayList<Integer> valoresResultado = new ArrayList<>(Arrays.asList(1,1,1));
 
-        when(dadosAtacanteMock.compararDadosCon(dadosDefensorMock)).thenReturn(valoresResultado);
+        when(dadosAtacanteMock.lanzar()).thenReturn(lanzadaAtacanteMock);
+        when(dadosDefensorMock.lanzar()).thenReturn(lanzadaDefensorMock);
+
+        when(lanzadaAtacanteMock.compararDadosCon(lanzadaDefensorMock)).thenReturn(valoresResultado);
 
         when(jugadorAtacanteMock.tirarDados(3)).thenReturn(dadosAtacanteMock);
         when(jugadorDefensorMock.tirarDados(3)).thenReturn(dadosDefensorMock);
