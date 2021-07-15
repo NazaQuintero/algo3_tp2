@@ -109,16 +109,13 @@ public class PaisTest {
         paisAtacante.colocarEjercito(new Ejercito(new Jugador(), 5));
 
         Pais paisDefensor = new Pais("Brasil");
-        paisDefensor.colocarEjercito(new Ejercito(new Jugador(), 3));
+        paisDefensor.colocarEjercito(new Ejercito(new Jugador(), 1));
 
-        ArrayList<Integer> dadosAtacante = new ArrayList<>(Arrays.asList(6, 6, 6));
-        paisAtacante.atacarA(paisDefensor, dadosAtacante);
+        paisAtacante.atacarA(paisDefensor, 3);
 
-        assertEquals(0, paisDefensor.cantidadEjercitos());
+        assertEquals(1, paisDefensor.cantidadEjercitos());
 
-        paisDefensor.colocarEjercito(new Ejercito(paisAtacante.dominadoPor(), 1));
         assertEquals(paisAtacante.dominadoPor(), paisDefensor.dominadoPor());
-
 
     }
 }

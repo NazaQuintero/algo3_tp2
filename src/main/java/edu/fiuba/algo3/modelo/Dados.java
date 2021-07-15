@@ -30,15 +30,13 @@ public class Dados {
     }
 
     public ArrayList<Integer> compararDadosCon(Dados defensor) {
-        // Itero por la collection de menor tamanio
-        // Comparo valores 1 a 1 (Pre: las collections estan oredenadas de Mayor a menor)
         ArrayList<Integer> resultado = new ArrayList<>(); // Creo Lista de resultado tamanio del menor con la comparacion
         int tamanioResultado;
         if(this.cantidadDados() > defensor.cantidadDados()) tamanioResultado = defensor.cantidadDados();
         else tamanioResultado = this.cantidadDados();
 
         for (int i = 0; i < tamanioResultado; i++) {
-            resultado.add(valores.get(i) - defensor.valores.get(i)); // > 0 gana atacante, = 0 empate, < 0 gana defensor
+            resultado.add(this.obtenerValores().get(i) - defensor.obtenerValores().get(i)); // > 0 gana atacante, = 0 empate, < 0 gana defensor
         }
         return resultado;
     }

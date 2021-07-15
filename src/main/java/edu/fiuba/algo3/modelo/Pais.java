@@ -4,13 +4,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Pais {
-
-    //Jugador jugadorDominante;
-    //private int cantidadEjercitos;
+    String nombre;
     Fichas ejercito;
     private ArrayList<Pais> paisesLimitrofes;
 
     public Pais(String nombre) {
+        this.nombre = nombre;
         this.paisesLimitrofes = new ArrayList<Pais>();
         this.ejercito = new EjercitoNulo();
     }
@@ -44,29 +43,12 @@ public class Pais {
 
     public void limitaCon(Pais otroPais) { paisesLimitrofes.add(otroPais); }
 
-    // La lista de dados esta ordenada de mayor a menor
-    public void atacarA(Pais paisDefensor, ArrayList<Integer> dadosAtacante) {
-        paisDefensor.recibirAtaque(dadosAtacante, this);
+    public void atacarA(Pais defensor, int cantidadEjercitos) {
+        defensor.recibirAtaque(this, cantidadEjercitos);
     }
 
-    // La lista de dados esta ordenada de mayor a menor
-    private void recibirAtaque(ArrayList<Integer> dadosAtacante, Pais paisAtacante) {
-        ArrayList<Integer> dadosDefensor = new ArrayList<>(Arrays.asList(3, 3, 3));
-        int cantidadDeVictoriasDefensor = 0;
-
-        // Tiene que iterar sobre la lista de dados mas chica
-        for (int i = 0; i < dadosDefensor.size() ; i++) {
-            if(dadosDefensor.get(i) >= dadosAtacante.get(i)) {
-                cantidadDeVictoriasDefensor++;
-            }
-
-        }
-
-        this.modificarCantidadEjercito(-(dadosDefensor.size() - cantidadDeVictoriasDefensor));
-        paisAtacante.modificarCantidadEjercito(-cantidadDeVictoriasDefensor);
-    }
-
-    public Fichas obtenerEjercito() {
-        return this.ejercito;
+    public void recibirAtaque(Pais atacante, int cantidadEjercitos) {
+        Batalla nuevaBatalla = new Batalla(atacante, cantidadEjercitos, this);
+        nuevaBatalla.batallar(atacante.dominadoPor().tirarDados(cantidadEjercitos), this.dominadoPor().tirarDados(this.cantidadEjercitos()));
     }
 }
