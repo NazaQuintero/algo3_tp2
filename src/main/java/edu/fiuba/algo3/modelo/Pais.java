@@ -49,6 +49,6 @@ public class Pais {
 
     public void recibirAtaque(Pais atacante, int cantidadEjercitos) {
         Batalla nuevaBatalla = new Batalla(atacante, cantidadEjercitos, this);
-        nuevaBatalla.batallar(atacante.dominadoPor().tirarDados(cantidadEjercitos), this.dominadoPor().tirarDados(this.cantidadEjercitos()));
+        nuevaBatalla.batallar();
     }
 }
