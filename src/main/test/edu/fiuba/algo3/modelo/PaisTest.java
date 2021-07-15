@@ -114,7 +114,6 @@ public class PaisTest {
         Jugador jugadorAtacanteMock = mock(Jugador.class);
         Jugador jugadorDefensorMock = mock(Jugador.class);
 
-
         Dado dadoAtacanteMock = mock(Dado.class); // serian dados que le pedimos a los ju
         when(dadoAtacanteMock.obtenerValor()).thenReturn(6);
 
