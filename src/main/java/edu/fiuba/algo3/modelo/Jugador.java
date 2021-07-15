@@ -36,13 +36,15 @@ public class Jugador {
 
     public ArrayList<Dado> tirarDados(int cantidadEjercitos) {
         ArrayList<Dado> dados = new ArrayList<>();
-        if (cantidadEjercitos > 3) cantidadEjercitos = 3;
+        if (cantidadEjercitos < 3) cantidadEjercitos = 1;
+        else cantidadEjercitos = 3;
 
         for (int i = 0; i < cantidadEjercitos; i++) {
             Dado unDado = new Dado();
             unDado.lanzar();
             dados.add(unDado);
         }
+
         return dados;
     }
 
