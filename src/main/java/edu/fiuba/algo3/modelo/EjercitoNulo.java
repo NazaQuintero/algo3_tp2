@@ -9,6 +9,6 @@ public class EjercitoNulo implements Fichas {
         return 0;
     }
 
-    public void agregarCantidad(int cantidad) {
+    public void modificarCantidad(int cantidad) {
     }
 }

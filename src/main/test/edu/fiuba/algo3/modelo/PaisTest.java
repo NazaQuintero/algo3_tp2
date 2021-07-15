@@ -53,7 +53,7 @@ public class PaisTest {
 
         assertEquals(unPais.cantidadEjercitos(), 1);
 
-        unPais.agregarEjercito(3);
+        unPais.modificarCantidadEjercito(3);
 
         assertEquals(4, unPais.cantidadEjercitos());
     }

@@ -10,7 +10,7 @@ public class Ejercito implements Fichas {
         this.cantidad = cantidad;
     }
 
-    public void agregarCantidad(int nuevaCantidad) {
+    public void modificarCantidad(int nuevaCantidad) {
         this.cantidad += nuevaCantidad;
     }
 

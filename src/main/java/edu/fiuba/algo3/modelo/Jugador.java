@@ -31,4 +31,9 @@ public class Jugador {
     public Objetivo obtenerObjetivoGeneral() {
         return this.general;
     }
+
+    public Dados tirarDados(int cantidadEjercitos) {
+        return new Dados(cantidadEjercitos);
+    }
+
 }

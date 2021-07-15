@@ -25,8 +25,8 @@ public class Pais {
         this.ejercito = unEjercito;
     }
 
-    public void agregarEjercito(int unaCantidad) {
-        this.ejercito.agregarCantidad(unaCantidad);
+    public void modificarCantidadEjercito(int unaCantidad) {
+        this.ejercito.modificarCantidad(unaCantidad);
     }
 
     public boolean esLimitrofeCon(Pais otroPais) {
@@ -62,8 +62,8 @@ public class Pais {
 
         }
 
-        this.agregarEjercito(-(dadosDefensor.size() - cantidadDeVictoriasDefensor));
-        paisAtacante.agregarEjercito(-cantidadDeVictoriasDefensor);
+        this.modificarCantidadEjercito(-(dadosDefensor.size() - cantidadDeVictoriasDefensor));
+        paisAtacante.modificarCantidadEjercito(-cantidadDeVictoriasDefensor);
     }
 
     public Fichas obtenerEjercito() {
