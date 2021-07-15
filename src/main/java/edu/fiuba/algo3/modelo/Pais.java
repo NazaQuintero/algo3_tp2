@@ -4,33 +4,28 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Pais {
-
-    Jugador jugadorDominante;
-    private int cantidadEjercitos;
+    String nombre;
+    Fichas ejercito;
     private ArrayList<Pais> paisesLimitrofes;
 
     public Pais(String nombre) {
-
-        this.cantidadEjercitos = 0;
+        this.nombre = nombre;
         this.paisesLimitrofes = new ArrayList<Pais>();
-
+        this.ejercito = new EjercitoNulo();
     }
 
-    public int cantidadEjercitos() { return this.cantidadEjercitos; }
+    public int cantidadEjercitos() { return this.ejercito.obtenerCantidad(); }
 
     public Jugador dominadoPor() {
-        return this.jugadorDominante;
+        return this.ejercito.obtenerJugador();
     }
 
-    public void colocarEjercitos(int cantidadDeEjercitos, Jugador jugador) throws PaisOcupadoPorOtroJugadorException {
-        if (this.jugadorDominante == null) {
-            this.jugadorDominante = jugador;
-        }
-        else if (jugador != this.dominadoPor()) throw new PaisOcupadoPorOtroJugadorException();
-        this.cantidadEjercitos += cantidadDeEjercitos;
+    public void colocarEjercito(Fichas unEjercito) {
+        this.ejercito = unEjercito;
+    }
 
-        if (this.cantidadEjercitos() == 0) this.jugadorDominante = null;
-
+    public void modificarCantidadEjercito(int unaCantidad) {
+        this.ejercito.modificarCantidad(unaCantidad);
     }
 
     public boolean esLimitrofeCon(Pais otroPais) {
@@ -48,32 +43,12 @@ public class Pais {
 
     public void limitaCon(Pais otroPais) { paisesLimitrofes.add(otroPais); }
 
-    // La lista de dados esta ordenada de mayor a menor
-    public void atacarA(Pais paisDefensor, ArrayList<Integer> dadosAtacante) {
-        paisDefensor.recibirAtaque(dadosAtacante, this);
+    public void atacarA(Pais defensor, int cantidadEjercitos) {
+        defensor.recibirAtaque(this, cantidadEjercitos);
     }
 
-    // La lista de dados esta ordenada de mayor a menor
-    private void recibirAtaque(ArrayList<Integer> dadosAtacante, Pais paisAtacante) {
-        ArrayList<Integer> dadosDefensor = new ArrayList<>(Arrays.asList(3, 3, 3));
-        int cantidadDeVictoriasDefensor = 0;
-
-        // Tiene que iterar sobre la lista de dados mas chica
-        for (int i = 0; i < dadosDefensor.size() ; i++) {
-            if(dadosDefensor.get(i) >= dadosAtacante.get(i)) {
-                cantidadDeVictoriasDefensor++;
-            }
-
-        }
-        try {
-            this.colocarEjercitos(-(dadosDefensor.size() - cantidadDeVictoriasDefensor), this.dominadoPor());
-            paisAtacante.colocarEjercitos(-cantidadDeVictoriasDefensor, paisAtacante.dominadoPor());
-        }
-
-        catch (Exception ignored){
-
-        }
-
+    public void recibirAtaque(Pais atacante, int cantidadEjercitos) {
+        Batalla nuevaBatalla = new Batalla(atacante, cantidadEjercitos, this);
+        nuevaBatalla.batallar();
     }
-
 }
