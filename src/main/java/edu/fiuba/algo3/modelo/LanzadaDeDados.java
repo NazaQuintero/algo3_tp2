@@ -17,7 +17,7 @@ public class LanzadaDeDados {
         if(cantidad > 3) cantidad = 3;
 
         for (int i = 0; i < cantidad; i++) {
-            valorTirada = 1 + r.nextInt(5) + 1;
+            valorTirada = 1 + r.nextInt(6);
             valores.add(valorTirada);
         }
         this.valores.sort(Comparator.reverseOrder());
