@@ -14,12 +14,10 @@ public class Batalla  {
     }
 
     public void batallar() {
-//        Dados dadosAtacante = atacante.dominadoPor().tirarDados(cantidadEjercitosAtacante);
-//        Dados dadosDefensor =  defensor.dominadoPor().tirarDados(defensor.cantidadEjercitos());
-        DueloDeDados unDuelo = new DueloDeDados();
-        ArrayList<Integer> resultados = unDuelo.iniciarDuelo(atacante.dominadoPor().tirarDados(cantidadEjercitosAtacante), defensor.dominadoPor().tirarDados(defensor.cantidadEjercitos())); // [>0 ==0  <0]
-        computarResultados(resultados);
-        if(defensor.cantidadEjercitos() <= 0) defensor.colocarEjercito(new Ejercito(atacante.dominadoPor(), 1)); // si solo recibe el jugador, adentro se pide la cantidad de ejercitos que se desea pasar a este pais
+        ResultadoBatalla resultado = new ResultadoBatalla(atacante, defensor);
+        resultado.computarResultado(cantidadEjercitosAtacante);
+        resultado.procesarResultado();
+         // si solo recibe el jugador, adentro se pide la cantidad de ejercitos que se desea pasar a este pais
     }
 
     private void computarResultados(ArrayList<Integer> resultados) {

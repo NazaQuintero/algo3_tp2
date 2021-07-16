@@ -10,7 +10,7 @@ public class Pais {
 
     public Pais(String nombre) {
         this.nombre = nombre;
-        this.paisesLimitrofes = new ArrayList<Pais>();
+        this.paisesLimitrofes = new ArrayList<>();
         this.ejercito = new EjercitoNulo();
     }
 
@@ -50,5 +50,9 @@ public class Pais {
     public void recibirAtaque(Pais atacante, int cantidadEjercitos) {
         Batalla nuevaBatalla = new Batalla(atacante, cantidadEjercitos, this);
         nuevaBatalla.batallar();
+    }
+
+    public ArrayList<Dado> tirarDados(int cantidad) {
+        return this.dominadoPor().tirarDados(cantidad);
     }
 }
