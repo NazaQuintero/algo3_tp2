@@ -16,8 +16,7 @@ public class ResultadoBatalla {
     public void computarResultado(int cantidadDeEjercitos) {
         ArrayList<Dado> dadosAtacante = atacante.tirarDados(cantidadDeEjercitos);
         ArrayList<Dado> dadosDefensor = defensor.tirarDados(defensor.cantidadEjercitos());
-        int tamanioMenor = dadosAtacante.size();
-        if(dadosDefensor.size() < tamanioMenor) tamanioMenor = dadosDefensor.size();
+        int tamanioMenor = Math.min(dadosDefensor.size(), dadosAtacante.size());
         for(int i = 0; i < tamanioMenor; i++) resultados.add(determinarGanador(dadosAtacante.get(i), dadosDefensor.get(i)));
     }
 
@@ -26,7 +25,6 @@ public class ResultadoBatalla {
     }
 
     private Victoria determinarGanador(Dado dadoAtacante, Dado dadoDefensor) {
-        if (dadoAtacante.compareTo(dadoDefensor) > 0) return new VictoriaAtacante();
-        return new VictoriaDefensor();
+        return ((dadoAtacante.compareTo(dadoDefensor) > 0) ? new VictoriaAtacante(): new VictoriaDefensor());
     }
 }
