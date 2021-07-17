@@ -29,16 +29,7 @@ public class Pais {
     }
 
     public boolean esLimitrofeCon(Pais otroPais) {
-
-        int i = 0;
-        boolean encontrado = false;
-
-        while (i < paisesLimitrofes.size() && !encontrado) {
-            if (paisesLimitrofes.get(i) == otroPais) encontrado = true;
-            else i++;
-        }
-
-        return encontrado;
+        return this.paisesLimitrofes.contains(otroPais);
     }
 
     public void limitaCon(Pais otroPais) { paisesLimitrofes.add(otroPais); }

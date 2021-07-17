@@ -18,6 +18,6 @@ public class Dado {
     }
 
     public int compareTo(Dado dadoDefensor) {
-        return this.obtenerValor() - dadoDefensor.obtenerValor();
+        return Integer.compare(this.valorTirada, dadoDefensor.valorTirada);
     }
 }
