@@ -28,8 +28,6 @@ public class BatallaTest {
         Batalla unaBatalla = new Batalla(paisAtacante, 3, paisDefensor);
 
         Dado dadoAtacanteMock = mock(Dado.class);
-        when(dadoAtacanteMock.obtenerValor()).thenReturn(6);
-
         Dado dadoDefensorMock = mock(Dado.class);
 
         when(dadoAtacanteMock.compareTo(dadoDefensorMock)).thenReturn(1);
@@ -71,10 +69,9 @@ public class BatallaTest {
         Batalla unaBatalla = new Batalla(paisAtacante, 3, paisDefensor);
 
         Dado dadoAtacanteMock = mock(Dado.class);
-        when(dadoAtacanteMock.obtenerValor()).thenReturn(1);
 
         Dado dadoDefensorMock = mock(Dado.class);
-        when(dadoDefensorMock.obtenerValor()).thenReturn(6);
+        when(dadoAtacanteMock.compareTo(dadoDefensorMock)).thenReturn(-1);
 
         ArrayList<Dado> dadosAtacante = new ArrayList<>();
         dadosAtacante.add(dadoAtacanteMock);
@@ -115,10 +112,9 @@ public class BatallaTest {
         Batalla unaBatalla = new Batalla(paisAtacante, 1, paisDefensor);
 
         Dado dadoAtacanteMock = mock(Dado.class);
-        when(dadoAtacanteMock.obtenerValor()).thenReturn(1);
 
         Dado dadoDefensorMock = mock(Dado.class);
-        when(dadoDefensorMock.obtenerValor()).thenReturn(1);
+        when(dadoAtacanteMock.compareTo(dadoDefensorMock)).thenReturn(-1);
 
         ArrayList<Dado> dadosAtacante = new ArrayList<>();
         dadosAtacante.add(dadoAtacanteMock);

@@ -17,7 +17,7 @@ public class Batalla  {
         ResultadoBatalla resultado = new ResultadoBatalla(atacante, defensor);
         resultado.computarResultado(cantidadEjercitosAtacante);
         resultado.procesarResultado();
-         // si solo recibe el jugador, adentro se pide la cantidad de ejercitos que se desea pasar a este pais
+        // si solo recibe el jugador, adentro se pide la cantidad de ejercitos que se desea pasar a este pais
     }
 
 }

@@ -17,12 +17,7 @@ public class Dado {
         return valorTirada;
     }
 
-    public Victoria determinarGanador(Dado dadoDefensor) {
-        if (this.compareTo(dadoDefensor) > 0) return new VictoriaAtacante();
-        return new VictoriaDefensor();
-    }
-
-    private int compareTo(Dado dadoDefensor) {
-        return this.obtenerValor()-dadoDefensor.obtenerValor();
+    public int compareTo(Dado dadoDefensor) {
+        return this.obtenerValor() - dadoDefensor.obtenerValor();
     }
 }
