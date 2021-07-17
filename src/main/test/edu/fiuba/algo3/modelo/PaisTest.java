@@ -114,11 +114,11 @@ public class PaisTest {
         Jugador jugadorAtacanteMock = mock(Jugador.class);
         Jugador jugadorDefensorMock = mock(Jugador.class);
 
-        Dado dadoAtacanteMock = mock(Dado.class); // serian dados que le pedimos a los ju
-        when(dadoAtacanteMock.obtenerValor()).thenReturn(6);
+        Dado dadoAtacanteMock = mock(Dado.class);
 
         Dado dadoDefensorMock = mock(Dado.class);
-        when(dadoDefensorMock.obtenerValor()).thenReturn(1);
+
+        when(dadoAtacanteMock.compareTo(dadoDefensorMock)).thenReturn(1);
 
         ArrayList<Dado> dadosAtacante = new ArrayList<>();
         dadosAtacante.add(dadoAtacanteMock);
@@ -148,6 +148,7 @@ public class PaisTest {
 
     @Test
     public void ataqueEntrePaisesGanaDefensor() {
+
         Pais paisAtacante = new Pais("Argentina");
         Pais paisDefensor = new Pais("Brasil");
 
@@ -155,11 +156,10 @@ public class PaisTest {
         Jugador jugadorDefensorMock = mock(Jugador.class);
 
 
-        Dado dadoAtacanteMock = mock(Dado.class); // serian dados que le pedimos a los ju
-        when(dadoAtacanteMock.obtenerValor()).thenReturn(1);
-
+        Dado dadoAtacanteMock = mock(Dado.class);
         Dado dadoDefensorMock = mock(Dado.class);
-        when(dadoDefensorMock.obtenerValor()).thenReturn(6);
+
+        when(dadoAtacanteMock.compareTo(dadoDefensorMock)).thenReturn(-1);
 
         ArrayList<Dado> dadosAtacante = new ArrayList<>();
         dadosAtacante.add(dadoAtacanteMock);
