@@ -31,8 +31,8 @@ public class BatallaTest {
         when(dadoAtacanteMock.obtenerValor()).thenReturn(6);
 
         Dado dadoDefensorMock = mock(Dado.class);
-        when(dadoDefensorMock.obtenerValor()).thenReturn(1);
 
+        when(dadoAtacanteMock.compareTo(dadoDefensorMock)).thenReturn(1);
         ArrayList<Dado> dadosAtacante = new ArrayList<>();
         dadosAtacante.add(dadoAtacanteMock);
         dadosAtacante.add(dadoAtacanteMock);

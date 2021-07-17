@@ -18,10 +18,15 @@ public class ResultadoBatalla {
         ArrayList<Dado> dadosDefensor = defensor.tirarDados(defensor.cantidadEjercitos());
         int tamanioMenor = dadosAtacante.size();
         if(dadosDefensor.size() < tamanioMenor) tamanioMenor = dadosDefensor.size();
-        for (int i = 0; i < tamanioMenor; i++) resultados.add(dadosAtacante.get(i).determinarGanador(dadosDefensor.get(i)));
+        for(int i = 0; i < tamanioMenor; i++) resultados.add(determinarGanador(dadosAtacante.get(i), dadosDefensor.get(i)));
     }
 
     public void procesarResultado() {
         for (Victoria victoria : resultados) victoria.procesarVictoria(atacante, defensor);
+    }
+
+    private Victoria determinarGanador(Dado dadoAtacante, Dado dadoDefensor) {
+        if (dadoAtacante.compareTo(dadoDefensor) > 0) return new VictoriaAtacante();
+        return new VictoriaDefensor();
     }
 }
