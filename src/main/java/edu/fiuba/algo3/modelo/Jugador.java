@@ -7,6 +7,7 @@ public class Jugador {
     private int cantidadPaisesDominados = 0;
     private Objetivo secreto;
     private Objetivo general = new General();
+    private Rol rol = new RolIndefinido();
 
 
     public String mostrarColor() {
@@ -34,18 +35,20 @@ public class Jugador {
         return this.general;
     }
 
-    public ArrayList<Dado> tirarDados(int cantidadEjercitos) {
-        ArrayList<Dado> dados = new ArrayList<>();
-        if (cantidadEjercitos < 3) cantidadEjercitos = 1;
-        else cantidadEjercitos = 3;
+    public ArrayList<Dado> tirarDados(Pais pais) {
+        return this.rol.tirarDados(pais);
+    }
 
-        for (int i = 0; i < cantidadEjercitos; i++) {
-            Dado unDado = new Dado();
-            unDado.lanzar();
-            dados.add(unDado);
-        }
+    public int pedirCantidad() {
+        return 4; // por ahora, despues se la pedimos al usuario
+    }
 
-        return dados;
+    public void rolAtacante() {
+        rol = new Atacante();
+    }
+
+    public void rolDefensor() {
+        rol = new Defensor();
     }
 
 }

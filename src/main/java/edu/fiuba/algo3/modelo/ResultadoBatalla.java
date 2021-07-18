@@ -13,9 +13,9 @@ public class ResultadoBatalla {
         this.resultados = new ArrayList<>();
     }
 
-    public void computarResultado(int cantidadDeEjercitos) {
-        ArrayList<Dado> dadosAtacante = atacante.tirarDados(cantidadDeEjercitos);
-        ArrayList<Dado> dadosDefensor = defensor.tirarDados(defensor.cantidadEjercitos());
+    public void computarResultado() {
+        ArrayList<Dado> dadosAtacante = atacante.tirarDados();
+        ArrayList<Dado> dadosDefensor = defensor.tirarDados();
         int tamanioMenor = Math.min(dadosDefensor.size(), dadosAtacante.size());
         for(int i = 0; i < tamanioMenor; i++) resultados.add(determinarGanador(dadosAtacante.get(i), dadosDefensor.get(i)));
     }

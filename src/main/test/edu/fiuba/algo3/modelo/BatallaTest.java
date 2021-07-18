@@ -17,6 +17,7 @@ public class BatallaTest {
         Pais paisDefensor = new Pais("Brasil");
 
         Jugador jugadorAtacanteMock = mock(Jugador.class);
+        when(jugadorAtacanteMock.pedirCantidad()).thenReturn(4);
         Jugador jugadorDefensorMock = mock(Jugador.class);
 
         Ejercito ejercitoAtacante = new Ejercito(jugadorAtacanteMock, 5);
@@ -25,7 +26,7 @@ public class BatallaTest {
         paisAtacante.colocarEjercito(ejercitoAtacante);
         paisDefensor.colocarEjercito(ejercitoDefensor);
 
-        Batalla unaBatalla = new Batalla(paisAtacante, 3, paisDefensor);
+        Batalla unaBatalla = new Batalla(paisAtacante, paisDefensor);
 
         Dado dadoAtacanteMock = mock(Dado.class);
         Dado dadoDefensorMock = mock(Dado.class);
@@ -41,8 +42,8 @@ public class BatallaTest {
         dadosDefensor.add(dadoDefensorMock);
         dadosDefensor.add(dadoDefensorMock);
 
-        when(jugadorAtacanteMock.tirarDados(3)).thenReturn(dadosAtacante);
-        when(jugadorDefensorMock.tirarDados(3)).thenReturn(dadosDefensor);
+        when(jugadorAtacanteMock.tirarDados(paisAtacante)).thenReturn(dadosAtacante);
+        when(jugadorDefensorMock.tirarDados(paisDefensor)).thenReturn(dadosDefensor);
 
         unaBatalla.batallar();
 
@@ -58,6 +59,7 @@ public class BatallaTest {
         Pais paisDefensor = new Pais("Brasil");
 
         Jugador jugadorAtacanteMock = mock(Jugador.class);
+        when(jugadorAtacanteMock.pedirCantidad()).thenReturn(4);
         Jugador jugadorDefensorMock = mock(Jugador.class);
 
         Ejercito ejercitoAtacante = new Ejercito(jugadorAtacanteMock, 4);
@@ -66,7 +68,7 @@ public class BatallaTest {
         paisAtacante.colocarEjercito(ejercitoAtacante);
         paisDefensor.colocarEjercito(ejercitoDefensor);
 
-        Batalla unaBatalla = new Batalla(paisAtacante, 3, paisDefensor);
+        Batalla unaBatalla = new Batalla(paisAtacante, paisDefensor);
 
         Dado dadoAtacanteMock = mock(Dado.class);
 
@@ -83,8 +85,8 @@ public class BatallaTest {
         dadosDefensor.add(dadoDefensorMock);
         dadosDefensor.add(dadoDefensorMock);
 
-        when(jugadorAtacanteMock.tirarDados(3)).thenReturn(dadosAtacante);
-        when(jugadorDefensorMock.tirarDados(3)).thenReturn(dadosDefensor);
+        when(jugadorAtacanteMock.tirarDados(paisAtacante)).thenReturn(dadosAtacante);
+        when(jugadorDefensorMock.tirarDados(paisDefensor)).thenReturn(dadosDefensor);
 
         unaBatalla.batallar();
 
@@ -101,6 +103,7 @@ public class BatallaTest {
         Pais paisDefensor = new Pais("Brasil");
 
         Jugador jugadorAtacanteMock = mock(Jugador.class);
+        when(jugadorAtacanteMock.pedirCantidad()).thenReturn(4);
         Jugador jugadorDefensorMock = mock(Jugador.class);
 
         Ejercito ejercitoAtacante = new Ejercito(jugadorAtacanteMock, 2);
@@ -109,7 +112,7 @@ public class BatallaTest {
         paisAtacante.colocarEjercito(ejercitoAtacante);
         paisDefensor.colocarEjercito(ejercitoDefensor);
 
-        Batalla unaBatalla = new Batalla(paisAtacante, 1, paisDefensor);
+        Batalla unaBatalla = new Batalla(paisAtacante, paisDefensor);
 
         Dado dadoAtacanteMock = mock(Dado.class);
 
@@ -122,8 +125,8 @@ public class BatallaTest {
         ArrayList<Dado> dadosDefensor = new ArrayList<>();
         dadosDefensor.add(dadoDefensorMock);
 
-        when(jugadorAtacanteMock.tirarDados(1)).thenReturn(dadosAtacante);
-        when(jugadorDefensorMock.tirarDados(1)).thenReturn(dadosDefensor);
+        when(jugadorAtacanteMock.tirarDados(paisAtacante)).thenReturn(dadosAtacante);
+        when(jugadorDefensorMock.tirarDados(paisDefensor)).thenReturn(dadosDefensor);
 
         unaBatalla.batallar();
 

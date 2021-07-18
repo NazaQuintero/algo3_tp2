@@ -34,16 +34,30 @@ public class Pais {
 
     public void limitaCon(Pais otroPais) { paisesLimitrofes.add(otroPais); }
 
-    public void atacarA(Pais defensor, int cantidadEjercitos) {
-        defensor.recibirAtaque(this, cantidadEjercitos);
+    public void atacarA(Pais defensor) {
+        this.rolAtacante();
+        defensor.recibirAtaque(this);
     }
 
-    public void recibirAtaque(Pais atacante, int cantidadEjercitos) {
-        Batalla nuevaBatalla = new Batalla(atacante, cantidadEjercitos, this);
+    public void recibirAtaque(Pais atacante) {
+        this.rolDefensor();
+        Batalla nuevaBatalla = new Batalla(atacante,this);
         nuevaBatalla.batallar();
     }
 
-    public ArrayList<Dado> tirarDados(int cantidad) {
-        return this.dominadoPor().tirarDados(cantidad);
+    public ArrayList<Dado> tirarDados() {
+        return this.dominadoPor().tirarDados(this);
+    }
+
+    public int pedirCantidadAlJugador() {
+        return this.ejercito.pedirCantidadAlJugador();
+    }
+
+    public void rolAtacante() {
+        this.dominadoPor().rolAtacante();
+    }
+
+    public void rolDefensor() {
+        this.dominadoPor().rolDefensor();
     }
 }

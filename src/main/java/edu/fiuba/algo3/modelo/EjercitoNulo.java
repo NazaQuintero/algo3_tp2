@@ -11,4 +11,9 @@ public class EjercitoNulo implements Fichas {
 
     public void modificarCantidad(int cantidad) {
     }
+
+    public int pedirCantidadAlJugador() {
+        return 0;
+    }
+
 }
