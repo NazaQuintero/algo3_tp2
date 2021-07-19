@@ -21,12 +21,12 @@ public class Tablero {
     }
 
     public void repartirPaises(ArrayList<Jugador> jugadores) throws PaisOcupadoPorOtroJugadorException {
-        ArrayList<Pais> _paises = new ArrayList<>(paises.values());
-        Collections.shuffle(_paises);
+        ArrayList<Pais> paises = new ArrayList<>(this.paises.values());
+        Collections.shuffle(paises);
 
         int cant_jugadores = jugadores.size();
         for (int i = 0; i < paises.size(); i++) {
-            jugadores.get(i % cant_jugadores).colocarEjercitos(1, _paises.get(i));
+            jugadores.get(i % cant_jugadores).colocarEjercitos(1, paises.get(i));
         }
     }
 
