@@ -18,7 +18,7 @@ public class JuegoTest {
 
 
     @Test
-    public void seColocan5EjercitosEnElMismoPais() throws PaisOcupadoPorOtroJugadorException {
+    public void seColocan1EjercitosEnElMismoPais() {
 
         Juego juego = new Juego();
         Jugador jugador = new Jugador();
@@ -26,9 +26,9 @@ public class JuegoTest {
 
         juego.agregarJugador(jugador);
 
-        jugador.colocarEjercitos(5, pais);
+        jugador.colocarEjercitos(pais);
 
-        assertEquals(pais.cantidadEjercitos(), 5);
+        assertEquals(1,pais.cantidadEjercitos());
         assertEquals(pais.dominadoPor(), jugador);
 
     }

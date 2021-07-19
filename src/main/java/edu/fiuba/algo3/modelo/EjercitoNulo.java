@@ -1,5 +1,7 @@
 package edu.fiuba.algo3.modelo;
 
+import java.util.ArrayList;
+
 public class EjercitoNulo implements Fichas {
     public Jugador obtenerJugador() {
         return null;
@@ -11,4 +13,24 @@ public class EjercitoNulo implements Fichas {
 
     public void modificarCantidad(int cantidad) {
     }
+
+    public int pedirCantidadAlJugador() {
+        return 0;
+    }
+
+    @Override
+    public Dados tirarDados(Pais pais) {
+        return null;
+    }
+
+    @Override
+    public void rolAtacante() {
+
+    }
+
+    @Override
+    public void rolDefensor() {
+
+    }
+
 }
