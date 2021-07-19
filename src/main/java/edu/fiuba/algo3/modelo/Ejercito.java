@@ -21,4 +21,8 @@ public class Ejercito implements Fichas {
     public int obtenerCantidad() {
         return cantidad;
     }
+
+    public int pedirCantidadAlJugador() {
+        return this.jugador.pedirCantidad();
+    }
 }
