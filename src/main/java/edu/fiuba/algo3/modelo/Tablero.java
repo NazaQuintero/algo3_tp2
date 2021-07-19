@@ -1,9 +1,9 @@
 package edu.fiuba.algo3.modelo;
 import java.util.*;
+import java.util.stream.Collectors;
 
 
 public class Tablero {
-    static final int CANTIDAD_PAISES = 6; // tiene que ser 50 pero es 6 para testear
     private Map<String,Pais> paises;
     private ArrayList<String> nombresPaises;
 
@@ -16,19 +16,18 @@ public class Tablero {
         paises.put(nombrePais, unPais);
         nombresPaises.add(nombrePais);
     }
+    public void agregarPais(Pais pais){
+        paises.put(pais.nombre, pais);
+    }
 
     public void repartirPaises(ArrayList<Jugador> jugadores) throws PaisOcupadoPorOtroJugadorException {
-        Random r = new Random();
-        int numeroJugador = 0; // seria el jugador 1 xd
-        String nombrePaisActual;
-        while ((nombresPaises.size()-1) > 0) {
-            nombrePaisActual = nombresPaises.get(r.nextInt((nombresPaises.size()-1)+1));
-            jugadores.get(numeroJugador).colocarEjercitos(1, paises.get(nombrePaisActual));
-            nombresPaises.remove(nombrePaisActual);
-            numeroJugador++;
-            if (numeroJugador >= jugadores.size()) numeroJugador = 0;
+        ArrayList<Pais> _paises = new ArrayList<>(paises.values());
+        Collections.shuffle(_paises);
+
+        int cant_jugadores = jugadores.size();
+        for (int i = 0; i < paises.size(); i++) {
+            jugadores.get(i % cant_jugadores).colocarEjercitos(1, _paises.get(i));
         }
-        jugadores.get(numeroJugador).colocarEjercitos(1, paises.get(nombresPaises.get(0)));
     }
 
     public Pais obtenerPais(String nombrePais) {

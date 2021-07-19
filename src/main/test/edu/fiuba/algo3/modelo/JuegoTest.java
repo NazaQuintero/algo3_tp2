@@ -33,22 +33,6 @@ public class JuegoTest {
 
     }
 
-    /*@Test
-    public void esTuTurnoDeCodearYYoMeLaRascoOK() {
-        Juego juego = new Juego();
-        Jugador unJugador = new Jugador();
-        Jugador otroJugador = new Jugador();
-        juego.agregarPais("Brasil");
-        juego.agregarPais("Chile");
-        juego.agregarPais("Argentina");
-        juego.agregarPais("Bolivia");
-        juego.agregarPais("Uruguay");
-        juego.agregarPais("Paraguay");
-
-        juego.agregarJugador(unJugador);
-        juego.agregarJugador(otroJugador);
-        juego.repartirPaises();
-    }*/
 
     @Test
     public void seRepartenEquitativamenteSeisPaisesEntreDosJugadores() throws CantidadDeJugadoresInsuficienteException, PaisOcupadoPorOtroJugadorException {
@@ -59,7 +43,7 @@ public class JuegoTest {
         juego.agregarJugador(jugadorDos);
         juego.comenzar();
 
-        assertEquals(3,jugadorUno.cantidadPaisesDominados());
-        assertEquals(3,jugadorDos.cantidadPaisesDominados());
+        assertEquals(25,jugadorUno.cantidadPaisesDominados());
+        assertEquals(25,jugadorDos.cantidadPaisesDominados());
     }
 }

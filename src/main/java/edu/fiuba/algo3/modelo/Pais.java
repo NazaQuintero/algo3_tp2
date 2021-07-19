@@ -5,12 +5,20 @@ import java.util.Arrays;
 
 public class Pais {
     String nombre;
+    String continente;
     Fichas ejercito;
     private ArrayList<Pais> paisesLimitrofes;
 
     public Pais(String nombre) {
         this.nombre = nombre;
-        this.paisesLimitrofes = new ArrayList<Pais>();
+        this.paisesLimitrofes = new ArrayList<>();
+        this.ejercito = new EjercitoNulo();
+
+    }
+    public Pais(String nombre, String continente){
+        this.nombre = nombre;
+        this.continente = continente;
+        this.paisesLimitrofes = new ArrayList<>();
         this.ejercito = new EjercitoNulo();
     }
 
