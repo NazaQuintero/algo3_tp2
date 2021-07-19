@@ -19,7 +19,7 @@ public class EjercitoNulo implements Fichas {
     }
 
     @Override
-    public ArrayList<Dado> tirarDados(Pais pais) {
+    public Dados tirarDados(Pais pais) {
         return null;
     }
 

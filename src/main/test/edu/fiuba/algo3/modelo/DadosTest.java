@@ -8,20 +8,20 @@ public class DadosTest {
 
     @Test
     public void porDefectoLaCantidadDeDadosEs3() {
-        Dados dados = new Dados();
+        Dados dados = new Dados(3);
         assertEquals(3, dados.obtenerCantidad());
     }
 
     @Test
     public void alRemoverUnDadoLaCantidadEs2() {
-        Dados dados = new Dados();
+        Dados dados = new Dados(3);
         dados.removerUnDado();
         assertEquals(2, dados.obtenerCantidad());
     }
 
     @Test
     public void alRemover3DadosYAgregar1LaCantidadEs1() {
-        Dados dados = new Dados();
+        Dados dados = new Dados(3);
         dados.removerUnDado();
         dados.removerUnDado();
         dados.removerUnDado();
@@ -36,13 +36,9 @@ public class DadosTest {
     }
 
     @Test
-    public void porDefectoElValorDeTiradaDeCadaDadoNoEstaOrdenado() {
-
-        Dados dados = new Dados();
-        dados.lanzar();
-
-        assertEquals(false, dados.estaOrdenadaDescendente());
-
+    public void porDefectoLosValoresDeCadaDadoEstanOrdenados() {
+        Dados dados = new Dados(3);
+        assertEquals(true, dados.estaOrdenadaDescendente());
     }
 
     @Test

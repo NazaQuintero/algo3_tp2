@@ -45,7 +45,7 @@ public class Pais {
         nuevaBatalla.batallar();
     }
 
-    public ArrayList<Dado> tirarDados() {
+    public Dados tirarDados() {
         return this.ejercito.tirarDados(this);
     }
 

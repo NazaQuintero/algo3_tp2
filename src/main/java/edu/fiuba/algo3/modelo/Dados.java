@@ -6,17 +6,22 @@ import java.util.Iterator;
 import java.util.stream.Collectors;
 
 public class Dados implements Iterable<Dado> {
-    private final ArrayList<Dado> dados = new ArrayList<>();
-    private final int CANTIDAD_DEFECTO_DE_DADOS = 3;
+    private final ArrayList<Dado> dados;
+
+    public Dados(int cantidad) {
+        dados = new ArrayList<>();
+        for (int i = 0; i < cantidad ; i++) this.dados.add(new Dado());
+        this.ordenarDescendente();
+    }
 
     public Dados() {
-        for (int i = 0; i <= CANTIDAD_DEFECTO_DE_DADOS ; i++) this.dados.add(new Dado());
+        dados  = new ArrayList<>();
     }
 
     public void lanzar() { for (Dado dado: dados) dado.lanzar(); }
 
     public int obtenerCantidad() {
-        return this.dados.size() - 1;
+        return this.dados.size();
     }
 
     public void removerUnDado() {
@@ -25,6 +30,10 @@ public class Dados implements Iterable<Dado> {
 
     public void agregarDado(Dado unDado) {
         this.dados.add(unDado);
+    }
+
+    public Dado obtenerDado(int index) {
+        return this.dados.get(index);
     }
 
     public void ordenarDescendente() {

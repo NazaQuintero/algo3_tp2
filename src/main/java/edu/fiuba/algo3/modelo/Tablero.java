@@ -23,12 +23,12 @@ public class Tablero {
         String nombrePaisActual;
         while ((nombresPaises.size()-1) > 0) {
             nombrePaisActual = nombresPaises.get(r.nextInt((nombresPaises.size()-1)+1));
-            jugadores.get(numeroJugador).colocarEjercitos(1, paises.get(nombrePaisActual));
+            jugadores.get(numeroJugador).colocarEjercitos(paises.get(nombrePaisActual));
             nombresPaises.remove(nombrePaisActual);
             numeroJugador++;
             if (numeroJugador >= jugadores.size()) numeroJugador = 0;
         }
-        jugadores.get(numeroJugador).colocarEjercitos(1, paises.get(nombresPaises.get(0)));
+        jugadores.get(numeroJugador).colocarEjercitos(paises.get(nombresPaises.get(0)));
     }
 
     public Pais obtenerPais(String nombrePais) {

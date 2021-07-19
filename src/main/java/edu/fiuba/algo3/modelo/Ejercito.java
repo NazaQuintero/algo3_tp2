@@ -1,19 +1,17 @@
 package edu.fiuba.algo3.modelo;
 
-import java.util.ArrayList;
-
 public class Ejercito implements Fichas {
 
     private Jugador jugador;
     private int cantidad;
 
-    public Ejercito(Jugador jugador, int cantidad) {
+    public Ejercito(Jugador jugador) {
         this.jugador = jugador;
-        this.cantidad = cantidad;
+        this.cantidad = 1;
     }
 
     public void modificarCantidad(int nuevaCantidad) {
-        this.cantidad += nuevaCantidad;
+            this.cantidad += nuevaCantidad;
     }
 
     public Jugador obtenerJugador() {
@@ -29,7 +27,7 @@ public class Ejercito implements Fichas {
     }
 
     @Override
-    public ArrayList<Dado> tirarDados(Pais pais) {
+    public Dados tirarDados(Pais pais) {
         return this.jugador.tirarDados(pais);
     }
 

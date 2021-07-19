@@ -9,7 +9,7 @@ public interface Fichas {
 
     int pedirCantidadAlJugador();
 
-    ArrayList<Dado> tirarDados(Pais pais);
+    Dados tirarDados(Pais pais);
 
     void rolAtacante();
 
