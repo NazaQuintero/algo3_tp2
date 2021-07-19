@@ -3,6 +3,7 @@ package edu.fiuba.algo3.modelo;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class DadosTest {
 
@@ -38,7 +39,7 @@ public class DadosTest {
     @Test
     public void porDefectoLosValoresDeCadaDadoEstanOrdenados() {
         Dados dados = new Dados(3);
-        assertEquals(true, dados.estaOrdenadaDescendente());
+        assertTrue(dados.estaOrdenadaDescendente());
     }
 
     @Test
@@ -47,7 +48,7 @@ public class DadosTest {
         dados.lanzar();
         dados.ordenarDescendente();
 
-        assertEquals(true, dados.estaOrdenadaDescendente());
+        assertTrue(dados.estaOrdenadaDescendente());
 
     }
 

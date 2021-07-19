@@ -27,7 +27,7 @@ public class PaisTest {
     }
 
     @Test
-    public void laCantidadDeEjercitosColocadaEsCorrecta() throws PaisOcupadoPorOtroJugadorException {
+    public void laCantidadDeEjercitosColocadaEsCorrecta() {
 
         Pais unPais = new Pais("Argentina");
         Ejercito ejercito = new Ejercito(new Jugador());
@@ -38,7 +38,7 @@ public class PaisTest {
     }
 
     @Test
-    public void alColocarUnEjercitoEstaDominadoPorUnJugador() throws PaisOcupadoPorOtroJugadorException {
+    public void alColocarUnEjercitoEstaDominadoPorUnJugador() {
 
         Jugador unJugador = new Jugador();
         Pais unPais = new Pais("Argentina");
@@ -49,7 +49,7 @@ public class PaisTest {
     }
 
     @Test
-    public void unPaisQueTenia1EjercitoPasaATener4SiElMismoJugadorVuelveAColocar() throws PaisOcupadoPorOtroJugadorException {
+    public void unPaisQueTenia1EjercitoPasaATener4SiElMismoJugadorVuelveAColocar() {
 
         Jugador unJugador = new Jugador();
         Pais unPais = new Pais("Argentina");
@@ -108,7 +108,7 @@ public class PaisTest {
 
 
     @Test
-    public void ataqueEntrePaisesGanaAtacanteYColocaUnEjercitoEnElPaisDerrotado() throws PaisOcupadoPorOtroJugadorException {
+    public void ataqueEntrePaisesGanaAtacanteYColocaUnEjercitoEnElPaisDerrotado() {
 
         Pais paisAtacante = new Pais("Argentina");
         Pais paisDefensor = new Pais("Brasil");

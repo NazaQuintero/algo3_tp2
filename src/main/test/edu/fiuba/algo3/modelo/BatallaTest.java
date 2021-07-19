@@ -120,6 +120,7 @@ public class BatallaTest {
         Batalla unaBatalla = new Batalla(paisAtacante, paisDefensor);
 
         Dado dadoAtacanteMock = mock(Dado.class);
+        when(dadoAtacanteMock.obtenerValor()).thenReturn(1);
 
         Dado dadoDefensorMock = mock(Dado.class);
         when(dadoAtacanteMock.compareTo(dadoDefensorMock)).thenReturn(0);
