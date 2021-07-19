@@ -21,7 +21,7 @@ public class Juego {
         }
         //Error al cargar los archivos
         catch (Exception e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
     }
 
