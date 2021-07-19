@@ -1,7 +1,5 @@
 package edu.fiuba.algo3.modelo;
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
+
 import java.util.ArrayList;
 
 
@@ -21,7 +19,8 @@ public class Juego {
         jugadores.add(unJugador);
     }
 
-    public void comenzar() throws CantidadDeJugadoresInsuficienteException, PaisOcupadoPorOtroJugadorException {
+    public void comenzar() throws CantidadDeJugadoresInsuficienteException {
+
         try {
             CargarJuego.cargarPaisesAlTablero(tablero, ARCHIVO_PAISES);
             //CargarJuego.cargarTarjetas(tarjetas, ARCHIVO_TARJETAS);
