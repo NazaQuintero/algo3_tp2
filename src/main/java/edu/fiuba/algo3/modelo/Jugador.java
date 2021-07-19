@@ -18,8 +18,8 @@ public class Jugador {
         return cantidadPaisesDominados;
     }
 
-    public void colocarEjercitos(int cantidadDeEjercitos, Pais pais) throws PaisOcupadoPorOtroJugadorException {
-        pais.colocarEjercito(new Ejercito(this, cantidadDeEjercitos));
+    public void colocarEjercitos(Pais pais) {
+        pais.colocarEjercito(new Ejercito(this));
         cantidadPaisesDominados++;
     }
 
@@ -35,7 +35,7 @@ public class Jugador {
         return this.general;
     }
 
-    public ArrayList<Dado> tirarDados(Pais pais) {
+    public Dados tirarDados(Pais pais) {
         return this.rol.tirarDados(pais);
     }
 

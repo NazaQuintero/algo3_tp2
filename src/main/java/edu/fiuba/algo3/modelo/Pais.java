@@ -45,19 +45,17 @@ public class Pais {
         nuevaBatalla.batallar();
     }
 
-    public ArrayList<Dado> tirarDados() {
-        return this.dominadoPor().tirarDados(this);
+    public Dados tirarDados() {
+        return this.ejercito.tirarDados(this);
     }
 
     public int pedirCantidadAlJugador() {
         return this.ejercito.pedirCantidadAlJugador();
     }
 
-    public void rolAtacante() {
-        this.dominadoPor().rolAtacante();
-    }
+    public void rolAtacante() { this.ejercito.rolAtacante(); }
 
     public void rolDefensor() {
-        this.dominadoPor().rolDefensor();
+        this.ejercito.rolDefensor();
     }
 }

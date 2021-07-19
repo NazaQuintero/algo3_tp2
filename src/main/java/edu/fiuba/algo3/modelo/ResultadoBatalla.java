@@ -14,10 +14,10 @@ public class ResultadoBatalla {
     }
 
     public void computarResultado() {
-        ArrayList<Dado> dadosAtacante = atacante.tirarDados();
-        ArrayList<Dado> dadosDefensor = defensor.tirarDados();
-        int tamanioMenor = Math.min(dadosDefensor.size(), dadosAtacante.size());
-        for(int i = 0; i < tamanioMenor; i++) resultados.add(determinarGanador(dadosAtacante.get(i), dadosDefensor.get(i)));
+        Dados dadosAtacante = atacante.tirarDados();
+        Dados dadosDefensor = defensor.tirarDados();
+        int tamanioMenor = Math.min(dadosDefensor.obtenerCantidad(), dadosAtacante.obtenerCantidad());
+        for(int i = 0; i < tamanioMenor; i++) resultados.add(determinarGanador(dadosAtacante.obtenerDado(i), dadosDefensor.obtenerDado(i))); //TODO: hacer que la clase Dados sepa comparar elemento a elemento y devuelva un set de Victoria's
     }
 
     public void procesarResultado() {
@@ -25,6 +25,6 @@ public class ResultadoBatalla {
     }
 
     private Victoria determinarGanador(Dado dadoAtacante, Dado dadoDefensor) {
-        return ((dadoAtacante.compareTo(dadoDefensor) > 0) ? new VictoriaAtacante(): new VictoriaDefensor());
+        return ((dadoAtacante.compareTo(dadoDefensor) < 0) ? new VictoriaAtacante(): new VictoriaDefensor());
     }
 }
