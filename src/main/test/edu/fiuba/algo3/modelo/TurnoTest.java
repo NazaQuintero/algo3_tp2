@@ -12,9 +12,9 @@ public class TurnoTest {
     public void laCantidadDeTurnosEs3siLaCantidadDeJugadoresEs3() {
 //        ArrayList<Jugador> jugadores = new ArrayList<>();
         Jugadores jugadores = new Jugadores();
-        Jugador jugador1 = new Jugador();
-        Jugador jugador2 = new Jugador();
-        Jugador jugador3 = new Jugador();
+        Jugador jugador1 = new Jugador(1);
+        Jugador jugador2 = new Jugador(2);
+        Jugador jugador3 = new Jugador(3);
         jugadores.agregarJugador(jugador1);
         jugadores.agregarJugador(jugador2);
         jugadores.agregarJugador(jugador3);
@@ -27,9 +27,9 @@ public class TurnoTest {
     public void porDefectoElTurnoEsDelJugadorNumero1() {
 //        ArrayList<Jugador> jugadores = new ArrayList<>();
         Jugadores jugadores = new Jugadores();
-        Jugador jugador1 = new Jugador();
-        Jugador jugador2 = new Jugador();
-        Jugador jugador3 = new Jugador();
+        Jugador jugador1 = new Jugador(1);
+        Jugador jugador2 = new Jugador(2);
+        Jugador jugador3 = new Jugador(3);
         jugadores.agregarJugador(jugador1);
         jugadores.agregarJugador(jugador2);
         jugadores.agregarJugador(jugador3);
@@ -42,9 +42,9 @@ public class TurnoTest {
     public void alSeleccionarPrimerJugadorAlJugador2EsElJugadorDelTurnoActual() {
 //        ArrayList<Jugador> jugadores = new ArrayList<>();
         Jugadores jugadores = new Jugadores();
-        Jugador jugador1 = new Jugador();
-        Jugador jugador2 = new Jugador();
-        Jugador jugador3 = new Jugador();
+        Jugador jugador1 = new Jugador(1);
+        Jugador jugador2 = new Jugador(2);
+        Jugador jugador3 = new Jugador(3);
         jugadores.agregarJugador(jugador1);
         jugadores.agregarJugador(jugador2);
         jugadores.agregarJugador(jugador3);
@@ -61,9 +61,9 @@ public class TurnoTest {
     public void alFinalizarElAtaqueDelJugador2ElTurnoSigueSiendoDeJugador2() {
 //        ArrayList<Jugador> jugadores = new ArrayList<>();
         Jugadores jugadores = new Jugadores();
-        Jugador jugador1 = new Jugador();
-        Jugador jugador2 = new Jugador();
-        Jugador jugador3 = new Jugador();
+        Jugador jugador1 = new Jugador(1);
+        Jugador jugador2 = new Jugador(2);
+        Jugador jugador3 = new Jugador(3);
         jugadores.agregarJugador(jugador1);
         jugadores.agregarJugador(jugador2);
         jugadores.agregarJugador(jugador3);
@@ -82,9 +82,9 @@ public class TurnoTest {
     public void alFinalizarElTurnoDelJugador3ElTurnoDelSiguienteJugadorEsDelJugador1() {
 //        ArrayList<Jugador> jugadores = new ArrayList<>();
         Jugadores jugadores = new Jugadores();
-        Jugador jugador1 = new Jugador();
-        Jugador jugador2 = new Jugador();
-        Jugador jugador3 = new Jugador();
+        Jugador jugador1 = new Jugador(1);
+        Jugador jugador2 = new Jugador(2);
+        Jugador jugador3 = new Jugador(3);
         jugadores.agregarJugador(jugador1);
         jugadores.agregarJugador(jugador2);
         jugadores.agregarJugador(jugador3);
@@ -116,9 +116,9 @@ public class TurnoTest {
 //        ArrayList<Jugador> jugadores = new ArrayList<>();
 
         Jugadores jugadores = new Jugadores();
-        Jugador jugador1 = new Jugador();
-        Jugador jugador2 = new Jugador();
-        Jugador jugador3 = new Jugador();
+        Jugador jugador1 = new Jugador(1);
+        Jugador jugador2 = new Jugador(2);
+        Jugador jugador3 = new Jugador(3);
         jugadores.agregarJugador(jugador1);
         jugadores.agregarJugador(jugador2);
         jugadores.agregarJugador(jugador3);
@@ -142,8 +142,8 @@ public class TurnoTest {
 //        ArrayList<Jugador> jugadores = new ArrayList<>();
         Jugadores jugadores = new Jugadores();
 
-        Jugador jugador1 = new Jugador();
-        Jugador jugador2 = new Jugador();
+        Jugador jugador1 = new Jugador(1);
+        Jugador jugador2 = new Jugador(2);
         jugadores.agregarJugador(jugador1);
         jugadores.agregarJugador(jugador2);
 
@@ -162,117 +162,115 @@ public class TurnoTest {
         assertEquals(jugador1, turno.obtenerJugadorTurnoActual());
         jugador1.finalizarReagrupe();
 
-        assertEquals(jugador2, turno.obtenerJugadorTurnoActual());
+        assertEquals(jugador2.obtenerId(), turno.obtenerJugadorTurnoActual().obtenerId());
         Ronda ronda = turno.obtenerRondaActual();
         assertEquals("Colocacion", ronda.obtenerDescripcion());
     }
 
-//
-//    @Test
-//    public void luegoDeFinalizar3TurnosLaCantidadDeTurnosJugadosEs3() {
-//        ArrayList<Jugador> jugadores = new ArrayList<>();
-//        Jugador jugador1 = new Jugador();
-//        Jugador jugador2 = new Jugador();
-//        Jugador jugador3 = new Jugador();
-//        jugadores.add(jugador1);
-//        jugadores.add(jugador2);
-//        jugadores.add(jugador3);
-//
-//        Turno turno = new Turno(jugadores);
-//        turno.seleccionarPrimerJugador(1); // se recibe por parametro un numero random que va de cero a la cantidad de jugadores
-//        turno.finalizarTurnoActual();
-//        turno.finalizarTurnoActual();
-//        assertEquals(jugador1, turno.obtenerJugadorTurnoActual());
-//        turno.finalizarTurnoActual();
-//        assertEquals(3, turno.obtenerCantidadDeTurnosJugados());
-//    }
-//
-//    @Test
-//    public void porDefectoLaPrimerRondaEsDeAtaque() {
-//        ArrayList<Jugador> jugadores = new ArrayList<>();
-//
-//        Turno turno = new Turno(jugadores);
-//        Ronda unaRonda = turno.obtenerRondaActual();
-//        assertEquals(true, unaRonda.puedeAtacar());
-//    }
-//
-//    @Test
-//    public void cuandoLeTocaNuevamenteAlPrimerJugadorLaRondaEsDeColocacion() {
-//        ArrayList<Jugador> jugadores = new ArrayList<>();
-//        Jugador jugador1 = new Jugador();
-//        Jugador jugador2 = new Jugador();
-//        Jugador jugador3 = new Jugador();
-//        jugadores.add(jugador1);
-//        jugadores.add(jugador2);
-//        jugadores.add(jugador3);
-//
-//        Turno turno = new Turno(jugadores);
-//        turno.seleccionarPrimerJugador(1); // se recibe por parametro un numero random que va de cero a la cantidad de jugadores
-//
-//        turno.finalizarTurnoActual();
-//        turno.finalizarTurnoActual();
-//        turno.finalizarTurnoActual();
-//        assertEquals(jugador2, turno.obtenerJugadorTurnoActual());
-//
-//        Ronda unaRonda = turno.obtenerRondaActual();
-//        assertEquals(false, unaRonda.puedeAtacar());
-//        assertEquals(false, unaRonda.puedeReagrupar());
-//        assertEquals(true, unaRonda.puedeColocar());
-//    }
-//
-//    @Test
-//    public void cuandoLaRondaEsDeReagrupePorPrimeraVezLaCantidadDeRondasJugadasEs1() {
-//        ArrayList<Jugador> jugadores = new ArrayList<>();
-//        Jugador jugador1 = new Jugador();
-//        Jugador jugador2 = new Jugador();
-//        Jugador jugador3 = new Jugador();
-//        jugadores.add(jugador1);
-//        jugadores.add(jugador2);
-//        jugadores.add(jugador3);
-//
-//        Turno turno = new Turno(jugadores);
-//        turno.seleccionarPrimerJugador(1); // se recibe por parametro un numero random que va de cero a la cantidad de jugadores
-//
-//        turno.finalizarAtaque();
-//
-//        assertEquals(jugador2, turno.obtenerJugadorTurnoActual());
-//
-//        assertEquals(1, turno.obtenerCantidadDeRondasJugadas());
-//
-//        Ronda ronda = turno.obtenerRondaActual();
-//        assertEquals(false, ronda.puedeAtacar());
-//        assertEquals(true, ronda.puedeReagrupar());
-//    }
 
-//    @Test
-//    public void cuandoLeTocaAlPrimerJugadorPorTerceraVezLaRondaEsDeAtaque() {
+    @Test
+    public void luegoDeFinalizar3TurnosLaCantidadDeTurnosJugadosEs3() {
 //        ArrayList<Jugador> jugadores = new ArrayList<>();
-//        Jugador jugador1 = new Jugador();
-//        Jugador jugador2 = new Jugador();
-//        Jugador jugador3 = new Jugador();
-//        jugadores.add(jugador1);
-//        jugadores.add(jugador2);
-//        jugadores.add(jugador3);
-//
-//        Turno turno = new Turno(jugadores);
-//        turno.seleccionarPrimerJugador(1); // se recibe por parametro un numero random que va de cero a la cantidad de jugadores
-//
-//        turno.finalizarTurnoActual();
-//        turno.finalizarTurnoActual();
-//        turno.finalizarTurnoActual();
-//        assertEquals(jugador2, turno.obtenerJugadorTurnoActual());
-//
-//        turno.finalizarTurnoActual();
-//        turno.finalizarTurnoActual();
-//        turno.finalizarTurnoActual();
-//        assertEquals(jugador2, turno.obtenerJugadorTurnoActual());
-//
-//        Ronda unaRonda = turno.obtenerRondaActual();
-//        assertEquals(true, unaRonda.puedeAtacar());
-//        assertEquals(false, unaRonda.puedeReagrupar());
-//        assertEquals(false, unaRonda.puedeColocar());
-//        assertEquals(6, turno.obtenerCantidadDeRondasJugadas());
-//    }
+        Jugadores jugadores = new Jugadores();
+        Jugador jugador1 = new Jugador(1);
+        Jugador jugador2 = new Jugador(2);
+        Jugador jugador3 = new Jugador(3);
+        jugadores.agregarJugador(jugador1);
+        jugadores.agregarJugador(jugador2);
+        jugadores.agregarJugador(jugador3);
+
+        Turno turno = new ConTurno(jugadores);
+        turno.seleccionarPrimerJugador(1); // se recibe por parametro un numero random que va de cero a la cantidad de jugadores
+        turno.finalizarTurnoActual();
+        turno.finalizarTurnoActual();
+        assertEquals(jugador1.obtenerId(), turno.obtenerJugadorTurnoActual().obtenerId());
+        turno.finalizarTurnoActual();
+        assertEquals(3, turno.obtenerCantidadDeTurnosJugados());
+    }
+
+    @Test
+    public void porDefectoLaPrimerRondaEsDeAtaque() {
+        Jugadores jugadores = new Jugadores();
+
+        Turno turno = new ConTurno(jugadores);
+        Ronda unaRonda = turno.obtenerRondaActual();
+        assertEquals("Ataque", unaRonda.obtenerDescripcion());
+    }
+
+    @Test
+    public void cuandoLeTocaNuevamenteAlPrimerJugadorLaRondaEsDeColocacion() {
+        Jugadores jugadores = new Jugadores();
+        Jugador jugador1 = new Jugador(1);
+        Jugador jugador2 = new Jugador(2);
+        Jugador jugador3 = new Jugador(3);
+        jugadores.agregarJugador(jugador1);
+        jugadores.agregarJugador(jugador2);
+        jugadores.agregarJugador(jugador3);
+
+        Turno turno = new ConTurno(jugadores);
+        turno.seleccionarPrimerJugador(1); // se recibe por parametro un numero random que va de cero a la cantidad de jugadores
+
+        turno.finalizarTurnoActual();
+        turno.finalizarTurnoActual();
+        turno.finalizarTurnoActual();
+        assertEquals(jugador2.obtenerId(), turno.obtenerJugadorTurnoActual().obtenerId());
+
+        Ronda unaRonda = turno.obtenerRondaActual();
+        assertEquals("Colocacion", unaRonda.obtenerDescripcion());
+    }
+
+    @Test
+    public void cuandoLaRondaEsDeReagrupePorPrimeraVezLaCantidadDeRondasJugadasEs1() {
+        Jugadores jugadores = new Jugadores();
+        Jugador jugador1 = new Jugador(1);
+        Jugador jugador2 = new Jugador(2);
+        Jugador jugador3 = new Jugador(3);
+        jugadores.agregarJugador(jugador1);
+        jugadores.agregarJugador(jugador2);
+        jugadores.agregarJugador(jugador3);
+
+        Turno turno = new ConTurno(jugadores);
+        turno.seleccionarPrimerJugador(1); // se recibe por parametro un numero random que va de cero a la cantidad de jugadores
+
+        jugador2.finalizarAtaque();
+
+        assertEquals(jugador2.obtenerId(), turno.obtenerJugadorTurnoActual().obtenerId());
+
+        jugador2.finalizarReagrupe();
+
+        assertEquals(1, turno.obtenerCantidadDeRondasJugadas());
+
+        Ronda ronda = turno.obtenerRondaActual();
+        assertEquals("Ataque", ronda.obtenerDescripcion());
+    }
+
+    @Test
+    public void cuandoLeTocaAlPrimerJugadorPorTerceraVezLaRondaEsDeAtaque() {
+        Jugadores jugadores = new Jugadores();
+        Jugador jugador1 = new Jugador(1);
+        Jugador jugador2 = new Jugador(2);
+        Jugador jugador3 = new Jugador(3);
+        jugadores.agregarJugador(jugador1);
+        jugadores.agregarJugador(jugador2);
+        jugadores.agregarJugador(jugador3);
+
+        Turno turno = new ConTurno(jugadores);
+        turno.seleccionarPrimerJugador(1); // se recibe por parametro un numero random que va de cero a la cantidad de jugadores
+
+        turno.finalizarTurnoActual();
+        turno.finalizarTurnoActual();
+        turno.finalizarTurnoActual();
+        assertEquals(jugador2.obtenerId(), turno.obtenerJugadorTurnoActual().obtenerId());
+
+        turno.finalizarTurnoActual();
+        turno.finalizarTurnoActual();
+        turno.finalizarTurnoActual();
+        assertEquals(jugador2.obtenerId(), turno.obtenerJugadorTurnoActual().obtenerId());
+
+        Ronda unaRonda = turno.obtenerRondaActual();
+        assertEquals("Ataque", unaRonda.obtenerDescripcion());
+        assertEquals(2, turno.obtenerCantidadDeRondasJugadas());
+    }
 
 //    @Test
 //    public void cuandoLeTocaAlPrimerJugadorPorCuartaVezLaRondaEsDeAtaqueNuevamente() {

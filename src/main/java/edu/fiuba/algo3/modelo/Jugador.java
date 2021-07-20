@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.modelo;
 
 public class Jugador {
+    private final int id;
     private String color = "";
     private int cantidadPaisesDominados = 0;
     private Objetivo secreto;
@@ -8,6 +9,13 @@ public class Jugador {
     private Rol rol = new RolIndefinido();
     private Turno turno = new SinTurno();
 
+    public Jugador(int id) {
+        this.id = id;
+    }
+
+    public Jugador() { // despues lo volamo
+        this.id = 0;
+    }
 
     public String mostrarColor() {
         return color;
@@ -15,6 +23,10 @@ public class Jugador {
 
     public int cantidadPaisesDominados() {
         return cantidadPaisesDominados;
+    }
+
+    public int obtenerId() {
+        return this.id;
     }
 
     public void colocarEjercitos(Pais pais) {
