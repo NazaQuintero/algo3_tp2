@@ -56,8 +56,11 @@ public class ConTurno implements Turno {
 
     @Override
     public void cambiarRonda() { // 1) pasar por el 1er jugador 2) rondaAct = reagrupe
-        if(this.actual == this.primerJugador && this.cantidadDeTurnosJugados != 0) {
-            this.ronda = this.ronda.obtenerSiguiente();
+        if(this.actual == this.primerJugador) {
+            this.ronda = new Colocacion();
+            this.cantidadDeRondasJugadas++;
+        } else {
+            this.ronda = new Ataque();
         }
     }
 
@@ -74,12 +77,10 @@ public class ConTurno implements Turno {
     }
 
     public void finalizarReagrupe() {
-        this.cantidadDeRondasJugadas++;
         this.finalizarTurnoActual();
     }
 
     public void finalizarColocacion() {
-        this.cantidadDeRondasJugadas++;
         this.finalizarTurnoActual();
     }
 }

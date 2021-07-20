@@ -220,7 +220,7 @@ public class TurnoTest {
     }
 
     @Test
-    public void cuandoLaRondaEsDeReagrupePorPrimeraVezLaCantidadDeRondasJugadasEs1() {
+    public void cuandoLaRondaEsDeReagrupePorPrimeraVezLaCantidadDeRondasJugadasEs0() {
         Jugadores jugadores = new Jugadores();
         Jugador jugador1 = new Jugador(1);
         Jugador jugador2 = new Jugador(2);
@@ -238,7 +238,7 @@ public class TurnoTest {
 
         jugador2.finalizarReagrupe();
 
-        assertEquals(1, turno.obtenerCantidadDeRondasJugadas());
+        assertEquals(0, turno.obtenerCantidadDeRondasJugadas());
 
         Ronda ronda = turno.obtenerRondaActual();
         assertEquals("Ataque", ronda.obtenerDescripcion());
@@ -261,6 +261,7 @@ public class TurnoTest {
         turno.finalizarTurnoActual();
         turno.finalizarTurnoActual();
         assertEquals(jugador2.obtenerId(), turno.obtenerJugadorTurnoActual().obtenerId());
+        assertEquals("Colocacion", turno.obtenerRondaActual().obtenerDescripcion());
 
         turno.finalizarTurnoActual();
         turno.finalizarTurnoActual();
