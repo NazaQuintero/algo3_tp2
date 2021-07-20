@@ -1,11 +1,6 @@
 package edu.fiuba.algo3.modelo;
 
 public interface Ronda {
-    boolean puedeAtacar();
-    boolean puedeReagrupar();
-    boolean puedeColocar();
+    String obtenerDescripcion();
     Ronda obtenerSiguiente();
-
-    void finalizarAtaque();
-    void finalizarReagrupe();
 }

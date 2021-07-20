@@ -2,34 +2,13 @@ package edu.fiuba.algo3.modelo;
 
 public class Reagrupe implements Ronda {
 
-
     @Override
-    public boolean puedeAtacar() {
-        return false;
-    }
-
-    @Override
-    public boolean puedeReagrupar() {
-        return true;
-    }
-
-    @Override
-    public boolean puedeColocar() {
-        return false;
+    public String obtenerDescripcion() {
+        return "Reagrupe";
     }
 
     @Override
     public Ronda obtenerSiguiente() {
-        return null;
-    }
-
-    @Override
-    public void finalizarAtaque() {
-
-    }
-
-    @Override
-    public void finalizarReagrupe() {
-
+        return new Colocacion();
     }
 }

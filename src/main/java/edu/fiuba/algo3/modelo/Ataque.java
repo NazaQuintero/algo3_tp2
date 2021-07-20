@@ -3,18 +3,8 @@ package edu.fiuba.algo3.modelo;
 public class Ataque implements Ronda {
 
     @Override
-    public boolean puedeAtacar() {
-        return true;
-    }
-
-    @Override
-    public boolean puedeReagrupar() {
-        return false;
-    }
-
-    @Override
-    public boolean puedeColocar() {
-        return false;
+    public String obtenerDescripcion() {
+        return "Ataque";
     }
 
     @Override
@@ -22,13 +12,4 @@ public class Ataque implements Ronda {
         return new Reagrupe();
     }
 
-    @Override
-    public void finalizarAtaque() {
-
-    }
-
-    @Override
-    public void finalizarReagrupe() {
-
-    }
 }

@@ -1,13 +1,12 @@
 package edu.fiuba.algo3.modelo;
 
-import java.util.ArrayList;
-
 public class Jugador {
     private String color = "";
     private int cantidadPaisesDominados = 0;
     private Objetivo secreto;
     private Objetivo general = new General();
     private Rol rol = new RolIndefinido();
+    private Turno turno = new SinTurno();
 
 
     public String mostrarColor() {
@@ -51,4 +50,16 @@ public class Jugador {
         rol = new Defensor();
     }
 
+    public void setTurno(Turno unTurno) {
+        this.turno = unTurno;
+    }
+
+    public void finalizarAtaque() {
+        this.turno.finalizarAtaque();
+    }
+
+    public void finalizarReagrupe() {
+        this.turno.finalizarReagrupe();
+//        this.turno.cambiarRonda();
+    }
 }
