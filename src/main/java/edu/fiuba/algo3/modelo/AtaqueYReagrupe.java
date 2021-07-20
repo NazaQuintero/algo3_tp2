@@ -3,20 +3,20 @@ package edu.fiuba.algo3.modelo;
 import java.util.ArrayList;
 
 public class AtaqueYReagrupe implements Ronda {
-    Fase fase;
+    Ronda ronda;
 
     public AtaqueYReagrupe() {
-        this.fase = new Ataque();
+        this.ronda = new Ataque();
     }
 
     @Override
     public boolean puedeAtacar() {
-        return false;
+        return this.ronda.puedeAtacar();
     }
 
     @Override
     public boolean puedeReagrupar() {
-        return false;
+        return this.ronda.puedeReagrupar();
     }
 
     @Override
@@ -27,5 +27,15 @@ public class AtaqueYReagrupe implements Ronda {
     @Override
     public Ronda obtenerSiguiente() {
         return new Colocacion();
+    }
+
+    @Override
+    public void finalizarAtaque() {
+        this.ronda = new Reagrupe();
+    }
+
+    @Override
+    public void finalizarReagrupe() {
+
     }
 }

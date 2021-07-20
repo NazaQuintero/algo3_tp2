@@ -5,4 +5,7 @@ public interface Ronda {
     boolean puedeReagrupar();
     boolean puedeColocar();
     Ronda obtenerSiguiente();
+
+    void finalizarAtaque();
+    void finalizarReagrupe();
 }

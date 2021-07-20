@@ -35,7 +35,7 @@ public class Turno {
     }
 
     public void finalizarTurnoActual() {
-        this.actual = (this.actual < (this.jugadores.size())) ? (this.actual + 1) : 0;
+        this.actual = (this.actual < (this.jugadores.size() - 1)) ? (this.actual + 1) : 0;
         this.cantidadDeTurnosJugados++;
         if(this.actual == this.primerJugador) {
             this.ronda = this.ronda.obtenerSiguiente();
@@ -53,5 +53,15 @@ public class Turno {
 
     public int obtenerCantidadDeRondasJugadas() {
         return this.cantidadDeRondasJugadas;
+    }
+
+    public void finalizarAtaque() {
+        this.ronda.finalizarAtaque();
+        this.cantidadDeRondasJugadas++;
+    }
+
+    public void finalizarReagrupe() {
+        this.ronda.finalizarReagrupe();
+        this.finalizarTurnoActual();
     }
 }

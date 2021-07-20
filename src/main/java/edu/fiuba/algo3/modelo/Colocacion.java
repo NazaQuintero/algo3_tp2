@@ -20,4 +20,14 @@ public class Colocacion implements Ronda {
     public Ronda obtenerSiguiente() {
         return new AtaqueYReagrupe();
     }
+
+    @Override
+    public void finalizarAtaque() {
+
+    }
+
+    @Override
+    public void finalizarReagrupe() {
+
+    }
 }
