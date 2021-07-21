@@ -9,13 +9,13 @@ public class Pais {
     Fichas ejercito;
     private ArrayList<Pais> paisesLimitrofes;
 
-    public Pais(String nombre) {
+    public Pais(String nombre) {        // sobra, solo se usa en los tests
         this.nombre = nombre;
         this.paisesLimitrofes = new ArrayList<>();
         this.ejercito = new EjercitoNulo();
-
     }
-    public Pais(String nombre, String continente){
+
+    public Pais(String nombre, String continente) {
         this.nombre = nombre;
         this.continente = continente;
         this.paisesLimitrofes = new ArrayList<>();
@@ -66,4 +66,5 @@ public class Pais {
     public void rolDefensor() {
         this.ejercito.rolDefensor();
     }
+
 }

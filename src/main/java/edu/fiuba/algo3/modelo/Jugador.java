@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.modelo;
 
 public class Jugador {
+
     private final int id;
     private String color = "";
     private int cantidadPaisesDominados = 0;
