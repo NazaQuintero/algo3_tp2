@@ -52,7 +52,7 @@ public class ConTurno implements Turno {
     }
 
     public int obtenerCantidadDeRondasJugadas() {
-        return this.cantidadDeTurnosJugados/jugadores.obtenerCantidad();
+        return this.cantidadDeTurnosJugados / jugadores.obtenerCantidad();
     }
 
     public void setRonda(Ronda unaRonda) {
@@ -63,4 +63,27 @@ public class ConTurno implements Turno {
         this.ronda.finalizarRonda(this);
     }
 
+    public void atacarA(Pais atacante, Pais defensor) throws NoEsRondaDeAtaqueException {
+        try {
+            this.ronda.atacarA(atacante, defensor);
+        } catch (NoEsRondaDeAtaqueException e) {
+            throw new NoEsRondaDeAtaqueException();
+        }
+    }
+
+    public void reagrupar(Pais origen, Pais destino) throws NoEsRondaDeReagrupeException, ElPaisNoEsLimitrofeException { // o lo q sea la firma
+        try {
+            this.ronda.reagrupar(origen, destino);
+        } catch (NoEsRondaDeReagrupeException e) {
+            throw new NoEsRondaDeReagrupeException();
+        }
+    }
+
+    public void colocarEjercitos(Pais unPais) throws NoEsRondaDeColocacionException {
+        try {
+            this.ronda.colocarEjercitos(unPais);
+        } catch (NoEsRondaDeColocacionException e) {
+            throw new NoEsRondaDeColocacionException();
+        }
+    }
 }

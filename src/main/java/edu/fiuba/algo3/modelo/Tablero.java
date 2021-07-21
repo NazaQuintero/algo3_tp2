@@ -20,7 +20,7 @@ public class Tablero {
         paises.put(pais.nombre, pais);
     }
 
-    public void repartirPaises(ArrayList<Jugador> jugadores) {
+    public void repartirPaises(ArrayList<Jugador> jugadores) throws NoEsRondaDeColocacionException, ElJugadorNoTieneTurnoException {
         ArrayList<Pais> paises = new ArrayList<>(this.paises.values());
         Collections.shuffle(paises);
 

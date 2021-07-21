@@ -19,7 +19,7 @@ public class Juego {
         jugadores.add(unJugador);
     }
 
-    public void comenzar() throws CantidadDeJugadoresInsuficienteException {
+    public void comenzar() throws CantidadDeJugadoresInsuficienteException, ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException {
 
         try {
             CargarJuego.cargarPaisesAlTablero(tablero, ARCHIVO_PAISES);

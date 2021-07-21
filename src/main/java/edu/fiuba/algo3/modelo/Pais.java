@@ -13,6 +13,7 @@ public class Pais {
         this.nombre = nombre;
         this.paisesLimitrofes = new ArrayList<>();
         this.ejercito = new EjercitoNulo();
+    }
 
     }
     public Pais(String nombre, String continente){
@@ -66,4 +67,15 @@ public class Pais {
     public void rolDefensor() {
         this.ejercito.rolDefensor();
     }
+
+    public String getNombre() { return this.nombre; }
+
+    public void reagrupar(Pais destino) throws ElPaisNoEsLimitrofeException {
+        if (this.esLimitrofeCon(destino)) {
+            int cantidadEjercitos = pedirCantidadAlJugador();
+            this.modificarCantidadEjercito(-cantidadEjercitos);
+            destino.modificarCantidadEjercito(cantidadEjercitos);
+        } else throw new ElPaisNoEsLimitrofeException();
+    }
 }
+

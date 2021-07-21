@@ -1,9 +1,10 @@
 package edu.fiuba.algo3.modelo;
 
+import java.util.HashMap;
+
 public class Jugador {
     private final int id;
     private String color = "";
-    private int cantidadPaisesDominados = 0;
     private Objetivo secreto;
     private Objetivo general = new General();
     private Rol rol = new RolIndefinido();
@@ -22,16 +23,21 @@ public class Jugador {
     }
 
     public int cantidadPaisesDominados() {
-        return cantidadPaisesDominados;
+        return paisesDominados.size();
     }
 
     public int obtenerId() {
         return this.id;
     }
 
-    public void colocarEjercitos(Pais pais) {
-        pais.colocarEjercito(new Ejercito(this));
-        cantidadPaisesDominados++;
+    public void colocarEjercitos(Pais pais) throws ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException {
+        if (paisesDominados.containsValue(pais)) {
+            try {
+                this.turno.colocarEjercitos(pais);
+            } catch (ElJugadorNoTieneTurnoException e) {
+                throw new ElJugadorNoTieneTurnoException();
+            }
+        }
     }
 
     public void asignarColor(String color) {

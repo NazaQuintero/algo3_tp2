@@ -18,7 +18,7 @@ public class JuegoTest {
 
 
     @Test
-    public void seColocan1EjercitosEnElMismoPais() {
+    public void seColocan1EjercitosEnElMismoPais() throws NoEsRondaDeColocacionException, ElJugadorNoTieneTurnoException {
 
         Juego juego = new Juego();
         Jugador jugador = new Jugador();
@@ -35,7 +35,7 @@ public class JuegoTest {
 
 
     @Test
-    public void seRepartenEquitativamenteSeisPaisesEntreDosJugadores() throws CantidadDeJugadoresInsuficienteException, PaisOcupadoPorOtroJugadorException {
+    public void seRepartenEquitativamenteSeisPaisesEntreDosJugadores() throws CantidadDeJugadoresInsuficienteException, PaisOcupadoPorOtroJugadorException, ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException {
         Juego juego = new Juego();
         Jugador jugadorUno = new Jugador();
         Jugador jugadorDos = new Jugador();
