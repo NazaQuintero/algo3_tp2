@@ -67,7 +67,7 @@ public class TurnoTest {
         turno.seleccionarPrimerJugador(1); // se recibe por parametro un numero random que va de cero a la cantidad de jugadores
         assertEquals(jugador2, turno.obtenerJugadorTurnoActual());
 
-        jugador2.finalizarAtaque();
+        jugador2.finalizarRonda();
         assertEquals(jugador2, turno.obtenerJugadorTurnoActual());
         Ronda ronda = turno.obtenerRondaActual();
         assertEquals("Reagrupe", ronda.obtenerDescripcion());
@@ -87,10 +87,10 @@ public class TurnoTest {
         turno.seleccionarPrimerJugador(1); // se recibe por parametro un numero random que va de cero a la cantidad de jugadores
 
         assertEquals(jugador2, turno.obtenerJugadorTurnoActual());
-        jugador2.finalizarAtaque();
+        jugador2.finalizarRonda();
 
         assertEquals(jugador2, turno.obtenerJugadorTurnoActual());
-        jugador2.finalizarReagrupe();
+        jugador2.finalizarRonda();
 
         assertEquals(jugador3, turno.obtenerJugadorTurnoActual());
     }
@@ -118,10 +118,10 @@ public class TurnoTest {
         turno.seleccionarPrimerJugador(1); // se recibe por parametro un numero random que va de cero a la cantidad de jugadores
 
         assertEquals(jugador2, turno.obtenerJugadorTurnoActual());
-        jugador2.finalizarAtaque();
+        jugador2.finalizarRonda();
 
         assertEquals(jugador2, turno.obtenerJugadorTurnoActual());
-        jugador2.finalizarReagrupe();
+        jugador2.finalizarRonda();
 
         assertEquals(jugador3, turno.obtenerJugadorTurnoActual());
         Ronda ronda = turno.obtenerRondaActual();
@@ -141,16 +141,16 @@ public class TurnoTest {
         turno.seleccionarPrimerJugador(1); // se recibe por parametro un numero random que va de cero a la cantidad de jugadores
 
         assertEquals(jugador2, turno.obtenerJugadorTurnoActual());
-        jugador2.finalizarAtaque();
+        jugador2.finalizarRonda();
 
         assertEquals(jugador2, turno.obtenerJugadorTurnoActual());
-        jugador2.finalizarReagrupe();
+        jugador2.finalizarRonda();
 
         assertEquals(jugador1, turno.obtenerJugadorTurnoActual());
-        jugador1.finalizarAtaque();
+        jugador1.finalizarRonda();
 
         assertEquals(jugador1, turno.obtenerJugadorTurnoActual());
-        jugador1.finalizarReagrupe();
+        jugador1.finalizarRonda();
 
         assertEquals(jugador2.obtenerId(), turno.obtenerJugadorTurnoActual().obtenerId());
         Ronda ronda = turno.obtenerRondaActual();
@@ -170,13 +170,13 @@ public class TurnoTest {
 
         Turno turno = new ConTurno(jugadores);
         turno.seleccionarPrimerJugador(1); // se recibe por parametro un numero random que va de cero a la cantidad de jugadores
-        jugador2.finalizarAtaque();
-        jugador2.finalizarReagrupe();
+        jugador2.finalizarRonda();
+        jugador2.finalizarRonda();
         assertEquals(jugador3.obtenerId(), turno.obtenerJugadorTurnoActual().obtenerId());
-        jugador3.finalizarAtaque();
-        jugador3.finalizarReagrupe();
-        jugador1.finalizarAtaque();
-        jugador1.finalizarReagrupe();
+        jugador3.finalizarRonda();
+        jugador3.finalizarRonda();
+        jugador1.finalizarRonda();
+        jugador1.finalizarRonda();
         assertEquals(3, turno.obtenerCantidadDeTurnosJugados());
     }
 
@@ -202,14 +202,14 @@ public class TurnoTest {
         Turno turno = new ConTurno(jugadores);
         turno.seleccionarPrimerJugador(1); // se recibe por parametro un numero random que va de cero a la cantidad de jugadores
 
-        jugador2.finalizarAtaque();
-        jugador2.finalizarReagrupe();
+        jugador2.finalizarRonda();
+        jugador2.finalizarRonda();
 
-        jugador3.finalizarAtaque();
-        jugador3.finalizarReagrupe();
+        jugador3.finalizarRonda();
+        jugador3.finalizarRonda();
 
-        jugador1.finalizarAtaque();
-        jugador1.finalizarReagrupe();
+        jugador1.finalizarRonda();
+        jugador1.finalizarRonda();
 
         assertEquals(jugador2.obtenerId(), turno.obtenerJugadorTurnoActual().obtenerId());
 
@@ -230,11 +230,11 @@ public class TurnoTest {
         Turno turno = new ConTurno(jugadores);
         turno.seleccionarPrimerJugador(1); // se recibe por parametro un numero random que va de cero a la cantidad de jugadores
 
-        jugador2.finalizarAtaque();
+        jugador2.finalizarRonda();
 
         assertEquals(jugador2.obtenerId(), turno.obtenerJugadorTurnoActual().obtenerId());
 
-        jugador2.finalizarReagrupe();
+        jugador2.finalizarRonda();
 
         assertEquals(0, turno.obtenerCantidadDeRondasJugadas());
 
@@ -255,21 +255,21 @@ public class TurnoTest {
         Turno turno = new ConTurno(jugadores);
         turno.seleccionarPrimerJugador(1); // se recibe por parametro un numero random que va de cero a la cantidad de jugadores
 
-        jugador2.finalizarAtaque();
-        jugador2.finalizarReagrupe();
+        turno.finalizarRonda();
+        turno.finalizarRonda();
 
-        jugador3.finalizarAtaque();
-        jugador3.finalizarReagrupe();
+        turno.finalizarRonda();
+        turno.finalizarRonda();
 
-        jugador1.finalizarAtaque();
-        jugador1.finalizarReagrupe();
+        turno.finalizarRonda();
+        turno.finalizarRonda();
 
         assertEquals(jugador2.obtenerId(), turno.obtenerJugadorTurnoActual().obtenerId());
         assertEquals("Colocacion", turno.obtenerRondaActual().obtenerDescripcion());
 
-        jugador2.finalizarColocacion();
-        jugador3.finalizarColocacion();
-        jugador1.finalizarColocacion();
+        turno.finalizarRonda();
+        turno.finalizarRonda();
+        turno.finalizarRonda();
 
         assertEquals(jugador2.obtenerId(), turno.obtenerJugadorTurnoActual().obtenerId());
 

@@ -4,7 +4,6 @@ public class ConTurno implements Turno {
 
     private final Jugadores jugadores;
     private Jugador actual;
-
     private Ronda ronda;
     private int cantidadDeTurnosJugados;
 
@@ -33,11 +32,11 @@ public class ConTurno implements Turno {
         this.actual = this.jugadores.obtenerSiguiente();
     }
 
-    private boolean leTocaALPrimerJugador() {
+    public boolean leTocaALPrimerJugador() {
         return this.actual == this.jugadores.getPrimerJugador();
     }
 
-    private void finalizarTurnoActual() {
+    public void finalizarTurnoActual() {
         this.actual.setTurno(new SinTurno());
         this.cambiarJugadorActual();
         this.actual.setTurno(this);
@@ -60,18 +59,22 @@ public class ConTurno implements Turno {
         this.ronda = unaRonda;
     }
 
-    public void finalizarAtaque() {
-        this.setRonda(new Reagrupe());
+    public void finalizarRonda() {
+        this.ronda.finalizarRonda(this);
     }
 
-    public void finalizarReagrupe() {
+    /*public void finalizarAtaque() {
+        this.setRonda(new Reagrupe());
+    }*/
+
+    /*public void finalizarReagrupe() {
         this.finalizarTurnoActual();
         if(leTocaALPrimerJugador()) this.setRonda(new Colocacion());
         else this.setRonda(new Ataque());
-    }
+    }*/
 
-    public void finalizarColocacion() {
+    /*public void finalizarColocacion() {
         if(leTocaALPrimerJugador()) this.setRonda(new Ataque());
         this.finalizarTurnoActual();
-    }
+    }*/
 }

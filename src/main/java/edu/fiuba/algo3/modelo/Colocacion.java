@@ -8,4 +8,11 @@ public class Colocacion implements Ronda {
         return "Colocacion";
     }
 
+    @Override
+    public void finalizarRonda(Turno unTurno) {
+        if(unTurno.leTocaALPrimerJugador()) unTurno.setRonda(new Ataque());
+        unTurno.finalizarTurnoActual();
+    }
+
+
 }

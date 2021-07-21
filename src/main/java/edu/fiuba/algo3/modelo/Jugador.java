@@ -66,16 +66,16 @@ public class Jugador {
         this.turno = unTurno;
     }
 
-    public void finalizarAtaque() {
-        this.turno.finalizarAtaque();
+    public void finalizarRonda() {
+        this.turno.finalizarRonda();
     }
 
-    public void finalizarReagrupe() {
+    /*public void finalizarReagrupe() {
         this.turno.finalizarReagrupe();
 //        this.turno.cambiarRonda();
     }
 
     public void finalizarColocacion() {
         this.turno.finalizarColocacion();
-    }
+    }*/
 }

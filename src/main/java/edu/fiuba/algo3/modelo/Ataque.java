@@ -7,4 +7,8 @@ public class Ataque implements Ronda {
         return "Ataque";
     }
 
+    public void finalizarRonda(Turno unTurno) {
+        unTurno.setRonda(new Reagrupe());
+    }
+
 }

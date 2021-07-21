@@ -5,10 +5,18 @@ public interface Turno {
     Jugador obtenerJugadorTurnoActual();
     void seleccionarPrimerJugador(int valor);
     Ronda obtenerRondaActual();
-    void finalizarAtaque();
-    void finalizarReagrupe();
+//    void finalizarAtaque();
+//    void finalizarReagrupe();
     int obtenerCantidadDeRondasJugadas();
     int obtenerCantidadDeTurnosJugados();
 
-    void finalizarColocacion();
+    void setRonda(Ronda unaRonda);
+
+//    void finalizarColocacion();
+
+    boolean leTocaALPrimerJugador();
+
+    void finalizarTurnoActual();
+
+    void finalizarRonda();
 }

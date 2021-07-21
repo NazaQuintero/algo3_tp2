@@ -23,13 +23,7 @@ public class SinTurno implements Turno {
     }
 
     @Override
-    public void finalizarAtaque() {
-
-    }
-
-    @Override
-    public void finalizarReagrupe() {
-
+    public void finalizarRonda() {
     }
 
     @Override
@@ -42,13 +36,25 @@ public class SinTurno implements Turno {
         return 0;
     }
 
+    @Override
+    public void setRonda(Ronda unaRonda) {
+
+    }
+
+    @Override
+    public boolean leTocaALPrimerJugador() {
+        return false;
+    }
+
+    @Override
+    public void finalizarTurnoActual() {
+
+    }
+
 //    @Override
 //    public void cambiarRonda() {
 //
 //    }
 
-    @Override
-    public void finalizarColocacion() {
-    }
 
 }
