@@ -8,9 +8,4 @@ public class Colocacion implements Ronda {
         return "Colocacion";
     }
 
-    @Override
-    public Ronda obtenerSiguiente() {
-        return new Ataque();
-    }
-
 }

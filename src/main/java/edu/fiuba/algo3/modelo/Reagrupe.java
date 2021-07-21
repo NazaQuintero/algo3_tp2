@@ -7,8 +7,4 @@ public class Reagrupe implements Ronda {
         return "Reagrupe";
     }
 
-    @Override
-    public Ronda obtenerSiguiente() {
-        return new Colocacion();
-    }
 }

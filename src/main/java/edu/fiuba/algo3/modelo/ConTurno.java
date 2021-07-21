@@ -1,28 +1,18 @@
 package edu.fiuba.algo3.modelo;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-
 public class ConTurno implements Turno {
-    /*TODO: Tomar estrategia de Ataque y luego Reagrupe por cada jugador. Luego de que todos ataquen y reagrupen,
-    se pasa a ronda de Colocacion para todos los jugadores */
 
     private final Jugadores jugadores;
     private Jugador actual;
-    private Jugador primerJugador;
 
     private Ronda ronda;
     private int cantidadDeTurnosJugados;
-    private int cantidadDeRondasJugadas;
-    private Iterator<Jugador> iteradorDeJugadores;
 
     public ConTurno(Jugadores jugadores) {
         this.jugadores = jugadores;
-        this.iteradorDeJugadores = jugadores.iterator();
-        this.ronda = new Ataque();
-        this.actual = this.iteradorDeJugadores.next();
+        this.setRonda(new Ataque());
+        this.cambiarJugadorActual();
         this.cantidadDeTurnosJugados = 0;
-        this.cantidadDeRondasJugadas = 0;
     }
 
     public int obtenerCantidadDeTurnosPorRonda() {
@@ -33,18 +23,23 @@ public class ConTurno implements Turno {
         return this.actual;
     }
 
-
     public void seleccionarPrimerJugador(int valor) {
         this.jugadores.setPrimerJugador(valor);
-        this.primerJugador = this.jugadores.obtenerJugador(valor);
-        this.iteradorDeJugadores = jugadores.iterator();
         this.jugadores.obtenerJugador(valor).setTurno(this);
-        this.actual = this.iteradorDeJugadores.next();
+        this.cambiarJugadorActual();
+    }
+
+    private void cambiarJugadorActual() {
+        this.actual = this.jugadores.obtenerSiguiente();
+    }
+
+    private boolean leTocaALPrimerJugador() {
+        return this.actual == this.jugadores.getPrimerJugador();
     }
 
     private void finalizarTurnoActual() {
         this.actual.setTurno(new SinTurno());
-        this.actual = this.iteradorDeJugadores.next();
+        this.cambiarJugadorActual();
         this.actual.setTurno(this);
         this.cantidadDeTurnosJugados++;
     }
@@ -58,29 +53,25 @@ public class ConTurno implements Turno {
     }
 
     public int obtenerCantidadDeRondasJugadas() {
-        return this.cantidadDeRondasJugadas;
+        return this.cantidadDeTurnosJugados/jugadores.obtenerCantidad();
+    }
+
+    public void setRonda(Ronda unaRonda) {
+        this.ronda = unaRonda;
     }
 
     public void finalizarAtaque() {
-        this.ronda = this.ronda.obtenerSiguiente();
+        this.setRonda(new Reagrupe());
     }
 
     public void finalizarReagrupe() {
         this.finalizarTurnoActual();
-        if(this.actual == this.primerJugador) {
-            this.ronda = new Colocacion();
-            this.cantidadDeRondasJugadas++;
-        } else {
-            this.ronda = new Ataque();
-        }
+        if(leTocaALPrimerJugador()) this.setRonda(new Colocacion());
+        else this.setRonda(new Ataque());
     }
 
     public void finalizarColocacion() {
-        if(this.actual == this.primerJugador) {
-            this.ronda = new Ataque();
-            this.cantidadDeRondasJugadas++;
-        }
+        if(leTocaALPrimerJugador()) this.setRonda(new Ataque());
         this.finalizarTurnoActual();
-
     }
 }

@@ -8,6 +8,7 @@ public class Jugadores implements Iterable<Jugador> {
     private ArrayList<Jugador> jugadores = new ArrayList<>();
     private int tamanio;
     private int primerJugador;
+    Iterator<Jugador> it = this.iterator();
 
     public Jugadores() {
         this.tamanio = 0;
@@ -29,6 +30,15 @@ public class Jugadores implements Iterable<Jugador> {
 
     public void setPrimerJugador(int valor) {
         this.primerJugador = valor;
+        this.it = this.iterator();
+    }
+
+    public Jugador getPrimerJugador() {
+        return this.jugadores.get(this.primerJugador);
+    }
+
+    public Jugador obtenerSiguiente() {
+        return this.it.next();
     }
 
     @Override

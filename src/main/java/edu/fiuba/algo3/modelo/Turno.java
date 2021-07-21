@@ -10,7 +10,5 @@ public interface Turno {
     int obtenerCantidadDeRondasJugadas();
     int obtenerCantidadDeTurnosJugados();
 
-//    void cambiarRonda();
-
     void finalizarColocacion();
 }

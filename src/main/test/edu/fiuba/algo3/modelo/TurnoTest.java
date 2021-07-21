@@ -4,13 +4,11 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.util.ArrayList;
 
 public class TurnoTest {
 
     @Test
     public void laCantidadDeTurnosEs3siLaCantidadDeJugadoresEs3() {
-//        ArrayList<Jugador> jugadores = new ArrayList<>();
         Jugadores jugadores = new Jugadores();
         Jugador jugador1 = new Jugador(1);
         Jugador jugador2 = new Jugador(2);
@@ -25,7 +23,6 @@ public class TurnoTest {
 
     @Test
     public void porDefectoElTurnoEsDelJugadorNumero1() {
-//        ArrayList<Jugador> jugadores = new ArrayList<>();
         Jugadores jugadores = new Jugadores();
         Jugador jugador1 = new Jugador(1);
         Jugador jugador2 = new Jugador(2);
@@ -40,7 +37,6 @@ public class TurnoTest {
 
     @Test
     public void alSeleccionarPrimerJugadorAlJugador2EsElJugadorDelTurnoActual() {
-//        ArrayList<Jugador> jugadores = new ArrayList<>();
         Jugadores jugadores = new Jugadores();
         Jugador jugador1 = new Jugador(1);
         Jugador jugador2 = new Jugador(2);
@@ -59,7 +55,6 @@ public class TurnoTest {
 
     @Test
     public void alFinalizarElAtaqueDelJugador2ElTurnoSigueSiendoDeJugador2() {
-//        ArrayList<Jugador> jugadores = new ArrayList<>();
         Jugadores jugadores = new Jugadores();
         Jugador jugador1 = new Jugador(1);
         Jugador jugador2 = new Jugador(2);
@@ -80,7 +75,6 @@ public class TurnoTest {
 
     @Test
     public void alFinalizarElTurnoDelJugador3ElTurnoDelSiguienteJugadorEsDelJugador1() {
-//        ArrayList<Jugador> jugadores = new ArrayList<>();
         Jugadores jugadores = new Jugadores();
         Jugador jugador1 = new Jugador(1);
         Jugador jugador2 = new Jugador(2);
@@ -103,7 +97,6 @@ public class TurnoTest {
 
     @Test
     public void porDefectoLaCantidadDeTurnosJugadosEsCero() {
-//        ArrayList<Jugador> jugadores = new ArrayList<>();
         Jugadores jugadores = new Jugadores();
 
         Turno turno = new ConTurno(jugadores);
@@ -113,8 +106,6 @@ public class TurnoTest {
 
     @Test
     public void luegoDeQueElJugador2TerminoDeReagruparLeTocaRondaDeAtaqueAlJugador3() {
-//        ArrayList<Jugador> jugadores = new ArrayList<>();
-
         Jugadores jugadores = new Jugadores();
         Jugador jugador1 = new Jugador(1);
         Jugador jugador2 = new Jugador(2);
@@ -139,7 +130,6 @@ public class TurnoTest {
 
     @Test
     public void luegoDeQueElTodosAtacaronYDefendieronTocaColocacion() {
-//        ArrayList<Jugador> jugadores = new ArrayList<>();
         Jugadores jugadores = new Jugadores();
 
         Jugador jugador1 = new Jugador(1);
@@ -170,7 +160,6 @@ public class TurnoTest {
 
     @Test
     public void luegoDeFinalizar3TurnosLaCantidadDeTurnosJugadosEs3() {
-//        ArrayList<Jugador> jugadores = new ArrayList<>();
         Jugadores jugadores = new Jugadores();
         Jugador jugador1 = new Jugador(1);
         Jugador jugador2 = new Jugador(2);

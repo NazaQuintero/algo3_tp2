@@ -7,9 +7,4 @@ public class Ataque implements Ronda {
         return "Ataque";
     }
 
-    @Override
-    public Ronda obtenerSiguiente() {
-        return new Reagrupe();
-    }
-
 }
