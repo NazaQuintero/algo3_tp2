@@ -10,8 +10,8 @@ public class Colocacion implements Ronda {
 
     @Override
     public void finalizarRonda(Turno unTurno) {
-        if(unTurno.leTocaALPrimerJugador()) unTurno.setRonda(new Ataque());
         unTurno.finalizarTurnoActual();
+        if(unTurno.leTocaALPrimerJugador()) unTurno.setRonda(new Ataque());
     }
 
 
