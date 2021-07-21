@@ -1,7 +1,5 @@
 package edu.fiuba.algo3.modelo;
 
-import java.util.ArrayList;
-
 public class Atacante implements Rol {
     public Dados tirarDados(Pais pais) {
         Dados dados = new Dados();

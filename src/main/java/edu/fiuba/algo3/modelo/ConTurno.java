@@ -63,18 +63,4 @@ public class ConTurno implements Turno {
         this.ronda.finalizarRonda(this);
     }
 
-    /*public void finalizarAtaque() {
-        this.setRonda(new Reagrupe());
-    }*/
-
-    /*public void finalizarReagrupe() {
-        this.finalizarTurnoActual();
-        if(leTocaALPrimerJugador()) this.setRonda(new Colocacion());
-        else this.setRonda(new Ataque());
-    }*/
-
-    /*public void finalizarColocacion() {
-        if(leTocaALPrimerJugador()) this.setRonda(new Ataque());
-        this.finalizarTurnoActual();
-    }*/
 }

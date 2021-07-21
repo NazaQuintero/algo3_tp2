@@ -13,9 +13,7 @@ public class SinTurno implements Turno {
 
     @Override
     public void seleccionarPrimerJugador(int valor) {
-
     }
-
 
     @Override
     public Ronda obtenerRondaActual() {
@@ -38,7 +36,6 @@ public class SinTurno implements Turno {
 
     @Override
     public void setRonda(Ronda unaRonda) {
-
     }
 
     @Override
@@ -50,11 +47,6 @@ public class SinTurno implements Turno {
     public void finalizarTurnoActual() {
 
     }
-
-//    @Override
-//    public void cambiarRonda() {
-//
-//    }
 
 
 }
