@@ -31,6 +31,7 @@ public class Pais {
 
     public void colocarEjercito(Fichas unEjercito) {
         this.ejercito = unEjercito;
+        this.ejercito.agregarPais(this);
     }
 
     public void modificarCantidadEjercito(int unaCantidad) {
@@ -76,6 +77,14 @@ public class Pais {
             this.modificarCantidadEjercito(-cantidadEjercitos);
             destino.modificarCantidadEjercito(cantidadEjercitos);
         } else throw new ElPaisNoEsLimitrofeException();
+    }
+
+    public String obtenerNombre() {
+        return this.nombre;
+    }
+
+    public boolean estaLibre() {
+        return this.dominadoPor() == null;
     }
 }
 

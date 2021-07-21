@@ -14,4 +14,6 @@ public interface Fichas {
     void rolAtacante();
 
     void rolDefensor();
+
+    void agregarPais(Pais pais);
 }

@@ -9,7 +9,7 @@ public class Jugador {
     private Objetivo general = new General();
     private Rol rol = new RolIndefinido();
     private Turno turno = new SinTurno();
-    private HashMap<String, Pais> paisesDominados;
+    private HashMap<String, Pais> paisesDominados = new HashMap<>();
 
     public Jugador(int id) {
         this.id = id;
@@ -38,7 +38,7 @@ public class Jugador {
             } catch (ElJugadorNoTieneTurnoException e) {
                 throw new ElJugadorNoTieneTurnoException();
             }
-        }
+        } else if (pais.estaLibre()) pais.colocarEjercito(new Ejercito(this));
     }
 
     public void asignarColor(String color) {
@@ -91,6 +91,14 @@ public class Jugador {
         } catch (ElJugadorNoTieneTurnoException e) {
             throw new ElJugadorNoTieneTurnoException();
         }
+    }
+
+    public void agregarPais(Pais pais) {
+        this.paisesDominados.putIfAbsent(pais.obtenerNombre(), pais);
+    }
+
+    public void quitarPais(Pais defensor) {
+        this.paisesDominados.remove(defensor.obtenerNombre());
     }
 
     /*public void finalizarReagrupe() {

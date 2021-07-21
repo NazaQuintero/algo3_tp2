@@ -25,12 +25,13 @@ public class EjercitoNulo implements Fichas {
 
     @Override
     public void rolAtacante() {
-
     }
 
     @Override
     public void rolDefensor() {
+    }
 
+    public void agregarPais(Pais pais) {
     }
 
 }

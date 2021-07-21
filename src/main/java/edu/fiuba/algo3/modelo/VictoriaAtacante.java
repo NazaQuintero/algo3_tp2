@@ -7,6 +7,9 @@ public class VictoriaAtacante implements Victoria {
         if(defensor.cantidadEjercitos() > 0) {
             defensor.modificarCantidadEjercito(-1);
         }
-        if(defensor.cantidadEjercitos() <= 0) defensor.colocarEjercito(new Ejercito(atacante.dominadoPor()));
+        if(defensor.cantidadEjercitos() <= 0) {
+            defensor.dominadoPor().quitarPais(defensor); // ahre parece medio frula
+            defensor.colocarEjercito(new Ejercito(atacante.dominadoPor()));
+        }
     }
 }

@@ -107,10 +107,11 @@ public class RondaTest {
 
         Ronda unaRonda = turno.obtenerRondaActual();
 
+        assertEquals(jugador1, turno.obtenerJugadorTurnoActual());
         assertEquals("Ataque", unaRonda.obtenerDescripcion());
         assertNotEquals("Colocacion", unaRonda.obtenerDescripcion());
 
-        assertThrows(NoEsRondaDeColocacionException.class, () -> { jugador1.colocarEjercitos(otroPais); });
+        assertThrows(NoEsRondaDeColocacionException.class, () -> { jugador1.colocarEjercitos(unPais); });
 
     }
 

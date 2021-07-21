@@ -40,4 +40,8 @@ public class Ejercito implements Fichas {
     public void rolDefensor() {
         this.jugador.rolDefensor();
     }
+
+    public void agregarPais(Pais pais) {
+        this.jugador.agregarPais(pais);
+    }
 }
