@@ -74,4 +74,8 @@ public class Jugador {
         this.turno.finalizarReagrupe();
 //        this.turno.cambiarRonda();
     }
+
+    public void finalizarColocacion() {
+        this.turno.finalizarColocacion();
+    }
 }

@@ -42,26 +42,15 @@ public class ConTurno implements Turno {
         this.actual = this.iteradorDeJugadores.next();
     }
 
-    public void finalizarTurnoActual() {
+    private void finalizarTurnoActual() {
         this.actual.setTurno(new SinTurno());
         this.actual = this.iteradorDeJugadores.next();
-        this.cambiarRonda();
         this.actual.setTurno(this);
         this.cantidadDeTurnosJugados++;
     }
 
     public int obtenerCantidadDeTurnosJugados() {
         return this.cantidadDeTurnosJugados;
-    }
-
-    @Override
-    public void cambiarRonda() { // 1) pasar por el 1er jugador 2) rondaAct = reagrupe
-        if(this.actual == this.primerJugador) {
-            this.ronda = new Colocacion();
-            this.cantidadDeRondasJugadas++;
-        } else {
-            this.ronda = new Ataque();
-        }
     }
 
     public Ronda obtenerRondaActual() {
@@ -78,9 +67,20 @@ public class ConTurno implements Turno {
 
     public void finalizarReagrupe() {
         this.finalizarTurnoActual();
+        if(this.actual == this.primerJugador) {
+            this.ronda = new Colocacion();
+            this.cantidadDeRondasJugadas++;
+        } else {
+            this.ronda = new Ataque();
+        }
     }
 
     public void finalizarColocacion() {
+        if(this.actual == this.primerJugador) {
+            this.ronda = new Ataque();
+            this.cantidadDeRondasJugadas++;
+        }
         this.finalizarTurnoActual();
+
     }
 }

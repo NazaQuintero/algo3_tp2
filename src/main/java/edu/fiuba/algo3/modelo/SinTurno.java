@@ -16,10 +16,6 @@ public class SinTurno implements Turno {
 
     }
 
-    @Override
-    public void finalizarTurnoActual() {
-
-    }
 
     @Override
     public Ronda obtenerRondaActual() {
@@ -46,9 +42,13 @@ public class SinTurno implements Turno {
         return 0;
     }
 
-    @Override
-    public void cambiarRonda() {
+//    @Override
+//    public void cambiarRonda() {
+//
+//    }
 
+    @Override
+    public void finalizarColocacion() {
     }
 
 }
