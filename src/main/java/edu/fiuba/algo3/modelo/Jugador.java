@@ -9,6 +9,7 @@ public class Jugador {
     private Objetivo general = new General();
     private Rol rol = new RolIndefinido();
     private Turno turno = new SinTurno();
+    private HashMap<String, Pais> paisesDominados;
 
     public Jugador(int id) {
         this.id = id;
@@ -74,6 +75,22 @@ public class Jugador {
 
     public void finalizarRonda() {
         this.turno.finalizarRonda();
+    }
+
+    public void atacarA(Pais paisAtacante, Pais paisDefensor) throws ElJugadorNoTieneTurnoException, NoEsRondaDeAtaqueException {
+        try {
+            turno.atacarA(paisAtacante, paisDefensor);
+        } catch (ElJugadorNoTieneTurnoException e) {
+            throw new ElJugadorNoTieneTurnoException();
+        }
+    }
+
+    public void reagrupar(Pais origen, Pais destino) throws NoEsRondaDeReagrupeException, ElJugadorNoTieneTurnoException, ElPaisNoEsLimitrofeException {
+        try {
+            this.turno.reagrupar(origen, destino);
+        } catch (ElJugadorNoTieneTurnoException e) {
+            throw new ElJugadorNoTieneTurnoException();
+        }
     }
 
     /*public void finalizarReagrupe() {

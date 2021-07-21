@@ -15,8 +15,8 @@ public class Pais {
         this.ejercito = new EjercitoNulo();
     }
 
-    }
-    public Pais(String nombre, String continente){
+
+    public Pais(String nombre, String continente) {
         this.nombre = nombre;
         this.continente = continente;
         this.paisesLimitrofes = new ArrayList<>();
