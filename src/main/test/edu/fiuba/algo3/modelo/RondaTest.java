@@ -2,6 +2,7 @@ package edu.fiuba.algo3.modelo;
 
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -267,6 +268,7 @@ public class RondaTest {
 
     @Test
     public void seJuegaUnaRondaCon3JugadoresJugador2DominaAsiaNadieAtacaPeroSiColocan() throws ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException {
+        MockitoAnnotations.initMocks(this);
         Jugadores jugadores = new Jugadores();
         Usuario usuario1Mock = mock(Usuario.class);
         Usuario usuario2Mock = mock(Usuario.class);
