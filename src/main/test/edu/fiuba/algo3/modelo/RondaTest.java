@@ -374,6 +374,7 @@ public class RondaTest {
         Ejercito ejercitoDefensor2 = new Ejercito(jugador2Spy);
 
         paisAtacante.colocarEjercito(ejercitoAtacante);
+        paisAtacante.modificarCantidadEjercito(4);
         paisDefensor.colocarEjercito(ejercitoDefensor);
         paisDefensor2.colocarEjercito(ejercitoDefensor2);
 
