@@ -4,9 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 public class RondaTest {
@@ -36,7 +34,7 @@ public class RondaTest {
 
         assertEquals(jugador1, turno.obtenerJugadorTurnoActual());
         assertNotEquals(jugador2, turno.obtenerJugadorTurnoActual());
-        assertThrows(ElJugadorNoTieneTurnoException.class, () -> { jugador2.atacarA(otroPais, unPais); });
+        assertThrows(ElJugadorNoTieneTurnoException.class, () -> jugador2.atacarA(otroPais, unPais));
 
     }
 
@@ -65,7 +63,7 @@ public class RondaTest {
         assertNotEquals("Ataque", unaRonda.obtenerDescripcion());
         assertEquals("Reagrupe", unaRonda.obtenerDescripcion());
 
-        assertThrows(NoEsRondaDeAtaqueException.class, () -> { jugador1.atacarA(unPais, otroPais); });
+        assertThrows(NoEsRondaDeAtaqueException.class, () -> jugador1.atacarA(unPais, otroPais));
 
     }
 
@@ -94,7 +92,7 @@ public class RondaTest {
         assertEquals("Ataque", unaRonda.obtenerDescripcion());
         assertNotEquals("Reagrupe", unaRonda.obtenerDescripcion());
 
-        assertThrows(NoEsRondaDeReagrupeException.class, () -> { jugador1.reagrupar(unPais, otroPais); });
+        assertThrows(NoEsRondaDeReagrupeException.class, () -> jugador1.reagrupar(unPais, otroPais));
 
     }
 
@@ -123,7 +121,7 @@ public class RondaTest {
         assertEquals("Ataque", unaRonda.obtenerDescripcion());
         assertNotEquals("Colocacion", unaRonda.obtenerDescripcion());
 
-        assertThrows(NoEsRondaDeColocacionException.class, () -> { jugador1.colocarEjercitos(unPais); });
+        assertThrows(NoEsRondaDeColocacionException.class, () -> jugador1.colocarEjercitos(unPais));
 
     }
 
@@ -232,7 +230,7 @@ public class RondaTest {
 
         jugador1.recibirTarjeta(unaTarjeta);
 
-        assertThrows(ActivacionTarjetaEnRondaEquivocadaException.class, () -> { jugador1.activarTarjetaPais("Argentina"); });
+        assertThrows(ActivacionTarjetaEnRondaEquivocadaException.class, () -> jugador1.activarTarjetaPais("Argentina"));
 
     }
 
@@ -262,7 +260,7 @@ public class RondaTest {
 
         jugador1.recibirTarjeta(unaTarjeta);
 
-        assertThrows(ActivacionTarjetaEnRondaEquivocadaException.class, () -> { jugador1.activarTarjetaPais("Argentina"); });
+        assertThrows(ActivacionTarjetaEnRondaEquivocadaException.class, () -> jugador1.activarTarjetaPais("Argentina"));
 
     }
 
@@ -284,20 +282,18 @@ public class RondaTest {
 
         Pais unPais = new Pais("Argentina");
         Pais otroPais = new Pais("Chile");
-        Pais oootroPais = new Pais("China");
+        Pais china = new Pais("China");
 
         unPais.colocarEjercito(new Ejercito(jugador1));
         otroPais.colocarEjercito(new Ejercito(jugador3));
-        oootroPais.colocarEjercito(new Ejercito(jugador2)); // cada pais tiene un ejercito de cada jugador
+        china.colocarEjercito(new Ejercito(jugador2)); // cada pais tiene un ejercito de cada jugador
 
         Turno unTurno = new ConTurno(jugadores);
         unTurno.seleccionarPrimerJugador(0); // elegimos al jugador1 como primer jugador
         unTurno.setRonda(new Colocacion());
         
-        Asia asia = mock(Asia.class);
-
-        when(asia.dominadoPor(jugador2)).thenReturn(true);
-        when(asia.obtenerCantidadEjercito()).thenReturn(7);
+        Asia asia = new Asia("Asia");
+        asia.agregarPais(china);
 
         assertEquals(jugador1, unTurno.obtenerJugadorTurnoActual());
 
@@ -306,7 +302,7 @@ public class RondaTest {
 
         assertEquals(jugador2, unTurno.obtenerJugadorTurnoActual());
 
-        jugador2.colocarEjercitos(oootroPais);
+        jugador2.colocarEjercitos(china);
         jugador2.finalizarRonda();
 
         assertEquals(jugador3, unTurno.obtenerJugadorTurnoActual());
@@ -317,8 +313,10 @@ public class RondaTest {
         assertEquals(3, unPais.cantidadEjercitos());
         assertEquals(jugador1, unPais.dominadoPor());
 
-        assertEquals(3, oootroPais.cantidadEjercitos());
-        assertEquals(jugador2, oootroPais.dominadoPor());
+        // Asia dominado por Jugador2
+        assertEquals(3, china.cantidadEjercitos());
+        assertEquals(jugador2, china.dominadoPor());
+        assertTrue(asia.dominadoPor(jugador2));
 
         assertEquals(3, otroPais.cantidadEjercitos());
         assertEquals(jugador3, otroPais.dominadoPor());
