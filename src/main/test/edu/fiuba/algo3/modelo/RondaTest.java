@@ -1,7 +1,7 @@
 package edu.fiuba.algo3.modelo;
 
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito.*;
+import org.mockito.Mockito;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -327,12 +327,11 @@ public class RondaTest {
     @Test
     public void rondaDeAtaqueEntre2JugadoresJugador1AtacaYConquista2PaisesDelJugador2() throws ElJugadorNoTieneTurnoException, NoEsRondaDeAtaqueException {
         Jugadores jugadores = new Jugadores();
-        Usuario usuario1Spy = spy(new Usuario());
-        Usuario usuario2Spy = spy(new Usuario());
-        when(usuario1Spy.pedirCantidad()).thenReturn(4);
+        Usuario usuario1 = new Usuario();
+        Usuario usuario2 = new Usuario();
 
-        Jugador jugador1Spy = spy(new Jugador(1, usuario1Spy));
-        Jugador jugador2Spy = spy(new Jugador(2, usuario2Spy));
+        Jugador jugador1Spy = spy(new Jugador(1, usuario1));
+        Jugador jugador2Spy = spy(new Jugador(2, usuario2));
 
         jugadores.agregarJugador(jugador1Spy);
         jugadores.agregarJugador(jugador2Spy);
@@ -345,7 +344,6 @@ public class RondaTest {
 
         Dado dadoAtacanteMock = mock(Dado.class);
         when(dadoAtacanteMock.obtenerValor()).thenReturn(1);
-        // Mockito.doReturn(1).when(dadoAtacanteMock).obtenerValor();
 
         Dado dadoDefensorMock = mock(Dado.class);
         when(dadoDefensorMock.obtenerValor()).thenReturn(1);
@@ -364,7 +362,7 @@ public class RondaTest {
         dadosDefensor.agregarDado(dadoDefensorMock);
         dadosDefensor.agregarDado(dadoDefensorMock);
 
-        when(jugador1Spy.tirarDados(paisAtacante)).thenReturn(dadosAtacante);
+        Mockito.when(jugador1Spy.tirarDados(paisAtacante)).thenReturn(dadosAtacante);
         when(jugador2Spy.tirarDados(paisDefensor)).thenReturn(dadosDefensor);
         when(jugador2Spy.tirarDados(paisDefensor2)).thenReturn(dadosDefensor);
 
