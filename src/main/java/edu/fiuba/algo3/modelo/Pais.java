@@ -2,10 +2,10 @@ package edu.fiuba.algo3.modelo;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.function.Predicate;
 
 public class Pais {
     String nombre;
-    String continente;
     Fichas ejercito;
     private ArrayList<Pais> paisesLimitrofes;
 
@@ -14,13 +14,6 @@ public class Pais {
         this.paisesLimitrofes = new ArrayList<>();
         this.ejercito = new EjercitoNulo();
 
-    }
-
-    public Pais(String nombre, String continente) {
-        this.nombre = nombre;
-        this.continente = continente;
-        this.paisesLimitrofes = new ArrayList<>();
-        this.ejercito = new EjercitoNulo();
     }
 
     public int cantidadEjercitos() {
@@ -49,6 +42,9 @@ public class Pais {
     }
 
     public void atacarA(Pais defensor) {
+
+        // if (!paisesLimitrofes.contains(defensor)) throw new ElPaisNoEsLimitrofeException();
+
         this.rolAtacante();
         defensor.recibirAtaque(this);
     }

@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 public class Defensor implements Rol {
     public Dados tirarDados(Pais pais) {
-        Dados dados = new Dados();
         int cantidadEjercitosAtacante = pais.cantidadEjercitos();
+        Dados dados = new Dados(cantidadEjercitosAtacante);
         if(cantidadEjercitosAtacante >= 3) cantidadEjercitosAtacante = 3;
         // t0d0 esto podría estar en un método o clase validadore
 

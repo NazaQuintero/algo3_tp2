@@ -9,7 +9,7 @@ public class Dado implements Comparable<Dado> {
 
     public void lanzar() {
         Random r = new Random();
-        this.valorTirada = (1 + r.nextInt(6)); // q tas asiendo
+        this.valorTirada = (1 + r.nextInt(6));
     }
 
     public int obtenerValor() {

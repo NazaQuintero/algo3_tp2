@@ -26,4 +26,7 @@ public class Colocacion implements Ronda {
         unPais.modificarCantidadEjercito(unPais.pedirCantidadAlJugador());
     }
 
+    public void activarTarjeta(Tarjeta unaTarjeta) {
+        unaTarjeta.activar();
+    }
 }

@@ -13,6 +13,7 @@ public class Ataque implements Ronda {
 
     public void atacarA(Pais atacante, Pais defensor) {
         atacante.atacarA(defensor);
+
     }
 
     public void reagrupar(Pais origen, Pais destino) throws NoEsRondaDeReagrupeException {
@@ -21,6 +22,10 @@ public class Ataque implements Ronda {
 
     public void colocarEjercitos(Pais unPais) throws NoEsRondaDeColocacionException {
         throw new NoEsRondaDeColocacionException();
+    }
+
+    public void activarTarjeta(Tarjeta unaTarjeta) throws ActivacionTarjetaEnRondaEquivocadaException {
+        throw new ActivacionTarjetaEnRondaEquivocadaException();
     }
 
 

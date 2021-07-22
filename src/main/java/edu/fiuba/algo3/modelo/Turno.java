@@ -21,4 +21,6 @@ public interface Turno {
     void reagrupar(Pais origen, Pais destino) throws NoEsRondaDeReagrupeException, ElJugadorNoTieneTurnoException, ElPaisNoEsLimitrofeException;
 
     void colocarEjercitos(Pais pais) throws NoEsRondaDeColocacionException, ElJugadorNoTieneTurnoException;
+
+    void activarTarjeta(Tarjeta buscarTarjeta) throws ActivacionTarjetaEnRondaEquivocadaException, ElJugadorNoTieneTurnoException;
 }

@@ -10,11 +10,16 @@ public class Tarjeta {
         this.simbolo = simbolo;
     }
 
-    public Pais getPais() {
-        return pais;
+    public Pais obtenerPais(){ return pais; }
+    public String nombrePais() {
+        return pais.obtenerNombre();
     }
 
-    public Simbolo getSimbolo() {
+    public void activar() {
+        this.pais.modificarCantidadEjercito(2);
+    }
+
+    public Simbolo obtenerSimbolo() {
         return simbolo;
     }
 }

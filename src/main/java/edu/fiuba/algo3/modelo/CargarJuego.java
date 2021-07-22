@@ -26,15 +26,15 @@ public class CargarJuego {
 
             JsonObject jsonObject = jsonElement.getAsJsonObject();
 
-            //Crea el objeto pais sin limitrofes
+            // Crea el objeto pais sin limitrofes
             String nombrePais = jsonObject.get("Pais").getAsString();
-
-            Pais pais = new Pais(
-                    nombrePais,
-                    jsonObject.get("Continente").getAsString()
-            );
+            Pais pais = new Pais(nombrePais);
             paises.put(nombrePais, pais);
             limitrofes.put(pais, new ArrayList<>());
+
+            Continente continente = nuevoContinente(jsonObject.get("Continente").getAsString());
+            continente.agregarPais(pais);
+            tablero.agregarContinente(continente);
 
             String nombresLimitrofes = jsonObject.get("Limita con").getAsString();
             String[] arrayNombreLimitrofes = nombresLimitrofes.split(",");
@@ -75,7 +75,7 @@ public class CargarJuego {
 
             String nombrePais = jsonObject.get("Pais").getAsString();
 
-            return new Tarjeta(tablero.obtenerPais(nombrePais), nuevoSimbolo(jsonObject));
+            return new Tarjeta(tablero.obtenerPais(nombrePais), nuevoSimbolo(jsonObject.get("Simbolo").getAsString()));
         };
 
         gsonBuilder.registerTypeAdapter(Tarjeta.class, deserializer);
@@ -86,16 +86,26 @@ public class CargarJuego {
         tarjetas.addAll(Arrays.asList(_tarjetas));
     }
 
-    private static Simbolo nuevoSimbolo(JsonObject jsonObject) {
+    private static Simbolo nuevoSimbolo(String simbolo) {
 
-        switch (jsonObject.get("Simbolo").getAsString()) {
-
+        switch (simbolo) {
             case "Globo": return new Globo();
             case "Barco": return new Barco();
             case "Cañon": return new Canion();
         }
-
         return null;
+    }
+
+    private static Continente nuevoContinente(String nombreContinente) {
+        switch (nombreContinente){
+            case "Asia": return new Asia(nombreContinente);
+            case "Africa": return new Africa(nombreContinente);
+            case "Oceania": return new Oceania(nombreContinente);
+            case "Europa": return new Europa(nombreContinente);
+            case "America del Norte": return new AmericaDelNorte(nombreContinente);
+            case "America del Sur": return new AmericaDelSur(nombreContinente);
+            default: return new Asia(nombreContinente);
+        }
     }
 
 }
