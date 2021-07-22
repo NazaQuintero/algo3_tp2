@@ -44,9 +44,7 @@ public class SinTurno implements Turno {
     }
 
     @Override
-    public void finalizarTurnoActual() {
-
-    }
+    public void finalizarTurnoActual() { }
 
     @Override
     public void atacarA(Pais atacante, Pais defensor) throws ElJugadorNoTieneTurnoException {
@@ -60,6 +58,11 @@ public class SinTurno implements Turno {
 
     @Override
     public void colocarEjercitos(Pais unPais) throws ElJugadorNoTieneTurnoException {
+        throw new ElJugadorNoTieneTurnoException();
+    }
+
+    @Override
+    public void activarTarjeta(Tarjeta buscarTarjeta) throws ElJugadorNoTieneTurnoException, ActivacionTarjetaEnRondaEquivocadaException {
         throw new ElJugadorNoTieneTurnoException();
     }
 }

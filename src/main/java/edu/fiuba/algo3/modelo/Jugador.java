@@ -11,6 +11,7 @@ public class Jugador {
     private Rol rol = new RolIndefinido();
     private Turno turno = new SinTurno();
     private HashMap<String, Pais> paisesDominados = new HashMap<>();
+    private HashMap<String, Tarjeta> tarjetas = new HashMap<>();
     private Usuario usuario;
 
     public Jugador(int id, Usuario usuario) {
@@ -56,12 +57,10 @@ public class Jugador {
         return this.general;
     }
 
-    public Dados tirarDados(Pais pais) {
-        return this.rol.tirarDados(pais);
-    }
+    public Dados tirarDados(Pais pais) { return this.rol.tirarDados(pais); }
 
     public int pedirCantidad() {
-        return usuario.pedirCantidad(); // por ahora, despues se la pedimos al usuario
+        return usuario.pedirCantidad();
     }
 
     public void rolAtacante() {
@@ -102,6 +101,29 @@ public class Jugador {
 
     public void quitarPais(Pais defensor) {
         this.paisesDominados.remove(defensor.obtenerNombre());
+    }
+
+    public void recibirTarjeta(Tarjeta tarjeta){
+        tarjetas.put(tarjeta.nombrePais(), tarjeta);
+    }
+
+    public void activarTarjetaPais(String nombrePais) throws TarjetaNoEncontradaException, JugadorNoPoseePaisDeLaTarjetaException, ActivacionTarjetaEnRondaEquivocadaException, ElJugadorNoTieneTurnoException {
+        if(!this.poseePais(nombrePais)) throw new JugadorNoPoseePaisDeLaTarjetaException();
+
+        this.turno.activarTarjeta(this.buscarTarjeta(nombrePais));
+        tarjetas.remove(nombrePais); // this.mandarAlFondoDelMazo(nombrePais); deeaa
+    }
+
+    private Tarjeta buscarTarjeta(String nombrePais) throws TarjetaNoEncontradaException {
+       try {
+            return this.tarjetas.get(nombrePais);
+        } catch (NullPointerException e) {
+            throw new TarjetaNoEncontradaException();
+        }
+    }
+
+    private boolean poseePais(String nombrePais) {
+        return paisesDominados.containsKey(nombrePais);
     }
 
     /*public void finalizarReagrupe() {
