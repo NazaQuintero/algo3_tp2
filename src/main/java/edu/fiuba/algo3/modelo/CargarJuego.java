@@ -14,6 +14,7 @@ public class CargarJuego {
 
         HashMap<Pais, ArrayList<String>> limitrofes = new HashMap<>();
         HashMap<String, Pais> paises = new HashMap<>();
+        HashMap<String, Continente> continentes = new HashMap<>();
 
         InputStream is = CargarJuego.class.getClassLoader().getResourceAsStream(archivoPaises);
         if (is == null) throw new ArchivoDePaisesNoEncontradoException();
@@ -32,7 +33,13 @@ public class CargarJuego {
             paises.put(nombrePais, pais);
             limitrofes.put(pais, new ArrayList<>());
 
-            Continente continente = nuevoContinente(jsonObject.get("Continente").getAsString());
+            String nombre_continente = jsonObject.get("Continente").getAsString();
+            if (!continentes.containsKey(nombre_continente)){
+                Continente continente = nuevoContinente(nombre_continente);
+                continentes.put(nombre_continente, continente);
+            }
+
+            Continente continente = continentes.get(nombre_continente);
             continente.agregarPais(pais);
             tablero.agregarContinente(continente);
 
