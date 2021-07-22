@@ -323,6 +323,7 @@ public class RondaTest {
 
     }
 
+
     @Test
     public void rondaDeAtaqueEntre2JugadoresJugador1AtacaYConquista2PaisesDelJugador2() throws ElJugadorNoTieneTurnoException, NoEsRondaDeAtaqueException {
         Jugadores jugadores = new Jugadores();
@@ -366,9 +367,7 @@ public class RondaTest {
 
         when(jugador1Mock.tirarDados(paisAtacante)).thenReturn(dadosAtacante);
         when(jugador2Mock.tirarDados(paisDefensor)).thenReturn(dadosDefensor);
-        when(jugador2Mock.tirarDados(paisDefensor2)).thenReturn(dadosDefensor);
-
-        Ejercito ejercitoAtacante = new Ejercito(jugador1Mock);
+        when(jugador2Mock.tirarDados(paisDefensor2)).thenReturn(dadosDefensor); Ejercito ejercitoAtacante = new Ejercito(jugador1Mock);
         ejercitoAtacante.modificarCantidad(1);
         Ejercito ejercitoDefensor = new Ejercito(jugador2Mock);
         Ejercito ejercitoDefensor2 = new Ejercito(jugador2Mock);
