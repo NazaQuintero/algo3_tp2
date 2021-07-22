@@ -329,11 +329,11 @@ public class RondaTest {
         Usuario usuario1 = new Usuario();
         Usuario usuario2 = new Usuario();
 
-        Jugador jugador1Spy = mock(Jugador.class);
-        Jugador jugador2Spy = mock(Jugador.class);
+        Jugador jugador1Mock = mock(Jugador.class);
+        Jugador jugador2Mock = mock(Jugador.class);
 
-        jugadores.agregarJugador(jugador1Spy);
-        jugadores.agregarJugador(jugador2Spy);
+        jugadores.agregarJugador(jugador1Mock);
+        jugadores.agregarJugador(jugador2Mock);
 
 
         Pais paisAtacante = new Pais("Argentina");
@@ -361,17 +361,17 @@ public class RondaTest {
         dadosDefensor.agregarDado(dadoDefensorMock);
         dadosDefensor.agregarDado(dadoDefensorMock);
 
-        when(jugador1Spy.pedirCantidad()).thenReturn(4);
-        when(jugador2Spy.pedirCantidad()).thenReturn(3);
+        when(jugador1Mock.pedirCantidad()).thenReturn(4);
+        when(jugador2Mock.pedirCantidad()).thenReturn(3);
 
-        when(jugador1Spy.tirarDados(paisAtacante)).thenReturn(dadosAtacante);
-        when(jugador2Spy.tirarDados(paisDefensor)).thenReturn(dadosDefensor);
-        when(jugador2Spy.tirarDados(paisDefensor2)).thenReturn(dadosDefensor);
+        when(jugador1Mock.tirarDados(paisAtacante)).thenReturn(dadosAtacante);
+        when(jugador2Mock.tirarDados(paisDefensor)).thenReturn(dadosDefensor);
+        when(jugador2Mock.tirarDados(paisDefensor2)).thenReturn(dadosDefensor);
 
-        Ejercito ejercitoAtacante = new Ejercito(jugador1Spy);
+        Ejercito ejercitoAtacante = new Ejercito(jugador1Mock);
         ejercitoAtacante.modificarCantidad(1);
-        Ejercito ejercitoDefensor = new Ejercito(jugador2Spy);
-        Ejercito ejercitoDefensor2 = new Ejercito(jugador2Spy);
+        Ejercito ejercitoDefensor = new Ejercito(jugador2Mock);
+        Ejercito ejercitoDefensor2 = new Ejercito(jugador2Mock);
 
         paisAtacante.colocarEjercito(ejercitoAtacante);
         paisAtacante.modificarCantidadEjercito(4);
@@ -381,20 +381,20 @@ public class RondaTest {
 
         // Turno
         Turno unTurno = new ConTurno(jugadores);
-        doCallRealMethod().when(jugador1Spy).setTurno(unTurno);
+        doCallRealMethod().when(jugador1Mock).setTurno(unTurno);
         unTurno.seleccionarPrimerJugador(0); // le toca a jugador1
         assertEquals("Ataque", unTurno.obtenerRondaActual().obtenerDescripcion());
 
 
         //Ataque al primer pais defensor
-        doCallRealMethod().when(jugador1Spy).atacarA(paisAtacante, paisDefensor);
-        jugador1Spy.atacarA(paisAtacante, paisDefensor);
-        assertEquals(jugador1Spy, paisDefensor.dominadoPor());
+        doCallRealMethod().when(jugador1Mock).atacarA(paisAtacante, paisDefensor);
+        jugador1Mock.atacarA(paisAtacante, paisDefensor);
+        assertEquals(jugador1Mock, paisDefensor.dominadoPor());
 
         //Ataque al segundo pais defensor
-        doCallRealMethod().when(jugador1Spy).atacarA(paisAtacante, paisDefensor2);
-        jugador1Spy.atacarA(paisAtacante, paisDefensor2);
-        assertEquals(jugador1Spy, paisDefensor2.dominadoPor());
+        doCallRealMethod().when(jugador1Mock).atacarA(paisAtacante, paisDefensor2);
+        jugador1Mock.atacarA(paisAtacante, paisDefensor2);
+        assertEquals(jugador1Mock, paisDefensor2.dominadoPor());
 
     }
 
