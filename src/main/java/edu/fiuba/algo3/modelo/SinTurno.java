@@ -48,5 +48,18 @@ public class SinTurno implements Turno {
 
     }
 
+    @Override
+    public void atacarA(Pais atacante, Pais defensor) throws ElJugadorNoTieneTurnoException {
+        throw new ElJugadorNoTieneTurnoException();
+    }
 
+    @Override
+    public void reagrupar(Pais origen, Pais destino) throws ElJugadorNoTieneTurnoException {
+        throw new ElJugadorNoTieneTurnoException();
+    }
+
+    @Override
+    public void colocarEjercitos(Pais unPais) throws ElJugadorNoTieneTurnoException {
+        throw new ElJugadorNoTieneTurnoException();
+    }
 }

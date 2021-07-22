@@ -14,4 +14,20 @@ public class Reagrupe implements Ronda {
         else unTurno.setRonda(new Ataque());
     }
 
+    public void atacarA(Pais atacante, Pais defensor) throws NoEsRondaDeAtaqueException {
+        throw new NoEsRondaDeAtaqueException();
+    }
+
+    public void reagrupar(Pais origen, Pais destino) throws ElPaisNoEsLimitrofeException {
+        try {
+            origen.reagrupar(destino);
+        } catch (ElPaisNoEsLimitrofeException e) {
+            throw new ElPaisNoEsLimitrofeException();
+        }
+    }
+
+    public void colocarEjercitos(Pais unPais) throws NoEsRondaDeColocacionException {
+        throw new NoEsRondaDeColocacionException();
+    }
+
 }

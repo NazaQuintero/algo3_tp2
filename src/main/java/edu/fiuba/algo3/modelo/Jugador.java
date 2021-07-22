@@ -1,16 +1,21 @@
 package edu.fiuba.algo3.modelo;
 
+import java.util.HashMap;
+
 public class Jugador {
+
     private final int id;
     private String color = "";
-    private int cantidadPaisesDominados = 0;
     private Objetivo secreto;
     private Objetivo general = new General();
     private Rol rol = new RolIndefinido();
     private Turno turno = new SinTurno();
+    private HashMap<String, Pais> paisesDominados = new HashMap<>();
+    private Usuario usuario;
 
-    public Jugador(int id) {
+    public Jugador(int id, Usuario usuario) {
         this.id = id;
+        this.usuario = usuario;
     }
 
     public Jugador() { // despues lo volamo
@@ -22,16 +27,21 @@ public class Jugador {
     }
 
     public int cantidadPaisesDominados() {
-        return cantidadPaisesDominados;
+        return paisesDominados.size();
     }
 
     public int obtenerId() {
         return this.id;
     }
 
-    public void colocarEjercitos(Pais pais) {
-        pais.colocarEjercito(new Ejercito(this));
-        cantidadPaisesDominados++;
+    public void colocarEjercitos(Pais pais) throws ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException {
+        if (paisesDominados.containsKey(pais.obtenerNombre())) { //qsy
+            try {
+                this.turno.colocarEjercitos(pais);
+            } catch (ElJugadorNoTieneTurnoException e) {
+                throw new ElJugadorNoTieneTurnoException();
+            }
+        } else if (pais.estaLibre()) pais.colocarEjercito(new Ejercito(this));
     }
 
     public void asignarColor(String color) {
@@ -51,7 +61,7 @@ public class Jugador {
     }
 
     public int pedirCantidad() {
-        return 4; // por ahora, despues se la pedimos al usuario
+        return usuario.pedirCantidad(); // por ahora, despues se la pedimos al usuario
     }
 
     public void rolAtacante() {
@@ -68,6 +78,30 @@ public class Jugador {
 
     public void finalizarRonda() {
         this.turno.finalizarRonda();
+    }
+
+    public void atacarA(Pais paisAtacante, Pais paisDefensor) throws ElJugadorNoTieneTurnoException, NoEsRondaDeAtaqueException {
+        try {
+            turno.atacarA(paisAtacante, paisDefensor);
+        } catch (ElJugadorNoTieneTurnoException e) {
+            throw new ElJugadorNoTieneTurnoException();
+        }
+    }
+
+    public void reagrupar(Pais origen, Pais destino) throws NoEsRondaDeReagrupeException, ElJugadorNoTieneTurnoException, ElPaisNoEsLimitrofeException {
+        try {
+            this.turno.reagrupar(origen, destino);
+        } catch (ElJugadorNoTieneTurnoException e) {
+            throw new ElJugadorNoTieneTurnoException();
+        }
+    }
+
+    public void agregarPais(Pais pais) {
+        this.paisesDominados.putIfAbsent(pais.obtenerNombre(), pais);
+    }
+
+    public void quitarPais(Pais defensor) {
+        this.paisesDominados.remove(defensor.obtenerNombre());
     }
 
     /*public void finalizarReagrupe() {

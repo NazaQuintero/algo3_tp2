@@ -4,23 +4,20 @@ import java.util.stream.Collectors;
 
 
 public class Tablero {
-    private Map<String,Pais> paises;
-    private ArrayList<String> nombresPaises;
+    private HashMap<String,Pais> paises;
 
     public Tablero() {
-        nombresPaises = new ArrayList<>();
         paises = new HashMap<>();
     }
 
     public void agregarPais(String nombrePais, Pais unPais) {
         paises.put(nombrePais, unPais);
-        nombresPaises.add(nombrePais);
     }
     public void agregarPais(Pais pais){
         paises.put(pais.nombre, pais);
     }
 
-    public void repartirPaises(ArrayList<Jugador> jugadores) {
+    public void repartirPaises(ArrayList<Jugador> jugadores) throws NoEsRondaDeColocacionException, ElJugadorNoTieneTurnoException {
         ArrayList<Pais> paises = new ArrayList<>(this.paises.values());
         Collections.shuffle(paises);
 

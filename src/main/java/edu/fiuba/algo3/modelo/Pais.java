@@ -15,14 +15,17 @@ public class Pais {
         this.ejercito = new EjercitoNulo();
 
     }
-    public Pais(String nombre, String continente){
+
+    public Pais(String nombre, String continente) {
         this.nombre = nombre;
         this.continente = continente;
         this.paisesLimitrofes = new ArrayList<>();
         this.ejercito = new EjercitoNulo();
     }
 
-    public int cantidadEjercitos() { return this.ejercito.obtenerCantidad(); }
+    public int cantidadEjercitos() {
+        return this.ejercito.obtenerCantidad();
+    }
 
     public Jugador dominadoPor() {
         return this.ejercito.obtenerJugador();
@@ -30,6 +33,7 @@ public class Pais {
 
     public void colocarEjercito(Fichas unEjercito) {
         this.ejercito = unEjercito;
+        this.ejercito.agregarPais(this);
     }
 
     public void modificarCantidadEjercito(int unaCantidad) {
@@ -40,7 +44,9 @@ public class Pais {
         return this.paisesLimitrofes.contains(otroPais);
     }
 
-    public void limitaCon(Pais otroPais) { paisesLimitrofes.add(otroPais); }
+    public void limitaCon(Pais otroPais) {
+        paisesLimitrofes.add(otroPais);
+    }
 
     public void atacarA(Pais defensor) {
         this.rolAtacante();
@@ -49,7 +55,7 @@ public class Pais {
 
     public void recibirAtaque(Pais atacante) {
         this.rolDefensor();
-        Batalla nuevaBatalla = new Batalla(atacante,this);
+        Batalla nuevaBatalla = new Batalla(atacante, this);
         nuevaBatalla.batallar();
     }
 
@@ -61,9 +67,27 @@ public class Pais {
         return this.ejercito.pedirCantidadAlJugador();
     }
 
-    public void rolAtacante() { this.ejercito.rolAtacante(); }
+    public void rolAtacante() {
+        this.ejercito.rolAtacante();
+    }
 
     public void rolDefensor() {
         this.ejercito.rolDefensor();
+    }
+
+    public void reagrupar(Pais destino) throws ElPaisNoEsLimitrofeException {
+        if (this.esLimitrofeCon(destino)) {
+            int cantidadEjercitos = pedirCantidadAlJugador(); //checkear que la cantidad es valida
+            this.modificarCantidadEjercito(-cantidadEjercitos);
+            destino.modificarCantidadEjercito(cantidadEjercitos);
+        } else throw new ElPaisNoEsLimitrofeException();
+    }
+
+    public String obtenerNombre() {
+        return this.nombre;
+    }
+
+    public boolean estaLibre() {
+        return this.dominadoPor() == null;
     }
 }
