@@ -363,9 +363,9 @@ public class RondaTest {
         dadosDefensor.agregarDado(dadoDefensorMock);
         dadosDefensor.agregarDado(dadoDefensorMock);
 
-        Mockito.when(jugador1Spy.tirarDados(paisAtacante)).thenReturn(dadosAtacante);
-        when(jugador2Spy.tirarDados(paisDefensor)).thenReturn(dadosDefensor);
-        when(jugador2Spy.tirarDados(paisDefensor2)).thenReturn(dadosDefensor);
+        doReturn(dadosAtacante).when(jugador1Spy.tirarDados(paisAtacante));
+        doReturn(dadosDefensor).when(jugador2Spy.tirarDados(paisDefensor));
+        doReturn(dadosDefensor).when(jugador2Spy.tirarDados(paisDefensor2));
 
         Ejercito ejercitoAtacante = new Ejercito(jugador1Spy);
         ejercitoAtacante.modificarCantidad(1);
