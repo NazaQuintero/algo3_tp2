@@ -268,7 +268,6 @@ public class RondaTest {
 
     @Test
     public void seJuegaUnaRondaCon3JugadoresJugador2DominaAsiaNadieAtacaPeroSiColocan() throws ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException {
-        MockitoAnnotations.initMocks(this);
         Jugadores jugadores = new Jugadores();
         Usuario usuario1Mock = mock(Usuario.class);
         Usuario usuario2Mock = mock(Usuario.class);
