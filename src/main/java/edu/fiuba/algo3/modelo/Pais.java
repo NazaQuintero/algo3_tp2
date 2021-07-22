@@ -73,7 +73,7 @@ public class Pais {
 
     public void reagrupar(Pais destino) throws ElPaisNoEsLimitrofeException {
         if (this.esLimitrofeCon(destino)) {
-            int cantidadEjercitos = pedirCantidadAlJugador();
+            int cantidadEjercitos = pedirCantidadAlJugador(); //checkear que la cantidad es valida
             this.modificarCantidadEjercito(-cantidadEjercitos);
             destino.modificarCantidadEjercito(cantidadEjercitos);
         } else throw new ElPaisNoEsLimitrofeException();
@@ -87,4 +87,3 @@ public class Pais {
         return this.dominadoPor() == null;
     }
 }
-

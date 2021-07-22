@@ -28,7 +28,7 @@ public class RondaTest {
 
         unPais.colocarEjercito(new Ejercito(jugador1));
         otroPais.colocarEjercito(new Ejercito(jugador2));
-        oootroPais.colocarEjercito(new Ejercito(jugador3));
+        oootroPais.colocarEjercito(new Ejercito(jugador3)); // se coloca 1 solo ejercito en cada pais
 
         Turno turno = new ConTurno(jugadores);
         turno.seleccionarPrimerJugador(0); // es el jugador 1
