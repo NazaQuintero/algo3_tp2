@@ -10,9 +10,11 @@ public class Jugador {
     private Rol rol = new RolIndefinido();
     private Turno turno = new SinTurno();
     private HashMap<String, Pais> paisesDominados = new HashMap<>();
+    private Usuario usuario;
 
-    public Jugador(int id) {
+    public Jugador(int id, Usuario usuario) {
         this.id = id;
+        this.usuario = usuario;
     }
 
     public Jugador() { // despues lo volamo
@@ -32,7 +34,7 @@ public class Jugador {
     }
 
     public void colocarEjercitos(Pais pais) throws ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException {
-        if (paisesDominados.containsValue(pais)) {
+        if (paisesDominados.containsKey(pais.obtenerNombre())) { //qsy
             try {
                 this.turno.colocarEjercitos(pais);
             } catch (ElJugadorNoTieneTurnoException e) {
@@ -58,7 +60,7 @@ public class Jugador {
     }
 
     public int pedirCantidad() {
-        return 4; // por ahora, despues se la pedimos al usuario
+        return usuario.pedirCantidad(); // por ahora, despues se la pedimos al usuario
     }
 
     public void rolAtacante() {

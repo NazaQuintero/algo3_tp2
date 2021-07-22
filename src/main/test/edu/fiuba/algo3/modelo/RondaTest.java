@@ -12,9 +12,12 @@ public class RondaTest {
     @Test
     public void unJugadorNoPuedeAtacarSiNoTieneTurno() {
         Jugadores jugadores = new Jugadores();
-        Jugador jugador1 = new Jugador(1);
-        Jugador jugador2 = new Jugador(2);
-        Jugador jugador3 = new Jugador(3);
+        Usuario usuario1 = new Usuario();
+        Usuario usuario2 = new Usuario();
+        Usuario usuario3 = new Usuario();
+        Jugador jugador1 = new Jugador(1, usuario1);
+        Jugador jugador2 = new Jugador(2, usuario2);
+        Jugador jugador3 = new Jugador(3, usuario3);
         jugadores.agregarJugador(jugador1);
         jugadores.agregarJugador(jugador2);
         jugadores.agregarJugador(jugador3);
@@ -69,8 +72,10 @@ public class RondaTest {
     @Test
     public void elJugadorConTurnoNoPuedeReagruparSiLaRondaNoEsDeReagrupe() {
         Jugadores jugadores = new Jugadores();
-        Jugador jugador1 = new Jugador(1);
-        Jugador jugador2 = new Jugador(2);
+        Usuario usuario1 = new Usuario();
+        Usuario usuario2 = new Usuario();
+        Jugador jugador1 = new Jugador(1, usuario1);
+        Jugador jugador2 = new Jugador(2, usuario2);
         jugadores.agregarJugador(jugador1);
         jugadores.agregarJugador(jugador2);
 
@@ -95,8 +100,10 @@ public class RondaTest {
     @Test
     public void elJugadorConTurnoNoPuedeColocarEjercitosSiLaRondaNoEsDeColocacion() {
         Jugadores jugadores = new Jugadores();
-        Jugador jugador1 = new Jugador(1);
-        Jugador jugador2 = new Jugador(2);
+        Usuario usuario1 = new Usuario();
+        Usuario usuario2 = new Usuario();
+        Jugador jugador1 = new Jugador(1, usuario1);
+        Jugador jugador2 = new Jugador(2, usuario2);
         jugadores.agregarJugador(jugador1);
         jugadores.agregarJugador(jugador2);
 
@@ -118,6 +125,7 @@ public class RondaTest {
         assertThrows(NoEsRondaDeColocacionException.class, () -> { jugador1.colocarEjercitos(unPais); });
 
     }
+
 
     @Test
     public void rondaConDosJugadoresNoSeAtacanYSeColocan2NuevosEjercitosCadaUno() throws ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException {
