@@ -1,7 +1,7 @@
 package edu.fiuba.algo3.modelo;
 
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
+import org.mockito.Mockito.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -327,12 +327,12 @@ public class RondaTest {
     @Test
     public void rondaDeAtaqueEntre2JugadoresJugador1AtacaYConquista2PaisesDelJugador2() throws ElJugadorNoTieneTurnoException, NoEsRondaDeAtaqueException {
         Jugadores jugadores = new Jugadores();
-        Usuario usuario1Spy = Mockito.spy(new Usuario());
-        Usuario usuario2Spy = Mockito.spy(new Usuario());
+        Usuario usuario1Spy = spy(new Usuario());
+        Usuario usuario2Spy = spy(new Usuario());
         when(usuario1Spy.pedirCantidad()).thenReturn(4);
 
-        Jugador jugador1Spy = Mockito.spy(new Jugador(1, usuario1Spy));
-        Jugador jugador2Spy = Mockito.spy(new Jugador(2, usuario2Spy));
+        Jugador jugador1Spy = spy(new Jugador(1, usuario1Spy));
+        Jugador jugador2Spy = spy(new Jugador(2, usuario2Spy));
 
         jugadores.agregarJugador(jugador1Spy);
         jugadores.agregarJugador(jugador2Spy);
