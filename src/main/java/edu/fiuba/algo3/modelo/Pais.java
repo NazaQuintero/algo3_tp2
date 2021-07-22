@@ -6,7 +6,6 @@ import java.util.function.Predicate;
 
 public class Pais {
     String nombre;
-    String continente;
     Fichas ejercito;
     private ArrayList<Pais> paisesLimitrofes;
 
