@@ -14,11 +14,11 @@ public abstract class Continente {
         this.paises.add(pais);
     }
 
-    public boolean dominadoPor(Jugador jugador){
+    public boolean dominadoPor(Jugador jugador) {
         return this.paises.stream().allMatch(pais -> pais.dominadoPor() == jugador);
     }
-    public boolean dominaCantidadDePaises(Jugador jugador, int n){
-        return (this.paises.stream().filter(pais -> pais.dominadoPor() == jugador).count()) >= n;
+    public boolean dominaCantidadDePaises(Jugador jugador, int cantidad) {
+        return (this.paises.stream().filter(pais -> pais.dominadoPor() == jugador).count()) >= cantidad;
     }
 
     public String obtenerNombre(){
