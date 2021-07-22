@@ -3,6 +3,7 @@ package edu.fiuba.algo3.modelo;
 import java.util.HashMap;
 
 public class Jugador {
+
     private final int id;
     private String color = "";
     private Objetivo secreto;

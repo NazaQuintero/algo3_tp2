@@ -4,17 +4,14 @@ import java.util.stream.Collectors;
 
 
 public class Tablero {
-    private Map<String,Pais> paises;
-    private ArrayList<String> nombresPaises;
+    private HashMap<String,Pais> paises;
 
     public Tablero() {
-        nombresPaises = new ArrayList<>();
         paises = new HashMap<>();
     }
 
     public void agregarPais(String nombrePais, Pais unPais) {
         paises.put(nombrePais, unPais);
-        nombresPaises.add(nombrePais);
     }
     public void agregarPais(Pais pais){
         paises.put(pais.nombre, pais);
