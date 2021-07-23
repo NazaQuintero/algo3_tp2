@@ -1,5 +1,18 @@
 package edu.fiuba.algo3.modelo;
 
+import edu.fiuba.algo3.modelo.batallasDeDados.Dados;
+import edu.fiuba.algo3.modelo.excepciones.*;
+import edu.fiuba.algo3.modelo.fichas.Ejercito;
+import edu.fiuba.algo3.modelo.objetivos.General;
+import edu.fiuba.algo3.modelo.objetivos.Objetivo;
+import edu.fiuba.algo3.modelo.roles.Atacante;
+import edu.fiuba.algo3.modelo.roles.Defensor;
+import edu.fiuba.algo3.modelo.roles.Rol;
+import edu.fiuba.algo3.modelo.roles.RolIndefinido;
+import edu.fiuba.algo3.modelo.tarjetas.Tarjeta;
+import edu.fiuba.algo3.modelo.turnos.SinTurno;
+import edu.fiuba.algo3.modelo.turnos.Turno;
+
 import java.util.HashMap;
 
 public class Jugador {

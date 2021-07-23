@@ -1,5 +1,8 @@
 package edu.fiuba.algo3.modelo;
 
+import edu.fiuba.algo3.modelo.rondas.Ronda;
+import edu.fiuba.algo3.modelo.turnos.ConTurno;
+import edu.fiuba.algo3.modelo.turnos.Turno;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

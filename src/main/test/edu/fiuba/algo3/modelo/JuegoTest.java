@@ -1,5 +1,9 @@
 package edu.fiuba.algo3.modelo;
 
+import edu.fiuba.algo3.modelo.excepciones.CantidadDeJugadoresInsuficienteException;
+import edu.fiuba.algo3.modelo.excepciones.ElJugadorNoTieneTurnoException;
+import edu.fiuba.algo3.modelo.excepciones.NoEsRondaDeColocacionException;
+import edu.fiuba.algo3.modelo.excepciones.PaisOcupadoPorOtroJugadorException;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -35,7 +39,7 @@ public class JuegoTest {
 
 
     @Test
-    public void seRepartenEquitativamenteSeisPaisesEntreDosJugadores() throws CantidadDeJugadoresInsuficienteException, PaisOcupadoPorOtroJugadorException, ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException {
+    public void seRepartenEquitativamente25PaisesEntreDosJugadores() throws CantidadDeJugadoresInsuficienteException, ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException {
         Juego juego = new Juego();
         Jugador jugadorUno = new Jugador();
         Jugador jugadorDos = new Jugador();

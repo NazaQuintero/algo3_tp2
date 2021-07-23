@@ -1,6 +1,9 @@
 package edu.fiuba.algo3.modelo;
+import edu.fiuba.algo3.modelo.continentes.Continente;
+import edu.fiuba.algo3.modelo.excepciones.ElJugadorNoTieneTurnoException;
+import edu.fiuba.algo3.modelo.excepciones.NoEsRondaDeColocacionException;
+
 import java.util.*;
-import java.util.stream.Collectors;
 
 
 public class Tablero {
