@@ -4,6 +4,8 @@ import edu.fiuba.algo3.modelo.batallasDeDados.Batalla;
 import edu.fiuba.algo3.modelo.batallasDeDados.Dado;
 import edu.fiuba.algo3.modelo.batallasDeDados.Dados;
 import edu.fiuba.algo3.modelo.fichas.Ejercito;
+import edu.fiuba.algo3.modelo.roles.Atacante;
+import edu.fiuba.algo3.modelo.roles.Defensor;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -23,8 +25,11 @@ public class BatallaTest {
         Jugador jugadorDefensorMock = mock(Jugador.class);
 
         Ejercito ejercitoAtacante = new Ejercito(jugadorAtacanteMock);
+        ejercitoAtacante.asignarRol(new Atacante());
         ejercitoAtacante.modificarCantidad(4);
+
         Ejercito ejercitoDefensor = new Ejercito(jugadorDefensorMock);
+        ejercitoDefensor.asignarRol(new Defensor());
         ejercitoDefensor.modificarCantidad(2);
 
         paisAtacante.colocarEjercito(ejercitoAtacante);
@@ -67,8 +72,11 @@ public class BatallaTest {
         Jugador jugadorDefensorMock = mock(Jugador.class);
 
         Ejercito ejercitoAtacante = new Ejercito(jugadorAtacanteMock);
+        ejercitoAtacante.asignarRol(new Atacante());
         ejercitoAtacante.modificarCantidad(4);
+
         Ejercito ejercitoDefensor = new Ejercito(jugadorDefensorMock);
+        ejercitoDefensor.asignarRol(new Defensor());
         ejercitoDefensor.modificarCantidad(2);
 
         paisAtacante.colocarEjercito(ejercitoAtacante);
@@ -113,8 +121,11 @@ public class BatallaTest {
         Jugador jugadorDefensorMock = mock(Jugador.class);
 
         Ejercito ejercitoAtacante = new Ejercito(jugadorAtacanteMock);
+        ejercitoAtacante.asignarRol(new Atacante());
         ejercitoAtacante.modificarCantidad(1);
+
         Ejercito ejercitoDefensor = new Ejercito(jugadorDefensorMock);
+        ejercitoDefensor.asignarRol(new Defensor());
 
         paisAtacante.colocarEjercito(ejercitoAtacante);
         paisDefensor.colocarEjercito(ejercitoDefensor);

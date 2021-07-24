@@ -5,6 +5,8 @@ import edu.fiuba.algo3.modelo.batallasDeDados.Dados;
 import edu.fiuba.algo3.modelo.excepciones.ElPaisNoEsLimitrofeException;
 import edu.fiuba.algo3.modelo.fichas.EjercitoNulo;
 import edu.fiuba.algo3.modelo.fichas.Fichas;
+import edu.fiuba.algo3.modelo.roles.Atacante;
+import edu.fiuba.algo3.modelo.roles.Defensor;
 
 import java.util.ArrayList;
 
@@ -49,12 +51,12 @@ public class Pais {
 
         // if (!paisesLimitrofes.contains(defensor)) throw new ElPaisNoEsLimitrofeException();
 
-        this.rolAtacante();
+        this.ejercito.asignarRol(new Atacante());
         defensor.recibirAtaque(this);
     }
 
     public void recibirAtaque(Pais atacante) {
-        this.rolDefensor();
+        this.ejercito.asignarRol(new Defensor());
         Batalla nuevaBatalla = new Batalla(atacante, this);
         nuevaBatalla.batallar();
     }
@@ -67,13 +69,13 @@ public class Pais {
         return this.ejercito.pedirCantidadAlJugador();
     }
 
-    public void rolAtacante() {
-        this.ejercito.rolAtacante();
-    }
+//    public void rolAtacante() {
+//        this.ejercito.rolAtacante();
+//    }
 
-    public void rolDefensor() {
-        this.ejercito.rolDefensor();
-    }
+//    public void rolDefensor() {
+//        this.ejercito.rolDefensor();
+//    }
 
     public void reagrupar(Pais destino) throws ElPaisNoEsLimitrofeException {
         if (this.esLimitrofeCon(destino)) {

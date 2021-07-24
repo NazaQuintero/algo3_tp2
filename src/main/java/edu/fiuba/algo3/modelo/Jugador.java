@@ -21,7 +21,6 @@ public class Jugador {
     private String color = "";
     private Objetivo secreto;
     private Objetivo general = new General();
-    private Rol rol = new RolIndefinido();
     private Turno turno = new SinTurno();
     private HashMap<String, Pais> paisesDominados = new HashMap<>();
     private HashMap<String, Tarjeta> tarjetas = new HashMap<>();
@@ -70,19 +69,19 @@ public class Jugador {
         return this.general;
     }
 
-    public Dados tirarDados(Pais pais) { return this.rol.tirarDados(pais); }
+    public Dados tirarDados(Pais pais) { return pais.tirarDados(); }
 
     public int pedirCantidad() {
         return usuario.pedirCantidad();
     }
 
-    public void rolAtacante() {
-        rol = new Atacante();
-    }
-
-    public void rolDefensor() {
-        rol = new Defensor();
-    }
+//    public void rolAtacante() {
+//        rol = new Atacante();
+//    }
+//
+//    public void rolDefensor() {
+//        rol = new Defensor();
+//    }
 
     public void setTurno(Turno unTurno) {
         this.turno = unTurno;
