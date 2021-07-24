@@ -1,8 +1,12 @@
 package edu.fiuba.algo3.modelo;
 
+import edu.fiuba.algo3.modelo.batallasDeDados.Batalla;
+import edu.fiuba.algo3.modelo.batallasDeDados.Dados;
+import edu.fiuba.algo3.modelo.excepciones.ElPaisNoEsLimitrofeException;
+import edu.fiuba.algo3.modelo.fichas.EjercitoNulo;
+import edu.fiuba.algo3.modelo.fichas.Fichas;
+
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.function.Predicate;
 
 public class Pais {
     String nombre;

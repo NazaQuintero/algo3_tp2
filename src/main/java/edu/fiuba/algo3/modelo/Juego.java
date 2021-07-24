@@ -1,5 +1,10 @@
 package edu.fiuba.algo3.modelo;
 
+import edu.fiuba.algo3.modelo.excepciones.CantidadDeJugadoresInsuficienteException;
+import edu.fiuba.algo3.modelo.excepciones.ElJugadorNoTieneTurnoException;
+import edu.fiuba.algo3.modelo.excepciones.NoEsRondaDeColocacionException;
+import edu.fiuba.algo3.modelo.tarjetas.Tarjeta;
+
 import java.util.ArrayList;
 
 
