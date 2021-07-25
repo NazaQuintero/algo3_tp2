@@ -118,7 +118,7 @@ public class PaisTest {
         Jugador jugadorDefensorMock = mock(Jugador.class);
 
         Dado dadoAtacanteMock = mock(Dado.class);
-        when(dadoAtacanteMock.obtenerValor()).thenReturn(1);
+        when(dadoAtacanteMock.obtenerValor()).thenReturn(2);
 
         Dado dadoDefensorMock = mock(Dado.class);
         when(dadoDefensorMock.obtenerValor()).thenReturn(1);
@@ -161,9 +161,11 @@ public class PaisTest {
         Pais paisAtacante = new Pais("Argentina");
         Pais paisDefensor = new Pais("Brasil");
 
-        Jugador jugadorAtacanteMock = mock(Jugador.class);
-        when(jugadorAtacanteMock.pedirCantidad()).thenReturn(4);
-        Jugador jugadorDefensorMock = mock(Jugador.class);
+//        Jugador jugadorAtacanteMock = mock(Jugador.class);
+        Jugador atacante = new Jugador(1, new Usuario());
+//        when(jugadorAtacanteMock.pedirCantidad()).thenReturn(4);
+//        Jugador jugadorDefensorMock = mock(Jugador.class);
+        Jugador defensor = new Jugador(2, new Usuario());
 
 
         Dado dadoAtacanteMock = mock(Dado.class);
@@ -181,12 +183,20 @@ public class PaisTest {
         dadosDefensor.agregarDado(dadoDefensorMock);
         dadosDefensor.agregarDado(dadoDefensorMock);
 
-        when(jugadorAtacanteMock.tirarDados(paisAtacante)).thenReturn(dadosAtacante);
-        when(jugadorDefensorMock.tirarDados(paisDefensor)).thenReturn(dadosDefensor);
+//        when(jugadorAtacanteMock.tirarDados(paisAtacante)).thenReturn(dadosAtacante);
+//        when(atacante.tirarDados(paisAtacante)).thenReturn(dadosAtacante);
 
-        Ejercito ejercitoAtacante = new Ejercito(jugadorAtacanteMock);
+//        when(jugadorDefensorMock.tirarDados(paisDefensor)).thenReturn(dadosDefensor);
+
+//        when(defensor.tirarDados(paisDefensor)).thenReturn(dadosDefensor);
+
+
+//        Ejercito ejercitoAtacante = new Ejercito(jugadorAtacanteMock);
+        Ejercito ejercitoAtacante = new Ejercito(atacante);
         ejercitoAtacante.modificarCantidad(3);
-        Ejercito ejercitoDefensor = new Ejercito(jugadorDefensorMock);
+
+//        Ejercito ejercitoDefensor = new Ejercito(jugadorDefensorMock);
+        Ejercito ejercitoDefensor = new Ejercito(defensor);
         ejercitoDefensor.modificarCantidad(2);
 
         paisAtacante.colocarEjercito(ejercitoAtacante);
@@ -196,6 +206,6 @@ public class PaisTest {
 
         assertEquals(3, paisDefensor.cantidadEjercitos());
         assertEquals(1, paisAtacante.cantidadEjercitos());
-        assertEquals(jugadorDefensorMock, paisDefensor.dominadoPor());
+        assertEquals(defensor, paisDefensor.dominadoPor());
     }
 }
