@@ -1,7 +1,6 @@
 package edu.fiuba.algo3.modelo;
 
-import edu.fiuba.algo3.modelo.batallasDeDados.Dado;
-import edu.fiuba.algo3.modelo.batallasDeDados.Dados;
+import edu.fiuba.algo3.modelo.batallasDeDados.*;
 import edu.fiuba.algo3.modelo.continentes.Asia;
 import edu.fiuba.algo3.modelo.excepciones.*;
 import edu.fiuba.algo3.modelo.fichas.Ejercito;
@@ -44,7 +43,7 @@ public class RondaTest {
 
         assertEquals(jugador1, turno.obtenerJugadorTurnoActual());
         assertNotEquals(jugador2, turno.obtenerJugadorTurnoActual());
-        assertThrows(ElJugadorNoTieneTurnoException.class, () -> jugador2.atacarA(otroPais, unPais));
+        assertThrows(ElJugadorNoTieneTurnoException.class, () -> jugador2.atacarA(otroPais, unPais, new Dados(), new Dados()));
 
     }
 
@@ -73,7 +72,7 @@ public class RondaTest {
         assertNotEquals("Ataque", unaRonda.obtenerDescripcion());
         assertEquals("Reagrupe", unaRonda.obtenerDescripcion());
 
-        assertThrows(NoEsRondaDeAtaqueException.class, () -> jugador1.atacarA(unPais, otroPais));
+        assertThrows(NoEsRondaDeAtaqueException.class, () -> jugador1.atacarA(unPais, otroPais, new Dados(), new Dados()));
 
     }
 
@@ -337,50 +336,48 @@ public class RondaTest {
     @Test
     public void rondaDeAtaqueEntre2JugadoresJugador1AtacaYConquista2PaisesDelJugador2() throws ElJugadorNoTieneTurnoException, NoEsRondaDeAtaqueException {
         Jugadores jugadores = new Jugadores();
-        Usuario usuario1 = new Usuario();
-        Usuario usuario2 = new Usuario();
+        Usuario usuarioMock = mock(Usuario.class);
 
-        Jugador jugador1Mock = mock(Jugador.class);
-        Jugador jugador2Mock = mock(Jugador.class);
+        Jugador jugador1 = new Jugador(1, usuarioMock);
+        Jugador jugador2 = new Jugador(2, usuarioMock);
 
-        jugadores.agregarJugador(jugador1Mock);
-        jugadores.agregarJugador(jugador2Mock);
-
+        jugadores.agregarJugador(jugador1);
+        jugadores.agregarJugador(jugador2);
 
         Pais paisAtacante = new Pais("Argentina");
         Pais paisDefensor = new Pais("Brasil");
         Pais paisDefensor2 = new Pais("Bolivia");
 
+        Dado dadoAtacante = new DadoPersonalizado(6);
+        Dado dadoDefensor = new DadoPersonalizado(1);
+        Dado dadoDefensor2 = new DadoPersonalizado(1);
 
-        Dado dadoAtacanteMock = mock(Dado.class);
-        when(dadoAtacanteMock.obtenerValor()).thenReturn(6);
-
-        Dado dadoDefensorMock = mock(Dado.class);
-        when(dadoDefensorMock.obtenerValor()).thenReturn(1);
-
-
-        when(dadoAtacanteMock.compareTo(dadoDefensorMock)).thenReturn(-1);
 
         Dados dadosAtacante = new Dados();
-        dadosAtacante.agregarDado(dadoAtacanteMock);
-        dadosAtacante.agregarDado(dadoAtacanteMock);
-        dadosAtacante.agregarDado(dadoAtacanteMock);
+        dadosAtacante.agregarDado(dadoAtacante);
+        dadosAtacante.agregarDado(dadoAtacante);
+        dadosAtacante.agregarDado(dadoAtacante);
+        dadosAtacante.asignarPais(paisAtacante);
 
         Dados dadosDefensor = new Dados();
 
-        dadosDefensor.agregarDado(dadoDefensorMock);
-        dadosDefensor.agregarDado(dadoDefensorMock);
-        dadosDefensor.agregarDado(dadoDefensorMock);
+        dadosDefensor.agregarDado(dadoDefensor);
+        dadosDefensor.agregarDado(dadoDefensor);
+        dadosDefensor.agregarDado(dadoDefensor);
+        dadosDefensor.asignarPais(paisDefensor);
 
-        when(jugador1Mock.pedirCantidad()).thenReturn(4);
-        when(jugador2Mock.pedirCantidad()).thenReturn(3);
+        Dados dadosDefensor2 = new Dados();
 
-        when(jugador1Mock.tirarDados(paisAtacante)).thenReturn(dadosAtacante);
-        when(jugador2Mock.tirarDados(paisDefensor)).thenReturn(dadosDefensor);
-        when(jugador2Mock.tirarDados(paisDefensor2)).thenReturn(dadosDefensor); Ejercito ejercitoAtacante = new Ejercito(jugador1Mock);
+        dadosDefensor2.agregarDado(dadoDefensor2);
+        dadosDefensor2.agregarDado(dadoDefensor2);
+        dadosDefensor2.agregarDado(dadoDefensor2);
+        dadosDefensor2.asignarPais(paisDefensor2);
+
+        Ejercito ejercitoAtacante = new Ejercito(jugador1);
         ejercitoAtacante.modificarCantidad(1);
-        Ejercito ejercitoDefensor = new Ejercito(jugador2Mock);
-        Ejercito ejercitoDefensor2 = new Ejercito(jugador2Mock);
+
+        Ejercito ejercitoDefensor = new Ejercito(jugador2);
+        Ejercito ejercitoDefensor2 = new Ejercito(jugador2);
 
         paisAtacante.colocarEjercito(ejercitoAtacante);
         paisAtacante.modificarCantidadEjercito(4);
@@ -390,20 +387,19 @@ public class RondaTest {
 
         // Turno
         Turno unTurno = new ConTurno(jugadores);
-        doCallRealMethod().when(jugador1Mock).setTurno(unTurno);
         unTurno.seleccionarPrimerJugador(0); // le toca a jugador1
         assertEquals("Ataque", unTurno.obtenerRondaActual().obtenerDescripcion());
 
 
         //Ataque al primer pais defensor
-        doCallRealMethod().when(jugador1Mock).atacarA(paisAtacante, paisDefensor);
-        jugador1Mock.atacarA(paisAtacante, paisDefensor);
-        assertEquals(jugador1Mock, paisDefensor.dominadoPor());
+        ResultadoBatalla resultadoBatalla = jugador1.atacarA(paisAtacante, paisDefensor, dadosAtacante, dadosDefensor);
+        resultadoBatalla.procesarResultado();
+        assertEquals(jugador1, paisDefensor.dominadoPor());
 
         //Ataque al segundo pais defensor
-        doCallRealMethod().when(jugador1Mock).atacarA(paisAtacante, paisDefensor2);
-        jugador1Mock.atacarA(paisAtacante, paisDefensor2);
-        assertEquals(jugador1Mock, paisDefensor2.dominadoPor());
+        resultadoBatalla = jugador1.atacarA(paisAtacante, paisDefensor2, dadosAtacante, dadosDefensor2);
+        resultadoBatalla.procesarResultado();
+        assertEquals(jugador1, paisDefensor2.dominadoPor());
 
     }
 

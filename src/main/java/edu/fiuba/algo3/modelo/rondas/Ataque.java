@@ -1,6 +1,8 @@
 package edu.fiuba.algo3.modelo.rondas;
 
 import edu.fiuba.algo3.modelo.Pais;
+import edu.fiuba.algo3.modelo.batallasDeDados.Dados;
+import edu.fiuba.algo3.modelo.batallasDeDados.ResultadoBatalla;
 import edu.fiuba.algo3.modelo.tarjetas.Tarjeta;
 import edu.fiuba.algo3.modelo.turnos.Turno;
 import edu.fiuba.algo3.modelo.excepciones.ActivacionTarjetaEnRondaEquivocadaException;
@@ -18,8 +20,8 @@ public class Ataque implements Ronda {
         unTurno.setRonda(new Reagrupe());
     }
 
-    public void atacarA(Pais atacante, Pais defensor) {
-        atacante.atacarA(defensor);
+    public ResultadoBatalla atacarA(Pais atacante, Pais defensor, Dados dadosAtacante, Dados dadosDefensor) {
+        return atacante.atacarCon(defensor, dadosAtacante, dadosDefensor);
 
     }
 

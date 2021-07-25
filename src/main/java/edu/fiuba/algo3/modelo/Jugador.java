@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.modelo;
 
 import edu.fiuba.algo3.modelo.batallasDeDados.Dados;
+import edu.fiuba.algo3.modelo.batallasDeDados.ResultadoBatalla;
 import edu.fiuba.algo3.modelo.excepciones.*;
 import edu.fiuba.algo3.modelo.fichas.Ejercito;
 import edu.fiuba.algo3.modelo.objetivos.General;
@@ -91,9 +92,9 @@ public class Jugador {
         this.turno.finalizarRonda();
     }
 
-    public void atacarA(Pais paisAtacante, Pais paisDefensor) throws ElJugadorNoTieneTurnoException, NoEsRondaDeAtaqueException {
+    public ResultadoBatalla atacarA(Pais paisAtacante, Pais paisDefensor, Dados dadosAtacante, Dados dadosDefensor) throws ElJugadorNoTieneTurnoException, NoEsRondaDeAtaqueException {
         try {
-            turno.atacarA(paisAtacante, paisDefensor);
+            return turno.atacarA(paisAtacante, paisDefensor, dadosAtacante, dadosDefensor);
         } catch (ElJugadorNoTieneTurnoException e) {
             throw new ElJugadorNoTieneTurnoException();
         }

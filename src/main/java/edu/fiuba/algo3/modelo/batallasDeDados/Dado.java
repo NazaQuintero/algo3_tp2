@@ -1,23 +1,12 @@
 package edu.fiuba.algo3.modelo.batallasDeDados;
-import java.util.Random;
 
-public class Dado implements Comparable<Dado> {
-    private int valorTirada;
+import edu.fiuba.algo3.modelo.Pais;
 
-    public Dado() { this.lanzar(); }
-
-    public void lanzar() {
-        Random r = new Random();
-        this.valorTirada = (1 + r.nextInt(6));
-    }
-
-    public int obtenerValor() {
-        return valorTirada;
-    }
-
-    @Override
-    public int compareTo(Dado dadoDefensor) {
-        return Integer.compare(this.obtenerValor(), dadoDefensor.obtenerValor());
-    }
-
+public interface Dado extends Comparable<Dado> {
+    void lanzar();
+    int obtenerValor();
+    int compareTo(Dado otroDado);
+    boolean esMayorQue(Dado otroDado);
+    void asignarPais(Pais pais);
+    Pais obtenerPais();
 }
