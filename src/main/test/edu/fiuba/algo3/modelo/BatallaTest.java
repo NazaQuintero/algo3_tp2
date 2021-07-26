@@ -1,9 +1,6 @@
 package edu.fiuba.algo3.modelo;
 
-import edu.fiuba.algo3.modelo.batallasDeDados.DadoRandom;
-import edu.fiuba.algo3.modelo.batallasDeDados.Dados;
-import edu.fiuba.algo3.modelo.batallasDeDados.ProcesadorResultado;
-import edu.fiuba.algo3.modelo.batallasDeDados.ResultadoBatalla;
+import edu.fiuba.algo3.modelo.batallasDeDados.*;
 import edu.fiuba.algo3.modelo.fichas.Ejercito;
 import edu.fiuba.algo3.modelo.roles.Atacante;
 import edu.fiuba.algo3.modelo.roles.Defensor;
@@ -42,20 +39,20 @@ public class BatallaTest {
 
         when(dadoAtacanteMock.esMayorQue(dadoDefensorMock)).thenReturn(true);
 
-        Dados dadosAtacante = new Dados();
-        dadosAtacante.agregarDado(dadoAtacanteMock);
-        dadosAtacante.agregarDado(dadoAtacanteMock);
-        dadosAtacante.agregarDado(dadoAtacanteMock);
+//        Dados dadosAtacante = new Dados();
+//        dadosAtacante.agregarDado(dadoAtacanteMock);
+//        dadosAtacante.agregarDado(dadoAtacanteMock);
+//        dadosAtacante.agregarDado(dadoAtacanteMock);
+//
+//        Dados dadosDefensor = new Dados();
+//        dadosDefensor.agregarDado(dadoDefensorMock);
+//        dadosDefensor.agregarDado(dadoDefensorMock);
+//        dadosDefensor.agregarDado(dadoDefensorMock);
 
-        Dados dadosDefensor = new Dados();
-        dadosDefensor.agregarDado(dadoDefensorMock);
-        dadosDefensor.agregarDado(dadoDefensorMock);
-        dadosDefensor.agregarDado(dadoDefensorMock);
+//        when(jugadorAtacanteMock.tirarDados(paisAtacante)).thenReturn(dadosAtacante);
+//        when(jugadorDefensorMock.tirarDados(paisDefensor)).thenReturn(dadosDefensor);
 
-        when(jugadorAtacanteMock.tirarDados(paisAtacante)).thenReturn(dadosAtacante);
-        when(jugadorDefensorMock.tirarDados(paisDefensor)).thenReturn(dadosDefensor);
-
-        ResultadoBatalla resultadoBatalla = new ResultadoBatalla(paisAtacante, paisDefensor, dadosAtacante, dadosDefensor);
+        ResultadoBatalla resultadoBatalla = new ResultadoBatalla(paisAtacante, paisDefensor);
 //        resultadoBatalla.procesarResultado();
         ProcesadorResultado.obtenerInstancia().procesar(resultadoBatalla);
 
@@ -85,17 +82,11 @@ public class BatallaTest {
         paisAtacante.colocarEjercito(ejercitoAtacante);
         paisDefensor.colocarEjercito(ejercitoDefensor);
 
-        DadoRandom dadoAtacanteMock = mock(DadoRandom.class);
-        when(dadoAtacanteMock.obtenerValor()).thenReturn(1);
-
-        DadoRandom dadoDefensorMock = mock(DadoRandom.class);
-        when(dadoDefensorMock.obtenerValor()).thenReturn(6);
-        when(dadoAtacanteMock.compareTo(dadoDefensorMock)).thenReturn(1);
-
         Dados dadosAtacante = new Dados();
-        dadosAtacante.agregarDado(dadoAtacanteMock);
-        dadosAtacante.agregarDado(dadoAtacanteMock);
-        dadosAtacante.agregarDado(dadoAtacanteMock);
+        Dado dadoPersonalizadoAtacante = new DadoPersonalizado(1);
+        dadosAtacante.agregarDado(dadoPersonalizadoAtacante);
+        dadosAtacante.agregarDado(dadoPersonalizadoAtacante);
+        dadosAtacante.agregarDado(dadoPersonalizadoAtacante);
 
         Dados dadosDefensor = new Dados();
         dadosDefensor.agregarDado(dadoDefensorMock);
@@ -105,7 +96,10 @@ public class BatallaTest {
         when(jugadorAtacanteMock.tirarDados(paisAtacante)).thenReturn(dadosAtacante);
         when(jugadorDefensorMock.tirarDados(paisDefensor)).thenReturn(dadosDefensor);
 
-        ResultadoBatalla resultadoBatalla = new ResultadoBatalla(paisAtacante, paisDefensor, dadosAtacante, dadosDefensor);
+        ejercitoAtacante.setDados(dadosAtacante);
+        ejercitoDefensor.setDados(dadosDefensor);
+
+        ResultadoBatalla resultadoBatalla = new ResultadoBatalla(paisAtacante, paisDefensor);
         ProcesadorResultado.obtenerInstancia().procesar(resultadoBatalla);
 
         assertEquals(3, paisDefensor.cantidadEjercitos());
@@ -148,8 +142,9 @@ public class BatallaTest {
 
         when(jugadorAtacanteMock.tirarDados(paisAtacante)).thenReturn(dadosAtacante);
         when(jugadorDefensorMock.tirarDados(paisDefensor)).thenReturn(dadosDefensor);
+        */
 
-        ResultadoBatalla resultadoBatalla = new ResultadoBatalla(paisAtacante, paisDefensor, dadosAtacante, dadosDefensor);
+        ResultadoBatalla resultadoBatalla = new ResultadoBatalla(paisAtacante, paisDefensor);
         ProcesadorResultado.obtenerInstancia().procesar(resultadoBatalla);
 
         assertEquals(1, paisDefensor.cantidadEjercitos());

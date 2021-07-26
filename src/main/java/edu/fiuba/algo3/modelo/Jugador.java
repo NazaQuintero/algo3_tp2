@@ -82,7 +82,7 @@ public class Jugador {
 
     public ResultadoBatalla atacarA(Pais paisAtacante, Pais paisDefensor, Dados dadosAtacante, Dados dadosDefensor) throws ElJugadorNoTieneTurnoException, NoEsRondaDeAtaqueException {
         try {
-            return turno.atacarA(paisAtacante, paisDefensor, dadosAtacante, dadosDefensor);
+            return turno.atacarA(paisAtacante, paisDefensor);
         } catch (ElJugadorNoTieneTurnoException e) {
             throw new ElJugadorNoTieneTurnoException();
         }

@@ -5,9 +5,7 @@ import edu.fiuba.algo3.modelo.Pais;
 
 public class Atacante implements Rol {
     public Dados tirarDados(Pais pais) {
-        int cantidadEjercitosAtacante = this.obtenerCantidadDeEjercitos(pais.pedirCantidadAlJugador());
-
-        return new Dados(cantidadEjercitosAtacante);
+        return new Dados(this.obtenerCantidadDeEjercitos(pais.pedirCantidadAlJugador()));
     }
 
     private int obtenerCantidadDeEjercitos(int cantidad) {
