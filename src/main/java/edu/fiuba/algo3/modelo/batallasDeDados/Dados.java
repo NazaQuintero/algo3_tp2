@@ -1,5 +1,7 @@
 package edu.fiuba.algo3.modelo.batallasDeDados;
 
+import edu.fiuba.algo3.modelo.Pais;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -10,7 +12,7 @@ public class Dados implements Iterable<Dado> {
 
     public Dados(int cantidad) {
         dados = new ArrayList<>();
-        for (int i = 0; i < cantidad ; i++) this.dados.add(new Dado());
+        for (int i = 0; i < cantidad ; i++) this.dados.add(new DadoRandom());
         this.ordenarDescendente();
     }
 
@@ -47,5 +49,9 @@ public class Dados implements Iterable<Dado> {
     @Override
     public Iterator<Dado> iterator() {
         return this.dados.iterator();
+    }
+
+    public void asignarPais(Pais pais) {
+        for (Dado dado: dados) dado.asignarPais(pais);
     }
 }

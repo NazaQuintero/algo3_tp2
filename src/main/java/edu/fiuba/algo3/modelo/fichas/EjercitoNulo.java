@@ -3,6 +3,7 @@ package edu.fiuba.algo3.modelo.fichas;
 import edu.fiuba.algo3.modelo.batallasDeDados.Dados;
 import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.Pais;
+import edu.fiuba.algo3.modelo.roles.Rol;
 
 public class EjercitoNulo implements Fichas {
     public Jugador obtenerJugador() {
@@ -26,12 +27,17 @@ public class EjercitoNulo implements Fichas {
     }
 
     @Override
-    public void rolAtacante() {
-    }
+    public void asignarRol(Rol unRol) {    }
 
-    @Override
-    public void rolDefensor() {
-    }
+//    @Override
+//    public void rolAtacante() {
+//    }
+//
+//    @Override
+//    public void rolDefensor() {
+//    }
+
+
 
     public void agregarPais(Pais pais) {
     }

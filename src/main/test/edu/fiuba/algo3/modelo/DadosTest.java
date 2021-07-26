@@ -1,11 +1,11 @@
 package edu.fiuba.algo3.modelo;
 
-import edu.fiuba.algo3.modelo.batallasDeDados.Dado;
+import edu.fiuba.algo3.modelo.batallasDeDados.DadoPersonalizado;
+import edu.fiuba.algo3.modelo.batallasDeDados.DadoRandom;
 import edu.fiuba.algo3.modelo.batallasDeDados.Dados;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class DadosTest {
 
@@ -28,15 +28,9 @@ public class DadosTest {
         dados.removerUnDado();
         dados.removerUnDado();
         dados.removerUnDado();
-        dados.agregarDado(new Dado());
+        dados.agregarDado(new DadoRandom());
         assertEquals(1, dados.obtenerCantidad());
     }
-
-    /*@Test
-    public void porDefectoElValorDeTiradaDeCadaDadoEs1() {
-        Dados dados = new Dados();
-        for(Dado dado: dados) assertEquals(1, dado.obtenerValor());
-    }*/
 
     @Test
     public void porDefectoLosValoresDeCadaDadoEstanOrdenados() {
@@ -52,6 +46,23 @@ public class DadosTest {
 
         assertTrue(dados.estaOrdenadaDescendente());
 
+    }
+
+    @Test
+    public void luegoDeAgregarDadosYOrdenarLosValoresObtenidosSonLosCorrectos() {
+        Dados dados = new Dados();
+        dados.agregarDado(new DadoPersonalizado(2));
+        dados.agregarDado(new DadoPersonalizado(4));
+        dados.agregarDado(new DadoPersonalizado(1));
+
+        assertFalse(dados.estaOrdenadaDescendente());
+
+        dados.ordenarDescendente();
+        assertTrue(dados.estaOrdenadaDescendente());
+
+        assertEquals(4, dados.obtenerDado(0).obtenerValor());
+        assertEquals(2, dados.obtenerDado(1).obtenerValor());
+        assertEquals(1, dados.obtenerDado(2).obtenerValor());
     }
 
 

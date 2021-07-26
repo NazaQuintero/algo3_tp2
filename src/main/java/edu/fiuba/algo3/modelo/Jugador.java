@@ -1,14 +1,11 @@
 package edu.fiuba.algo3.modelo;
 
 import edu.fiuba.algo3.modelo.batallasDeDados.Dados;
+import edu.fiuba.algo3.modelo.batallasDeDados.ResultadoBatalla;
 import edu.fiuba.algo3.modelo.excepciones.*;
 import edu.fiuba.algo3.modelo.fichas.Ejercito;
 import edu.fiuba.algo3.modelo.objetivos.General;
 import edu.fiuba.algo3.modelo.objetivos.Objetivo;
-import edu.fiuba.algo3.modelo.roles.Atacante;
-import edu.fiuba.algo3.modelo.roles.Defensor;
-import edu.fiuba.algo3.modelo.roles.Rol;
-import edu.fiuba.algo3.modelo.roles.RolIndefinido;
 import edu.fiuba.algo3.modelo.tarjetas.Tarjeta;
 import edu.fiuba.algo3.modelo.turnos.SinTurno;
 import edu.fiuba.algo3.modelo.turnos.Turno;
@@ -21,7 +18,6 @@ public class Jugador {
     private String color = "";
     private Objetivo secreto;
     private Objetivo general = new General();
-    private Rol rol = new RolIndefinido();
     private Turno turno = new SinTurno();
     private HashMap<String, Pais> paisesDominados = new HashMap<>();
     private HashMap<String, Tarjeta> tarjetas = new HashMap<>();
@@ -70,18 +66,10 @@ public class Jugador {
         return this.general;
     }
 
-    public Dados tirarDados(Pais pais) { return this.rol.tirarDados(pais); }
+    public Dados tirarDados(Pais pais) { return pais.tirarDados(); }
 
     public int pedirCantidad() {
         return usuario.pedirCantidad();
-    }
-
-    public void rolAtacante() {
-        rol = new Atacante();
-    }
-
-    public void rolDefensor() {
-        rol = new Defensor();
     }
 
     public void setTurno(Turno unTurno) {
@@ -92,9 +80,9 @@ public class Jugador {
         this.turno.finalizarRonda();
     }
 
-    public void atacarA(Pais paisAtacante, Pais paisDefensor) throws ElJugadorNoTieneTurnoException, NoEsRondaDeAtaqueException {
+    public ResultadoBatalla atacarA(Pais paisAtacante, Pais paisDefensor, Dados dadosAtacante, Dados dadosDefensor) throws ElJugadorNoTieneTurnoException, NoEsRondaDeAtaqueException {
         try {
-            turno.atacarA(paisAtacante, paisDefensor);
+            return turno.atacarA(paisAtacante, paisDefensor, dadosAtacante, dadosDefensor);
         } catch (ElJugadorNoTieneTurnoException e) {
             throw new ElJugadorNoTieneTurnoException();
         }
@@ -139,12 +127,4 @@ public class Jugador {
         return paisesDominados.containsKey(nombrePais);
     }
 
-    /*public void finalizarReagrupe() {
-        this.turno.finalizarReagrupe();
-//        this.turno.cambiarRonda();
-    }
-
-    public void finalizarColocacion() {
-        this.turno.finalizarColocacion();
-    }*/
 }
