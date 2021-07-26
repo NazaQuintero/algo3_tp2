@@ -10,7 +10,7 @@ import edu.fiuba.algo3.modelo.excepciones.*;
 public interface Ronda {
     String obtenerDescripcion();
     void finalizarRonda(Turno unTurno);
-    ResultadoBatalla atacarA(Pais atacante, Pais defensor, Dados dadosAtacante, Dados dadosDefensor) throws NoEsRondaDeAtaqueException;
+    ResultadoBatalla atacarA(Pais atacante, Pais defensor) throws NoEsRondaDeAtaqueException;
     void reagrupar(Pais origen, Pais destino) throws NoEsRondaDeReagrupeException, ElPaisNoEsLimitrofeException;
     void colocarEjercitos(Pais unPais) throws NoEsRondaDeColocacionException;
 

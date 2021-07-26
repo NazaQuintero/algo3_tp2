@@ -47,7 +47,7 @@ public class Pais {
         paisesLimitrofes.add(otroPais);
     }
 
-    public ResultadoBatalla atacarCon(Pais defensor, Dados dadosAtacante, Dados dadosDefensor) {
+    public ResultadoBatalla atacarA(Pais defensor) {
 
         // if (!paisesLimitrofes.contains(defensor)) throw new ElPaisNoEsLimitrofeException();
 
@@ -57,7 +57,7 @@ public class Pais {
 
     public ResultadoBatalla recibirAtaque(Pais atacante) {
         this.ejercito.asignarRol(new Defensor());
-        return new ResultadoBatalla(atacante, this, dadosAtacante, dadosDefensor);
+        return new ResultadoBatalla(atacante, this);
     }
 
     public Dados tirarDados() {

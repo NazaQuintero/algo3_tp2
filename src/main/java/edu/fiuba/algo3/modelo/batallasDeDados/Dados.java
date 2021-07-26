@@ -1,7 +1,5 @@
 package edu.fiuba.algo3.modelo.batallasDeDados;
 
-import edu.fiuba.algo3.modelo.Pais;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;

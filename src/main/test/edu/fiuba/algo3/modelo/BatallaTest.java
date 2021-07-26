@@ -33,11 +33,25 @@ public class BatallaTest {
         paisAtacante.colocarEjercito(ejercitoAtacante);
         paisDefensor.colocarEjercito(ejercitoDefensor);
 
+        Dados dadosAtacante = new Dados();
+        Dado dadoPersonalizadoAtacante = new DadoPersonalizado(6);
+        dadosAtacante.agregarDado(dadoPersonalizadoAtacante);
+        dadosAtacante.agregarDado(dadoPersonalizadoAtacante);
+        dadosAtacante.agregarDado(dadoPersonalizadoAtacante);
 
-        DadoRandom dadoAtacanteMock = mock(DadoRandom.class);
-        DadoRandom dadoDefensorMock = mock(DadoRandom.class);
+        Dados dadosDefensor = new Dados();
+        Dado dadoPersonalizadoDefensor = new DadoPersonalizado(1);
+        dadosDefensor.agregarDado(dadoPersonalizadoDefensor);
+        dadosDefensor.agregarDado(dadoPersonalizadoDefensor);
+        dadosDefensor.agregarDado(dadoPersonalizadoDefensor);
 
-        when(dadoAtacanteMock.esMayorQue(dadoDefensorMock)).thenReturn(true);
+        ejercitoAtacante.setDados(dadosAtacante);
+        ejercitoDefensor.setDados(dadosDefensor);
+
+//        DadoRandom dadoAtacanteMock = mock(DadoRandom.class);
+//        DadoRandom dadoDefensorMock = mock(DadoRandom.class);
+//
+//        when(dadoAtacanteMock.esMayorQue(dadoDefensorMock)).thenReturn(true);
 
 //        Dados dadosAtacante = new Dados();
 //        dadosAtacante.agregarDado(dadoAtacanteMock);
@@ -89,12 +103,10 @@ public class BatallaTest {
         dadosAtacante.agregarDado(dadoPersonalizadoAtacante);
 
         Dados dadosDefensor = new Dados();
-        dadosDefensor.agregarDado(dadoDefensorMock);
-        dadosDefensor.agregarDado(dadoDefensorMock);
-        dadosDefensor.agregarDado(dadoDefensorMock);
-
-        when(jugadorAtacanteMock.tirarDados(paisAtacante)).thenReturn(dadosAtacante);
-        when(jugadorDefensorMock.tirarDados(paisDefensor)).thenReturn(dadosDefensor);
+        Dado dadoPersonalizadoDefensor = new DadoPersonalizado(6);
+        dadosDefensor.agregarDado(dadoPersonalizadoDefensor);
+        dadosDefensor.agregarDado(dadoPersonalizadoDefensor);
+        dadosDefensor.agregarDado(dadoPersonalizadoDefensor);
 
         ejercitoAtacante.setDados(dadosAtacante);
         ejercitoDefensor.setDados(dadosDefensor);
@@ -128,6 +140,18 @@ public class BatallaTest {
         paisAtacante.colocarEjercito(ejercitoAtacante);
         paisDefensor.colocarEjercito(ejercitoDefensor);
 
+        Dados dadosAtacante = new Dados();
+        Dado dadoPersonalizadoAtacante = new DadoPersonalizado(1);
+        dadosAtacante.agregarDado(dadoPersonalizadoAtacante);
+
+        Dados dadosDefensor = new Dados();
+        Dado dadoPersonalizadoDefensor = new DadoPersonalizado(1);
+        dadosDefensor.agregarDado(dadoPersonalizadoDefensor);
+
+        ejercitoAtacante.setDados(dadosAtacante);
+        ejercitoDefensor.setDados(dadosDefensor);
+
+        /*
         DadoRandom dadoAtacanteMock = mock(DadoRandom.class);
         when(dadoAtacanteMock.obtenerValor()).thenReturn(1);
 

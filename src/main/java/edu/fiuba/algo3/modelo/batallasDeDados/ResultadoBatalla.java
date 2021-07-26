@@ -10,14 +10,17 @@ public class ResultadoBatalla {
     private final Pais defensor;
     private ArrayList<Victoria> resultados;
 
-    public ResultadoBatalla(Pais atacante, Pais defensor, Dados dadosAtacante, Dados dadosDefensor) {
+    public ResultadoBatalla(Pais atacante, Pais defensor) {
         this.atacante = atacante;
         this.defensor = defensor;
         this.resultados = new ArrayList<>();
-        this.computarResultado(dadosAtacante, dadosDefensor);
+        this.computarResultado();
     }
 
-    private void computarResultado(Dados dadosAtacante, Dados dadosDefensor) {
+    private void computarResultado() {
+        Dados dadosAtacante = atacante.tirarDados();
+        Dados dadosDefensor = defensor.tirarDados();
+
         int tamanioMenor = Math.min(dadosDefensor.obtenerCantidad(), dadosAtacante.obtenerCantidad());
         for(int i = 0; i < tamanioMenor; i++) {
             Dado dadoAtacante = dadosAtacante.obtenerDado(i);
