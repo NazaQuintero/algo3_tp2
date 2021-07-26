@@ -73,9 +73,9 @@ public class ConTurno implements Turno {
         this.ronda.finalizarRonda(this);
     }
 
-    public ResultadoBatalla atacarA(Pais atacante, Pais defensor, Dados dadosAtacante, Dados dadosDefensor) throws NoEsRondaDeAtaqueException {
+    public ResultadoBatalla atacarA(Pais atacante, Pais defensor) throws NoEsRondaDeAtaqueException {
         try {
-            return this.ronda.atacarA(atacante, defensor, dadosAtacante, dadosDefensor);
+            return this.ronda.atacarA(atacante, defensor);
         } catch (NoEsRondaDeAtaqueException e) {
             throw new NoEsRondaDeAtaqueException();
         }

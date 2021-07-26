@@ -1,21 +1,19 @@
 package edu.fiuba.algo3.modelo.victorias;
 
-import edu.fiuba.algo3.modelo.batallasDeDados.Dado;
+import edu.fiuba.algo3.modelo.Pais;
 
 public class VictoriaDefensor implements Victoria {
 
-    private final Dado atacante;
-    private final Dado defensor;
+    private final Pais atacante;
 
-    public VictoriaDefensor(Dado atacante, Dado defensor) {
+    public VictoriaDefensor(Pais atacante) {
         this.atacante = atacante;
-        this.defensor = defensor;
     }
 
     @Override
     public void procesarVictoria() {
-        if(atacante.obtenerPais().cantidadEjercitos() > 0) {
-            atacante.obtenerPais().modificarCantidadEjercito(-1);
+        if(atacante.cantidadEjercitos() > 0) {
+            atacante.modificarCantidadEjercito(-1);
         }
     }
 }

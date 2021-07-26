@@ -129,25 +129,24 @@ public class PaisTest {
         dadosAtacante.agregarDado(dadoAtacante);
         dadosAtacante.agregarDado(dadoAtacante);
 
-        dadosAtacante.asignarPais(paisAtacante);
-
         Dados dadosDefensor = new Dados();
 
         dadosDefensor.agregarDado(dadoDefensor);
         dadosDefensor.agregarDado(dadoDefensor);
         dadosDefensor.agregarDado(dadoDefensor);
 
-        dadosDefensor.asignarPais(paisDefensor);
-
         Ejercito ejercitoAtacante = new Ejercito(jugadorAtacante);
         ejercitoAtacante.modificarCantidad(4);
         Ejercito ejercitoDefensor = new Ejercito(jugadorDefensor);
         ejercitoDefensor.modificarCantidad(2);
 
+        ejercitoAtacante.setDados(dadosAtacante);
+        ejercitoDefensor.setDados(dadosDefensor);
+
         paisAtacante.colocarEjercito(ejercitoAtacante);
         paisDefensor.colocarEjercito(ejercitoDefensor);
 
-        ResultadoBatalla resultadoBatalla = paisAtacante.atacarCon(paisDefensor, dadosAtacante, dadosDefensor);
+        ResultadoBatalla resultadoBatalla = paisAtacante.atacarA(paisDefensor);
         ProcesadorResultado.obtenerInstancia().procesar(resultadoBatalla);
 
         assertEquals(1, paisDefensor.cantidadEjercitos());
@@ -165,24 +164,18 @@ public class PaisTest {
 
         Jugador jugadorDefensor = new Jugador(2, new Usuario());
 
-
         Dado dadoAtacante = new DadoPersonalizado(1);
         Dado dadoDefensor = new DadoPersonalizado(6);
-
 
         Dados dadosAtacante = new Dados();
         dadosAtacante.agregarDado(dadoAtacante);
         dadosAtacante.agregarDado(dadoAtacante);
         dadosAtacante.agregarDado(dadoAtacante);
-        dadosAtacante.asignarPais(paisAtacante);
 
         Dados dadosDefensor = new Dados();
         dadosDefensor.agregarDado(dadoDefensor);
         dadosDefensor.agregarDado(dadoDefensor);
         dadosDefensor.agregarDado(dadoDefensor);
-
-        dadosDefensor.asignarPais(paisDefensor);
-
 
         Ejercito ejercitoAtacante = new Ejercito(jugadorAtacante);
         ejercitoAtacante.modificarCantidad(3);
@@ -190,10 +183,13 @@ public class PaisTest {
         Ejercito ejercitoDefensor = new Ejercito(jugadorDefensor);
         ejercitoDefensor.modificarCantidad(2);
 
+        ejercitoAtacante.setDados(dadosAtacante);
+        ejercitoDefensor.setDados(dadosDefensor);
+
         paisAtacante.colocarEjercito(ejercitoAtacante);
         paisDefensor.colocarEjercito(ejercitoDefensor);
 
-        ResultadoBatalla resultadoBatalla = paisAtacante.atacarCon(paisDefensor, dadosAtacante, dadosDefensor);
+        ResultadoBatalla resultadoBatalla = paisAtacante.atacarA(paisDefensor);
         ProcesadorResultado.obtenerInstancia().procesar(resultadoBatalla);
 
         assertEquals(3, paisDefensor.cantidadEjercitos());

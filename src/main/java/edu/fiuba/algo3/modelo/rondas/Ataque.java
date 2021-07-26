@@ -1,7 +1,6 @@
 package edu.fiuba.algo3.modelo.rondas;
 
 import edu.fiuba.algo3.modelo.Pais;
-import edu.fiuba.algo3.modelo.batallasDeDados.Dados;
 import edu.fiuba.algo3.modelo.batallasDeDados.ResultadoBatalla;
 import edu.fiuba.algo3.modelo.tarjetas.Tarjeta;
 import edu.fiuba.algo3.modelo.turnos.Turno;
@@ -20,8 +19,8 @@ public class Ataque implements Ronda {
         unTurno.setRonda(new Reagrupe());
     }
 
-    public ResultadoBatalla atacarA(Pais atacante, Pais defensor, Dados dadosAtacante, Dados dadosDefensor) {
-        return atacante.atacarCon(defensor, dadosAtacante, dadosDefensor);
+    public ResultadoBatalla atacarA(Pais atacante, Pais defensor) {
+        return atacante.atacarA(defensor);
     }
 
     public void reagrupar(Pais origen, Pais destino) throws NoEsRondaDeReagrupeException {

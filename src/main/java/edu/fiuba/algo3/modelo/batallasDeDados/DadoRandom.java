@@ -6,10 +6,8 @@ import java.util.Random;
 
 public class DadoRandom implements Dado {
     private int valorTirada;
-    private Pais pais;
 
     public DadoRandom() {
-        this.pais = new PaisIndefinido("indefinido");
         this.lanzar();
     }
 
@@ -32,11 +30,4 @@ public class DadoRandom implements Dado {
         return this.compareTo(otroDado) > 0;
     }
 
-    public void asignarPais(Pais pais) {
-        this.pais = pais;
-    }
-
-    public Pais obtenerPais() {
-        return pais;
-    }
 }
