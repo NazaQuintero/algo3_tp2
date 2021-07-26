@@ -129,15 +129,11 @@ public class PaisTest {
         dadosAtacante.agregarDado(dadoAtacante);
         dadosAtacante.agregarDado(dadoAtacante);
 
-        dadosAtacante.asignarPais(paisAtacante);
-
         Dados dadosDefensor = new Dados();
 
         dadosDefensor.agregarDado(dadoDefensor);
         dadosDefensor.agregarDado(dadoDefensor);
         dadosDefensor.agregarDado(dadoDefensor);
-
-        dadosDefensor.asignarPais(paisDefensor);
 
         Ejercito ejercitoAtacante = new Ejercito(jugadorAtacante);
         ejercitoAtacante.modificarCantidad(4);
@@ -174,15 +170,11 @@ public class PaisTest {
         dadosAtacante.agregarDado(dadoAtacante);
         dadosAtacante.agregarDado(dadoAtacante);
         dadosAtacante.agregarDado(dadoAtacante);
-        dadosAtacante.asignarPais(paisAtacante);
 
         Dados dadosDefensor = new Dados();
         dadosDefensor.agregarDado(dadoDefensor);
         dadosDefensor.agregarDado(dadoDefensor);
         dadosDefensor.agregarDado(dadoDefensor);
-
-        dadosDefensor.asignarPais(paisDefensor);
-
 
         Ejercito ejercitoAtacante = new Ejercito(jugadorAtacante);
         ejercitoAtacante.modificarCantidad(3);

@@ -42,9 +42,6 @@ public class BatallaTest {
 
         when(dadoAtacanteMock.esMayorQue(dadoDefensorMock)).thenReturn(true);
 
-        when(dadoAtacanteMock.obtenerPais()).thenReturn(paisAtacante);
-        when(dadoDefensorMock.obtenerPais()).thenReturn(paisDefensor);
-
         Dados dadosAtacante = new Dados();
         dadosAtacante.agregarDado(dadoAtacanteMock);
         dadosAtacante.agregarDado(dadoAtacanteMock);
@@ -58,7 +55,7 @@ public class BatallaTest {
         when(jugadorAtacanteMock.tirarDados(paisAtacante)).thenReturn(dadosAtacante);
         when(jugadorDefensorMock.tirarDados(paisDefensor)).thenReturn(dadosDefensor);
 
-        ResultadoBatalla resultadoBatalla = new ResultadoBatalla(dadosAtacante, dadosDefensor);
+        ResultadoBatalla resultadoBatalla = new ResultadoBatalla(paisAtacante, paisDefensor, dadosAtacante, dadosDefensor);
 //        resultadoBatalla.procesarResultado();
         ProcesadorResultado.obtenerInstancia().procesar(resultadoBatalla);
 
@@ -90,11 +87,9 @@ public class BatallaTest {
 
         DadoRandom dadoAtacanteMock = mock(DadoRandom.class);
         when(dadoAtacanteMock.obtenerValor()).thenReturn(1);
-        when(dadoAtacanteMock.obtenerPais()).thenReturn(paisAtacante);
 
         DadoRandom dadoDefensorMock = mock(DadoRandom.class);
         when(dadoDefensorMock.obtenerValor()).thenReturn(6);
-        when(dadoDefensorMock.obtenerPais()).thenReturn(paisDefensor);
         when(dadoAtacanteMock.compareTo(dadoDefensorMock)).thenReturn(1);
 
         Dados dadosAtacante = new Dados();
@@ -110,10 +105,7 @@ public class BatallaTest {
         when(jugadorAtacanteMock.tirarDados(paisAtacante)).thenReturn(dadosAtacante);
         when(jugadorDefensorMock.tirarDados(paisDefensor)).thenReturn(dadosDefensor);
 
-        dadosAtacante.asignarPais(paisAtacante);
-        dadosDefensor.asignarPais(paisDefensor);
-
-        ResultadoBatalla resultadoBatalla = new ResultadoBatalla(dadosAtacante, dadosDefensor);
+        ResultadoBatalla resultadoBatalla = new ResultadoBatalla(paisAtacante, paisDefensor, dadosAtacante, dadosDefensor);
         ProcesadorResultado.obtenerInstancia().procesar(resultadoBatalla);
 
         assertEquals(3, paisDefensor.cantidadEjercitos());
@@ -144,11 +136,9 @@ public class BatallaTest {
 
         DadoRandom dadoAtacanteMock = mock(DadoRandom.class);
         when(dadoAtacanteMock.obtenerValor()).thenReturn(1);
-        when(dadoAtacanteMock.obtenerPais()).thenReturn(paisAtacante);
 
         DadoRandom dadoDefensorMock = mock(DadoRandom.class);
         when(dadoAtacanteMock.compareTo(dadoDefensorMock)).thenReturn(0);
-        when(dadoDefensorMock.obtenerPais()).thenReturn(paisDefensor);
 
         Dados dadosAtacante = new Dados();
         dadosAtacante.agregarDado(dadoAtacanteMock);
@@ -159,7 +149,7 @@ public class BatallaTest {
         when(jugadorAtacanteMock.tirarDados(paisAtacante)).thenReturn(dadosAtacante);
         when(jugadorDefensorMock.tirarDados(paisDefensor)).thenReturn(dadosDefensor);
 
-        ResultadoBatalla resultadoBatalla = new ResultadoBatalla(dadosAtacante, dadosDefensor);
+        ResultadoBatalla resultadoBatalla = new ResultadoBatalla(paisAtacante, paisDefensor, dadosAtacante, dadosDefensor);
         ProcesadorResultado.obtenerInstancia().procesar(resultadoBatalla);
 
         assertEquals(1, paisDefensor.cantidadEjercitos());

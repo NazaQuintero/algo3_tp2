@@ -7,10 +7,7 @@ public class Atacante implements Rol {
     public Dados tirarDados(Pais pais) {
         int cantidadEjercitosAtacante = this.obtenerCantidadDeEjercitos(pais.pedirCantidadAlJugador());
 
-        Dados dados = new Dados(cantidadEjercitosAtacante);
-        dados.asignarPais(pais);
-
-        return dados;
+        return new Dados(cantidadEjercitosAtacante);
     }
 
     private int obtenerCantidadDeEjercitos(int cantidad) {

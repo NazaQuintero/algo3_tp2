@@ -51,7 +51,4 @@ public class Dados implements Iterable<Dado> {
         return this.dados.iterator();
     }
 
-    public void asignarPais(Pais pais) {
-        for (Dado dado: dados) dado.asignarPais(pais);
-    }
 }

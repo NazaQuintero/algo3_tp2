@@ -357,21 +357,18 @@ public class RondaTest {
         dadosAtacante.agregarDado(dadoAtacante);
         dadosAtacante.agregarDado(dadoAtacante);
         dadosAtacante.agregarDado(dadoAtacante);
-        dadosAtacante.asignarPais(paisAtacante);
 
         Dados dadosDefensor = new Dados();
 
         dadosDefensor.agregarDado(dadoDefensor);
         dadosDefensor.agregarDado(dadoDefensor);
         dadosDefensor.agregarDado(dadoDefensor);
-        dadosDefensor.asignarPais(paisDefensor);
 
         Dados dadosDefensor2 = new Dados();
 
         dadosDefensor2.agregarDado(dadoDefensor2);
         dadosDefensor2.agregarDado(dadoDefensor2);
         dadosDefensor2.agregarDado(dadoDefensor2);
-        dadosDefensor2.asignarPais(paisDefensor2);
 
         Ejercito ejercitoAtacante = new Ejercito(jugador1);
         ejercitoAtacante.modificarCantidad(1);
