@@ -6,10 +6,6 @@ import edu.fiuba.algo3.modelo.excepciones.*;
 import edu.fiuba.algo3.modelo.fichas.Ejercito;
 import edu.fiuba.algo3.modelo.objetivos.General;
 import edu.fiuba.algo3.modelo.objetivos.Objetivo;
-import edu.fiuba.algo3.modelo.roles.Atacante;
-import edu.fiuba.algo3.modelo.roles.Defensor;
-import edu.fiuba.algo3.modelo.roles.Rol;
-import edu.fiuba.algo3.modelo.roles.RolIndefinido;
 import edu.fiuba.algo3.modelo.tarjetas.Tarjeta;
 import edu.fiuba.algo3.modelo.turnos.SinTurno;
 import edu.fiuba.algo3.modelo.turnos.Turno;
@@ -76,14 +72,6 @@ public class Jugador {
         return usuario.pedirCantidad();
     }
 
-//    public void rolAtacante() {
-//        rol = new Atacante();
-//    }
-//
-//    public void rolDefensor() {
-//        rol = new Defensor();
-//    }
-
     public void setTurno(Turno unTurno) {
         this.turno = unTurno;
     }
@@ -139,12 +127,4 @@ public class Jugador {
         return paisesDominados.containsKey(nombrePais);
     }
 
-    /*public void finalizarReagrupe() {
-        this.turno.finalizarReagrupe();
-//        this.turno.cambiarRonda();
-    }
-
-    public void finalizarColocacion() {
-        this.turno.finalizarColocacion();
-    }*/
 }

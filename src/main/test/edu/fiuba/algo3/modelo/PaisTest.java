@@ -148,7 +148,7 @@ public class PaisTest {
         paisDefensor.colocarEjercito(ejercitoDefensor);
 
         ResultadoBatalla resultadoBatalla = paisAtacante.atacarCon(paisDefensor, dadosAtacante, dadosDefensor);
-        resultadoBatalla.procesarResultado();
+        ProcesadorResultado.obtenerInstancia().procesar(resultadoBatalla);
 
         assertEquals(1, paisDefensor.cantidadEjercitos());
         assertEquals(jugadorAtacante, paisDefensor.dominadoPor());
@@ -194,7 +194,7 @@ public class PaisTest {
         paisDefensor.colocarEjercito(ejercitoDefensor);
 
         ResultadoBatalla resultadoBatalla = paisAtacante.atacarCon(paisDefensor, dadosAtacante, dadosDefensor);
-        resultadoBatalla.procesarResultado();
+        ProcesadorResultado.obtenerInstancia().procesar(resultadoBatalla);
 
         assertEquals(3, paisDefensor.cantidadEjercitos());
         assertEquals(1, paisAtacante.cantidadEjercitos());

@@ -393,12 +393,13 @@ public class RondaTest {
 
         //Ataque al primer pais defensor
         ResultadoBatalla resultadoBatalla = jugador1.atacarA(paisAtacante, paisDefensor, dadosAtacante, dadosDefensor);
-        resultadoBatalla.procesarResultado();
+        ProcesadorResultado.obtenerInstancia().procesar(resultadoBatalla);
+
         assertEquals(jugador1, paisDefensor.dominadoPor());
 
         //Ataque al segundo pais defensor
         resultadoBatalla = jugador1.atacarA(paisAtacante, paisDefensor2, dadosAtacante, dadosDefensor2);
-        resultadoBatalla.procesarResultado();
+        ProcesadorResultado.obtenerInstancia().procesar(resultadoBatalla);
         assertEquals(jugador1, paisDefensor2.dominadoPor());
 
     }

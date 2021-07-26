@@ -40,16 +40,6 @@ public class Ejercito implements Fichas {
 
     public void asignarRol(Rol unRol) { this.rol = unRol; }
 
-//    @Override
-//    public void rolAtacante() {
-//        this.rol.rolAtacante();
-//    }
-//
-//    @Override
-//    public void rolDefensor() {
-//        this.jugador.rolDefensor();
-//    }
-
     public void agregarPais(Pais pais) {
         this.jugador.agregarPais(pais);
     }

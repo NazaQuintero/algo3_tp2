@@ -57,8 +57,6 @@ public class Pais {
 
     public ResultadoBatalla recibirAtaque(Dados dadosAtacante, Dados dadosDefensor) {
         this.ejercito.asignarRol(new Defensor());
-//        Batalla batalla = new Batalla(atacante, this);
-//        Batalla batalla = new Batalla();
         return new ResultadoBatalla(dadosAtacante, dadosDefensor);
     }
 
@@ -69,14 +67,6 @@ public class Pais {
     public int pedirCantidadAlJugador() {
         return this.ejercito.pedirCantidadAlJugador();
     }
-
-//    public void rolAtacante() {
-//        this.ejercito.rolAtacante();
-//    }
-
-//    public void rolDefensor() {
-//        this.ejercito.rolDefensor();
-//    }
 
     public void reagrupar(Pais destino) throws ElPaisNoEsLimitrofeException {
         if (this.esLimitrofeCon(destino)) {

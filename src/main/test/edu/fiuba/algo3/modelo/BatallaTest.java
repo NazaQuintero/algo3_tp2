@@ -2,6 +2,7 @@ package edu.fiuba.algo3.modelo;
 
 import edu.fiuba.algo3.modelo.batallasDeDados.DadoRandom;
 import edu.fiuba.algo3.modelo.batallasDeDados.Dados;
+import edu.fiuba.algo3.modelo.batallasDeDados.ProcesadorResultado;
 import edu.fiuba.algo3.modelo.batallasDeDados.ResultadoBatalla;
 import edu.fiuba.algo3.modelo.fichas.Ejercito;
 import edu.fiuba.algo3.modelo.roles.Atacante;
@@ -58,7 +59,8 @@ public class BatallaTest {
         when(jugadorDefensorMock.tirarDados(paisDefensor)).thenReturn(dadosDefensor);
 
         ResultadoBatalla resultadoBatalla = new ResultadoBatalla(dadosAtacante, dadosDefensor);
-        resultadoBatalla.procesarResultado();
+//        resultadoBatalla.procesarResultado();
+        ProcesadorResultado.obtenerInstancia().procesar(resultadoBatalla);
 
         assertEquals(1, paisDefensor.cantidadEjercitos());
         assertEquals(jugadorAtacanteMock, paisDefensor.dominadoPor());
@@ -112,7 +114,7 @@ public class BatallaTest {
         dadosDefensor.asignarPais(paisDefensor);
 
         ResultadoBatalla resultadoBatalla = new ResultadoBatalla(dadosAtacante, dadosDefensor);
-        resultadoBatalla.procesarResultado();
+        ProcesadorResultado.obtenerInstancia().procesar(resultadoBatalla);
 
         assertEquals(3, paisDefensor.cantidadEjercitos());
         assertEquals(2, paisAtacante.cantidadEjercitos());
@@ -158,7 +160,7 @@ public class BatallaTest {
         when(jugadorDefensorMock.tirarDados(paisDefensor)).thenReturn(dadosDefensor);
 
         ResultadoBatalla resultadoBatalla = new ResultadoBatalla(dadosAtacante, dadosDefensor);
-        resultadoBatalla.procesarResultado();
+        ProcesadorResultado.obtenerInstancia().procesar(resultadoBatalla);
 
         assertEquals(1, paisDefensor.cantidadEjercitos());
         assertEquals(1, paisAtacante.cantidadEjercitos());

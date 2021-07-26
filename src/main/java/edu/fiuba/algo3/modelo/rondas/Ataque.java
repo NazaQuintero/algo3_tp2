@@ -22,7 +22,6 @@ public class Ataque implements Ronda {
 
     public ResultadoBatalla atacarA(Pais atacante, Pais defensor, Dados dadosAtacante, Dados dadosDefensor) {
         return atacante.atacarCon(defensor, dadosAtacante, dadosDefensor);
-
     }
 
     public void reagrupar(Pais origen, Pais destino) throws NoEsRondaDeReagrupeException {
