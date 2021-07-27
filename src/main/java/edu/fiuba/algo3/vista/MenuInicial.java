@@ -11,7 +11,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class MenuInicial extends VBox {
-//    private static final String RUTA_ICONO = "logo.png";
+
     private static final int ANCHO = 250;
     private static final int ALTO = 250;
     private Stage stage;
@@ -31,8 +31,7 @@ public class MenuInicial extends VBox {
         startButton.getStyleClass().add("startButton");
         exitButton.getStyleClass().add("exitButton");
 
-        SeleccionDeJugadoresEventHandler seleccionDeJugadoresEventHandler = new SeleccionDeJugadoresEventHandler(stage);
-        startButton.setOnAction(seleccionDeJugadoresEventHandler);
+        startButton.setOnAction(new SeleccionDeJugadoresEventHandler(stage));
         exitButton.setOnAction(e -> Platform.exit());
 
         HBox botonera = new HBox(startButton, exitButton);

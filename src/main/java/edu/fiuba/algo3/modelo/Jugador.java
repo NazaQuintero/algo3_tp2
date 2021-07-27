@@ -16,6 +16,7 @@ public class Jugador {
 
     private final int id;
     private String color = "";
+    private String nombre;
     private Objetivo secreto;
     private Objetivo general = new General();
     private Turno turno = new SinTurno();
@@ -30,6 +31,10 @@ public class Jugador {
 
     public Jugador() { // despues lo volamo
         this.id = 0;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public String mostrarColor() {

@@ -17,12 +17,10 @@ public class SeleccionDeJugadoresEventHandler implements EventHandler<ActionEven
     @Override
     public void handle(ActionEvent actionEvent) {
 
-        SeleccionCantidadJugadores seleccionJugadores = new SeleccionCantidadJugadores();
+        SeleccionCantidadJugadores seleccionJugadores = new SeleccionCantidadJugadores(stage);
         Scene nuevaEscena = new Scene(seleccionJugadores);
         stage.setScene(nuevaEscena);
         stage.setTitle("Seleccion de jugadores");
-//        stage.setFullScreen(true);
-        //stage.setFullScreenExitHint("");
         stage.setMinHeight(600);
         stage.setMinWidth(600);
     }
