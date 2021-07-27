@@ -11,6 +11,7 @@ public class Ejercito implements Fichas {
     private Jugador jugador;
     private int cantidad;
     private Rol rol = new RolIndefinido();
+    private Dados dados;
 
     public Ejercito(Jugador jugador) {
         this.jugador = jugador;
@@ -33,8 +34,14 @@ public class Ejercito implements Fichas {
         return this.jugador.pedirCantidad();
     }
 
+    public void setDados(Dados dados) {
+        this.dados = dados;
+    }
+
     @Override
     public Dados tirarDados(Pais pais) {
+        if (dados != null) return dados;
+
         return this.rol.tirarDados(pais);
     }
 

@@ -55,7 +55,7 @@ public class SinTurno implements Turno {
     public void finalizarTurnoActual() { }
 
     @Override
-    public ResultadoBatalla atacarA(Pais atacante, Pais defensor, Dados dadosAtacantes, Dados dadosDefensor) throws ElJugadorNoTieneTurnoException {
+    public ResultadoBatalla atacarA(Pais atacante, Pais defensor) throws ElJugadorNoTieneTurnoException {
         throw new ElJugadorNoTieneTurnoException();
     }
 

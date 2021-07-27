@@ -4,8 +4,6 @@ import edu.fiuba.algo3.modelo.victorias.Victoria;
 
 public class ProcesadorResultado {
     private static ProcesadorResultado instancia;
-    private ProcesadorResultado() {
-    }
 
     public static ProcesadorResultado obtenerInstancia() {
         if(instancia == null) instancia = new ProcesadorResultado();

@@ -43,7 +43,7 @@ public class RondaTest {
 
         assertEquals(jugador1, turno.obtenerJugadorTurnoActual());
         assertNotEquals(jugador2, turno.obtenerJugadorTurnoActual());
-        assertThrows(ElJugadorNoTieneTurnoException.class, () -> jugador2.atacarA(otroPais, unPais, new Dados(), new Dados()));
+        assertThrows(ElJugadorNoTieneTurnoException.class, () -> jugador2.atacarA(otroPais, unPais));
 
     }
 
@@ -72,7 +72,7 @@ public class RondaTest {
         assertNotEquals("Ataque", unaRonda.obtenerDescripcion());
         assertEquals("Reagrupe", unaRonda.obtenerDescripcion());
 
-        assertThrows(NoEsRondaDeAtaqueException.class, () -> jugador1.atacarA(unPais, otroPais, new Dados(), new Dados()));
+        assertThrows(NoEsRondaDeAtaqueException.class, () -> jugador1.atacarA(unPais, otroPais));
 
     }
 
@@ -352,26 +352,22 @@ public class RondaTest {
         Dado dadoDefensor = new DadoPersonalizado(1);
         Dado dadoDefensor2 = new DadoPersonalizado(1);
 
-
         Dados dadosAtacante = new Dados();
         dadosAtacante.agregarDado(dadoAtacante);
         dadosAtacante.agregarDado(dadoAtacante);
         dadosAtacante.agregarDado(dadoAtacante);
-        dadosAtacante.asignarPais(paisAtacante);
 
         Dados dadosDefensor = new Dados();
 
         dadosDefensor.agregarDado(dadoDefensor);
         dadosDefensor.agregarDado(dadoDefensor);
         dadosDefensor.agregarDado(dadoDefensor);
-        dadosDefensor.asignarPais(paisDefensor);
 
         Dados dadosDefensor2 = new Dados();
 
         dadosDefensor2.agregarDado(dadoDefensor2);
         dadosDefensor2.agregarDado(dadoDefensor2);
         dadosDefensor2.agregarDado(dadoDefensor2);
-        dadosDefensor2.asignarPais(paisDefensor2);
 
         Ejercito ejercitoAtacante = new Ejercito(jugador1);
         ejercitoAtacante.modificarCantidad(1);
@@ -384,6 +380,9 @@ public class RondaTest {
         paisDefensor.colocarEjercito(ejercitoDefensor);
         paisDefensor2.colocarEjercito(ejercitoDefensor2);
 
+        ejercitoAtacante.setDados(dadosAtacante);
+        ejercitoDefensor.setDados(dadosDefensor);
+        ejercitoDefensor2.setDados(dadosDefensor2);
 
         // Turno
         Turno unTurno = new ConTurno(jugadores);
@@ -392,13 +391,13 @@ public class RondaTest {
 
 
         //Ataque al primer pais defensor
-        ResultadoBatalla resultadoBatalla = jugador1.atacarA(paisAtacante, paisDefensor, dadosAtacante, dadosDefensor);
+        ResultadoBatalla resultadoBatalla = jugador1.atacarA(paisAtacante, paisDefensor);
         ProcesadorResultado.obtenerInstancia().procesar(resultadoBatalla);
 
         assertEquals(jugador1, paisDefensor.dominadoPor());
 
         //Ataque al segundo pais defensor
-        resultadoBatalla = jugador1.atacarA(paisAtacante, paisDefensor2, dadosAtacante, dadosDefensor2);
+        resultadoBatalla = jugador1.atacarA(paisAtacante, paisDefensor2);
         ProcesadorResultado.obtenerInstancia().procesar(resultadoBatalla);
         assertEquals(jugador1, paisDefensor2.dominadoPor());
 

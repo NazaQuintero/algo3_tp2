@@ -24,7 +24,7 @@ public class Reagrupe implements Ronda {
         else unTurno.setRonda(new Ataque());
     }
 
-    public ResultadoBatalla atacarA(Pais atacante, Pais defensor, Dados dadosAtacante, Dados dadosDefensor) throws NoEsRondaDeAtaqueException {
+    public ResultadoBatalla atacarA(Pais atacante, Pais defensor) throws NoEsRondaDeAtaqueException {
         throw new NoEsRondaDeAtaqueException();
     }
 

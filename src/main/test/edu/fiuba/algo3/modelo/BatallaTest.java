@@ -1,9 +1,6 @@
 package edu.fiuba.algo3.modelo;
 
-import edu.fiuba.algo3.modelo.batallasDeDados.DadoRandom;
-import edu.fiuba.algo3.modelo.batallasDeDados.Dados;
-import edu.fiuba.algo3.modelo.batallasDeDados.ProcesadorResultado;
-import edu.fiuba.algo3.modelo.batallasDeDados.ResultadoBatalla;
+import edu.fiuba.algo3.modelo.batallasDeDados.*;
 import edu.fiuba.algo3.modelo.fichas.Ejercito;
 import edu.fiuba.algo3.modelo.roles.Atacante;
 import edu.fiuba.algo3.modelo.roles.Defensor;
@@ -36,29 +33,40 @@ public class BatallaTest {
         paisAtacante.colocarEjercito(ejercitoAtacante);
         paisDefensor.colocarEjercito(ejercitoDefensor);
 
-
-        DadoRandom dadoAtacanteMock = mock(DadoRandom.class);
-        DadoRandom dadoDefensorMock = mock(DadoRandom.class);
-
-        when(dadoAtacanteMock.esMayorQue(dadoDefensorMock)).thenReturn(true);
-
-        when(dadoAtacanteMock.obtenerPais()).thenReturn(paisAtacante);
-        when(dadoDefensorMock.obtenerPais()).thenReturn(paisDefensor);
-
         Dados dadosAtacante = new Dados();
-        dadosAtacante.agregarDado(dadoAtacanteMock);
-        dadosAtacante.agregarDado(dadoAtacanteMock);
-        dadosAtacante.agregarDado(dadoAtacanteMock);
+        Dado dadoPersonalizadoAtacante = new DadoPersonalizado(6);
+        dadosAtacante.agregarDado(dadoPersonalizadoAtacante);
+        dadosAtacante.agregarDado(dadoPersonalizadoAtacante);
+        dadosAtacante.agregarDado(dadoPersonalizadoAtacante);
 
         Dados dadosDefensor = new Dados();
-        dadosDefensor.agregarDado(dadoDefensorMock);
-        dadosDefensor.agregarDado(dadoDefensorMock);
-        dadosDefensor.agregarDado(dadoDefensorMock);
+        Dado dadoPersonalizadoDefensor = new DadoPersonalizado(1);
+        dadosDefensor.agregarDado(dadoPersonalizadoDefensor);
+        dadosDefensor.agregarDado(dadoPersonalizadoDefensor);
+        dadosDefensor.agregarDado(dadoPersonalizadoDefensor);
 
-        when(jugadorAtacanteMock.tirarDados(paisAtacante)).thenReturn(dadosAtacante);
-        when(jugadorDefensorMock.tirarDados(paisDefensor)).thenReturn(dadosDefensor);
+        ejercitoAtacante.setDados(dadosAtacante);
+        ejercitoDefensor.setDados(dadosDefensor);
 
-        ResultadoBatalla resultadoBatalla = new ResultadoBatalla(dadosAtacante, dadosDefensor);
+//        DadoRandom dadoAtacanteMock = mock(DadoRandom.class);
+//        DadoRandom dadoDefensorMock = mock(DadoRandom.class);
+//
+//        when(dadoAtacanteMock.esMayorQue(dadoDefensorMock)).thenReturn(true);
+
+//        Dados dadosAtacante = new Dados();
+//        dadosAtacante.agregarDado(dadoAtacanteMock);
+//        dadosAtacante.agregarDado(dadoAtacanteMock);
+//        dadosAtacante.agregarDado(dadoAtacanteMock);
+//
+//        Dados dadosDefensor = new Dados();
+//        dadosDefensor.agregarDado(dadoDefensorMock);
+//        dadosDefensor.agregarDado(dadoDefensorMock);
+//        dadosDefensor.agregarDado(dadoDefensorMock);
+
+//        when(jugadorAtacanteMock.tirarDados(paisAtacante)).thenReturn(dadosAtacante);
+//        when(jugadorDefensorMock.tirarDados(paisDefensor)).thenReturn(dadosDefensor);
+
+        ResultadoBatalla resultadoBatalla = new ResultadoBatalla(paisAtacante, paisDefensor);
 //        resultadoBatalla.procesarResultado();
         ProcesadorResultado.obtenerInstancia().procesar(resultadoBatalla);
 
@@ -88,32 +96,22 @@ public class BatallaTest {
         paisAtacante.colocarEjercito(ejercitoAtacante);
         paisDefensor.colocarEjercito(ejercitoDefensor);
 
-        DadoRandom dadoAtacanteMock = mock(DadoRandom.class);
-        when(dadoAtacanteMock.obtenerValor()).thenReturn(1);
-        when(dadoAtacanteMock.obtenerPais()).thenReturn(paisAtacante);
-
-        DadoRandom dadoDefensorMock = mock(DadoRandom.class);
-        when(dadoDefensorMock.obtenerValor()).thenReturn(6);
-        when(dadoDefensorMock.obtenerPais()).thenReturn(paisDefensor);
-        when(dadoAtacanteMock.compareTo(dadoDefensorMock)).thenReturn(1);
-
         Dados dadosAtacante = new Dados();
-        dadosAtacante.agregarDado(dadoAtacanteMock);
-        dadosAtacante.agregarDado(dadoAtacanteMock);
-        dadosAtacante.agregarDado(dadoAtacanteMock);
+        Dado dadoPersonalizadoAtacante = new DadoPersonalizado(1);
+        dadosAtacante.agregarDado(dadoPersonalizadoAtacante);
+        dadosAtacante.agregarDado(dadoPersonalizadoAtacante);
+        dadosAtacante.agregarDado(dadoPersonalizadoAtacante);
 
         Dados dadosDefensor = new Dados();
-        dadosDefensor.agregarDado(dadoDefensorMock);
-        dadosDefensor.agregarDado(dadoDefensorMock);
-        dadosDefensor.agregarDado(dadoDefensorMock);
+        Dado dadoPersonalizadoDefensor = new DadoPersonalizado(6);
+        dadosDefensor.agregarDado(dadoPersonalizadoDefensor);
+        dadosDefensor.agregarDado(dadoPersonalizadoDefensor);
+        dadosDefensor.agregarDado(dadoPersonalizadoDefensor);
 
-        when(jugadorAtacanteMock.tirarDados(paisAtacante)).thenReturn(dadosAtacante);
-        when(jugadorDefensorMock.tirarDados(paisDefensor)).thenReturn(dadosDefensor);
+        ejercitoAtacante.setDados(dadosAtacante);
+        ejercitoDefensor.setDados(dadosDefensor);
 
-        dadosAtacante.asignarPais(paisAtacante);
-        dadosDefensor.asignarPais(paisDefensor);
-
-        ResultadoBatalla resultadoBatalla = new ResultadoBatalla(dadosAtacante, dadosDefensor);
+        ResultadoBatalla resultadoBatalla = new ResultadoBatalla(paisAtacante, paisDefensor);
         ProcesadorResultado.obtenerInstancia().procesar(resultadoBatalla);
 
         assertEquals(3, paisDefensor.cantidadEjercitos());
@@ -142,13 +140,23 @@ public class BatallaTest {
         paisAtacante.colocarEjercito(ejercitoAtacante);
         paisDefensor.colocarEjercito(ejercitoDefensor);
 
+        Dados dadosAtacante = new Dados();
+        Dado dadoPersonalizadoAtacante = new DadoPersonalizado(1);
+        dadosAtacante.agregarDado(dadoPersonalizadoAtacante);
+
+        Dados dadosDefensor = new Dados();
+        Dado dadoPersonalizadoDefensor = new DadoPersonalizado(1);
+        dadosDefensor.agregarDado(dadoPersonalizadoDefensor);
+
+        ejercitoAtacante.setDados(dadosAtacante);
+        ejercitoDefensor.setDados(dadosDefensor);
+
+        /*
         DadoRandom dadoAtacanteMock = mock(DadoRandom.class);
         when(dadoAtacanteMock.obtenerValor()).thenReturn(1);
-        when(dadoAtacanteMock.obtenerPais()).thenReturn(paisAtacante);
 
         DadoRandom dadoDefensorMock = mock(DadoRandom.class);
         when(dadoAtacanteMock.compareTo(dadoDefensorMock)).thenReturn(0);
-        when(dadoDefensorMock.obtenerPais()).thenReturn(paisDefensor);
 
         Dados dadosAtacante = new Dados();
         dadosAtacante.agregarDado(dadoAtacanteMock);
@@ -158,8 +166,9 @@ public class BatallaTest {
 
         when(jugadorAtacanteMock.tirarDados(paisAtacante)).thenReturn(dadosAtacante);
         when(jugadorDefensorMock.tirarDados(paisDefensor)).thenReturn(dadosDefensor);
+        */
 
-        ResultadoBatalla resultadoBatalla = new ResultadoBatalla(dadosAtacante, dadosDefensor);
+        ResultadoBatalla resultadoBatalla = new ResultadoBatalla(paisAtacante, paisDefensor);
         ProcesadorResultado.obtenerInstancia().procesar(resultadoBatalla);
 
         assertEquals(1, paisDefensor.cantidadEjercitos());
