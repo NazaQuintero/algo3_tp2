@@ -43,7 +43,7 @@ public class RondaTest {
 
         assertEquals(jugador1, turno.obtenerJugadorTurnoActual());
         assertNotEquals(jugador2, turno.obtenerJugadorTurnoActual());
-        assertThrows(ElJugadorNoTieneTurnoException.class, () -> jugador2.atacarA(otroPais, unPais, new Dados(), new Dados()));
+        assertThrows(ElJugadorNoTieneTurnoException.class, () -> jugador2.atacarA(otroPais, unPais));
 
     }
 
@@ -72,7 +72,7 @@ public class RondaTest {
         assertNotEquals("Ataque", unaRonda.obtenerDescripcion());
         assertEquals("Reagrupe", unaRonda.obtenerDescripcion());
 
-        assertThrows(NoEsRondaDeAtaqueException.class, () -> jugador1.atacarA(unPais, otroPais, new Dados(), new Dados()));
+        assertThrows(NoEsRondaDeAtaqueException.class, () -> jugador1.atacarA(unPais, otroPais));
 
     }
 
@@ -391,13 +391,13 @@ public class RondaTest {
 
 
         //Ataque al primer pais defensor
-        ResultadoBatalla resultadoBatalla = jugador1.atacarA(paisAtacante, paisDefensor, dadosAtacante, dadosDefensor);
+        ResultadoBatalla resultadoBatalla = jugador1.atacarA(paisAtacante, paisDefensor);
         ProcesadorResultado.obtenerInstancia().procesar(resultadoBatalla);
 
         assertEquals(jugador1, paisDefensor.dominadoPor());
 
         //Ataque al segundo pais defensor
-        resultadoBatalla = jugador1.atacarA(paisAtacante, paisDefensor2, dadosAtacante, dadosDefensor2);
+        resultadoBatalla = jugador1.atacarA(paisAtacante, paisDefensor2);
         ProcesadorResultado.obtenerInstancia().procesar(resultadoBatalla);
         assertEquals(jugador1, paisDefensor2.dominadoPor());
 
