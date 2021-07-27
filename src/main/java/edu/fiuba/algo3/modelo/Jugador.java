@@ -2,6 +2,8 @@ package edu.fiuba.algo3.modelo;
 
 import edu.fiuba.algo3.modelo.batallasDeDados.Dados;
 import edu.fiuba.algo3.modelo.batallasDeDados.ResultadoBatalla;
+import edu.fiuba.algo3.modelo.canjes.Canje;
+import edu.fiuba.algo3.modelo.canjes.CanjeNulo;
 import edu.fiuba.algo3.modelo.excepciones.*;
 import edu.fiuba.algo3.modelo.fichas.Ejercito;
 import edu.fiuba.algo3.modelo.objetivos.General;
@@ -10,6 +12,7 @@ import edu.fiuba.algo3.modelo.tarjetas.Tarjeta;
 import edu.fiuba.algo3.modelo.turnos.SinTurno;
 import edu.fiuba.algo3.modelo.turnos.Turno;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Jugador {
@@ -22,10 +25,12 @@ public class Jugador {
     private HashMap<String, Pais> paisesDominados = new HashMap<>();
     private HashMap<String, Tarjeta> tarjetas = new HashMap<>();
     private Usuario usuario;
+    private Canje canje;
 
     public Jugador(int id, Usuario usuario) {
         this.id = id;
         this.usuario = usuario;
+        this.canje = new CanjeNulo();
     }
 
     public Jugador() { // despues lo volamo
@@ -127,4 +132,12 @@ public class Jugador {
         return paisesDominados.containsKey(nombrePais);
     }
 
+    public ArrayList<Tarjeta> pedirTarjetasACanjear() {
+        return usuario.pedirTarjetasACanjear();
+    }
+
+    public void solicitarCanje() throws JugadorSinTarjetasException, SinCanjeHabilitadoException {
+        if (tarjetas.size() == 0) throw new JugadorSinTarjetasException();
+        else canje = canje.habilitarCanje(this.pedirTarjetasACanjear());
+    }
 }

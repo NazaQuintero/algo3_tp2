@@ -25,4 +25,15 @@ public class Tarjeta {
     public Simbolo obtenerSimbolo() {
         return simbolo;
     }
+
+    public boolean coincideSimboloCon(Tarjeta unaTarjeta) {
+        return this.obtenerSimbolo() == unaTarjeta.obtenerSimbolo();
+    }
+
+    public TipoCanje compararSimbolos(Tarjeta unaTarjeta, Tarjeta otraTarjeta) {
+        if (this.coincideSimboloCon(unaTarjeta) && this.coincideSimboloCon(otraTarjeta) || !this.coincideSimboloCon(unaTarjeta) && !this.coincideSimboloCon(otraTarjeta))
+            return new CanjeHabilitado();
+        return new SinCanje();
+    }
+
 }
