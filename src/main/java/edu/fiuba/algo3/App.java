@@ -10,6 +10,9 @@ import javafx.stage.Stage;
  */
 public class App extends Application {
 
+    private static final int ANCHO = 640;
+    private static final int ALTO = 480;
+
     @Override
     public void start(Stage stage) {
 
