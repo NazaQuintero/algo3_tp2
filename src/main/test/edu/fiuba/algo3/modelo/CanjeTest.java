@@ -42,7 +42,7 @@ public class CanjeTest {
     }
 
     @Test
-    public void elCuartoCanjeOtorga15EjercitosExtras() { //otorga poggies!!!1XD
+    public void elCuartoCanjeOtorga15EjercitosExtras() {
         Canje unCanje = new CanjeNulo(); // hasta aca no hubieron canjes
         unCanje = unCanje.siguienteCanje(); // hacemos el primer canje
         unCanje = unCanje.siguienteCanje(); // hacemos el segundo canje
@@ -53,7 +53,7 @@ public class CanjeTest {
     }
 
     @Test
-    public void elQuintoCanjeOtorga20EjercitosExtras() { //otorga poggies!!!1XD
+    public void elQuintoCanjeOtorga20EjercitosExtras() {
         Canje unCanje = new CanjeNulo(); // hasta aca no hubieron canjes
         unCanje = unCanje.siguienteCanje(); // hacemos el primer canje
         unCanje = unCanje.siguienteCanje(); // hacemos el segundo canje
@@ -65,16 +65,16 @@ public class CanjeTest {
     }
 
     @Test
-    public void elSEXOCanjeOtorga25EjercitosExtras() { //otorga poggies!!!1XD
+    public void elSextoCanjeOtorga25EjercitosExtras() {
         Canje unCanje = new CanjeNulo(); // hasta aca no hubieron canjes
         unCanje = unCanje.siguienteCanje(); // hacemos el primer canje
         unCanje = unCanje.siguienteCanje(); // hacemos el segundo canje
         unCanje = unCanje.siguienteCanje(); // hacemos el tercer canje
         unCanje = unCanje.siguienteCanje(); // hacemos el cuarto canje
         unCanje = unCanje.siguienteCanje(); // hacemos el quinto canje
-        unCanje = unCanje.siguienteCanje(); // hacemos el sexo canje
+        unCanje = unCanje.siguienteCanje(); // hacemos el sexto canje
 
-        assertEquals(25, unCanje.cantidadEjercitos()); // el sexo canje da 25 ejercitos 0w0
+        assertEquals(25, unCanje.cantidadEjercitos()); // el sexto canje da 25 ejercitos
     }
 
     // y asi sucesivamente
