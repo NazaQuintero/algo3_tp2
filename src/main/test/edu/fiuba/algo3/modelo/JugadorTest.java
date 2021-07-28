@@ -35,6 +35,7 @@ public class JugadorTest {
         assertEquals(jugador.cantidadPaisesDominados(), 0);
     }
 
+    /*
     @Test
     public void porDefectoUnjugadorNoTieneObjetivoSecreto() {
         Jugador jugador = new Jugador();
@@ -54,7 +55,7 @@ public class JugadorTest {
         Jugador jugador = new Jugador();
         assertFalse(jugador.obtenerObjetivoGeneral().estaCumplido());
     }
-
+    */
 
 
 }

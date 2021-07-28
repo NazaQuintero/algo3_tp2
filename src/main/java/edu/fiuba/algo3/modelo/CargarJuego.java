@@ -10,6 +10,7 @@ import com.google.gson.*;
 import edu.fiuba.algo3.modelo.continentes.*;
 import edu.fiuba.algo3.modelo.excepciones.ArchivoDePaisesNoEncontradoException;
 import edu.fiuba.algo3.modelo.excepciones.ArchivoDeTarjetasNoEncontradoException;
+import edu.fiuba.algo3.modelo.objetivos.Objetivo;
 import edu.fiuba.algo3.modelo.tarjetas.*;
 
 public class CargarJuego {
@@ -119,4 +120,7 @@ public class CargarJuego {
         }
     }
 
+    public static void cargarObjetivos(ArrayList<Objetivo> objetivos) {
+
+    }
 }
