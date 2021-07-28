@@ -15,7 +15,7 @@ public class ContinenteTest {
     public void porDefectoNoEstaDominadoPorNadie() {
 
         Jugador jugador = new Jugador();
-        Continente asia = new Asia("Asia");
+        Continente asia = new Asia();
 
         asia.agregarPais(new Pais("China"));
 

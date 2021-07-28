@@ -127,7 +127,7 @@ public class Jugador {
     }
 
     public boolean cumpleObjetivo() {
-        return this.objetivos.stream().anyMatch(Objetivo::estaCumplido);
+        return this.objetivos.stream().anyMatch(objetivo -> objetivo.estaCumplido(this));
     }
 
     public String obtenerNombre() {

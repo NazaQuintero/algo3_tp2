@@ -11,7 +11,6 @@ public class Tablero {
 
     public Tablero() {
         paises = new HashMap<>();
-        continentes = new HashMap<>();
     }
 
     public void agregarPais(Pais pais){ paises.put(pais.nombre, pais); }

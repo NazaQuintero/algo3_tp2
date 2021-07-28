@@ -19,7 +19,6 @@ public class CargarJuego {
 
         HashMap<Pais, ArrayList<String>> limitrofes = new HashMap<>();
         HashMap<String, Pais> paises = new HashMap<>();
-        HashMap<String, Continente> continentes = new HashMap<>();
 
         InputStream is = CargarJuego.class.getClassLoader().getResourceAsStream(archivoPaises);
         if (is == null) throw new ArchivoDePaisesNoEncontradoException();
