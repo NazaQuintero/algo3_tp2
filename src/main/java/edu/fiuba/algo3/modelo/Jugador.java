@@ -152,4 +152,8 @@ public class Jugador {
         }
     }
 
+    public Canje obtenerCanjeActual() {
+        return canje;
+    }
+
 }
