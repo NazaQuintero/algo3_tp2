@@ -1,11 +1,14 @@
 package edu.fiuba.algo3.modelo.objetivos;
 
 import edu.fiuba.algo3.modelo.Jugador;
+import edu.fiuba.algo3.modelo.continentes.MultitonContinentes;
 
 public class Ocupacion4 implements Objetivo {
     @Override
     public boolean estaCumplido(Jugador jugador) {
-        return false;
+        return MultitonContinentes.obtenerInstanciaDe("Europa").dominadoPor(jugador) &&
+                MultitonContinentes.obtenerInstanciaDe("Asia").dominaCantidadDePaises(jugador, 4) &&
+                MultitonContinentes.obtenerInstanciaDe("America del Sur").dominaCantidadDePaises(jugador, 2);
     }
 
     @Override

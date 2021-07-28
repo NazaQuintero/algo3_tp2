@@ -12,6 +12,7 @@ import edu.fiuba.algo3.modelo.turnos.Turno;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.stream.Collectors;
 
 public class Jugador {
 

@@ -5,7 +5,11 @@ import java.util.HashMap;
 public class MultitonContinentes {
     private static HashMap<String, Continente> continentes = new HashMap<>();
 
-    private MultitonContinentes() {}
+    private MultitonContinentes() { }
+
+    public static void reiniciar() {
+        continentes = new HashMap<>();
+    }
     
     public static Continente obtenerInstanciaDe(String nombreDeContinente) {
         if(continentes.get(nombreDeContinente) == null) {
