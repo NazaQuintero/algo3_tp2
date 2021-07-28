@@ -35,7 +35,10 @@ public class RondaTest {
         Pais oootroPais = new Pais("Bolivia");
 
         unPais.colocarEjercito(new Ejercito(jugador1));
-        otroPais.colocarEjercito(new Ejercito(jugador2));
+        Ejercito ejercitoJ2 = new Ejercito(jugador2);
+        ejercitoJ2.modificarCantidad(2);
+
+        otroPais.colocarEjercito(ejercitoJ2);
         oootroPais.colocarEjercito(new Ejercito(jugador3)); // se coloca 1 solo ejercito en cada pais
 
         Turno turno = new ConTurno(jugadores);
@@ -60,7 +63,9 @@ public class RondaTest {
         Pais unPais = new Pais("Argentina");
         Pais otroPais = new Pais("Brasil");
 
-        unPais.colocarEjercito(new Ejercito(jugador1));
+        Ejercito ejercitoJ1 = new Ejercito(jugador1);
+        ejercitoJ1.modificarCantidad(2);
+        unPais.colocarEjercito(ejercitoJ1);
         otroPais.colocarEjercito(new Ejercito(jugador2));
 
         Turno turno = new ConTurno(jugadores);
@@ -347,6 +352,9 @@ public class RondaTest {
         Pais paisAtacante = new Pais("Argentina");
         Pais paisDefensor = new Pais("Brasil");
         Pais paisDefensor2 = new Pais("Bolivia");
+
+        paisAtacante.limitaCon(paisDefensor);
+        paisAtacante.limitaCon(paisDefensor2);
 
         Dado dadoAtacante = new DadoPersonalizado(6);
         Dado dadoDefensor = new DadoPersonalizado(1);

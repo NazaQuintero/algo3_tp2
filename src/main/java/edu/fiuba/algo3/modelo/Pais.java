@@ -1,7 +1,9 @@
 package edu.fiuba.algo3.modelo;
 
 import edu.fiuba.algo3.modelo.batallasDeDados.Dados;
+import edu.fiuba.algo3.modelo.batallasDeDados.Resultado;
 import edu.fiuba.algo3.modelo.batallasDeDados.ResultadoBatalla;
+import edu.fiuba.algo3.modelo.excepciones.EjercitosInsuficientesException;
 import edu.fiuba.algo3.modelo.excepciones.ElPaisNoEsLimitrofeException;
 import edu.fiuba.algo3.modelo.fichas.EjercitoNulo;
 import edu.fiuba.algo3.modelo.fichas.Fichas;
@@ -51,15 +53,15 @@ public class Pais {
         paisesLimitrofes.add(otroPais);
     }
 
-    public ResultadoBatalla atacarA(Pais defensor) {
+    public Resultado atacarA(Pais defensor) throws ElPaisNoEsLimitrofeException, EjercitosInsuficientesException {
 
-        // if (!paisesLimitrofes.contains(defensor)) throw new ElPaisNoEsLimitrofeException();
+        if (!paisesLimitrofes.contains(defensor)) throw new ElPaisNoEsLimitrofeException();
 
         this.ejercito.asignarRol(new Atacante());
         return defensor.recibirAtaque(this);
     }
 
-    public ResultadoBatalla recibirAtaque(Pais atacante) {
+    public Resultado recibirAtaque(Pais atacante) {
         this.ejercito.asignarRol(new Defensor());
         return new ResultadoBatalla(atacante, this);
     }

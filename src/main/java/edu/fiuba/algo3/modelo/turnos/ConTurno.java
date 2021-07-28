@@ -3,8 +3,7 @@ package edu.fiuba.algo3.modelo.turnos;
 import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.Jugadores;
 import edu.fiuba.algo3.modelo.Pais;
-import edu.fiuba.algo3.modelo.batallasDeDados.Dados;
-import edu.fiuba.algo3.modelo.batallasDeDados.ResultadoBatalla;
+import edu.fiuba.algo3.modelo.batallasDeDados.Resultado;
 import edu.fiuba.algo3.modelo.tarjetas.Tarjeta;
 import edu.fiuba.algo3.modelo.excepciones.*;
 import edu.fiuba.algo3.modelo.rondas.Ataque;
@@ -76,7 +75,8 @@ public class ConTurno implements Turno {
     public ResultadoBatalla atacarA(Pais atacante, Pais defensor) throws NoEsRondaDeAtaqueException {
         try {
             return this.ronda.atacarA(atacante, defensor);
-        } catch (NoEsRondaDeAtaqueException e) {
+        } catch (ElPaisNoEsLimitrofeException | EjercitosInsuficientesException e) {
+            //pedir en la vista que intente con otro pais
             throw new NoEsRondaDeAtaqueException();
         }
     }

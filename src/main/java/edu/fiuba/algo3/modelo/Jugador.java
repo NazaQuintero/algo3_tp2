@@ -87,6 +87,10 @@ public class Jugador {
         }
     }
 
+    private boolean puedeAtacar() {
+        return this.paisesDominados.stream().anyMatch(pais -> pais.cantidadEjercitos() > 1);
+    }
+
     public void reagrupar(Pais origen, Pais destino) throws NoEsRondaDeReagrupeException, ElJugadorNoTieneTurnoException, ElPaisNoEsLimitrofeException {
         try {
             this.turno.reagrupar(origen, destino);
