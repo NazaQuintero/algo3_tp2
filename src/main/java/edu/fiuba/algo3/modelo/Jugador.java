@@ -113,19 +113,19 @@ public class Jugador {
         tarjetas.put(tarjeta.nombrePais(), tarjeta);
     }
 
-    public void activarTarjetaPais(String nombrePais) throws TarjetaNoEncontradaException, JugadorNoPoseePaisDeLaTarjetaException, ActivacionTarjetaEnRondaEquivocadaException, ElJugadorNoTieneTurnoException {
-        if(!this.poseePais(nombrePais)) throw new JugadorNoPoseePaisDeLaTarjetaException();
-
-        this.turno.activarTarjeta(this.buscarTarjeta(nombrePais));
-        tarjetas.remove(nombrePais); // this.mandarAlFondoDelMazo(nombrePais); deeaa
+    public void activarTarjetaPais(Pais unPais) throws TarjetaNoEncontradaException, JugadorNoPoseePaisDeLaTarjetaException, ActivacionTarjetaEnRondaEquivocadaException, ElJugadorNoTieneTurnoException, LaTarjetaYaFueActivadaException {
+        if(!this.poseePais(unPais.obtenerNombre())) throw new JugadorNoPoseePaisDeLaTarjetaException();
+        this.turno.activarTarjeta(this.buscarTarjeta(unPais.obtenerNombre())); // x ahora, despues lo mejoramos
     }
 
-    private Tarjeta buscarTarjeta(String nombrePais) throws TarjetaNoEncontradaException {
-       try {
-            return this.tarjetas.get(nombrePais);
-        } catch (NullPointerException e) {
+    public Tarjeta buscarTarjeta(String nombrePais) throws TarjetaNoEncontradaException {
+       /*try {
+            return this.tarjetas.get(nombrePais);// esto devolverianull
+        } catch (NullPointerException e) { //??? com el get no devolvia un null de esos o algo? pregunte por disc si estaba testeado esto tipo si te acordas
             throw new TarjetaNoEncontradaException();
-        }
+        }*/
+        if (tarjetas.containsKey(nombrePais)) return tarjetas.get(nombrePais);
+        else throw new TarjetaNoEncontradaException();
     }
 
     private boolean poseePais(String nombrePais) {
@@ -136,8 +136,20 @@ public class Jugador {
         return usuario.pedirTarjetasACanjear();
     }
 
-    public void solicitarCanje() throws JugadorSinTarjetasException, SinCanjeHabilitadoException {
+    public void solicitarCanje() throws JugadorSinTarjetasException, SinCanjeHabilitadoException, LaTarjetaYaEstaDesactivadaException {
         if (tarjetas.size() == 0) throw new JugadorSinTarjetasException();
-        else canje = canje.habilitarCanje(this.pedirTarjetasACanjear());
+        else {
+            ArrayList<Tarjeta> tarjetasACanjear = this.pedirTarjetasACanjear();
+            canje = canje.habilitarCanje(tarjetasACanjear);
+            devolverTarjetas(tarjetasACanjear);
+        }
     }
+
+    public void devolverTarjetas(ArrayList<Tarjeta> tarjetasADevolver) throws LaTarjetaYaEstaDesactivadaException {
+        for (Tarjeta tarjeta : tarjetasADevolver) {
+            tarjeta.desactivar();
+            tarjetas.remove(tarjeta.nombrePais());
+        }
+    }
+
 }

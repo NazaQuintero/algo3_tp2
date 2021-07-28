@@ -184,7 +184,7 @@ public class RondaTest {
     }
 
     @Test
-    public void seActivaUnaTarjetaDePaisEnRondaDeColocacionSumandole2EjercitosADichoPais() throws JugadorNoPoseePaisDeLaTarjetaException, TarjetaNoEncontradaException, ActivacionTarjetaEnRondaEquivocadaException, ElJugadorNoTieneTurnoException {
+    public void seActivaUnaTarjetaDePaisEnRondaDeColocacionSumandole2EjercitosADichoPais() throws JugadorNoPoseePaisDeLaTarjetaException, TarjetaNoEncontradaException, ActivacionTarjetaEnRondaEquivocadaException, ElJugadorNoTieneTurnoException, LaTarjetaYaFueActivadaException {
         Jugadores jugadores = new Jugadores();
         Usuario usuario1 = new Usuario();
         Usuario usuario2 = new Usuario();
@@ -208,7 +208,7 @@ public class RondaTest {
 
         jugador1.recibirTarjeta(unaTarjeta);
 
-        jugador1.activarTarjetaPais("Argentina"); // al activar la tarjeta se suman 2 ejercitos
+        jugador1.activarTarjetaPais(unPais); // al activar la tarjeta se suman 2 ejercitos
 
         assertEquals(jugador1, unPais.dominadoPor());
         assertEquals(3, unPais.cantidadEjercitos());
@@ -239,7 +239,7 @@ public class RondaTest {
 
         jugador1.recibirTarjeta(unaTarjeta);
 
-        assertThrows(ActivacionTarjetaEnRondaEquivocadaException.class, () -> jugador1.activarTarjetaPais("Argentina"));
+        assertThrows(ActivacionTarjetaEnRondaEquivocadaException.class, () -> jugador1.activarTarjetaPais(unPais));
 
     }
 
@@ -269,7 +269,7 @@ public class RondaTest {
 
         jugador1.recibirTarjeta(unaTarjeta);
 
-        assertThrows(ActivacionTarjetaEnRondaEquivocadaException.class, () -> jugador1.activarTarjetaPais("Argentina"));
+        assertThrows(ActivacionTarjetaEnRondaEquivocadaException.class, () -> jugador1.activarTarjetaPais(unPais));
 
     }
 

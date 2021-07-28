@@ -4,6 +4,7 @@ import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.Pais;
 import edu.fiuba.algo3.modelo.batallasDeDados.Dados;
 import edu.fiuba.algo3.modelo.batallasDeDados.ResultadoBatalla;
+import edu.fiuba.algo3.modelo.excepciones.LaTarjetaYaFueActivadaException;
 import edu.fiuba.algo3.modelo.tarjetas.Tarjeta;
 import edu.fiuba.algo3.modelo.turnos.Turno;
 import edu.fiuba.algo3.modelo.excepciones.NoEsRondaDeAtaqueException;
@@ -43,7 +44,7 @@ public class Colocacion implements Ronda {
     }
     */
 
-    public void activarTarjeta(Tarjeta unaTarjeta) {
+    public void activarTarjeta(Tarjeta unaTarjeta) throws LaTarjetaYaFueActivadaException {
         unaTarjeta.activar();
     }
 }

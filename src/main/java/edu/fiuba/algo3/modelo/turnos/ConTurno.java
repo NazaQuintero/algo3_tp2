@@ -97,7 +97,7 @@ public class ConTurno implements Turno {
         }
     }
 
-    public void activarTarjeta(Tarjeta unaTarjeta) throws ActivacionTarjetaEnRondaEquivocadaException {
+    public void activarTarjeta(Tarjeta unaTarjeta) throws ActivacionTarjetaEnRondaEquivocadaException, LaTarjetaYaFueActivadaException {
         this.ronda.activarTarjeta(unaTarjeta);
     }
 
