@@ -11,14 +11,14 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class ObjetivosTest {
 
     @Test
-    void porDefectoUnJugadorNoCumpleNingunObjetivo() {
+    public void porDefectoUnJugadorNoCumpleNingunObjetivo() {
         Jugador jugador = new Jugador();
 
         assertFalse(jugador.cumpleObjetivo());
     }
 
     @Test
-    void unJugadorCumpleElObjetivoGeneralDe30Paises() throws ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException {
+    public void unJugadorCumpleElObjetivoGeneralDe30Paises() throws ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException {
         Jugador jugador = new Jugador();
         for (int i = 0; i < 30; i++) jugador.colocarEjercitos(new Pais(i + ""));
 
@@ -26,7 +26,7 @@ public class ObjetivosTest {
     }
 
     @Test
-    void unJugadorCumpleObjetivoDeDestruccion() {
+    public void unJugadorCumpleObjetivoDeDestruccion() {
         Jugador jugador = new Jugador();
         Jugador otroJugador = new Jugador();
 
@@ -35,7 +35,7 @@ public class ObjetivosTest {
     }
 
     @Test
-    void unJugadorNoCumpleObjetivoDeDestruccion() throws ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException {
+    public void unJugadorNoCumpleObjetivoDeDestruccion() throws ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException {
         Jugador jugador = new Jugador();
         Jugador otroJugador = new Jugador();
         otroJugador.colocarEjercitos(new Pais("Japon"));
