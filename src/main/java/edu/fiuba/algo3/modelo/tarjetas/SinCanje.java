@@ -10,7 +10,7 @@ public class SinCanje implements TipoCanje {
 
     @Override
     public TipoCanje compararTarjetas(ArrayList<Tarjeta> tarjetas) {
-        return null;
+        return tarjetas.get(0).compararSimbolos(tarjetas.get(1), tarjetas.get(2)); // aca me gustaria meter una entidad TARJETAS pero mas adelante
     }
 
     @Override
