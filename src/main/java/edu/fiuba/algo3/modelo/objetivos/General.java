@@ -14,6 +14,6 @@ public class General implements Objetivo {
 
     @Override
     public boolean estaCumplido() {
-        return false;
+        return this.paisesDominados.size() == 30;
     }
 }

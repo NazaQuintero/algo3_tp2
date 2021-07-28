@@ -10,14 +10,14 @@ import edu.fiuba.algo3.modelo.tarjetas.Tarjeta;
 import edu.fiuba.algo3.modelo.turnos.SinTurno;
 import edu.fiuba.algo3.modelo.turnos.Turno;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Jugador {
 
     private final int id;
     private String color = "";
-    private Objetivo secreto;
-    private Objetivo general = new General();
+    private ArrayList<Objetivo> objetivos = new ArrayList<>();
     private Turno turno = new SinTurno();
     private ArrayList<Pais> paisesDominados = new ArrayList<>();
     private HashMap<String, Tarjeta> tarjetas = new HashMap<>();
@@ -26,10 +26,12 @@ public class Jugador {
     public Jugador(int id, Usuario usuario) {
         this.id = id;
         this.usuario = usuario;
+        this.objetivos.add(new General(paisesDominados));
     }
 
     public Jugador() { // despues lo volamo
         this.id = 0;
+        this.objetivos.add(new General(paisesDominados));
     }
 
     public String mostrarColor() {
@@ -100,14 +102,14 @@ public class Jugador {
         tarjetas.put(tarjeta.nombrePais(), tarjeta);
     }
 
-    public void activarTarjetaPais(String nombrePais) throws TarjetaNoEncontradaException, JugadorNoPoseePaisDeLaTarjetaException, ActivacionTarjetaEnRondaEquivocadaException, ElJugadorNoTieneTurnoException {
-        if(!this.poseePais(nombrePais)) throw new JugadorNoPoseePaisDeLaTarjetaException();
+    public void activarTarjetaPais(Pais unPais) throws TarjetaNoEncontradaException, JugadorNoPoseePaisDeLaTarjetaException, ActivacionTarjetaEnRondaEquivocadaException, ElJugadorNoTieneTurnoException {
+        if(!this.paisesDominados.contains(unPais)) throw new JugadorNoPoseePaisDeLaTarjetaException();
 
-        this.turno.activarTarjeta(this.buscarTarjeta(nombrePais));
-        tarjetas.remove(nombrePais); // this.mandarAlFondoDelMazo(nombrePais); deeaa
+        this.turno.activarTarjeta(this.buscarTarjeta(unPais));
+        tarjetas.remove(unPais.obtenerNombre()); // this.mandarAlFondoDelMazo(nombrePais); deeaa
     }
 
-    private Tarjeta buscarTarjeta(String nombrePais) throws TarjetaNoEncontradaException {
+    private Tarjeta buscarTarjeta(Pais unPais) throws TarjetaNoEncontradaException {
        try {
             return this.tarjetas.get(unPais.obtenerNombre());
         } catch (NullPointerException e) {
