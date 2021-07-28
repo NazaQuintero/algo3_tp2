@@ -208,7 +208,7 @@ public class RondaTest {
 
         jugador1.recibirTarjeta(unaTarjeta);
 
-        jugador1.activarTarjetaPais("Argentina"); // al activar la tarjeta se suman 2 ejercitos
+        jugador1.activarTarjetaPais(unPais); // al activar la tarjeta se suman 2 ejercitos
 
         assertEquals(jugador1, unPais.dominadoPor());
         assertEquals(3, unPais.cantidadEjercitos());
@@ -239,7 +239,7 @@ public class RondaTest {
 
         jugador1.recibirTarjeta(unaTarjeta);
 
-        assertThrows(ActivacionTarjetaEnRondaEquivocadaException.class, () -> jugador1.activarTarjetaPais("Argentina"));
+        assertThrows(ActivacionTarjetaEnRondaEquivocadaException.class, () -> jugador1.activarTarjetaPais(unPais));
 
     }
 
@@ -269,7 +269,7 @@ public class RondaTest {
 
         jugador1.recibirTarjeta(unaTarjeta);
 
-        assertThrows(ActivacionTarjetaEnRondaEquivocadaException.class, () -> jugador1.activarTarjetaPais("Argentina"));
+        assertThrows(ActivacionTarjetaEnRondaEquivocadaException.class, () -> jugador1.activarTarjetaPais(unPais));
 
     }
 
@@ -301,7 +301,7 @@ public class RondaTest {
         unTurno.seleccionarPrimerJugador(0); // elegimos al jugador1 como primer jugador
         unTurno.setRonda(new Colocacion());
         
-        Asia asia = new Asia("Asia");
+        Asia asia = new Asia();
         asia.agregarPais(china);
 
         assertEquals(jugador1, unTurno.obtenerJugadorTurnoActual());

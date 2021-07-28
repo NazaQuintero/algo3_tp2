@@ -1,0 +1,38 @@
+.body {
+    -fx-background-image: url("fondo.jpeg");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 100% 100%;
+
+}
+
+.title {
+    -fx-font-size: 32px;
+    -fx-font-weight: bold;
+    -fx-border-width: 3;
+    -fx-border-color: black;
+    -fx-background-color: blue;
+}
+
+.exitButton {
+    -fx-background-color: red;
+    -fx-text-fill: white;
+    -fx-font-size: 32px;
+}
+
+.startButton {
+    -fx-background-color: green;
+    -fx-font-size: 32px;
+}
+
+.comboBox {
+    -fx-pref-width: 300px;
+    -fx-pref-height: 50px;
+    -fx-font-size: 24px;
+
+}
+
+.textField {
+    -fx-pref-width: 300px;
+    -fx-pref-height: 50px;
+    -fx-font-size: 24px;
+}

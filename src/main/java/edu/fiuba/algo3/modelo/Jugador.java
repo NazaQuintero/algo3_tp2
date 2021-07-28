@@ -10,26 +10,33 @@ import edu.fiuba.algo3.modelo.tarjetas.Tarjeta;
 import edu.fiuba.algo3.modelo.turnos.SinTurno;
 import edu.fiuba.algo3.modelo.turnos.Turno;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Jugador {
 
     private final int id;
     private String color = "";
-    private Objetivo secreto;
-    private Objetivo general = new General();
+    private ArrayList<Objetivo> objetivos = new ArrayList<>();
+    private String nombre;
     private Turno turno = new SinTurno();
-    private HashMap<String, Pais> paisesDominados = new HashMap<>();
+    private ArrayList<Pais> paisesDominados = new ArrayList<>();
     private HashMap<String, Tarjeta> tarjetas = new HashMap<>();
     private Usuario usuario;
 
     public Jugador(int id, Usuario usuario) {
         this.id = id;
         this.usuario = usuario;
+        this.objetivos.add(new General());
     }
 
     public Jugador() { // despues lo volamo
         this.id = 0;
+        this.objetivos.add(new General());
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public String mostrarColor() {
@@ -45,7 +52,7 @@ public class Jugador {
     }
 
     public void colocarEjercitos(Pais pais) throws ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException {
-        if (paisesDominados.containsKey(pais.obtenerNombre())) { //qsy
+        if (paisesDominados.contains(pais)) {
             try {
                 this.turno.colocarEjercitos(pais);
             } catch (ElJugadorNoTieneTurnoException e) {
@@ -56,14 +63,6 @@ public class Jugador {
 
     public void asignarColor(String color) {
         this.color = color;
-    }
-
-    public Objetivo obtenerObjetivoSecreto() {
-        return this.secreto;
-    }
-
-    public Objetivo obtenerObjetivoGeneral() {
-        return this.general;
     }
 
     public Dados tirarDados(Pais pais) { return pais.tirarDados(); }
@@ -97,34 +96,45 @@ public class Jugador {
     }
 
     public void agregarPais(Pais pais) {
-        this.paisesDominados.putIfAbsent(pais.obtenerNombre(), pais);
+        if (!paisesDominados.contains(pais)) this.paisesDominados.add(pais);
     }
 
     public void quitarPais(Pais defensor) {
-        this.paisesDominados.remove(defensor.obtenerNombre());
+        this.paisesDominados.remove(defensor);
     }
 
     public void recibirTarjeta(Tarjeta tarjeta){
         tarjetas.put(tarjeta.nombrePais(), tarjeta);
     }
 
-    public void activarTarjetaPais(String nombrePais) throws TarjetaNoEncontradaException, JugadorNoPoseePaisDeLaTarjetaException, ActivacionTarjetaEnRondaEquivocadaException, ElJugadorNoTieneTurnoException {
-        if(!this.poseePais(nombrePais)) throw new JugadorNoPoseePaisDeLaTarjetaException();
+    public void activarTarjetaPais(Pais unPais) throws TarjetaNoEncontradaException, JugadorNoPoseePaisDeLaTarjetaException, ActivacionTarjetaEnRondaEquivocadaException, ElJugadorNoTieneTurnoException {
+        if(!this.paisesDominados.contains(unPais)) throw new JugadorNoPoseePaisDeLaTarjetaException();
 
-        this.turno.activarTarjeta(this.buscarTarjeta(nombrePais));
-        tarjetas.remove(nombrePais); // this.mandarAlFondoDelMazo(nombrePais); deeaa
+        this.turno.activarTarjeta(this.buscarTarjeta(unPais));
+        tarjetas.remove(unPais.obtenerNombre()); // this.mandarAlFondoDelMazo(nombrePais); deeaa
     }
 
-    private Tarjeta buscarTarjeta(String nombrePais) throws TarjetaNoEncontradaException {
+    private Tarjeta buscarTarjeta(Pais unPais) throws TarjetaNoEncontradaException {
        try {
-            return this.tarjetas.get(nombrePais);
+            return this.tarjetas.get(unPais.obtenerNombre());
         } catch (NullPointerException e) {
             throw new TarjetaNoEncontradaException();
         }
     }
 
-    private boolean poseePais(String nombrePais) {
-        return paisesDominados.containsKey(nombrePais);
+    public void asignarObjetivo(Objetivo unObjetivo) {
+        this.objetivos.add(unObjetivo);
     }
 
+    public boolean cumpleObjetivo() {
+        return this.objetivos.stream().anyMatch(objetivo -> objetivo.estaCumplido(this));
+    }
+
+    public String obtenerNombre() {
+        return nombre;
+    }
+
+    public boolean poseeTresPaisesLimitrofes() {
+        return paisesDominados.stream().anyMatch(pais -> (int) pais.getPaisesLimitrofes().stream().filter(pais1 -> pais1.dominadoPor() == this).count() >= 2);
+    }
 }
