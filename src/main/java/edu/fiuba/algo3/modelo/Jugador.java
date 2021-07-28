@@ -12,18 +12,17 @@ import edu.fiuba.algo3.modelo.turnos.Turno;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.stream.Collectors;
 
 public class Jugador {
 
     private final int id;
     private String color = "";
     private ArrayList<Objetivo> objetivos = new ArrayList<>();
+    private String nombre;
     private Turno turno = new SinTurno();
     private ArrayList<Pais> paisesDominados = new ArrayList<>();
     private HashMap<String, Tarjeta> tarjetas = new HashMap<>();
     private Usuario usuario;
-    private String nombre;
 
     public Jugador(int id, Usuario usuario) {
         this.id = id;
