@@ -44,5 +44,4 @@ public class Tarjeta {
             return new CanjeHabilitado();
         return new SinCanje();
     }
-
 }
