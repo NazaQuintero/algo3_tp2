@@ -133,4 +133,8 @@ public class Jugador {
     public String obtenerNombre() {
         return nombre;
     }
+
+    public boolean poseeTresPaisesLimitrofes() {
+        return paisesDominados.stream().anyMatch(pais -> (int) pais.getPaisesLimitrofes().stream().filter(pais1 -> pais1.dominadoPor() == this).count() >= 2);
+    }
 }

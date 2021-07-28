@@ -107,4 +107,48 @@ public class ObjetivosTest {
         assertFalse(ocupacion8.estaCumplido(new Jugador()));
     }
 
+    @Test
+    public void ocupacion2AmericaDelSur7DeEuropay3LimitrofesEstaCumplido() throws ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException {
+        MultitonContinentes.reiniciar();
+        Continente americaDelSur = MultitonContinentes.obtenerInstanciaDe("America del Sur");
+        Continente europa = MultitonContinentes.obtenerInstanciaDe("Europa");
+
+        ArrayList<Pais> paisesDeEuropa = new ArrayList<>();
+        for(int i = 0; i < 7; i++) {
+            paisesDeEuropa.add(new Pais(i+""));
+            europa.agregarPais(paisesDeEuropa.get(i));
+        }
+
+        Jugador jugador = new Jugador();
+        jugador.asignarObjetivo(new Ocupacion2());
+
+        for(Pais pais: paisesDeEuropa) jugador.colocarEjercitos(pais);
+
+        Pais argentina = new Pais("Argentina");
+        Pais uruguay = new Pais("Uruguay");
+        Pais chile = new Pais("Chile");
+
+        americaDelSur.agregarPais(argentina);
+        americaDelSur.agregarPais(uruguay);
+        americaDelSur.agregarPais(chile);
+
+        argentina.limitaCon(uruguay);
+        uruguay.limitaCon(argentina);
+
+        argentina.limitaCon(chile);
+        chile.limitaCon(argentina);
+
+        jugador.colocarEjercitos(argentina);
+        jugador.colocarEjercitos(uruguay);
+        jugador.colocarEjercitos(chile);
+
+        assertTrue(europa.dominaCantidadDePaises(jugador, 7));
+        assertTrue(americaDelSur.dominadoPor(jugador));
+
+        assertTrue(jugador.poseeTresPaisesLimitrofes());
+
+        assertTrue(jugador.cumpleObjetivo());
+
+    }
+
 }

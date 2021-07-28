@@ -10,8 +10,8 @@ public class MultitonTest {
 
     @Test
     public void alPedir2VecesElMismoContinenteLaInstanciaObtenidaDeContinenteEsLaMisma() {
-        Continente continente1 = MultitonContinentes.obtenerInstanciaDe("Europa");
-        Continente continente2 = MultitonContinentes.obtenerInstanciaDe("Europa");
+        Continente continente1 = MultitonContinentes.obtenerInstanciaDe("Africa");
+        Continente continente2 = MultitonContinentes.obtenerInstanciaDe("Africa");
 
         assertEquals(continente1, continente2);
     }
