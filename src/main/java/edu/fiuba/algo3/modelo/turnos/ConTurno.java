@@ -72,7 +72,7 @@ public class ConTurno implements Turno {
         this.ronda.finalizarRonda(this);
     }
 
-    public ResultadoBatalla atacarA(Pais atacante, Pais defensor) throws NoEsRondaDeAtaqueException {
+    public Resultado atacarA(Pais atacante, Pais defensor) throws NoEsRondaDeAtaqueException {
         try {
             return this.ronda.atacarA(atacante, defensor);
         } catch (ElPaisNoEsLimitrofeException | EjercitosInsuficientesException e) {

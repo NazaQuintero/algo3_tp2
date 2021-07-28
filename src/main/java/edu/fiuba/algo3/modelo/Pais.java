@@ -50,7 +50,12 @@ public class Pais {
     }
 
     public void limitaCon(Pais otroPais) {
+        otroPais.agregarLimitrofe(this);
         paisesLimitrofes.add(otroPais);
+    }
+
+    private void agregarLimitrofe(Pais unPais) {
+        paisesLimitrofes.add(unPais);
     }
 
     public Resultado atacarA(Pais defensor) throws ElPaisNoEsLimitrofeException, EjercitosInsuficientesException {

@@ -23,6 +23,10 @@ public class Ataque implements Ronda {
         return atacante.atacarA(defensor);
     }
 
+    private boolean puedeAtacar(Pais atacante) {
+        return atacante.cantidadEjercitos() > 1;
+    }
+
     public void reagrupar(Pais origen, Pais destino) throws NoEsRondaDeReagrupeException {
         throw new NoEsRondaDeReagrupeException();
     }

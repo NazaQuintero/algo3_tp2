@@ -10,7 +10,7 @@ public class ProcesadorResultado {
         return instancia;
     }
 
-    public void procesar(ResultadoBatalla resultadoBatalla) {
+    public void procesar(Resultado resultadoBatalla) {
         for(Victoria victoria: resultadoBatalla.obtenerResultados()) victoria.procesarVictoria();
     }
 }
