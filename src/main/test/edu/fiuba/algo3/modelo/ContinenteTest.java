@@ -33,7 +33,7 @@ public class ContinenteTest {
         jugador.colocarEjercitos(india);
         jugador.colocarEjercitos(japon);
 
-        Continente asia = new Asia("Asia");
+        Continente asia = new Asia();
         asia.agregarPais(china);
         asia.agregarPais(india);
         asia.agregarPais(japon);
@@ -52,7 +52,7 @@ public class ContinenteTest {
         jugador.colocarEjercitos(india);
         jugador.colocarEjercitos(japon);
 
-        Continente asia = new Asia("Asia");
+        Continente asia = new Asia();
         asia.agregarPais(china);
         asia.agregarPais(india);
         asia.agregarPais(japon);
@@ -72,7 +72,7 @@ public class ContinenteTest {
         jugador.colocarEjercitos(india);
         jugador2.colocarEjercitos(japon);
 
-        Continente asia = new Asia("Asia");
+        Continente asia = new Asia();
         asia.agregarPais(china);
         asia.agregarPais(india);
         asia.agregarPais(japon);

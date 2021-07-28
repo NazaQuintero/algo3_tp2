@@ -11,7 +11,12 @@ public class Destruccion implements Objetivo {
     }
 
     @Override
-    public boolean estaCumplido() {
+    public boolean estaCumplido(Jugador jugador) {
         return jugadorAEliminar.cantidadPaisesDominados() == 0;
+    }
+
+    @Override
+    public String obtenerDescripcion() {
+        return "Destruir a " + jugadorAEliminar.obtenerNombre();
     }
 }

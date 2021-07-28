@@ -34,7 +34,6 @@ public class Juego {
         try {
             CargarJuego.cargarPaisesAlTablero(tablero, ARCHIVO_PAISES);
             CargarJuego.cargarTarjetas(tarjetas, ARCHIVO_TARJETAS, tablero);
-            CargarJuego.cargarObjetivos(objetivos);
         }
 
         //Error al cargar los archivos

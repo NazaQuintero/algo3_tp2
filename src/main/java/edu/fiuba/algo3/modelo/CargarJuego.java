@@ -38,15 +38,10 @@ public class CargarJuego {
             paises.put(nombrePais, pais);
             limitrofes.put(pais, new ArrayList<>());
 
-            String nombre_continente = jsonObject.get("Continente").getAsString();
-            if (!continentes.containsKey(nombre_continente)){
-                Continente continente = nuevoContinente(nombre_continente);
-                continentes.put(nombre_continente, continente);
-            }
+            String nombreContinente = jsonObject.get("Continente").getAsString();
+            Continente continente = MultitonContinentes.obtenerInstanciaDe(nombreContinente);
 
-            Continente continente = continentes.get(nombre_continente);
             continente.agregarPais(pais);
-            tablero.agregarContinente(continente);
 
             String nombresLimitrofes = jsonObject.get("Limita con").getAsString();
             String[] arrayNombreLimitrofes = nombresLimitrofes.split(",");
@@ -108,19 +103,4 @@ public class CargarJuego {
         return null;
     }
 
-    private static Continente nuevoContinente(String nombreContinente) {
-        switch (nombreContinente){
-            case "Asia": return new Asia(nombreContinente);
-            case "Africa": return new Africa(nombreContinente);
-            case "Oceania": return new Oceania(nombreContinente);
-            case "Europa": return new Europa(nombreContinente);
-            case "America del Norte": return new AmericaDelNorte(nombreContinente);
-            case "America del Sur": return new AmericaDelSur(nombreContinente);
-            default: return new Asia(nombreContinente);
-        }
-    }
-
-    public static void cargarObjetivos(ArrayList<Objetivo> objetivos) {
-
-    }
 }

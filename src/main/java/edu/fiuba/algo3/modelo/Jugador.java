@@ -22,16 +22,21 @@ public class Jugador {
     private ArrayList<Pais> paisesDominados = new ArrayList<>();
     private HashMap<String, Tarjeta> tarjetas = new HashMap<>();
     private Usuario usuario;
+    private String nombre;
 
     public Jugador(int id, Usuario usuario) {
         this.id = id;
         this.usuario = usuario;
-        this.objetivos.add(new General(paisesDominados));
+        this.objetivos.add(new General());
     }
 
     public Jugador() { // despues lo volamo
         this.id = 0;
-        this.objetivos.add(new General(paisesDominados));
+        this.objetivos.add(new General());
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public String mostrarColor() {
@@ -123,5 +128,9 @@ public class Jugador {
 
     public boolean cumpleObjetivo() {
         return this.objetivos.stream().anyMatch(Objetivo::estaCumplido);
+    }
+
+    public String obtenerNombre() {
+        return nombre;
     }
 }

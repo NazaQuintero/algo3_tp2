@@ -8,16 +8,13 @@ import java.util.*;
 
 public class Tablero {
     private HashMap<String,Pais> paises;
-    private HashMap<String, Continente> continentes;
 
     public Tablero() {
         paises = new HashMap<>();
         continentes = new HashMap<>();
     }
 
-
     public void agregarPais(Pais pais){ paises.put(pais.nombre, pais); }
-    public void agregarContinente(Continente continente){ continentes.put(continente.obtenerNombre(), continente); }
 
     public void repartirPaises(ArrayList<Jugador> jugadores) throws NoEsRondaDeColocacionException, ElJugadorNoTieneTurnoException {
         ArrayList<Pais> paises = new ArrayList<>(this.paises.values());
