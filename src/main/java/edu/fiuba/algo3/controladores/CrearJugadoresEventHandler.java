@@ -8,24 +8,18 @@ import javafx.stage.Stage;
 
 public class CrearJugadoresEventHandler implements EventHandler<ActionEvent> {
 
-    /*
+    private final Stage stage;
     private final int cantidadJugadores;
 
-    public CrearJugadoresEventHandler(int cantidadJugadores) {
-        this.cantidadJugadores = cantidadJugadores;
-    }
-    */
-
-    private final Stage stage;
-
-    public CrearJugadoresEventHandler(Stage stage) {
+    public CrearJugadoresEventHandler(Stage stage, int cantidadJugadores) {
         this.stage = stage;
+        this.cantidadJugadores = cantidadJugadores;
     }
 
     @Override
     public void handle(ActionEvent actionEvent) {
 
-        CreacionJugadores creacionJugadores = new CreacionJugadores(stage);
+        CreacionJugadores creacionJugadores = new CreacionJugadores(stage, cantidadJugadores);
         Scene nuevaEscena = new Scene(creacionJugadores);
         stage.setScene(nuevaEscena);
         stage.setTitle("Creacion de jugadores");

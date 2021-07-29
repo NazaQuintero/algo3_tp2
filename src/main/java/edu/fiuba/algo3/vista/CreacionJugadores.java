@@ -14,33 +14,41 @@ public class CreacionJugadores extends BorderPane {
 
     VBox panel = new VBox();
 
-    public CreacionJugadores(Stage stage) {
+    public CreacionJugadores(Stage stage, int cantidadJugadores) {
 
         this.getStylesheets().add("styles.css");
 
-        Label label = new Label("Ingrese el nombre del jugador: ");
+        for (int i = 0; i < cantidadJugadores; i++) {
+            Label label = new Label("Ingrese el nombre del jugador " + (i+1) + ": ");
+            HBox textFieldHBox = crearTextFieldBox();
+            HBox botonera = crearBotoneraHorizontal();
+            panel.getChildren().addAll(label, textFieldHBox, botonera);
+        }
 
+        panel.setAlignment(Pos.CENTER);
+        this.setCenter(panel);
+    }
+
+    private HBox crearTextFieldBox() {
         TextField inputText = new TextField();
         inputText.setPrefWidth(300);
         inputText.setPrefHeight(50);
         HBox textFieldHBox = new HBox(inputText);
         textFieldHBox.setAlignment(Pos.CENTER);
+        return textFieldHBox;
+    }
 
-//        inputText.getStyleClass().add("textField");
-
+    private HBox crearBotoneraHorizontal() {
         Button buttonSubmit = new Button("Cargar");
+        buttonSubmit.getStyleClass().add("startButton");
 
         Button exitButton = new Button("Salir");
+        exitButton.getStyleClass().add("exitButton");
         exitButton.setOnAction(e -> Platform.exit());
 
         HBox hbox = new HBox(buttonSubmit, exitButton);
         hbox.setAlignment(Pos.CENTER);
-
-        panel.setAlignment(Pos.CENTER);
-        panel.getChildren().addAll(label, textFieldHBox, hbox);
-
-        this.setCenter(panel);
-
+        return hbox;
     }
 
 }

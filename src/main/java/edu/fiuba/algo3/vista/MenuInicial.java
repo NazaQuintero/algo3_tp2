@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.vista;
 
 import edu.fiuba.algo3.controladores.SeleccionDeJugadoresEventHandler;
+import edu.fiuba.algo3.modelo.Juego;
 import javafx.application.Platform;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -16,7 +17,7 @@ public class MenuInicial extends VBox {
     private static final int ALTO = 250;
     private Stage stage;
 
-    public MenuInicial(Stage stage) {
+    public MenuInicial(Stage stage, Juego juego) {
         this.stage = stage;
         this.setAlignment(Pos.CENTER);
         this.setSpacing(20);
@@ -31,7 +32,7 @@ public class MenuInicial extends VBox {
         startButton.getStyleClass().add("startButton");
         exitButton.getStyleClass().add("exitButton");
 
-        startButton.setOnAction(new SeleccionDeJugadoresEventHandler(stage));
+        startButton.setOnAction(new SeleccionDeJugadoresEventHandler(stage, juego));
         exitButton.setOnAction(e -> Platform.exit());
 
         HBox botonera = new HBox(startButton, exitButton);
