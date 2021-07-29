@@ -14,9 +14,7 @@ public class JuegoTest {
     public void elJuegoNoComienzaSinUnMinimoDe2Jugadores() {
 
         Juego juego = new Juego();
-
-        juego.agregarJugador(new Jugador());
-
+        juego.agregarJugador("Juani");
         assertThrows(CantidadDeJugadoresInsuficienteException.class, juego::comenzar);
     }
 
@@ -25,15 +23,14 @@ public class JuegoTest {
     public void seColocan1EjercitosEnElMismoPais() throws NoEsRondaDeColocacionException, ElJugadorNoTieneTurnoException {
 
         Juego juego = new Juego();
-        Jugador jugador = new Jugador();
-        Pais pais = new Pais("Argentina");
 
-        juego.agregarJugador(jugador);
+        juego.agregarJugador("Juani");
+        juego.agregarJugador("Martin");
 
-        jugador.colocarEjercitos(pais);
+        juego.colocarEjercitos("Juani", "Argentina", 1);
 
-        assertEquals(1,pais.cantidadEjercitos());
-        assertEquals(pais.dominadoPor(), jugador);
+        assertEquals(1,juego.cantidadEjercitosEn("Argentina"));
+        assertEquals("Juani", juego.paisDominadoPor("Argentina"));
 
     }
 
@@ -41,14 +38,12 @@ public class JuegoTest {
     @Test
     public void seRepartenEquitativamente25PaisesEntreDosJugadores() throws CantidadDeJugadoresInsuficienteException, ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException {
         Juego juego = new Juego();
-        Jugador jugadorUno = new Jugador();
-        Jugador jugadorDos = new Jugador();
-        juego.agregarJugador(jugadorUno);
-        juego.agregarJugador(jugadorDos);
+        juego.agregarJugador("Martin");
+        juego.agregarJugador("Juani");
         juego.comenzar();
 
-        assertEquals(25,jugadorUno.cantidadPaisesDominados());
-        assertEquals(25,jugadorDos.cantidadPaisesDominados());
+        assertEquals(25,juego.cantidadPaisesDominados("Martin"));
+        assertEquals(25,juego.cantidadPaisesDominados("Juani"));
     }
 
 }

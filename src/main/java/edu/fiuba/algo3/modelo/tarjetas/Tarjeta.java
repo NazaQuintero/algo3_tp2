@@ -23,8 +23,7 @@ public class Tarjeta {
     }
 
     public void activar() throws LaTarjetaYaFueActivadaException {
-        estadoTarjeta = estadoTarjeta.activar(pais); // implementame este porfis
-        /*this.pais.modificarCantidadEjercito(2); esto lo hacemos en TarjetaDesactivada, en el metodo activar pasandole el pais*/
+        estadoTarjeta = estadoTarjeta.activar(pais);
     }
 
     public void desactivar() throws LaTarjetaYaEstaDesactivadaException {

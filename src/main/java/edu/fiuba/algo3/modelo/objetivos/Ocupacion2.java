@@ -10,7 +10,7 @@ public class Ocupacion2 implements Objetivo {
         // falta chequear limitrofes
         return MultitonContinentes.obtenerInstanciaDe("America del Sur").dominadoPor(jugador) &&
                 MultitonContinentes.obtenerInstanciaDe("Europa").dominaCantidadDePaises(jugador, 7) &&
-                jugador.poseeTresPaisesLimitrofes();
+                jugador.poseeLimitrofes(3);
     }
 
     @Override

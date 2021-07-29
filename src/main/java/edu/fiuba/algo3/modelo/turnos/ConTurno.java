@@ -4,6 +4,7 @@ import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.Jugadores;
 import edu.fiuba.algo3.modelo.Pais;
 import edu.fiuba.algo3.modelo.batallasDeDados.Resultado;
+import edu.fiuba.algo3.modelo.rondas.Colocacion;
 import edu.fiuba.algo3.modelo.tarjetas.Tarjeta;
 import edu.fiuba.algo3.modelo.excepciones.*;
 import edu.fiuba.algo3.modelo.rondas.Ataque;
@@ -39,6 +40,7 @@ public class ConTurno implements Turno {
 
     private void cambiarJugadorActual() {
         this.actual = this.jugadores.obtenerSiguiente();
+        this.actual.setTurno(this);
     }
 
     public boolean leTocaALPrimerJugador() {
@@ -48,8 +50,8 @@ public class ConTurno implements Turno {
     public void finalizarTurnoActual() {
         this.actual.setTurno(new SinTurno());
         this.cambiarJugadorActual();
-        this.actual.setTurno(this);
         this.cantidadDeTurnosJugados++;
+
     }
 
     public int obtenerCantidadDeTurnosJugados() {
@@ -72,29 +74,24 @@ public class ConTurno implements Turno {
         this.ronda.finalizarRonda(this);
     }
 
-    public Resultado atacarA(Pais atacante, Pais defensor) throws NoEsRondaDeAtaqueException {
+    public Resultado atacarA(Pais atacante, Pais defensor, int cantidadEjercitos) throws NoEsRondaDeAtaqueException {
         try {
-            return this.ronda.atacarA(atacante, defensor);
+            return this.ronda.atacarA(atacante, defensor, cantidadEjercitos);
         } catch (ElPaisNoEsLimitrofeException | EjercitosInsuficientesException e) {
-            //pedir en la vista que intente con otro pais
             throw new NoEsRondaDeAtaqueException();
         }
     }
 
-    public void reagrupar(Pais origen, Pais destino) throws NoEsRondaDeReagrupeException, ElPaisNoEsLimitrofeException { // o lo q sea la firma
+    public void reagrupar(Pais origen, Pais destino, int cantidad) throws NoEsRondaDeReagrupeException, ElPaisNoEsLimitrofeException { // o lo q sea la firma
         try {
-            this.ronda.reagrupar(origen, destino);
+            this.ronda.reagrupar(origen, destino, cantidad);
         } catch (NoEsRondaDeReagrupeException e) {
             throw new NoEsRondaDeReagrupeException();
         }
     }
 
-    public void colocarEjercitos(Pais unPais) throws NoEsRondaDeColocacionException {
-        try {
-            this.ronda.colocarEjercitos(unPais);
-        } catch (NoEsRondaDeColocacionException e) {
-            throw new NoEsRondaDeColocacionException();
-        }
+    public void colocarEjercitos(Pais unPais, int cantidadEjercitos) throws NoEsRondaDeColocacionException {
+        this.ronda.colocarEjercitos(unPais, cantidadEjercitos);
     }
 
     public void activarTarjeta(Tarjeta unaTarjeta) throws ActivacionTarjetaEnRondaEquivocadaException, LaTarjetaYaFueActivadaException {

@@ -31,7 +31,7 @@ public class PaisTest {
     public void laCantidadDeEjercitosColocadaEsCorrecta() {
 
         Pais unPais = new Pais("Argentina");
-        Ejercito ejercito = new Ejercito(new Jugador());
+        Ejercito ejercito = new Ejercito(new Jugador(0, "Juani"));
         ejercito.modificarCantidad(2);
         unPais.colocarEjercito(ejercito);
         assertEquals(3, unPais.cantidadEjercitos());
@@ -41,10 +41,10 @@ public class PaisTest {
     @Test
     public void alColocarUnEjercitoEstaDominadoPorUnJugador() {
 
-        Jugador unJugador = new Jugador();
+        Jugador unJugador = new Jugador(0, "Naza");
         Pais unPais = new Pais("Argentina");
         Ejercito unEjercito = new Ejercito(unJugador);
-        unPais.colocarEjercito(unEjercito);
+        unPais.colocarEjercito(new Ejercito(unJugador));
 
         assertEquals(unJugador, unPais.dominadoPor());
     }
@@ -52,7 +52,7 @@ public class PaisTest {
     @Test
     public void unPaisQueTenia1EjercitoPasaATener4SiElMismoJugadorVuelveAColocar() {
 
-        Jugador unJugador = new Jugador();
+        Jugador unJugador = new Jugador(0,"Naza");
         Pais unPais = new Pais("Argentina");
         unPais.colocarEjercito(new Ejercito(unJugador));
 
@@ -109,21 +109,20 @@ public class PaisTest {
 
 
     @Test
-    public void ataqueEntrePaisesGanaAtacanteYColocaUnEjercitoEnElPaisDerrotado() throws ElPaisNoEsLimitrofeException, EjercitosInsuficientesException {
+    public void ataqueEntrePaisesGanaAtacanteYColocaUnEjercitoEnElPaisDerrotado() throws Exception {
 
         Pais paisAtacante = new Pais("Argentina");
         Pais paisDefensor = new Pais("Brasil");
+        paisAtacante.limitaCon(paisDefensor);
+        Jugador jAtacante = new Jugador(0, "Martin");
+        Jugador jDefensor = new Jugador(1, "Naza");
 
-        Usuario usuarioMock = mock(Usuario.class);
+        // Asigna que el Pais pertenezca a un jugador
+        jAtacante.colocarEjercitos(paisAtacante, 4);
+        jDefensor.colocarEjercitos(paisDefensor, 3);
 
-        when(usuarioMock.pedirCantidad()).thenReturn(4);
-
-        Jugador jugadorAtacante = new Jugador(1, usuarioMock);
-
-        Jugador jugadorDefensor = new Jugador(2, usuarioMock);
 
         Dado dadoAtacante = new DadoPersonalizado(2);
-
         Dado dadoDefensor = new DadoPersonalizado(1);
 
         Dados dadosAtacante = new Dados();
@@ -132,41 +131,32 @@ public class PaisTest {
         dadosAtacante.agregarDado(dadoAtacante);
 
         Dados dadosDefensor = new Dados();
-
         dadosDefensor.agregarDado(dadoDefensor);
         dadosDefensor.agregarDado(dadoDefensor);
         dadosDefensor.agregarDado(dadoDefensor);
 
-        Ejercito ejercitoAtacante = new Ejercito(jugadorAtacante);
-        ejercitoAtacante.modificarCantidad(4);
-        Ejercito ejercitoDefensor = new Ejercito(jugadorDefensor);
-        ejercitoDefensor.modificarCantidad(2);
+        paisAtacante.ejercito.setDados(dadosAtacante);
+        paisDefensor.ejercito.setDados(dadosDefensor);
 
-        ejercitoAtacante.setDados(dadosAtacante);
-        ejercitoDefensor.setDados(dadosDefensor);
-
-        paisAtacante.colocarEjercito(ejercitoAtacante);
-        paisDefensor.colocarEjercito(ejercitoDefensor);
-
-        paisAtacante.limitaCon(paisDefensor);
-
-        Resultado resultadoBatalla = paisAtacante.atacarA(paisDefensor);
+        Resultado resultadoBatalla = paisAtacante.atacarA(paisDefensor, 3);
         ProcesadorResultado.obtenerInstancia().procesar(resultadoBatalla);
 
         assertEquals(1, paisDefensor.cantidadEjercitos());
-        assertEquals(jugadorAtacante, paisDefensor.dominadoPor());
-
+        assertEquals(jAtacante, paisDefensor.dominadoPor());
     }
 
     @Test
-    public void ataqueEntrePaisesGanaDefensor() throws ElPaisNoEsLimitrofeException, EjercitosInsuficientesException {
-
+    public void ataqueEntrePaisesGanaDefensor() throws Exception {
         Pais paisAtacante = new Pais("Argentina");
         Pais paisDefensor = new Pais("Brasil");
+        paisAtacante.limitaCon(paisDefensor);
+        Jugador jAtacante = new Jugador(0, "Martin");
+        Jugador jDefensor = new Jugador(1, "Naza");
 
-        Jugador jugadorAtacante = new Jugador(1, new Usuario());
-
-        Jugador jugadorDefensor = new Jugador(2, new Usuario());
+        paisAtacante.colocarEjercito(new Ejercito(jAtacante));
+        paisAtacante.modificarCantidadEjercito(3);
+        paisDefensor.colocarEjercito(new Ejercito(jDefensor));
+        paisDefensor.modificarCantidadEjercito(2);
 
         Dado dadoAtacante = new DadoPersonalizado(1);
         Dado dadoDefensor = new DadoPersonalizado(6);
@@ -181,25 +171,13 @@ public class PaisTest {
         dadosDefensor.agregarDado(dadoDefensor);
         dadosDefensor.agregarDado(dadoDefensor);
 
-        Ejercito ejercitoAtacante = new Ejercito(jugadorAtacante);
-        ejercitoAtacante.modificarCantidad(3);
+        paisAtacante.ejercito.setDados(dadosAtacante);
+        paisDefensor.ejercito.setDados(dadosDefensor);
 
-        Ejercito ejercitoDefensor = new Ejercito(jugadorDefensor);
-        ejercitoDefensor.modificarCantidad(2);
-
-        ejercitoAtacante.setDados(dadosAtacante);
-        ejercitoDefensor.setDados(dadosDefensor);
-
-        paisAtacante.colocarEjercito(ejercitoAtacante);
-        paisDefensor.colocarEjercito(ejercitoDefensor);
-
-        paisAtacante.limitaCon(paisDefensor);
-
-        Resultado resultadoBatalla = paisAtacante.atacarA(paisDefensor);
+        Resultado resultadoBatalla = paisAtacante.atacarA(paisDefensor, 3);
         ProcesadorResultado.obtenerInstancia().procesar(resultadoBatalla);
 
         assertEquals(3, paisDefensor.cantidadEjercitos());
         assertEquals(1, paisAtacante.cantidadEjercitos());
-        assertEquals(jugadorDefensor, paisDefensor.dominadoPor());
     }
 }

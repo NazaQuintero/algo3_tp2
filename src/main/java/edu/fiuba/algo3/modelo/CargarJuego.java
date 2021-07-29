@@ -10,7 +10,7 @@ import com.google.gson.*;
 import edu.fiuba.algo3.modelo.continentes.*;
 import edu.fiuba.algo3.modelo.excepciones.ArchivoDePaisesNoEncontradoException;
 import edu.fiuba.algo3.modelo.excepciones.ArchivoDeTarjetasNoEncontradoException;
-import edu.fiuba.algo3.modelo.objetivos.Objetivo;
+import edu.fiuba.algo3.modelo.objetivos.*;
 import edu.fiuba.algo3.modelo.tarjetas.*;
 
 public class CargarJuego {
@@ -90,6 +90,22 @@ public class CargarJuego {
         Tarjeta[] _tarjetas = gson.fromJson(json, Tarjeta[].class);
 
         tarjetas.addAll(Arrays.asList(_tarjetas));
+    }
+
+    public static void cargarObjetivos(ArrayList<Objetivo> objetivos, ArrayList<Jugador> jugadores){
+
+        // Crea los objetivos de ocupacion
+        objetivos.add(new Ocupacion1());
+        objetivos.add(new Ocupacion2());
+        objetivos.add(new Ocupacion3());
+        objetivos.add(new Ocupacion4());
+        objetivos.add(new Ocupacion5());
+        objetivos.add(new Ocupacion6());
+        objetivos.add(new Ocupacion7());
+        objetivos.add(new Ocupacion8());
+
+        // Crea los objetivos de Destruccion
+        for (Jugador jugador : jugadores) {objetivos.add(new Destruccion(jugador));}
     }
 
     private static Simbolo nuevoSimbolo(String simbolo) {

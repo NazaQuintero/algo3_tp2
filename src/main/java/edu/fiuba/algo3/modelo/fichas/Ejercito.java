@@ -19,7 +19,7 @@ public class Ejercito implements Fichas {
     }
 
     public void modificarCantidad(int aumentarEn) {
-            this.cantidad += aumentarEn;
+        this.cantidad += aumentarEn;
     }
 
     public Jugador obtenerJugador() {
@@ -28,10 +28,6 @@ public class Ejercito implements Fichas {
 
     public int obtenerCantidad() {
         return cantidad;
-    }
-
-    public int pedirCantidadAlJugador() {
-        return this.jugador.pedirCantidad();
     }
 
     public void setDados(Dados dados) {

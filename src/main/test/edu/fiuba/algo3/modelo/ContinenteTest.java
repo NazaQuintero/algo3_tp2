@@ -13,25 +13,22 @@ public class ContinenteTest {
 
     @Test
     public void porDefectoNoEstaDominadoPorNadie() {
-
-        Jugador jugador = new Jugador();
+        Jugador jugador = new Jugador(0, "Martin");
         Continente asia = new Asia();
-
         asia.agregarPais(new Pais("China"));
-
         assertFalse(asia.dominadoPor(jugador));
     }
 
     @Test
     public void unJugadorDomina3PaisesDeAsia() throws ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException {
-        Jugador jugador = new Jugador();
+        Jugador jugador = new Jugador(0, "Martin");
         Pais china = new Pais("China");
         Pais india = new Pais("India");
         Pais japon = new Pais("Japon");
 
-        jugador.colocarEjercitos(china);
-        jugador.colocarEjercitos(india);
-        jugador.colocarEjercitos(japon);
+        jugador.colocarEjercitos(china, 1);
+        jugador.colocarEjercitos(india, 1);
+        jugador.colocarEjercitos(japon, 1);
 
         Continente asia = new Asia();
         asia.agregarPais(china);
@@ -43,14 +40,14 @@ public class ContinenteTest {
 
     @Test
     public void unJugadorDominaTodoAsia() throws ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException {
-        Jugador jugador = new Jugador();
+        Jugador jugador = new Jugador(0, "Martin");
         Pais china = new Pais("China");
         Pais india = new Pais("India");
         Pais japon = new Pais("Japon");
 
-        jugador.colocarEjercitos(china);
-        jugador.colocarEjercitos(india);
-        jugador.colocarEjercitos(japon);
+        jugador.colocarEjercitos(china, 1);
+        jugador.colocarEjercitos(india, 1);
+        jugador.colocarEjercitos(japon, 1);
 
         Continente asia = new Asia();
         asia.agregarPais(china);
@@ -62,15 +59,15 @@ public class ContinenteTest {
 
     @Test
     public void unJugadorNoDominaTodoAsia() throws ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException {
-        Jugador jugador = new Jugador();
-        Jugador jugador2 = new Jugador();
+        Jugador jugador = new Jugador(0, "Martin");
+        Jugador jugador2 = new Jugador(1, "Frank");
         Pais china = new Pais("China");
         Pais india = new Pais("India");
         Pais japon = new Pais("Japon");
 
-        jugador.colocarEjercitos(china);
-        jugador.colocarEjercitos(india);
-        jugador2.colocarEjercitos(japon);
+        jugador.colocarEjercitos(china, 1);
+        jugador.colocarEjercitos(india, 1);
+        jugador2.colocarEjercitos(japon, 1);
 
         Continente asia = new Asia();
         asia.agregarPais(china);

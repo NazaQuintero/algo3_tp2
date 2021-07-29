@@ -21,7 +21,7 @@ public class JugadorTest {
     @Test
     public void seCreaUnJugadorConColorRosa() {
 
-        Jugador jugador = new Jugador();
+        Jugador jugador = new Jugador(0, "Cami");
         jugador.asignarColor("rosa");
 
         assertEquals(jugador.mostrarColor(), "rosa");
@@ -31,7 +31,7 @@ public class JugadorTest {
     @Test
     public void porDefectoUnJugadorNoTieneColorAsignado() {
 
-        Jugador jugador = new Jugador();
+        Jugador jugador = new Jugador(0, "Cami");
 
         assertEquals(jugador.mostrarColor(), "");
     }
@@ -39,15 +39,15 @@ public class JugadorTest {
     @Test
     public void porDefectoUnJugadorNoTienePaises() {
 
-        Jugador jugador = new Jugador();
+        Jugador jugador = new Jugador(0, "Cami");
 
         assertEquals(jugador.cantidadPaisesDominados(), 0);
     }
 
 
     @Test
-    public void luegoDeQueElJugadorActivaUnaTarjetaEstaQuedaActivadaYNoSePuedeVolverAActivar() throws ElJugadorNoTieneTurnoException, ActivacionTarjetaEnRondaEquivocadaException, TarjetaNoEncontradaException, JugadorNoPoseePaisDeLaTarjetaException, LaTarjetaYaFueActivadaException {
-        Jugador unJugador = new Jugador();
+    public void luegoDeQueElJugadorActivaUnaTarjetaEstaQuedaActivadaYNoSePuedeVolverAActivar() throws Exception{
+        Jugador unJugador = new Jugador(0, "Cami");
         Jugadores jugadores = new Jugadores();
         jugadores.agregarJugador(unJugador);
         Turno unTurno = new ConTurno(jugadores);
@@ -56,7 +56,7 @@ public class JugadorTest {
         unJugador.setTurno(unTurno);
 
         Pais unPais = new Pais("Bolivia");
-        unPais.colocarEjercito(new Ejercito(unJugador));
+        unJugador.colocarEjercitos(unPais, 2);
         Simbolo unChirimbolito = new Globo();
         Tarjeta unaTarjeta = new Tarjeta(unPais, unChirimbolito);
         unJugador.recibirTarjeta(unaTarjeta);
@@ -66,135 +66,117 @@ public class JugadorTest {
     }
 
     @Test
-    public void luegoDeCanjearTarjetasElJugadorYaNoLasPosee() throws JugadorSinTarjetasException, SinCanjeHabilitadoException, LaTarjetaYaEstaDesactivadaException, LaTarjetaYaFueActivadaException {
-        Usuario unUsuarioMock = mock(Usuario.class);
+    public void luegoDeCanjearTarjetasElJugadorYaNoLasPosee() throws Exception {
+        Jugador jugador = new Jugador(0, "Martin");
 
-        Pais unPais = new Pais("Argentina");
-        Pais otroPais = new Pais("Brasil");
-        Pais oootroPais = new Pais("Colombia"); // jjajaja xd
+        Pais arg = new Pais("Argentina");
+        Pais bra = new Pais("Brasil");
+        Pais col = new Pais("Colombia");
 
-        Tarjeta unaTarjeta = new Tarjeta(unPais, new Globo());
-        Tarjeta otraTarjeta = new Tarjeta(unPais, new Barco());
-        Tarjeta oootraaTarjeta = new Tarjeta(unPais, new Canion());
+        Tarjeta tArg = new Tarjeta(arg, new Globo());
+        Tarjeta tBra = new Tarjeta(bra, new Globo());
+        Tarjeta tCol = new Tarjeta(col, new Globo());
 
-        unaTarjeta.activar();
-        otraTarjeta.activar();
-        oootraaTarjeta.activar();
+        jugador.recibirTarjeta(tArg);
+        jugador.recibirTarjeta(tBra);
+        jugador.recibirTarjeta(tCol);
 
-        ArrayList<Tarjeta> tarjetasElegidas = new ArrayList<>();
-        tarjetasElegidas.add(unaTarjeta);
-        tarjetasElegidas.add(otraTarjeta);
-        tarjetasElegidas.add(oootraaTarjeta);
+        ArrayList<Tarjeta> tarjetas = new ArrayList<>();
+        tarjetas.add(tArg);
+        tarjetas.add(tBra);
+        tarjetas.add(tCol);
 
-        when(unUsuarioMock.pedirTarjetasACanjear()).thenReturn(tarjetasElegidas);
+        tArg.activar();
+        tBra.activar();
+        tCol.activar();
 
-        Jugador unJugador = new Jugador(1, unUsuarioMock);
-
-        unJugador.recibirTarjeta(unaTarjeta);
-        unJugador.recibirTarjeta(otraTarjeta);
-        unJugador.recibirTarjeta(oootraaTarjeta);
-
-        unJugador.solicitarCanje();
-
-        assertThrows(TarjetaNoEncontradaException.class, () -> unJugador.buscarTarjeta(unPais));
-        assertThrows(TarjetaNoEncontradaException.class, () -> unJugador.buscarTarjeta(otroPais));
-        assertThrows(TarjetaNoEncontradaException.class, () -> unJugador.buscarTarjeta(oootroPais));
+        jugador.solicitarCanje(tarjetas);
+        assertThrows(TarjetaNoEncontradaException.class, () -> jugador.buscarTarjeta(arg));
+        assertThrows(TarjetaNoEncontradaException.class, () -> jugador.buscarTarjeta(bra));
+        assertThrows(TarjetaNoEncontradaException.class, () -> jugador.buscarTarjeta(col));
     }
 
     @Test
     public void unJugadorQueNoRealizoCanjesRecibeUnPrimerCanjeAlSolicitarUnoYPuedeColocar4EjercitosExtra() throws LaTarjetaYaFueActivadaException, JugadorSinTarjetasException, LaTarjetaYaEstaDesactivadaException, SinCanjeHabilitadoException {
-        Usuario usuarioMock = mock(Usuario.class);
-        Jugador unJugador = new Jugador(1, usuarioMock);
+        Jugador jugador = new Jugador(0, "Martin");
 
-        Pais unPais = new Pais("Argentina");
-        Pais otroPais = new Pais("Brasil");
-        Pais ootroPais = new Pais("Colombia");
+        Pais arg = new Pais("Argentina");
+        Pais bra = new Pais("Brasil");
+        Pais col = new Pais("Colombia");
 
-        Tarjeta unaTarjeta = new Tarjeta(unPais, new Globo());
-        Tarjeta otraTarjeta = new Tarjeta(otroPais, new Globo());
-        Tarjeta ootraTarjeta = new Tarjeta(ootroPais, new Globo());
+        Tarjeta tArg = new Tarjeta(arg, new Globo());
+        Tarjeta tBra = new Tarjeta(bra, new Globo());
+        Tarjeta tCol = new Tarjeta(col, new Globo());
 
-        unaTarjeta.activar();
-        otraTarjeta.activar();
-        ootraTarjeta.activar();
+        tArg.activar();
+        tBra.activar();
+        tCol.activar();
 
-        unJugador.recibirTarjeta(unaTarjeta);
-        unJugador.recibirTarjeta(otraTarjeta);
-        unJugador.recibirTarjeta(ootraTarjeta);
+        jugador.recibirTarjeta(tArg);
+        jugador.recibirTarjeta(tBra);
+        jugador.recibirTarjeta(tCol);
 
-        ArrayList<Tarjeta> tarjetasElegidas = new ArrayList<>();
-        tarjetasElegidas.add(unaTarjeta);
-        tarjetasElegidas.add(otraTarjeta);
-        tarjetasElegidas.add(ootraTarjeta);
+        ArrayList<Tarjeta> tarjetas = new ArrayList<>();
+        tarjetas.add(tArg);
+        tarjetas.add(tBra);
+        tarjetas.add(tCol);
 
-        when(usuarioMock.pedirTarjetasACanjear()).thenReturn(tarjetasElegidas);
-
-
-        unJugador.solicitarCanje();
-
-
-        assertEquals(4, unJugador.obtenerCanjeActual().cantidadEjercitos());
-
+        jugador.solicitarCanje(tarjetas);
+        assertEquals(4, jugador.obtenerCanjeActual().cantidadEjercitos());
     }
 
     @Test
     public void unJugadorQueRealizoUnCanjeRecibeUnSegundoCanjeAlSolicitarOtroYPuedeColocar7EjercitosExtra() throws LaTarjetaYaFueActivadaException, JugadorSinTarjetasException, LaTarjetaYaEstaDesactivadaException, SinCanjeHabilitadoException {
-        Usuario usuarioMock = mock(Usuario.class);
-        Jugador unJugador = new Jugador(1, usuarioMock);
+        Jugador jugador = new Jugador(0, "Martin");
 
-        Pais unPais1Canje = new Pais("Argentina");
-        Pais otroPais1Canje = new Pais("Brasil");
-        Pais ootroPais1Canje = new Pais("Colombia");
+        Pais arg = new Pais("Argentina");
+        Pais bra = new Pais("Brasil");
+        Pais col = new Pais("Colombia");
 
-        Tarjeta unaTarjeta1Canje = new Tarjeta(unPais1Canje, new Globo());
-        Tarjeta otraTarjeta1Canje = new Tarjeta(otroPais1Canje, new Globo());
-        Tarjeta ootraTarjeta1Canje = new Tarjeta(ootroPais1Canje, new Globo());
+        Tarjeta tArg = new Tarjeta(arg, new Globo());
+        Tarjeta tBra = new Tarjeta(bra, new Globo());
+        Tarjeta tCol = new Tarjeta(col, new Globo());
 
-        unaTarjeta1Canje.activar();
-        otraTarjeta1Canje.activar();
-        ootraTarjeta1Canje.activar();
+        jugador.recibirTarjeta(tArg);
+        jugador.recibirTarjeta(tBra);
+        jugador.recibirTarjeta(tCol);
 
-        unJugador.recibirTarjeta(unaTarjeta1Canje);
-        unJugador.recibirTarjeta(otraTarjeta1Canje);
-        unJugador.recibirTarjeta(ootraTarjeta1Canje);
+        ArrayList<Tarjeta> tarjetas = new ArrayList<>();
+        tarjetas.add(tArg);
+        tarjetas.add(tBra);
+        tarjetas.add(tCol);
 
-        ArrayList<Tarjeta> tarjetasElegidas1Canje = new ArrayList<>();
-        tarjetasElegidas1Canje.add(unaTarjeta1Canje);
-        tarjetasElegidas1Canje.add(otraTarjeta1Canje);
-        tarjetasElegidas1Canje.add(ootraTarjeta1Canje);
+        tArg.activar();
+        tBra.activar();
+        tCol.activar();
 
-        when(usuarioMock.pedirTarjetasACanjear()).thenReturn(tarjetasElegidas1Canje);
+        jugador.solicitarCanje(tarjetas);
 
-        unJugador.solicitarCanje();
+        tarjetas.clear();
 
-        Pais unPais2Canje = new Pais("Uruguay");
-        Pais otroPais2Canje = new Pais("Bolivia");
-        Pais ootroPais2Canje = new Pais("China");
+        arg = new Pais("Argentina2");
+        bra = new Pais("Brasil2");
+        col = new Pais("Colombia2");
 
-        Tarjeta unaTarjeta2Canje = new Tarjeta(unPais2Canje, new Globo());
-        Tarjeta otraTarjeta2Canje = new Tarjeta(otroPais2Canje, new Barco());
-        Tarjeta ootraTarjeta2Canje = new Tarjeta(ootroPais2Canje, new Canion());
+        tArg = new Tarjeta(arg, new Globo());
+        tBra = new Tarjeta(bra, new Globo());
+        tCol = new Tarjeta(col, new Globo());
 
-        unaTarjeta2Canje.activar();
-        otraTarjeta2Canje.activar();
-        ootraTarjeta2Canje.activar();
+        jugador.recibirTarjeta(tArg);
+        jugador.recibirTarjeta(tBra);
+        jugador.recibirTarjeta(tCol);
 
-        unJugador.recibirTarjeta(unaTarjeta1Canje);
-        unJugador.recibirTarjeta(otraTarjeta1Canje);
-        unJugador.recibirTarjeta(ootraTarjeta1Canje);
+        tarjetas.add(tArg);
+        tarjetas.add(tBra);
+        tarjetas.add(tCol);
 
-        ArrayList<Tarjeta> tarjetasElegidas2Canje = new ArrayList<>();
-        tarjetasElegidas2Canje.add(unaTarjeta2Canje);
-        tarjetasElegidas2Canje.add(otraTarjeta2Canje);
-        tarjetasElegidas2Canje.add(ootraTarjeta2Canje);
+        tArg.activar();
+        tBra.activar();
+        tCol.activar();
 
-        when(usuarioMock.pedirTarjetasACanjear()).thenReturn(tarjetasElegidas2Canje);
+        jugador.solicitarCanje(tarjetas);
 
-
-        unJugador.solicitarCanje();
-
-
-        assertEquals(7, unJugador.obtenerCanjeActual().cantidadEjercitos());
+        assertEquals(7, jugador.obtenerCanjeActual().cantidadEjercitos());
 
     }
 

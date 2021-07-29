@@ -4,11 +4,13 @@ import edu.fiuba.algo3.modelo.batallasDeDados.Dados;
 import edu.fiuba.algo3.modelo.Pais;
 
 public class Defensor implements Rol {
-    public Dados tirarDados(Pais pais) {
-        return new Dados(this.obtenerCantidadDeEjercitos(pais.pedirCantidadAlJugador()));
+    int cantidadEjercitos = 0;
+    public Defensor(int cantidadEjercitos){
+        this.cantidadEjercitos = cantidadEjercitos;
     }
 
-    private int obtenerCantidadDeEjercitos(int cantidad) {
-        return Math.min(cantidad, 3);
+    public Dados tirarDados(Pais pais) {
+        return new Dados(Math.min(cantidadEjercitos, 3));
     }
+
 }

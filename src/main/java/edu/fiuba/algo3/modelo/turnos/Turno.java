@@ -24,11 +24,11 @@ public interface Turno {
 
     void finalizarRonda();
 
-    Resultado atacarA(Pais atacante, Pais defensor) throws ElJugadorNoTieneTurnoException, NoEsRondaDeAtaqueException;
+    Resultado atacarA(Pais atacante, Pais defensor, int cantidadEjercitos) throws ElJugadorNoTieneTurnoException, NoEsRondaDeAtaqueException;
 
-    void reagrupar(Pais origen, Pais destino) throws NoEsRondaDeReagrupeException, ElJugadorNoTieneTurnoException, ElPaisNoEsLimitrofeException;
+    void reagrupar(Pais origen, Pais destino, int cantidad) throws NoEsRondaDeReagrupeException, ElJugadorNoTieneTurnoException, ElPaisNoEsLimitrofeException;
 
-    void colocarEjercitos(Pais pais) throws NoEsRondaDeColocacionException, ElJugadorNoTieneTurnoException;
+    void colocarEjercitos(Pais pais, int cantidadEjercitos) throws NoEsRondaDeColocacionException, ElJugadorNoTieneTurnoException;
 
     void activarTarjeta(Tarjeta buscarTarjeta) throws ActivacionTarjetaEnRondaEquivocadaException, ElJugadorNoTieneTurnoException, LaTarjetaYaFueActivadaException;
 }

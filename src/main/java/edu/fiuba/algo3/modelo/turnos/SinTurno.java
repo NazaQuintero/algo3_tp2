@@ -55,17 +55,17 @@ public class SinTurno implements Turno {
     public void finalizarTurnoActual() { }
 
     @Override
-    public ResultadoBatalla atacarA(Pais atacante, Pais defensor) throws ElJugadorNoTieneTurnoException {
+    public ResultadoBatalla atacarA(Pais atacante, Pais defensor, int cantidadEjercitos) throws ElJugadorNoTieneTurnoException {
         throw new ElJugadorNoTieneTurnoException();
     }
 
     @Override
-    public void reagrupar(Pais origen, Pais destino) throws ElJugadorNoTieneTurnoException {
+    public void reagrupar(Pais origen, Pais destino, int cantidad) throws ElJugadorNoTieneTurnoException {
         throw new ElJugadorNoTieneTurnoException();
     }
 
     @Override
-    public void colocarEjercitos(Pais unPais) throws ElJugadorNoTieneTurnoException {
+    public void colocarEjercitos(Pais unPais, int cantidadEjercitos) throws ElJugadorNoTieneTurnoException {
         throw new ElJugadorNoTieneTurnoException();
     }
 
