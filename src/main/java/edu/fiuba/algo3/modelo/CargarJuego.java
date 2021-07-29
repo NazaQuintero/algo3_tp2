@@ -70,7 +70,7 @@ public class CargarJuego {
         }
     }
 
-    public static void cargarTarjetas(ArrayList<Tarjeta> tarjetas, String archivoTarjetas, Tablero tablero) throws ArchivoDeTarjetasNoEncontradoException {
+    public static void cargarTarjetas(Tablero tablero, String archivoTarjetas) throws ArchivoDeTarjetasNoEncontradoException {
         String json;
         try {
             InputStream is = CargarJuego.class.getClassLoader().getResourceAsStream(archivoTarjetas);
@@ -91,9 +91,9 @@ public class CargarJuego {
         gsonBuilder.registerTypeAdapter(Tarjeta.class, deserializer);
         Gson gson = gsonBuilder.create();
 
-        Tarjeta[] _tarjetas = gson.fromJson(json, Tarjeta[].class);
+        Tarjeta[] tarjetas = gson.fromJson(json, Tarjeta[].class);
 
-        tarjetas.addAll(Arrays.asList(_tarjetas));
+        for (Tarjeta t: tarjetas) tablero.agregarTarjeta(t);
     }
 
     private static Simbolo nuevoSimbolo(String simbolo) {

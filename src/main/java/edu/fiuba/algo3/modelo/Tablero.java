@@ -5,15 +5,18 @@ import edu.fiuba.algo3.modelo.batallasDeDados.Resultado;
 import edu.fiuba.algo3.modelo.batallasDeDados.ResultadoBatalla;
 import edu.fiuba.algo3.modelo.continentes.Continente;
 import edu.fiuba.algo3.modelo.excepciones.*;
+import edu.fiuba.algo3.modelo.tarjetas.Tarjeta;
 
 import java.util.*;
 
 
 public class Tablero {
     private final HashMap<String,Pais> paises;
+    private final HashMap<String, Tarjeta> tarjetas;
 
     public Tablero() {
         paises = new HashMap<>();
+        tarjetas = new HashMap<>();
     }
 
     public void agregarPais(Pais pais){ paises.put(pais.nombre, pais); }
@@ -56,5 +59,17 @@ public class Tablero {
 
     public void reagrupar(Jugador jugador, String nombrePaisOrigen, String nombrePaisDestino, int cantidadAMover) throws ElPaisNoEsLimitrofeException, NoEsRondaDeReagrupeException, ElJugadorNoTieneTurnoException {
         jugador.reagrupar(obtenerPais(nombrePaisOrigen), obtenerPais(nombrePaisDestino), cantidadAMover);
+    }
+
+    public int cantidadPaisesDominados(Jugador jugador) {
+        return jugador.cantidadPaisesDominados();
+    }
+
+    public void recibirTarjeta(Jugador jugador, String paisTarjeta) {
+        jugador.recibirTarjeta(tarjetas.get(paisTarjeta));
+    }
+
+    public void agregarTarjeta(Tarjeta t) {
+        tarjetas.put(t.nombrePais(), t);
     }
 }

@@ -7,6 +7,7 @@ import edu.fiuba.algo3.modelo.turnos.ConTurno;
 import edu.fiuba.algo3.modelo.turnos.SinTurno;
 import edu.fiuba.algo3.modelo.turnos.Turno;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 
@@ -25,7 +26,7 @@ public class Juego {
         tarjetas = new ArrayList<>();
 
         CargarJuego.cargarPaisesAlTablero(tablero, ARCHIVO_PAISES);
-        CargarJuego.cargarTarjetas(tarjetas, ARCHIVO_TARJETAS, tablero);
+        CargarJuego.cargarTarjetas(tablero, ARCHIVO_TARJETAS);
     }
 
     public void agregarJugador(String nombre){
@@ -35,7 +36,7 @@ public class Juego {
 
     public void comenzar() throws CantidadDeJugadoresInsuficienteException {
         if (jugadores.obtenerCantidad() < 2) throw new CantidadDeJugadoresInsuficienteException();
-        else tablero.repartirPaises(jugadores);
+        tablero.repartirPaises(jugadores);
         jugadores.mezclar();
         Objetivos.asignarObjetivos(jugadores);
         turno = new ConTurno(jugadores);
@@ -57,7 +58,11 @@ public class Juego {
     }
 
     public int cantidadPaisesDominados(String nombre) throws JugadorNoExisteException{
-        return  jugadores.obtenerJugador(nombre).cantidadPaisesDominados();
+        return tablero.cantidadPaisesDominados(jugadores.obtenerJugador(nombre));
+    }
+
+    public void recibirTarjeta(String nombreJugador, String paisTarjeta) throws JugadorNoExisteException {
+        tablero.recibirTarjeta(jugadores.obtenerJugador(nombreJugador), paisTarjeta);
     }
 
     public int cantidadEjercitosEn(String nombrePais) {
@@ -67,4 +72,5 @@ public class Juego {
     public String paisDominadoPor(String nombrePais) {
         return tablero.paisDominadoPor(nombrePais).obtenerNombre();
     }
+
 }

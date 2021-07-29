@@ -44,22 +44,4 @@ public class JuegoTest {
         assertEquals(25,juego.cantidadPaisesDominados("Juani"));
     }
 
-    @Test
-    public void funcionaLaRondaInicialDeColocacion() throws JugadorNoExisteException, CantidadDeJugadoresInsuficienteException, ArchivoDeTarjetasNoEncontradoException, ArchivoDePaisesNoEncontradoException{
-        Juego juego = new Juego();
-        juego.agregarJugador("Martin");
-        juego.agregarJugador("Naza");
-        juego.agregarJugador("Jueni");
-        juego.agregarJugador("Fran");
-        juego.agregarJugador("Cami");
-
-        juego.comenzar();
-
-
-
-
-
-
-    }
-
 }
