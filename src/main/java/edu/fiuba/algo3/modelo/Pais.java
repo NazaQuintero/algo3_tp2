@@ -22,6 +22,10 @@ public class Pais {
 
     }
 
+    public ArrayList<Pais> getPaisesLimitrofes() {
+        return paisesLimitrofes;
+    }
+
     public int cantidadEjercitos() {
         return this.ejercito.obtenerCantidad();
     }

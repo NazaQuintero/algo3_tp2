@@ -19,10 +19,10 @@ public class Jugador {
 
     private final int id;
     private String color = "";
-    private Objetivo secreto;
-    private Objetivo general = new General();
+    private ArrayList<Objetivo> objetivos = new ArrayList<>();
+    private String nombre;
     private Turno turno = new SinTurno();
-    private HashMap<String, Pais> paisesDominados = new HashMap<>();
+    private ArrayList<Pais> paisesDominados = new ArrayList<>();
     private HashMap<String, Tarjeta> tarjetas = new HashMap<>();
     private Usuario usuario;
     private Canje canje;
@@ -30,11 +30,17 @@ public class Jugador {
     public Jugador(int id, Usuario usuario) {
         this.id = id;
         this.usuario = usuario;
+        this.objetivos.add(new General());
         this.canje = new CanjeNulo();
     }
 
     public Jugador() { // despues lo volamo
         this.id = 0;
+        this.objetivos.add(new General());
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public String mostrarColor() {
@@ -50,7 +56,7 @@ public class Jugador {
     }
 
     public void colocarEjercitos(Pais pais) throws ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException {
-        if (paisesDominados.containsKey(pais.obtenerNombre())) { //qsy
+        if (paisesDominados.contains(pais)) {
             try {
                 this.turno.colocarEjercitos(pais);
             } catch (ElJugadorNoTieneTurnoException e) {
@@ -61,14 +67,6 @@ public class Jugador {
 
     public void asignarColor(String color) {
         this.color = color;
-    }
-
-    public Objetivo obtenerObjetivoSecreto() {
-        return this.secreto;
-    }
-
-    public Objetivo obtenerObjetivoGeneral() {
-        return this.general;
     }
 
     public Dados tirarDados(Pais pais) { return pais.tirarDados(); }
@@ -102,11 +100,11 @@ public class Jugador {
     }
 
     public void agregarPais(Pais pais) {
-        this.paisesDominados.putIfAbsent(pais.obtenerNombre(), pais);
+        if (!paisesDominados.contains(pais)) this.paisesDominados.add(pais);
     }
 
     public void quitarPais(Pais defensor) {
-        this.paisesDominados.remove(defensor.obtenerNombre());
+        this.paisesDominados.remove(defensor);
     }
 
     public void recibirTarjeta(Tarjeta tarjeta){
@@ -114,22 +112,29 @@ public class Jugador {
     }
 
     public void activarTarjetaPais(Pais unPais) throws TarjetaNoEncontradaException, JugadorNoPoseePaisDeLaTarjetaException, ActivacionTarjetaEnRondaEquivocadaException, ElJugadorNoTieneTurnoException, LaTarjetaYaFueActivadaException {
-        if(!this.poseePais(unPais.obtenerNombre())) throw new JugadorNoPoseePaisDeLaTarjetaException();
-        this.turno.activarTarjeta(this.buscarTarjeta(unPais.obtenerNombre())); // x ahora, despues lo mejoramos
+        if(!this.paisesDominados.contains(unPais)) throw new JugadorNoPoseePaisDeLaTarjetaException();
+        this.turno.activarTarjeta(this.buscarTarjeta(unPais));
     }
 
-    public Tarjeta buscarTarjeta(String nombrePais) throws TarjetaNoEncontradaException {
-       /*try {
-            return this.tarjetas.get(nombrePais);// esto devolverianull
-        } catch (NullPointerException e) { //??? com el get no devolvia un null de esos o algo? pregunte por disc si estaba testeado esto tipo si te acordas
-            throw new TarjetaNoEncontradaException();
-        }*/
-        if (tarjetas.containsKey(nombrePais)) return tarjetas.get(nombrePais);
+    public Tarjeta buscarTarjeta(Pais unPais) throws TarjetaNoEncontradaException {
+        if (tarjetas.containsKey(unPais.obtenerNombre())) return tarjetas.get(unPais.obtenerNombre());
         else throw new TarjetaNoEncontradaException();
     }
 
-    private boolean poseePais(String nombrePais) {
-        return paisesDominados.containsKey(nombrePais);
+    public void asignarObjetivo(Objetivo unObjetivo) {
+        this.objetivos.add(unObjetivo);
+    }
+
+    public boolean cumpleObjetivo() {
+        return this.objetivos.stream().anyMatch(objetivo -> objetivo.estaCumplido(this));
+    }
+
+    public String obtenerNombre() {
+        return nombre;
+    }
+
+    public boolean poseeTresPaisesLimitrofes() {
+        return paisesDominados.stream().anyMatch(pais -> (int) pais.getPaisesLimitrofes().stream().filter(pais1 -> pais1.dominadoPor() == this).count() >= 2);
     }
 
     public ArrayList<Tarjeta> pedirTarjetasACanjear() {

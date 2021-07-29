@@ -44,25 +44,6 @@ public class JugadorTest {
         assertEquals(jugador.cantidadPaisesDominados(), 0);
     }
 
-    @Test
-    public void porDefectoUnjugadorNoTieneObjetivoSecreto() {
-        Jugador jugador = new Jugador();
-
-        assertNull(jugador.obtenerObjetivoSecreto());
-    }
-
-    @Test
-    public void porDefectoUnjugadorTieneObjetivoGeneral() {
-        Jugador jugador = new Jugador();
-
-        assertNotNull(jugador.obtenerObjetivoGeneral());
-    }
-
-    @Test
-    public void porDefectoElObjetivoGeneralNoEstaCumplido() {
-        Jugador jugador = new Jugador();
-        assertFalse(jugador.obtenerObjetivoGeneral().estaCumplido());
-    }
 
     @Test
     public void luegoDeQueElJugadorActivaUnaTarjetaEstaQuedaActivadaYNoSePuedeVolverAActivar() throws ElJugadorNoTieneTurnoException, ActivacionTarjetaEnRondaEquivocadaException, TarjetaNoEncontradaException, JugadorNoPoseePaisDeLaTarjetaException, LaTarjetaYaFueActivadaException {
@@ -115,9 +96,9 @@ public class JugadorTest {
 
         unJugador.solicitarCanje();
 
-        assertThrows(TarjetaNoEncontradaException.class, () -> unJugador.buscarTarjeta(unaTarjeta.nombrePais()));
-        assertThrows(TarjetaNoEncontradaException.class, () -> unJugador.buscarTarjeta(otraTarjeta.nombrePais()));
-        assertThrows(TarjetaNoEncontradaException.class, () -> unJugador.buscarTarjeta(oootraaTarjeta.nombrePais()));
+        assertThrows(TarjetaNoEncontradaException.class, () -> unJugador.buscarTarjeta(unPais));
+        assertThrows(TarjetaNoEncontradaException.class, () -> unJugador.buscarTarjeta(otroPais));
+        assertThrows(TarjetaNoEncontradaException.class, () -> unJugador.buscarTarjeta(oootroPais));
     }
 
     @Test
@@ -151,7 +132,7 @@ public class JugadorTest {
 
         unJugador.solicitarCanje();
 
-        
+
         assertEquals(4, unJugador.obtenerCanjeActual().cantidadEjercitos());
 
     }
