@@ -20,13 +20,10 @@ public class SeleccionCantidadJugadores extends BorderPane {
     VBox panel = new VBox();
     int cantidad = 0;
 
-    public SeleccionCantidadJugadores(Stage stage, Juego juego) {
+    public SeleccionCantidadJugadores(Stage stage) {
         this.getStylesheets().add("styles.css");
 
         ComboBox<String> comboBox = crearComboBox();
-
-
-//         = comboBox.getSelectionModel().getSelectedIndex() + 2
 
         HBox botonera = this.crearBotoneraHorizontal(stage);
         Label label = this.crearLabel();
@@ -65,7 +62,7 @@ public class SeleccionCantidadJugadores extends BorderPane {
 
         comboBox.setOnAction(e -> {
             this.cantidad = comboBox.getSelectionModel().getSelectedIndex() + 2;
-            System.out.println("Cantidad: " + cantidad);
+            // System.out.println("Cantidad: " + cantidad);
         });
 
         return comboBox;

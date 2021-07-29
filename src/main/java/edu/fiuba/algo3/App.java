@@ -11,16 +11,15 @@ import javafx.stage.Stage;
  */
 public class App extends Application {
 
-    private static final int ANCHO = 640;
-    private static final int ALTO = 480;
+    private static final int ANCHO = 800;
+    private static final int ALTO = 550;
 
     @Override
     public void start(Stage stage) {
-        Juego juego = new Juego();
-        MenuInicial menuInicial = new MenuInicial(stage, juego);
+        MenuInicial menuInicial = new MenuInicial(stage);
         Scene presentacion = new Scene(menuInicial, ANCHO, ALTO);
         stage.setScene(presentacion);
-        stage.setTitle("Comenzar juego");
+        stage.setTitle("A.L.T.E.G.O.");
         stage.show();
     }
 

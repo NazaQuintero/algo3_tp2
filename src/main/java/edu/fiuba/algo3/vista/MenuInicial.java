@@ -13,11 +13,9 @@ import javafx.stage.Stage;
 
 public class MenuInicial extends VBox {
 
-    private static final int ANCHO = 250;
-    private static final int ALTO = 250;
     private Stage stage;
 
-    public MenuInicial(Stage stage, Juego juego) {
+    public MenuInicial(Stage stage) {
         this.stage = stage;
         this.setAlignment(Pos.CENTER);
         this.setSpacing(20);
@@ -32,7 +30,7 @@ public class MenuInicial extends VBox {
         startButton.getStyleClass().add("startButton");
         exitButton.getStyleClass().add("exitButton");
 
-        startButton.setOnAction(new SeleccionDeJugadoresEventHandler(stage, juego));
+        startButton.setOnAction(new SeleccionDeJugadoresEventHandler(stage));
         exitButton.setOnAction(e -> Platform.exit());
 
         HBox botonera = new HBox(startButton, exitButton);
