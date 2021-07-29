@@ -18,15 +18,17 @@ import javafx.stage.Stage;
 public class SeleccionCantidadJugadores extends BorderPane {
 
     VBox panel = new VBox();
+    int cantidad = 0;
 
     public SeleccionCantidadJugadores(Stage stage, Juego juego) {
         this.getStylesheets().add("styles.css");
 
         ComboBox<String> comboBox = crearComboBox();
 
-        int cantidad = comboBox.getSelectionModel().getSelectedIndex() + 2;
 
-        HBox botonera = this.crearBotoneraHorizontal(stage, cantidad);
+//         = comboBox.getSelectionModel().getSelectedIndex() + 2
+
+        HBox botonera = this.crearBotoneraHorizontal(stage);
         Label label = this.crearLabel();
 
         panel.getChildren().addAll(label, comboBox, botonera);
@@ -37,7 +39,7 @@ public class SeleccionCantidadJugadores extends BorderPane {
 
     }
 
-    private HBox crearBotoneraHorizontal(Stage stage, int cantidad) {
+    private HBox crearBotoneraHorizontal(Stage stage) {
         Button startButton = new Button("Ingresar");
         Button exitButton = new Button("Salir");
 
@@ -60,6 +62,12 @@ public class SeleccionCantidadJugadores extends BorderPane {
         );
         ComboBox<String> comboBox = new ComboBox<>(options);
         comboBox.getStyleClass().add("comboBox");
+
+        comboBox.setOnAction(e -> {
+            this.cantidad = comboBox.getSelectionModel().getSelectedIndex() + 2;
+            System.out.println("Cantidad: " + cantidad);
+        });
+
         return comboBox;
     }
 
