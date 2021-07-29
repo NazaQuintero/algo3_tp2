@@ -2,6 +2,7 @@ package edu.fiuba.algo3.modelo;
 
 import edu.fiuba.algo3.modelo.canjes.Canje;
 import edu.fiuba.algo3.modelo.canjes.CanjeNulo;
+import edu.fiuba.algo3.modelo.canjes.NesimoCanje;
 import edu.fiuba.algo3.modelo.excepciones.JugadorSinTarjetasException;
 import org.junit.jupiter.api.Test;
 
@@ -55,6 +56,7 @@ public class CanjeTest {
     @Test
     public void elQuintoCanjeOtorga20EjercitosExtras() {
         Canje unCanje = new CanjeNulo(); // hasta aca no hubieron canjes
+        NesimoCanje.reiniciar();
         unCanje = unCanje.siguienteCanje(); // hacemos el primer canje
         unCanje = unCanje.siguienteCanje(); // hacemos el segundo canje
         unCanje = unCanje.siguienteCanje(); // hacemos el tercer canje
@@ -67,6 +69,7 @@ public class CanjeTest {
     @Test
     public void elSextoCanjeOtorga25EjercitosExtras() {
         Canje unCanje = new CanjeNulo(); // hasta aca no hubieron canjes
+        NesimoCanje.reiniciar();
         unCanje = unCanje.siguienteCanje(); // hacemos el primer canje
         unCanje = unCanje.siguienteCanje(); // hacemos el segundo canje
         unCanje = unCanje.siguienteCanje(); // hacemos el tercer canje
