@@ -1,8 +1,6 @@
 package edu.fiuba.algo3.modelo;
 
-import edu.fiuba.algo3.modelo.canjes.PrimerCanje;
 import edu.fiuba.algo3.modelo.excepciones.*;
-import edu.fiuba.algo3.modelo.fichas.Ejercito;
 import edu.fiuba.algo3.modelo.rondas.Colocacion;
 import edu.fiuba.algo3.modelo.tarjetas.*;
 import edu.fiuba.algo3.modelo.turnos.ConTurno;
@@ -11,7 +9,6 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
-import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class JugadorTest {
@@ -90,7 +87,7 @@ public class JugadorTest {
         tBra.activar();
         tCol.activar();
 
-        jugador.solicitarCanje(tarjetas);
+        jugador.canjearTarjetas(tarjetas);
         assertThrows(TarjetaNoEncontradaException.class, () -> jugador.buscarTarjeta(arg));
         assertThrows(TarjetaNoEncontradaException.class, () -> jugador.buscarTarjeta(bra));
         assertThrows(TarjetaNoEncontradaException.class, () -> jugador.buscarTarjeta(col));
@@ -121,7 +118,7 @@ public class JugadorTest {
         tarjetas.add(tBra);
         tarjetas.add(tCol);
 
-        jugador.solicitarCanje(tarjetas);
+        jugador.canjearTarjetas(tarjetas);
         assertEquals(4, jugador.obtenerCanjeActual().cantidadEjercitos());
     }
 
@@ -150,7 +147,7 @@ public class JugadorTest {
         tBra.activar();
         tCol.activar();
 
-        jugador.solicitarCanje(tarjetas);
+        jugador.canjearTarjetas(tarjetas);
 
         tarjetas.clear();
 
@@ -174,7 +171,7 @@ public class JugadorTest {
         tBra.activar();
         tCol.activar();
 
-        jugador.solicitarCanje(tarjetas);
+        jugador.canjearTarjetas(tarjetas);
 
         assertEquals(7, jugador.obtenerCanjeActual().cantidadEjercitos());
 

@@ -190,7 +190,7 @@ public class RondaTest {
     }
 
     @Test
-    public void seJuegaUnaRondaCon3JugadoresJugador2DominaAsiaNadieAtacaPeroSiColocan() throws ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException, JugadorNoExisteException {
+    public void seJuegaUnaRondaCon3JugadoresJugador2DominaAsiaNadieAtacaPeroSiColocan() throws ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException, JugadorNoExisteException, PaisOcupadoPorOtroJugadorException {
         Jugadores jugadores = new Jugadores();
         Jugador jugador1 = new Jugador( "Martin");
         Jugador jugador2 = new Jugador( "Naza");

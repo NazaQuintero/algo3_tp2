@@ -4,6 +4,7 @@ import edu.fiuba.algo3.modelo.continentes.Continente;
 import edu.fiuba.algo3.modelo.continentes.MultitonContinentes;
 import edu.fiuba.algo3.modelo.excepciones.ElJugadorNoTieneTurnoException;
 import edu.fiuba.algo3.modelo.excepciones.NoEsRondaDeColocacionException;
+import edu.fiuba.algo3.modelo.excepciones.PaisOcupadoPorOtroJugadorException;
 import edu.fiuba.algo3.modelo.objetivos.*;
 import org.junit.jupiter.api.Test;
 
@@ -18,7 +19,7 @@ public class ObjetivosTest {
     }
 
     @Test
-    public void unJugadorCumpleElObjetivoGeneralDe30Paises() throws ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException {
+    public void unJugadorCumpleElObjetivoGeneralDe30Paises() throws ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException, PaisOcupadoPorOtroJugadorException {
         Jugador jugador = new Jugador( "Cami");
         for (int i = 0; i < 30; i++) jugador.colocarEjercitos(new Pais(i + ""), 1);
 
@@ -35,7 +36,7 @@ public class ObjetivosTest {
     }
 
     @Test
-    public void unJugadorNoCumpleObjetivoDeDestruccion() throws ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException {
+    public void unJugadorNoCumpleObjetivoDeDestruccion() throws ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException, PaisOcupadoPorOtroJugadorException {
         Jugador jugador1 = new Jugador( "Martin");
         Jugador jugador2 = new Jugador( "Naza");
         jugador2.colocarEjercitos(new Pais("Brasil"), 1);
@@ -93,7 +94,7 @@ public class ObjetivosTest {
     }
 
     @Test
-    public void ocupacion2AmericaDelSur7DeEuropay3LimitrofesEstaCumplido() throws ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException {
+    public void ocupacion2AmericaDelSur7DeEuropay3LimitrofesEstaCumplido() throws ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException, PaisOcupadoPorOtroJugadorException {
         MultitonContinentes.reiniciar();
         Continente americaDelSur = MultitonContinentes.obtenerInstanciaDe("America del Sur");
         Continente europa = MultitonContinentes.obtenerInstanciaDe("Europa");

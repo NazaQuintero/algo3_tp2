@@ -6,8 +6,6 @@ import edu.fiuba.algo3.modelo.tarjetas.Tarjeta;
 import edu.fiuba.algo3.modelo.turnos.ConTurno;
 import edu.fiuba.algo3.modelo.turnos.SinTurno;
 import edu.fiuba.algo3.modelo.turnos.Turno;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 
@@ -29,8 +27,13 @@ public class Juego {
         CargarJuego.cargarTarjetas(tablero, ARCHIVO_TARJETAS);
     }
 
-    public void agregarJugador(String nombre){
+    public Jugador agregarJugador(String nombre){
         Jugador jugador = new Jugador(nombre);
+        jugadores.agregarJugador(jugador);
+        return jugador;
+    }
+
+    public void agregarJugador(Jugador jugador){
         jugadores.agregarJugador(jugador);
     }
 
@@ -42,35 +45,55 @@ public class Juego {
         turno = new ConTurno(jugadores);
     }
 
-    public void finalizarRonda(String nombreJugador) throws JugadorNoExisteException, ElJugadorNoTieneTurnoException {
-        turno.finalizarRonda(jugadores.obtenerJugador(nombreJugador));
+    public void finalizarRonda(Jugador jugador) throws ElJugadorNoTieneTurnoException {
+        turno.finalizarRonda(jugador);
     }
 
-    public void ataque(String jugador, String paisAtacante, String paisDefensor, int cantidadEjercitos) throws ElPaisNoEsLimitrofeException, EjercitosInsuficientesException, JugadorNoExisteException, ElJugadorNoTieneTurnoException, NoEsRondaDeAtaqueException {
-        tablero.ataque(jugadores.obtenerJugador(jugador), paisAtacante, paisDefensor, cantidadEjercitos);
+    public void ataque(Jugador jAtacante, Pais pAtacante, Pais pDefensor, int cantidadEjercitos) throws ElJugadorNoTieneTurnoException, EjercitosInsuficientesException, NoEsRondaDeAtaqueException, ElPaisNoEsLimitrofeException {
+        tablero.ataque(jAtacante, pAtacante, pDefensor, cantidadEjercitos);
     }
 
-    public void colocarEjercitos(String nombreJugador, String nombrePais, int cantidadEjercitos) throws ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException, JugadorNoExisteException{
-        tablero.colocarEjercitos(jugadores.obtenerJugador(nombreJugador), nombrePais, cantidadEjercitos);
+
+    public void colocarEjercitos(Jugador jugador, Pais pais, int cantidadEjercitos) throws ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException, JugadorNoExisteException, PaisOcupadoPorOtroJugadorException {
+        tablero.colocarEjercitos(jugador, pais, cantidadEjercitos);
     }
-    public void reagrupar(String nombreJugador, String nombrePaisOrigen, String nombrePaisDestino, int cantidadAMover) throws JugadorNoExisteException, ElPaisNoEsLimitrofeException, NoEsRondaDeReagrupeException, ElJugadorNoTieneTurnoException {
-        tablero.reagrupar(jugadores.obtenerJugador(nombreJugador), nombrePaisOrigen, nombrePaisDestino, cantidadAMover);
+    public void reagrupar(Jugador jugador, Pais paisOrigen, Pais paisDestino, int cantidadAMover) throws JugadorNoExisteException, ElPaisNoEsLimitrofeException, NoEsRondaDeReagrupeException, ElJugadorNoTieneTurnoException {
+        tablero.reagrupar(jugador, paisOrigen, paisDestino, cantidadAMover);
     }
 
-    public int cantidadPaisesDominados(String nombre) throws JugadorNoExisteException{
-        return tablero.cantidadPaisesDominados(jugadores.obtenerJugador(nombre));
+    public int cantidadPaisesDominados(Jugador jugador){
+        return tablero.cantidadPaisesDominados(jugador);
     }
 
-    public void recibirTarjeta(String nombreJugador, String paisTarjeta) throws JugadorNoExisteException {
-        tablero.recibirTarjeta(jugadores.obtenerJugador(nombreJugador), paisTarjeta);
+    public void recibirTarjeta(Jugador jugador, Pais paisTarjeta) {
+        tablero.recibirTarjeta(jugador, paisTarjeta);
     }
 
-    public int cantidadEjercitosEn(String nombrePais) {
-        return tablero.cantidadEjercitosEn(nombrePais);
+    public int cantidadEjercitosEn(Pais pais) {
+        return tablero.cantidadEjercitosEn(pais);
     }
 
-    public String paisDominadoPor(String nombrePais) {
-        return tablero.paisDominadoPor(nombrePais).obtenerNombre();
+    public Jugador paisDominadoPor(Pais pais) {
+        return tablero.paisDominadoPor(pais);
     }
 
+    public void activarTarjeta(Jugador jugador, Pais pais) throws JugadorNoExisteException, ElJugadorNoTieneTurnoException, ActivacionTarjetaEnRondaEquivocadaException, LaTarjetaYaFueActivadaException, TarjetaNoEncontradaException, JugadorNoPoseePaisDeLaTarjetaException {
+        tablero.activarTarjeta(jugador, pais);
+    }
+
+    public void canjearTarjetas(Jugador jugador, ArrayList<Pais> paisesTarjetas) throws JugadorSinTarjetasException, LaTarjetaYaEstaDesactivadaException, SinCanjeHabilitadoException {
+        tablero.canjearTarjetas(jugador, paisesTarjetas);
+    }
+
+    // Probablemente lo saquemos o saquemos todos los Strings y pongamos objetos
+    // Hoy pregunto como nos conviene laburarlo
+    public Jugador obtenerJugador(String nombreJugador) throws JugadorNoExisteException {
+        return jugadores.obtenerJugador(nombreJugador);
+    }
+    public Pais obtenerPais(String nombrePais){
+        return tablero.obtenerPais(nombrePais);
+    }
+    public void setTurno(){
+        this.turno = new ConTurno(jugadores);
+    }
 }

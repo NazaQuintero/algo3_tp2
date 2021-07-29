@@ -21,7 +21,7 @@ public class CanjeTest {
         Tarjeta tarjeta = new Tarjeta(new Pais("Japon"), new Globo());
         ArrayList<Tarjeta> tarjetas = new ArrayList<>();
         tarjetas.add(tarjeta);
-        assertThrows(JugadorSinTarjetasException.class, () -> jugador.solicitarCanje(tarjetas));
+        assertThrows(JugadorSinTarjetasException.class, () -> jugador.canjearTarjetas(tarjetas));
     }
 
     @Test

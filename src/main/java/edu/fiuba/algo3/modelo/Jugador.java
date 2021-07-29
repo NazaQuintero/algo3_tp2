@@ -39,7 +39,7 @@ public class Jugador {
         return paisesDominados.size();
     }
 
-    public void colocarEjercitos(Pais pais, int cantidadEjercitos) throws ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException {
+    public void colocarEjercitos(Pais pais, int cantidadEjercitos) throws ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException, PaisOcupadoPorOtroJugadorException {
         if (paisesDominados.contains(pais)) {
             this.turno.colocarEjercitos(pais, cantidadEjercitos);
         }
@@ -48,6 +48,7 @@ public class Jugador {
             pais.colocarEjercito(new Ejercito(this));
             pais.modificarCantidadEjercito(cantidadEjercitos-1);
         }
+        else throw new PaisOcupadoPorOtroJugadorException();
     }
 
     public void asignarColor(String color) {
@@ -123,7 +124,7 @@ public class Jugador {
         return paisesDominados.stream().anyMatch(pais -> (int) pais.getPaisesLimitrofes().stream().filter(pais1 -> pais1.dominadoPor() == this).count() >= cantLimitrofes-1);
     }
 
-    public void solicitarCanje(ArrayList<Tarjeta> tarjetas) throws JugadorSinTarjetasException, SinCanjeHabilitadoException, LaTarjetaYaEstaDesactivadaException {
+    public void canjearTarjetas(ArrayList<Tarjeta> tarjetas) throws JugadorSinTarjetasException, SinCanjeHabilitadoException, LaTarjetaYaEstaDesactivadaException {
         if (!comprobarTarjetas(tarjetas)) throw new JugadorSinTarjetasException();
         canje = canje.habilitarCanje(tarjetas);
         devolverTarjetas(tarjetas);

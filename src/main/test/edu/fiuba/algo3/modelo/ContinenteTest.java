@@ -4,6 +4,7 @@ import edu.fiuba.algo3.modelo.continentes.Asia;
 import edu.fiuba.algo3.modelo.continentes.Continente;
 import edu.fiuba.algo3.modelo.excepciones.ElJugadorNoTieneTurnoException;
 import edu.fiuba.algo3.modelo.excepciones.NoEsRondaDeColocacionException;
+import edu.fiuba.algo3.modelo.excepciones.PaisOcupadoPorOtroJugadorException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -20,7 +21,7 @@ public class ContinenteTest {
     }
 
     @Test
-    public void unJugadorDomina3PaisesDeAsia() throws ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException {
+    public void unJugadorDomina3PaisesDeAsia() throws ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException, PaisOcupadoPorOtroJugadorException {
         Jugador jugador = new Jugador( "Martin");
         Pais china = new Pais("China");
         Pais india = new Pais("India");
@@ -39,7 +40,7 @@ public class ContinenteTest {
     }
 
     @Test
-    public void unJugadorDominaTodoAsia() throws ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException {
+    public void unJugadorDominaTodoAsia() throws ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException, PaisOcupadoPorOtroJugadorException {
         Jugador jugador = new Jugador( "Martin");
         Pais china = new Pais("China");
         Pais india = new Pais("India");
@@ -58,7 +59,7 @@ public class ContinenteTest {
     }
 
     @Test
-    public void unJugadorNoDominaTodoAsia() throws ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException {
+    public void unJugadorNoDominaTodoAsia() throws ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException, PaisOcupadoPorOtroJugadorException {
         Jugador jugador = new Jugador( "Martin");
         Jugador jugador2 = new Jugador( "Frank");
         Pais china = new Pais("China");
