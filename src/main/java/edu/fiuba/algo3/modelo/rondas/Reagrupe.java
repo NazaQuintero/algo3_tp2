@@ -2,6 +2,7 @@ package edu.fiuba.algo3.modelo.rondas;
 
 import edu.fiuba.algo3.modelo.Pais;
 import edu.fiuba.algo3.modelo.batallasDeDados.Dados;
+import edu.fiuba.algo3.modelo.batallasDeDados.Resultado;
 import edu.fiuba.algo3.modelo.batallasDeDados.ResultadoBatalla;
 import edu.fiuba.algo3.modelo.tarjetas.Tarjeta;
 import edu.fiuba.algo3.modelo.turnos.Turno;
@@ -24,16 +25,22 @@ public class Reagrupe implements Ronda {
         else unTurno.setRonda(new Ataque());
     }
 
-    public ResultadoBatalla atacarA(Pais atacante, Pais defensor) throws NoEsRondaDeAtaqueException {
+    public Resultado atacarA(Pais atacante, Pais defensor) throws NoEsRondaDeAtaqueException {
         throw new NoEsRondaDeAtaqueException();
     }
 
     public void reagrupar(Pais origen, Pais destino) throws ElPaisNoEsLimitrofeException {
         try {
-            origen.reagrupar(destino);
+            if(this.puedeReagrupar(origen)) {
+                origen.reagrupar(destino);
+            }
         } catch (ElPaisNoEsLimitrofeException e) {
             throw new ElPaisNoEsLimitrofeException();
         }
+    }
+
+    private boolean puedeReagrupar(Pais pais) {
+        return pais.cantidadEjercitos() > 1;
     }
 
     public void colocarEjercitos(Pais unPais) throws NoEsRondaDeColocacionException {

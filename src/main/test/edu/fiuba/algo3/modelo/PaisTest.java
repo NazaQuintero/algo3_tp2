@@ -1,6 +1,8 @@
 package edu.fiuba.algo3.modelo;
 
 import edu.fiuba.algo3.modelo.batallasDeDados.*;
+import edu.fiuba.algo3.modelo.excepciones.EjercitosInsuficientesException;
+import edu.fiuba.algo3.modelo.excepciones.ElPaisNoEsLimitrofeException;
 import edu.fiuba.algo3.modelo.fichas.Ejercito;
 import org.junit.jupiter.api.Test;
 
@@ -107,7 +109,7 @@ public class PaisTest {
 
 
     @Test
-    public void ataqueEntrePaisesGanaAtacanteYColocaUnEjercitoEnElPaisDerrotado() {
+    public void ataqueEntrePaisesGanaAtacanteYColocaUnEjercitoEnElPaisDerrotado() throws ElPaisNoEsLimitrofeException, EjercitosInsuficientesException {
 
         Pais paisAtacante = new Pais("Argentina");
         Pais paisDefensor = new Pais("Brasil");
@@ -146,7 +148,9 @@ public class PaisTest {
         paisAtacante.colocarEjercito(ejercitoAtacante);
         paisDefensor.colocarEjercito(ejercitoDefensor);
 
-        ResultadoBatalla resultadoBatalla = paisAtacante.atacarA(paisDefensor);
+        paisAtacante.limitaCon(paisDefensor);
+
+        Resultado resultadoBatalla = paisAtacante.atacarA(paisDefensor);
         ProcesadorResultado.obtenerInstancia().procesar(resultadoBatalla);
 
         assertEquals(1, paisDefensor.cantidadEjercitos());
@@ -155,7 +159,7 @@ public class PaisTest {
     }
 
     @Test
-    public void ataqueEntrePaisesGanaDefensor() {
+    public void ataqueEntrePaisesGanaDefensor() throws ElPaisNoEsLimitrofeException, EjercitosInsuficientesException {
 
         Pais paisAtacante = new Pais("Argentina");
         Pais paisDefensor = new Pais("Brasil");
@@ -189,7 +193,9 @@ public class PaisTest {
         paisAtacante.colocarEjercito(ejercitoAtacante);
         paisDefensor.colocarEjercito(ejercitoDefensor);
 
-        ResultadoBatalla resultadoBatalla = paisAtacante.atacarA(paisDefensor);
+        paisAtacante.limitaCon(paisDefensor);
+
+        Resultado resultadoBatalla = paisAtacante.atacarA(paisDefensor);
         ProcesadorResultado.obtenerInstancia().procesar(resultadoBatalla);
 
         assertEquals(3, paisDefensor.cantidadEjercitos());

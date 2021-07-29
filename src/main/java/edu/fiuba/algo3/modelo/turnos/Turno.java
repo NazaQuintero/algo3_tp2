@@ -2,6 +2,7 @@ package edu.fiuba.algo3.modelo.turnos;
 
 import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.Pais;
+import edu.fiuba.algo3.modelo.batallasDeDados.Resultado;
 import edu.fiuba.algo3.modelo.batallasDeDados.ResultadoBatalla;
 import edu.fiuba.algo3.modelo.tarjetas.Tarjeta;
 import edu.fiuba.algo3.modelo.excepciones.*;
@@ -23,7 +24,7 @@ public interface Turno {
 
     void finalizarRonda();
 
-    ResultadoBatalla atacarA(Pais atacante, Pais defensor) throws ElJugadorNoTieneTurnoException, NoEsRondaDeAtaqueException;
+    Resultado atacarA(Pais atacante, Pais defensor) throws ElJugadorNoTieneTurnoException, NoEsRondaDeAtaqueException;
 
     void reagrupar(Pais origen, Pais destino) throws NoEsRondaDeReagrupeException, ElJugadorNoTieneTurnoException, ElPaisNoEsLimitrofeException;
 

@@ -3,6 +3,7 @@ package edu.fiuba.algo3.modelo.rondas;
 import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.Pais;
 import edu.fiuba.algo3.modelo.batallasDeDados.Dados;
+import edu.fiuba.algo3.modelo.batallasDeDados.Resultado;
 import edu.fiuba.algo3.modelo.batallasDeDados.ResultadoBatalla;
 import edu.fiuba.algo3.modelo.excepciones.LaTarjetaYaFueActivadaException;
 import edu.fiuba.algo3.modelo.tarjetas.Tarjeta;
@@ -24,7 +25,7 @@ public class Colocacion implements Ronda {
         if(unTurno.leTocaALPrimerJugador()) unTurno.setRonda(new Ataque());
     }
 
-    public ResultadoBatalla atacarA(Pais atacante, Pais defensor) throws NoEsRondaDeAtaqueException {
+    public Resultado atacarA(Pais atacante, Pais defensor) throws NoEsRondaDeAtaqueException {
         throw new NoEsRondaDeAtaqueException();
     }
 
