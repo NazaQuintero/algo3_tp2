@@ -25,25 +25,17 @@ public class Colocacion implements Ronda {
         if(unTurno.leTocaALPrimerJugador()) unTurno.setRonda(new Ataque());
     }
 
-    public Resultado atacarA(Pais atacante, Pais defensor) throws NoEsRondaDeAtaqueException {
+    public Resultado atacarA(Pais atacante, Pais defensor, int cantidadEjercitos) throws NoEsRondaDeAtaqueException {
         throw new NoEsRondaDeAtaqueException();
     }
 
-    public void reagrupar(Pais origen, Pais destino) throws NoEsRondaDeReagrupeException {
+    public void reagrupar(Pais origen, Pais destino, int cantidad) throws NoEsRondaDeReagrupeException {
         throw new NoEsRondaDeReagrupeException();
     }
 
-    public void colocarEjercitos(Pais unPais) {
-        unPais.modificarCantidadEjercito(unPais.pedirCantidadAlJugador());
+    public void colocarEjercitos(Pais unPais, int cantidadEjercitos) {
+        unPais.modificarCantidadEjercito(cantidadEjercitos);
     }
-
-    /*
-    public void colocarEjercitos(Jugador jugador) {
-
-        int cantidadEjercitosAColocar = jugador.cantidadPaisesDominados()/2;
-
-    }
-    */
 
     public void activarTarjeta(Tarjeta unaTarjeta) throws LaTarjetaYaFueActivadaException {
         unaTarjeta.activar();

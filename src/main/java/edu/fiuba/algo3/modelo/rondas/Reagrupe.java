@@ -25,14 +25,14 @@ public class Reagrupe implements Ronda {
         else unTurno.setRonda(new Ataque());
     }
 
-    public Resultado atacarA(Pais atacante, Pais defensor) throws NoEsRondaDeAtaqueException {
+    public Resultado atacarA(Pais atacante, Pais defensor, int cantidadEjercitos) throws NoEsRondaDeAtaqueException {
         throw new NoEsRondaDeAtaqueException();
     }
 
-    public void reagrupar(Pais origen, Pais destino) throws ElPaisNoEsLimitrofeException {
+    public void reagrupar(Pais origen, Pais destino, int cantidad) throws ElPaisNoEsLimitrofeException {
         try {
             if(this.puedeReagrupar(origen)) {
-                origen.reagrupar(destino);
+                origen.reagrupar(destino, cantidad);
             }
         } catch (ElPaisNoEsLimitrofeException e) {
             throw new ElPaisNoEsLimitrofeException();
@@ -43,7 +43,7 @@ public class Reagrupe implements Ronda {
         return pais.cantidadEjercitos() > 1;
     }
 
-    public void colocarEjercitos(Pais unPais) throws NoEsRondaDeColocacionException {
+    public void colocarEjercitos(Pais unPais, int cantidadEjercitos) throws NoEsRondaDeColocacionException {
         throw new NoEsRondaDeColocacionException();
     }
 

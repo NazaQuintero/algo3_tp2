@@ -27,19 +27,12 @@ public class EjercitoNulo implements Fichas {
     }
 
     @Override
-    public void asignarRol(Rol unRol) {    }
-
-//    @Override
-//    public void rolAtacante() {
-//    }
-//
-//    @Override
-//    public void rolDefensor() {
-//    }
-
-
+    public void asignarRol(Rol unRol) {
+    }
 
     public void agregarPais(Pais pais) {
+    }
+    public void setDados(Dados dados) {
     }
 
 }

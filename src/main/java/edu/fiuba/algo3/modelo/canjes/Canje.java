@@ -20,7 +20,8 @@ public abstract class Canje {
     public abstract int cantidadEjercitos();
 
     public Canje habilitarCanje(ArrayList<Tarjeta> tarjetas) throws SinCanjeHabilitadoException {
-        TipoCanje tipoAuxiliar = tipo.compararTarjetas(tarjetas); // necesitamos tarjetas optimas para la operacsiom!!!1
+
+        TipoCanje tipoAuxiliar = tipo.compararTarjetas(tarjetas);
         try {
             Canje nuevoCanje = tipoAuxiliar.canjear(this);
             tipo = tipoAuxiliar;

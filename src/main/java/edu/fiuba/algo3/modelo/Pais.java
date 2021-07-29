@@ -5,6 +5,7 @@ import edu.fiuba.algo3.modelo.batallasDeDados.Resultado;
 import edu.fiuba.algo3.modelo.batallasDeDados.ResultadoBatalla;
 import edu.fiuba.algo3.modelo.excepciones.EjercitosInsuficientesException;
 import edu.fiuba.algo3.modelo.excepciones.ElPaisNoEsLimitrofeException;
+import edu.fiuba.algo3.modelo.fichas.Ejercito;
 import edu.fiuba.algo3.modelo.fichas.EjercitoNulo;
 import edu.fiuba.algo3.modelo.fichas.Fichas;
 import edu.fiuba.algo3.modelo.roles.Atacante;
@@ -36,13 +37,13 @@ public class Pais {
         return this.ejercito.obtenerJugador();
     }
 
-    public void colocarEjercito(Fichas unEjercito) {
-        this.ejercito = unEjercito;
+    public void colocarEjercito(Fichas ejercito) {
+        this.ejercito = ejercito;
         this.ejercito.agregarPais(this);
     }
 
-    public void modificarCantidadEjercito(int unaCantidad) {
-        this.ejercito.modificarCantidad(unaCantidad);
+    public void modificarCantidadEjercito(int aumentarEn) {
+        this.ejercito.modificarCantidad(aumentarEn);
     }
 
     public boolean esLimitrofeCon(Pais otroPais) {
@@ -58,16 +59,16 @@ public class Pais {
         paisesLimitrofes.add(unPais);
     }
 
-    public Resultado atacarA(Pais defensor) throws ElPaisNoEsLimitrofeException, EjercitosInsuficientesException {
+    public Resultado atacarA(Pais defensor, int cantidadDeEjercitos) throws ElPaisNoEsLimitrofeException, EjercitosInsuficientesException {
 
         if (!paisesLimitrofes.contains(defensor)) throw new ElPaisNoEsLimitrofeException();
 
-        this.ejercito.asignarRol(new Atacante());
+        this.ejercito.asignarRol(new Atacante(cantidadDeEjercitos));
         return defensor.recibirAtaque(this);
     }
 
     public Resultado recibirAtaque(Pais atacante) {
-        this.ejercito.asignarRol(new Defensor());
+        this.ejercito.asignarRol(new Defensor(this.cantidadEjercitos()));
         return new ResultadoBatalla(atacante, this);
     }
 
@@ -75,15 +76,11 @@ public class Pais {
         return this.ejercito.tirarDados(this);
     }
 
-    public int pedirCantidadAlJugador() {
-        return this.ejercito.pedirCantidadAlJugador();
-    }
 
-    public void reagrupar(Pais destino) throws ElPaisNoEsLimitrofeException {
+    public void reagrupar(Pais destino, int cantidad) throws ElPaisNoEsLimitrofeException {
         if (this.esLimitrofeCon(destino)) {
-            int cantidadEjercitos = pedirCantidadAlJugador(); //checkear que la cantidad es valida
-            this.modificarCantidadEjercito(-cantidadEjercitos);
-            destino.modificarCantidadEjercito(cantidadEjercitos);
+            this.modificarCantidadEjercito(-cantidad);
+            destino.modificarCantidadEjercito(cantidad);
         } else throw new ElPaisNoEsLimitrofeException();
     }
 

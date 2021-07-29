@@ -4,9 +4,9 @@ import edu.fiuba.algo3.modelo.batallasDeDados.*;
 import edu.fiuba.algo3.modelo.continentes.Asia;
 import edu.fiuba.algo3.modelo.excepciones.*;
 import edu.fiuba.algo3.modelo.fichas.Ejercito;
+import edu.fiuba.algo3.modelo.rondas.Ataque;
 import edu.fiuba.algo3.modelo.rondas.Colocacion;
 import edu.fiuba.algo3.modelo.rondas.Reagrupe;
-import edu.fiuba.algo3.modelo.rondas.Ronda;
 import edu.fiuba.algo3.modelo.tarjetas.Globo;
 import edu.fiuba.algo3.modelo.tarjetas.Tarjeta;
 import edu.fiuba.algo3.modelo.turnos.ConTurno;
@@ -14,351 +14,239 @@ import edu.fiuba.algo3.modelo.turnos.Turno;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
 
 public class RondaTest {
     @Test
-    public void unJugadorNoPuedeAtacarSiNoTieneTurno() {
+    public void unJugadorNoPuedeAtacarSiNoTieneTurno() throws Exception {
         Jugadores jugadores = new Jugadores();
-        Usuario usuario1 = new Usuario();
-        Usuario usuario2 = new Usuario();
-        Usuario usuario3 = new Usuario();
-        Jugador jugador1 = new Jugador(1, usuario1);
-        Jugador jugador2 = new Jugador(2, usuario2);
-        Jugador jugador3 = new Jugador(3, usuario3);
+        Jugador jugador1 = new Jugador( "Martin");
+        Jugador jugador2 = new Jugador( "Juani");
         jugadores.agregarJugador(jugador1);
         jugadores.agregarJugador(jugador2);
-        jugadores.agregarJugador(jugador3);
 
-        Pais unPais = new Pais("Argentina");
-        Pais otroPais = new Pais("Brasil");
-        Pais oootroPais = new Pais("Bolivia");
-
-        unPais.colocarEjercito(new Ejercito(jugador1));
-        Ejercito ejercitoJ2 = new Ejercito(jugador2);
-        ejercitoJ2.modificarCantidad(2);
-
-        otroPais.colocarEjercito(ejercitoJ2);
-        oootroPais.colocarEjercito(new Ejercito(jugador3)); // se coloca 1 solo ejercito en cada pais
+        Pais arg = new Pais("Argentina");
+        Pais bra = new Pais("Brasil");
+        jugador2.colocarEjercitos(bra, 2);
 
         Turno turno = new ConTurno(jugadores);
-        turno.seleccionarPrimerJugador(0); // es el jugador 1
+        // Se selecciona el jugador1
+        turno.seleccionarPrimerJugador(0);
 
-        assertEquals(jugador1, turno.obtenerJugadorTurnoActual());
-        assertNotEquals(jugador2, turno.obtenerJugadorTurnoActual());
-        assertThrows(ElJugadorNoTieneTurnoException.class, () -> jugador2.atacarA(otroPais, unPais));
+        assertThrows(ElJugadorNoTieneTurnoException.class, () -> jugador2.atacarA(bra, arg, 1));
 
     }
 
     @Test
-    public void elJugadorConTurnoNoPuedeAtacarSiLaRondaNoEsDeAtaque() {
-        Usuario usuario1 = new Usuario();
-        Usuario usuario2 = new Usuario();
+    public void elJugadorConTurnoNoPuedeAtacarSiLaRondaNoEsDeAtaque() throws Exception{
         Jugadores jugadores = new Jugadores();
-        Jugador jugador1 = new Jugador(1, usuario1);
-        Jugador jugador2 = new Jugador(2, usuario2);
+        Jugador jugador1 = new Jugador( "Martin");
+        Jugador jugador2 = new Jugador( "Naza");
         jugadores.agregarJugador(jugador1);
         jugadores.agregarJugador(jugador2);
 
-        Pais unPais = new Pais("Argentina");
-        Pais otroPais = new Pais("Brasil");
+        Pais arg = new Pais("Argentina");
+        Pais jpn = new Pais("Japon");
 
-        Ejercito ejercitoJ1 = new Ejercito(jugador1);
-        ejercitoJ1.modificarCantidad(2);
-        unPais.colocarEjercito(ejercitoJ1);
-        otroPais.colocarEjercito(new Ejercito(jugador2));
+        jugador1.colocarEjercitos(arg, 3);
+        jugador2.colocarEjercitos(jpn, 2);
 
         Turno turno = new ConTurno(jugadores);
-        turno.seleccionarPrimerJugador(0); // es el jugador 1
+        turno.seleccionarPrimerJugador(0);
 
-        jugador1.finalizarRonda(); // aca finaliza la ronda de ataque
-
-        Ronda unaRonda = turno.obtenerRondaActual();
-        assertNotEquals("Ataque", unaRonda.obtenerDescripcion());
-        assertEquals("Reagrupe", unaRonda.obtenerDescripcion());
-
-        assertThrows(NoEsRondaDeAtaqueException.class, () -> jugador1.atacarA(unPais, otroPais));
-
+        assertThrows(NoEsRondaDeAtaqueException.class, () -> jugador1.atacarA(arg, jpn, 1));
     }
 
 
     @Test
-    public void elJugadorConTurnoNoPuedeReagruparSiLaRondaNoEsDeReagrupe() {
+    public void elJugadorConTurnoNoPuedeReagruparSiLaRondaNoEsDeReagrupe() throws Exception{
         Jugadores jugadores = new Jugadores();
-        Usuario usuario1 = new Usuario();
-        Usuario usuario2 = new Usuario();
-        Jugador jugador1 = new Jugador(1, usuario1);
-        Jugador jugador2 = new Jugador(2, usuario2);
+        Jugador jugador1 = new Jugador( "Martin");
         jugadores.agregarJugador(jugador1);
-        jugadores.agregarJugador(jugador2);
 
-        Pais unPais = new Pais("Argentina");
-        Pais otroPais = new Pais("Brasil");
+        Pais arg = new Pais("Argentina");
+        Pais jpn = new Pais("Japon");
 
-        unPais.colocarEjercito(new Ejercito(jugador1));
-        otroPais.colocarEjercito(new Ejercito(jugador2));
+        jugador1.colocarEjercitos(arg, 7);
+        jugador1.colocarEjercitos(jpn, 1);
 
         Turno turno = new ConTurno(jugadores);
-        turno.seleccionarPrimerJugador(0); // es el jugador 1
+        turno.seleccionarPrimerJugador(0);
 
-        Ronda unaRonda = turno.obtenerRondaActual();
-
-        assertEquals("Ataque", unaRonda.obtenerDescripcion());
-        assertNotEquals("Reagrupe", unaRonda.obtenerDescripcion());
-
-        assertThrows(NoEsRondaDeReagrupeException.class, () -> jugador1.reagrupar(unPais, otroPais));
-
+        assertThrows(NoEsRondaDeReagrupeException.class, () -> jugador1.reagrupar(arg, jpn, 3));
     }
 
     @Test
-    public void elJugadorConTurnoNoPuedeColocarEjercitosSiLaRondaNoEsDeColocacion() {
+    public void elJugadorConTurnoNoPuedeColocarEjercitosSiLaRondaNoEsDeColocacion() throws Exception{
         Jugadores jugadores = new Jugadores();
-        Usuario usuario1 = new Usuario();
-        Usuario usuario2 = new Usuario();
-        Jugador jugador1 = new Jugador(1, usuario1);
-        Jugador jugador2 = new Jugador(2, usuario2);
+        Jugador jugador1 = new Jugador( "Martin");
         jugadores.agregarJugador(jugador1);
-        jugadores.agregarJugador(jugador2);
 
-        Pais unPais = new Pais("Argentina");
-        Pais otroPais = new Pais("Brasil");
+        Pais arg = new Pais("Argentina");
+        Pais jpn = new Pais("Japon");
 
-        unPais.colocarEjercito(new Ejercito(jugador1));
-        otroPais.colocarEjercito(new Ejercito(jugador1));
+        jugador1.colocarEjercitos(arg, 7);
+        jugador1.colocarEjercitos(jpn, 1);
 
         Turno turno = new ConTurno(jugadores);
-        turno.seleccionarPrimerJugador(0); // es el jugador 1
-
-        Ronda unaRonda = turno.obtenerRondaActual();
-
-        assertEquals(jugador1, turno.obtenerJugadorTurnoActual());
-        assertEquals("Ataque", unaRonda.obtenerDescripcion());
-        assertNotEquals("Colocacion", unaRonda.obtenerDescripcion());
-
-        assertThrows(NoEsRondaDeColocacionException.class, () -> jugador1.colocarEjercitos(unPais));
-
+        turno.setRonda(new Ataque());
+        turno.seleccionarPrimerJugador(0);
+        assertThrows(NoEsRondaDeColocacionException.class, () -> jugador1.colocarEjercitos(arg, 3));
     }
 
 
     @Test
-    public void rondaConDosJugadoresNoSeAtacanYSeColocan2NuevosEjercitosCadaUno() throws ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException {
-        Usuario usuarioMock1 = mock(Usuario.class);
-        Usuario usuarioMock2 = mock(Usuario.class);
-        when(usuarioMock1.pedirCantidad()).thenReturn(2);
-        when(usuarioMock2.pedirCantidad()).thenReturn(2);
+    public void rondaConDosJugadoresNoSeAtacanYSeColocan2NuevosEjercitosCadaUno() throws Exception {
         Jugadores jugadores = new Jugadores();
-        Jugador jugador1 = new Jugador(1, usuarioMock1); // ahora cada jugador recibe un objeto usuario, si fuera online tendria mas comportamiento asi q esta bueno (?
-        Jugador jugador2 = new Jugador(2, usuarioMock2);
+        Jugador jugador1 = new Jugador( "Martin");
+        Jugador jugador2 = new Jugador( "Naza");
         jugadores.agregarJugador(jugador1);
         jugadores.agregarJugador(jugador2);
 
-        Pais unPais = new Pais("Argentina");
-        Pais otroPais = new Pais("Chile");
+        Pais arg = new Pais("Argentina");
+        Pais jpn = new Pais("Japon");
 
+        jugador1.colocarEjercitos(arg, 1);
+        jugador2.colocarEjercitos(jpn, 1);
 
-        unPais.colocarEjercito(new Ejercito(jugador1));
-        otroPais.colocarEjercito(new Ejercito(jugador2)); // esto seria previo al comienzo de la partida obviamente
+        Turno turno = new ConTurno(jugadores);
+        turno.seleccionarPrimerJugador(0);
 
-        // a este punto cada pais tiene 1 ejercito de cada jugador
-
-        assertEquals(1, unPais.cantidadEjercitos());
-        assertEquals(jugador1, unPais.dominadoPor());
-        assertEquals(1, otroPais.cantidadEjercitos());
-        assertEquals(jugador2, otroPais.dominadoPor());
-
-        Turno unTurno = new ConTurno(jugadores);
-        unTurno.seleccionarPrimerJugador(0); // seleccionamos a jugador1 como primer jugador
-
-        jugador1.finalizarRonda(); // no ataca
-        jugador1.finalizarRonda(); // no reagrupa
-        jugador2.finalizarRonda(); // no ataca
-        jugador2.finalizarRonda(); // no reagrupa
-
-        // le toca nuevamente al jugador1, ronda de colocacion
-        assertEquals("Colocacion", unTurno.obtenerRondaActual().obtenerDescripcion());
-        assertEquals(jugador1, unTurno.obtenerJugadorTurnoActual());
-
-        jugador1.colocarEjercitos(unPais); // coloca 2 ejercitos
+        // Le toca la colocacion al jugador1
+        jugador1.colocarEjercitos(arg, 2);
         jugador1.finalizarRonda();
 
-        jugador2.colocarEjercitos(otroPais); // coloca 2 ejercitos
+        jugador2.colocarEjercitos(jpn, 2);
         jugador2.finalizarRonda();
 
-        assertEquals(3, unPais.cantidadEjercitos());
-        assertEquals(3, otroPais.cantidadEjercitos());
+        assertEquals(3, arg.cantidadEjercitos());
+        assertEquals(3, jpn.cantidadEjercitos());
     }
 
     @Test
-    public void seActivaUnaTarjetaDePaisEnRondaDeColocacionSumandole2EjercitosADichoPais() throws JugadorNoPoseePaisDeLaTarjetaException, TarjetaNoEncontradaException, ActivacionTarjetaEnRondaEquivocadaException, ElJugadorNoTieneTurnoException, LaTarjetaYaFueActivadaException {
+    public void seActivaUnaTarjetaDePaisEnRondaDeColocacionSumandole2EjercitosADichoPais() throws Exception {
         Jugadores jugadores = new Jugadores();
-        Usuario usuario1 = new Usuario();
-        Usuario usuario2 = new Usuario();
-        Jugador jugador1 = new Jugador(1, usuario1);
-        Jugador jugador2 = new Jugador(2, usuario2);
+        Jugador jugador1 = new Jugador( "Martin");
         jugadores.agregarJugador(jugador1);
-        jugadores.agregarJugador(jugador2);
 
-        Pais unPais = new Pais("Argentina");
-        Pais otroPais = new Pais("Brasil");
+        Pais arg = new Pais("Argentina");
 
-        unPais.colocarEjercito(new Ejercito(jugador1)); // por defecto cada pais tiene 1 ejercito
-        otroPais.colocarEjercito(new Ejercito(jugador1));
+        jugador1.colocarEjercitos(arg, 1);
 
-        Turno unTurno = new ConTurno(jugadores);
-        unTurno.seleccionarPrimerJugador(0);
+        Turno turno = new ConTurno(jugadores);
+        turno.seleccionarPrimerJugador(0);
 
-        unTurno.setRonda(new Colocacion());
+        turno.setRonda(new Colocacion());
 
-        Tarjeta unaTarjeta = new Tarjeta(unPais, new Globo());
+        Tarjeta tarjeta = new Tarjeta(arg, new Globo());
+        jugador1.recibirTarjeta(tarjeta);
 
-        jugador1.recibirTarjeta(unaTarjeta);
+        // Al activar la tarjeta se le suman 2 ejercitos
+        jugador1.activarTarjetaPais(arg);
 
-        jugador1.activarTarjetaPais(unPais); // al activar la tarjeta se suman 2 ejercitos
-
-        assertEquals(jugador1, unPais.dominadoPor());
-        assertEquals(3, unPais.cantidadEjercitos());
-
+        assertEquals(3, arg.cantidadEjercitos());
     }
 
     @Test
-    public void noSePuedeActivarUnaTarjetaDePaisEnUnaRondaDeAtaque() {
-
+    public void noSePuedeActivarUnaTarjetaDePaisEnUnaRondaDeAtaque() throws Exception{
         Jugadores jugadores = new Jugadores();
-        Usuario usuario1 = new Usuario();
-        Usuario usuario2 = new Usuario();
-        Jugador jugador1 = new Jugador(1, usuario1);
-        Jugador jugador2 = new Jugador(2, usuario2);
+        Jugador jugador1 = new Jugador( "Martin");
         jugadores.agregarJugador(jugador1);
-        jugadores.agregarJugador(jugador2);
 
-        Pais unPais = new Pais("Argentina");
-        Pais otroPais = new Pais("Brasil");
+        Pais arg = new Pais("Argentina");
 
-        unPais.colocarEjercito(new Ejercito(jugador1)); // por defecto cada pais tiene 1 ejercito
-        otroPais.colocarEjercito(new Ejercito(jugador1));
+        jugador1.colocarEjercitos(arg, 1);
 
-        Turno unTurno = new ConTurno(jugadores);
-        unTurno.seleccionarPrimerJugador(0); // por defecto la ronda es de ataque
+        Turno turno = new ConTurno(jugadores);
+        turno.seleccionarPrimerJugador(0);
 
-        Tarjeta unaTarjeta = new Tarjeta(unPais, new Globo());
+        turno.setRonda(new Ataque());
 
-        jugador1.recibirTarjeta(unaTarjeta);
+        Tarjeta tarjeta = new Tarjeta(arg, new Globo());
+        jugador1.recibirTarjeta(tarjeta);
 
-        assertThrows(ActivacionTarjetaEnRondaEquivocadaException.class, () -> jugador1.activarTarjetaPais(unPais));
-
+        assertThrows(ActivacionTarjetaEnRondaEquivocadaException.class, () -> jugador1.activarTarjetaPais(arg));
     }
 
     @Test
-    public void noSePuedeActivarUnaTarjetaDePaisEnUnaRondaDeReagrupe() {
-
+    public void noSePuedeActivarUnaTarjetaDePaisEnUnaRondaDeReagrupe() throws Exception{
         Jugadores jugadores = new Jugadores();
-        Usuario usuario1 = new Usuario();
-        Usuario usuario2 = new Usuario();
-        Jugador jugador1 = new Jugador(1, usuario1);
-        Jugador jugador2 = new Jugador(2, usuario2);
+        Jugador jugador1 = new Jugador( "Martin");
         jugadores.agregarJugador(jugador1);
-        jugadores.agregarJugador(jugador2);
 
-        Pais unPais = new Pais("Argentina");
-        Pais otroPais = new Pais("Brasil");
+        Pais arg = new Pais("Argentina");
 
-        unPais.colocarEjercito(new Ejercito(jugador1)); // por defecto cada pais tiene 1 ejercito
-        otroPais.colocarEjercito(new Ejercito(jugador1));
+        jugador1.colocarEjercitos(arg, 1);
 
-        Turno unTurno = new ConTurno(jugadores);
-        unTurno.seleccionarPrimerJugador(0);
+        Turno turno = new ConTurno(jugadores);
+        turno.seleccionarPrimerJugador(0);
 
-        unTurno.setRonda(new Reagrupe());
+        turno.setRonda(new Reagrupe());
 
-        Tarjeta unaTarjeta = new Tarjeta(unPais, new Globo());
+        Tarjeta tarjeta = new Tarjeta(arg, new Globo());
+        jugador1.recibirTarjeta(tarjeta);
 
-        jugador1.recibirTarjeta(unaTarjeta);
-
-        assertThrows(ActivacionTarjetaEnRondaEquivocadaException.class, () -> jugador1.activarTarjetaPais(unPais));
+        assertThrows(ActivacionTarjetaEnRondaEquivocadaException.class, () -> jugador1.activarTarjetaPais(arg));
 
     }
 
     @Test
-    public void seJuegaUnaRondaCon3JugadoresJugador2DominaAsiaNadieAtacaPeroSiColocan() throws ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException {
+    public void seJuegaUnaRondaCon3JugadoresJugador2DominaAsiaNadieAtacaPeroSiColocan() throws ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException, JugadorNoExisteException, PaisOcupadoPorOtroJugadorException {
         Jugadores jugadores = new Jugadores();
-        Usuario usuario1Mock = mock(Usuario.class);
-        Usuario usuario2Mock = mock(Usuario.class);
-        Usuario usuario3Mock = mock(Usuario.class);
-        Jugador jugador1 = new Jugador(1, usuario1Mock);
-        Jugador jugador2 = new Jugador(2, usuario2Mock);
-        Jugador jugador3 = new Jugador(3, usuario3Mock);
-        when(usuario1Mock.pedirCantidad()).thenReturn(2);
-        when(usuario2Mock.pedirCantidad()).thenReturn(2);
-        when(usuario3Mock.pedirCantidad()).thenReturn(2);
+        Jugador jugador1 = new Jugador( "Martin");
+        Jugador jugador2 = new Jugador( "Naza");
+        Jugador jugador3 = new Jugador( "Juani");
+
         jugadores.agregarJugador(jugador1);
         jugadores.agregarJugador(jugador2);
         jugadores.agregarJugador(jugador3);
 
-        Pais unPais = new Pais("Argentina");
-        Pais otroPais = new Pais("Chile");
-        Pais china = new Pais("China");
+        Pais arg = new Pais("Argentina");
+        Pais bra = new Pais("Brasil");
+        Pais jpn = new Pais("Japon");
+        Pais rsa = new Pais("Rusia");
 
-        unPais.colocarEjercito(new Ejercito(jugador1));
-        otroPais.colocarEjercito(new Ejercito(jugador3));
-        china.colocarEjercito(new Ejercito(jugador2)); // cada pais tiene un ejercito de cada jugador
-
-        Turno unTurno = new ConTurno(jugadores);
-        unTurno.seleccionarPrimerJugador(0); // elegimos al jugador1 como primer jugador
-        unTurno.setRonda(new Colocacion());
-        
         Asia asia = new Asia();
-        asia.agregarPais(china);
+        asia.agregarPais(jpn);
+        asia.agregarPais(rsa);
 
-        assertEquals(jugador1, unTurno.obtenerJugadorTurnoActual());
+        Turno turno = new ConTurno(jugadores);
+        turno.seleccionarPrimerJugador(0);
+        turno.setRonda(new Colocacion());
 
-        jugador1.colocarEjercitos(unPais);
+        jugador1.colocarEjercitos(arg, 1);
         jugador1.finalizarRonda();
 
-        assertEquals(jugador2, unTurno.obtenerJugadorTurnoActual());
-
-        jugador2.colocarEjercitos(china);
+        jugador2.colocarEjercitos(jpn, 1);
+        jugador2.colocarEjercitos(rsa, 1);
         jugador2.finalizarRonda();
 
-        assertEquals(jugador3, unTurno.obtenerJugadorTurnoActual());
-
-        jugador3.colocarEjercitos(otroPais);
+        jugador3.colocarEjercitos(bra, 1);
         jugador3.finalizarRonda();
 
-        assertEquals(3, unPais.cantidadEjercitos());
-        assertEquals(jugador1, unPais.dominadoPor());
 
         // Asia dominado por Jugador2
-        assertEquals(3, china.cantidadEjercitos());
-        assertEquals(jugador2, china.dominadoPor());
         assertTrue(asia.dominadoPor(jugador2));
-
-        assertEquals(3, otroPais.cantidadEjercitos());
-        assertEquals(jugador3, otroPais.dominadoPor());
-
     }
 
 
     @Test
-    public void rondaDeAtaqueEntre2JugadoresJugador1AtacaYConquista2PaisesDelJugador2() throws ElJugadorNoTieneTurnoException, NoEsRondaDeAtaqueException {
+    public void rondaDeAtaqueEntre2JugadoresJugador1AtacaYConquista2PaisesDelJugador2() throws Exception {
         Jugadores jugadores = new Jugadores();
-        Usuario usuarioMock = mock(Usuario.class);
-
-        Jugador jugador1 = new Jugador(1, usuarioMock);
-        Jugador jugador2 = new Jugador(2, usuarioMock);
+        Jugador jugador1 = new Jugador( "Martin");
+        Jugador jugador2 = new Jugador( "Naza");
 
         jugadores.agregarJugador(jugador1);
         jugadores.agregarJugador(jugador2);
 
-        Pais paisAtacante = new Pais("Argentina");
-        Pais paisDefensor = new Pais("Brasil");
-        Pais paisDefensor2 = new Pais("Bolivia");
+        Pais arg = new Pais("Argentina");
+        Pais bra = new Pais("Brasil");
+        Pais jpn = new Pais("Japon");
 
-        paisAtacante.limitaCon(paisDefensor);
-        paisAtacante.limitaCon(paisDefensor2);
+        arg.limitaCon(bra);
+        arg.limitaCon(jpn);
 
         Dado dadoAtacante = new DadoPersonalizado(6);
         Dado dadoDefensor = new DadoPersonalizado(1);
-        Dado dadoDefensor2 = new DadoPersonalizado(1);
 
         Dados dadosAtacante = new Dados();
         dadosAtacante.agregarDado(dadoAtacante);
@@ -366,49 +254,30 @@ public class RondaTest {
         dadosAtacante.agregarDado(dadoAtacante);
 
         Dados dadosDefensor = new Dados();
-
-        dadosDefensor.agregarDado(dadoDefensor);
-        dadosDefensor.agregarDado(dadoDefensor);
         dadosDefensor.agregarDado(dadoDefensor);
 
-        Dados dadosDefensor2 = new Dados();
+        arg.colocarEjercito(new Ejercito(jugador1));
+        arg.modificarCantidadEjercito(6);
+        bra.colocarEjercito(new Ejercito(jugador2));
+        jpn.colocarEjercito(new Ejercito(jugador2));
 
-        dadosDefensor2.agregarDado(dadoDefensor2);
-        dadosDefensor2.agregarDado(dadoDefensor2);
-        dadosDefensor2.agregarDado(dadoDefensor2);
+        arg.ejercito.setDados(dadosAtacante);
+        bra.ejercito.setDados(dadosDefensor);
+        jpn.ejercito.setDados(dadosDefensor);
 
-        Ejercito ejercitoAtacante = new Ejercito(jugador1);
-        ejercitoAtacante.modificarCantidad(1);
-
-        Ejercito ejercitoDefensor = new Ejercito(jugador2);
-        Ejercito ejercitoDefensor2 = new Ejercito(jugador2);
-
-        paisAtacante.colocarEjercito(ejercitoAtacante);
-        paisAtacante.modificarCantidadEjercito(4);
-        paisDefensor.colocarEjercito(ejercitoDefensor);
-        paisDefensor2.colocarEjercito(ejercitoDefensor2);
-
-        ejercitoAtacante.setDados(dadosAtacante);
-        ejercitoDefensor.setDados(dadosDefensor);
-        ejercitoDefensor2.setDados(dadosDefensor2);
-
-        // Turno
         Turno unTurno = new ConTurno(jugadores);
-        unTurno.seleccionarPrimerJugador(0); // le toca a jugador1
-        assertEquals("Ataque", unTurno.obtenerRondaActual().obtenerDescripcion());
+        unTurno.setRonda(new Ataque());
+        unTurno.seleccionarPrimerJugador(0);
 
-
-        //Ataque al primer pais defensor
-        Resultado resultadoBatalla = jugador1.atacarA(paisAtacante, paisDefensor);
+        //Ataque al primer pais del jugador2
+        Resultado resultadoBatalla = jugador1.atacarA(arg, bra, 2);
         ProcesadorResultado.obtenerInstancia().procesar(resultadoBatalla);
+        assertEquals(jugador1, bra.dominadoPor());
 
-        assertEquals(jugador1, paisDefensor.dominadoPor());
-
-        //Ataque al segundo pais defensor
-        resultadoBatalla = jugador1.atacarA(paisAtacante, paisDefensor2);
+        //Ataque al segundo pais del jugador2
+        resultadoBatalla = jugador1.atacarA(arg, jpn, 4);
         ProcesadorResultado.obtenerInstancia().procesar(resultadoBatalla);
-        assertEquals(jugador1, paisDefensor2.dominadoPor());
-
+        assertEquals(jugador1, jpn.dominadoPor());
     }
 
 }

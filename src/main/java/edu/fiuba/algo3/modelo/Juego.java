@@ -1,58 +1,99 @@
 package edu.fiuba.algo3.modelo;
 
-import edu.fiuba.algo3.modelo.excepciones.CantidadDeJugadoresInsuficienteException;
-import edu.fiuba.algo3.modelo.excepciones.ElJugadorNoTieneTurnoException;
-import edu.fiuba.algo3.modelo.excepciones.NoEsRondaDeColocacionException;
-import edu.fiuba.algo3.modelo.objetivos.Objetivo;
+import edu.fiuba.algo3.modelo.excepciones.*;
+import edu.fiuba.algo3.modelo.objetivos.*;
 import edu.fiuba.algo3.modelo.tarjetas.Tarjeta;
-
+import edu.fiuba.algo3.modelo.turnos.ConTurno;
+import edu.fiuba.algo3.modelo.turnos.SinTurno;
+import edu.fiuba.algo3.modelo.turnos.Turno;
 import java.util.ArrayList;
-import java.util.Random;
 
 
 public class Juego {
     static final String ARCHIVO_PAISES = "paises.json";
     static final String ARCHIVO_TARJETAS = "tarjetas.json";
 
-    private Tablero tablero;
-    private ArrayList<Jugador> jugadores;
-    private ArrayList<Tarjeta> tarjetas;
-    private ArrayList<Objetivo> objetivos;
+    private final Tablero tablero;
+    private final Jugadores jugadores;
+    private final ArrayList<Tarjeta> tarjetas;
+    private Turno turno = new SinTurno();
 
-    public Juego() {
+    public Juego() throws ArchivoDePaisesNoEncontradoException, ArchivoDeTarjetasNoEncontradoException{
         tablero = new Tablero();
-        jugadores = new ArrayList<>();
+        jugadores = new Jugadores();
         tarjetas = new ArrayList<>();
+
+        CargarJuego.cargarPaisesAlTablero(tablero, ARCHIVO_PAISES);
+        CargarJuego.cargarTarjetas(tablero, ARCHIVO_TARJETAS);
     }
 
-    public void agregarJugador(Jugador unJugador) {
-        jugadores.add(unJugador);
+    public Jugador agregarJugador(String nombre){
+        Jugador jugador = new Jugador(nombre);
+        jugadores.agregarJugador(jugador);
+        return jugador;
     }
 
-    public void comenzar() throws CantidadDeJugadoresInsuficienteException, ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException {
-
-        try {
-            CargarJuego.cargarPaisesAlTablero(tablero, ARCHIVO_PAISES);
-            CargarJuego.cargarTarjetas(tarjetas, ARCHIVO_TARJETAS, tablero);
-        }
-
-        //Error al cargar los archivos
-        catch (Exception e) { e.printStackTrace(); }
-
-        if (jugadores.size() < 2) throw new CantidadDeJugadoresInsuficienteException();
-        else tablero.repartirPaises(jugadores);
-
-        asignarObjetivos();
+    public void agregarJugador(Jugador jugador){
+        jugadores.agregarJugador(jugador);
     }
 
-    private void asignarObjetivos() {
-
-        //for (Jugador jugador: jugadores) jugador.asignarObjetivo(nuevoObjetivo());
+    public void comenzar() throws CantidadDeJugadoresInsuficienteException {
+        if (jugadores.obtenerCantidad() < 2) throw new CantidadDeJugadoresInsuficienteException();
+        tablero.repartirPaises(jugadores);
+        jugadores.mezclar();
+        Objetivos.asignarObjetivos(jugadores);
+        turno = new ConTurno(jugadores);
     }
 
-    private Objetivo nuevoObjetivo() {
-        Random r = new Random();
-        return objetivos.remove(r.nextInt(objetivos.size())-1);
+    public void finalizarRonda(Jugador jugador) throws ElJugadorNoTieneTurnoException {
+        turno.finalizarRonda(jugador);
     }
 
+    public void ataque(Jugador jAtacante, Pais pAtacante, Pais pDefensor, int cantidadEjercitos) throws ElJugadorNoTieneTurnoException, EjercitosInsuficientesException, NoEsRondaDeAtaqueException, ElPaisNoEsLimitrofeException {
+        tablero.ataque(jAtacante, pAtacante, pDefensor, cantidadEjercitos);
+    }
+
+
+    public void colocarEjercitos(Jugador jugador, Pais pais, int cantidadEjercitos) throws ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException, JugadorNoExisteException, PaisOcupadoPorOtroJugadorException {
+        tablero.colocarEjercitos(jugador, pais, cantidadEjercitos);
+    }
+    public void reagrupar(Jugador jugador, Pais paisOrigen, Pais paisDestino, int cantidadAMover) throws JugadorNoExisteException, ElPaisNoEsLimitrofeException, NoEsRondaDeReagrupeException, ElJugadorNoTieneTurnoException {
+        tablero.reagrupar(jugador, paisOrigen, paisDestino, cantidadAMover);
+    }
+
+    public int cantidadPaisesDominados(Jugador jugador){
+        return tablero.cantidadPaisesDominados(jugador);
+    }
+
+    public void recibirTarjeta(Jugador jugador, Pais paisTarjeta) {
+        tablero.recibirTarjeta(jugador, paisTarjeta);
+    }
+
+    public int cantidadEjercitosEn(Pais pais) {
+        return tablero.cantidadEjercitosEn(pais);
+    }
+
+    public Jugador paisDominadoPor(Pais pais) {
+        return tablero.paisDominadoPor(pais);
+    }
+
+    public void activarTarjeta(Jugador jugador, Pais pais) throws JugadorNoExisteException, ElJugadorNoTieneTurnoException, ActivacionTarjetaEnRondaEquivocadaException, LaTarjetaYaFueActivadaException, TarjetaNoEncontradaException, JugadorNoPoseePaisDeLaTarjetaException {
+        tablero.activarTarjeta(jugador, pais);
+    }
+
+    public void canjearTarjetas(Jugador jugador, ArrayList<Pais> paisesTarjetas) throws JugadorSinTarjetasException, LaTarjetaYaEstaDesactivadaException, SinCanjeHabilitadoException {
+        tablero.canjearTarjetas(jugador, paisesTarjetas);
+    }
+
+    // Probablemente lo saquemos o saquemos todos los Strings y pongamos objetos
+    // Hoy pregunto como nos conviene laburarlo
+    public Jugador obtenerJugador(String nombreJugador) throws JugadorNoExisteException {
+        return jugadores.obtenerJugador(nombreJugador);
+    }
+    public Pais obtenerPais(String nombrePais){
+        return tablero.obtenerPais(nombrePais);
+    }
+    public void setTurno(){
+        this.turno = new ConTurno(jugadores);
+    }
 }

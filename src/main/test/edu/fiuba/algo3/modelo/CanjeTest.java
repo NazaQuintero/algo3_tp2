@@ -4,7 +4,11 @@ import edu.fiuba.algo3.modelo.canjes.Canje;
 import edu.fiuba.algo3.modelo.canjes.CanjeNulo;
 import edu.fiuba.algo3.modelo.canjes.NesimoCanje;
 import edu.fiuba.algo3.modelo.excepciones.JugadorSinTarjetasException;
+import edu.fiuba.algo3.modelo.tarjetas.Globo;
+import edu.fiuba.algo3.modelo.tarjetas.Tarjeta;
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -13,9 +17,11 @@ import static org.mockito.Mockito.mock;
 public class CanjeTest {
     @Test
     public void unJugadorSinTarjetasNoPuedeRealizarUnCanje()  {
-        Usuario usuarioMock = mock(Usuario.class);
-        Jugador unJugador = new Jugador(1, usuarioMock);
-        assertThrows(JugadorSinTarjetasException.class, unJugador::solicitarCanje);
+        Jugador jugador = new Jugador( "Martin");
+        Tarjeta tarjeta = new Tarjeta(new Pais("Japon"), new Globo());
+        ArrayList<Tarjeta> tarjetas = new ArrayList<>();
+        tarjetas.add(tarjeta);
+        assertThrows(JugadorSinTarjetasException.class, () -> jugador.canjearTarjetas(tarjetas));
     }
 
     @Test

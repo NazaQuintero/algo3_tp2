@@ -1,8 +1,6 @@
 package edu.fiuba.algo3.modelo;
 
-import edu.fiuba.algo3.modelo.batallasDeDados.Dados;
 import edu.fiuba.algo3.modelo.batallasDeDados.Resultado;
-import edu.fiuba.algo3.modelo.batallasDeDados.ResultadoBatalla;
 import edu.fiuba.algo3.modelo.canjes.Canje;
 import edu.fiuba.algo3.modelo.canjes.CanjeNulo;
 import edu.fiuba.algo3.modelo.batallasDeDados.ResultadoBatallaNulo;
@@ -19,30 +17,18 @@ import java.util.HashMap;
 
 public class Jugador {
 
-    private final int id;
     private String color = "";
-    private ArrayList<Objetivo> objetivos = new ArrayList<>();
-    private String nombre;
+    private final ArrayList<Objetivo> objetivos = new ArrayList<>();
+    private final String nombre;
     private Turno turno = new SinTurno();
-    private ArrayList<Pais> paisesDominados = new ArrayList<>();
-    private HashMap<String, Tarjeta> tarjetas = new HashMap<>();
-    private Usuario usuario;
+    private final ArrayList<Pais> paisesDominados = new ArrayList<>();
+    private final HashMap<Pais, Tarjeta> tarjetas = new HashMap<>();
     private Canje canje;
 
-    public Jugador(int id, Usuario usuario) {
-        this.id = id;
-        this.usuario = usuario;
+    public Jugador(String nombre){
         this.objetivos.add(new General());
         this.canje = new CanjeNulo();
-    }
-
-    public Jugador() { // despues lo volamo
-        this.id = 0;
-        this.objetivos.add(new General());
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+        this.nombre =  nombre;
     }
 
     public String mostrarColor() {
@@ -53,49 +39,37 @@ public class Jugador {
         return paisesDominados.size();
     }
 
-    public int obtenerId() {
-        return this.id;
-    }
-
-    public void colocarEjercitos(Pais pais) throws ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException {
+    public void colocarEjercitos(Pais pais, int cantidadEjercitos) throws ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException, PaisOcupadoPorOtroJugadorException {
         if (paisesDominados.contains(pais)) {
-            try {
-                this.turno.colocarEjercitos(pais);
-            } catch (ElJugadorNoTieneTurnoException e) {
-                throw new ElJugadorNoTieneTurnoException();
-            }
-        } else if (pais.estaLibre()) pais.colocarEjercito(new Ejercito(this));
+            this.turno.colocarEjercitos(pais, cantidadEjercitos);
+        }
+
+        else if (pais.estaLibre()){
+            pais.colocarEjercito(new Ejercito(this));
+            pais.modificarCantidadEjercito(cantidadEjercitos-1);
+        }
+        else throw new PaisOcupadoPorOtroJugadorException();
     }
 
     public void asignarColor(String color) {
         this.color = color;
     }
 
-    public Dados tirarDados(Pais pais) { return pais.tirarDados(); }
-
-    public int pedirCantidad() {
-        return usuario.pedirCantidad();
-    }
-
     public void setTurno(Turno unTurno) {
         this.turno = unTurno;
     }
 
-    public void finalizarRonda() {
-        this.turno.finalizarRonda();
+    public void finalizarRonda() throws ElJugadorNoTieneTurnoException{
+        this.turno.finalizarRonda(this);
     }
 
-    public Resultado atacarA(Pais paisAtacante, Pais paisDefensor) throws ElJugadorNoTieneTurnoException, NoEsRondaDeAtaqueException {
+    public Resultado atacarA(Pais paisAtacante, Pais paisDefensor, int cantidadEjercitos) throws ElJugadorNoTieneTurnoException, NoEsRondaDeAtaqueException, EjercitosInsuficientesException, ElPaisNoEsLimitrofeException {
         Resultado resultado = new ResultadoBatallaNulo();
-        try {
-            if (this.puedeAtacar()){
-                resultado = turno.atacarA(paisAtacante, paisDefensor);
-            } else {
-                turno.finalizarRonda();
-            }
-        } catch (ElJugadorNoTieneTurnoException e) {
-            throw new ElJugadorNoTieneTurnoException();
-        }
+       if (this.puedeAtacar()){
+           resultado = turno.atacarA(paisAtacante, paisDefensor, cantidadEjercitos);
+       } else {
+           turno.finalizarRonda(this);
+       }
         return resultado;
     }
 
@@ -103,10 +77,11 @@ public class Jugador {
         return this.paisesDominados.stream().anyMatch(pais -> pais.cantidadEjercitos() > 1);
     }
 
-    public void reagrupar(Pais origen, Pais destino) throws NoEsRondaDeReagrupeException, ElJugadorNoTieneTurnoException, ElPaisNoEsLimitrofeException {
+    public void reagrupar(Pais origen, Pais destino, int cantidad) throws NoEsRondaDeReagrupeException, ElJugadorNoTieneTurnoException, ElPaisNoEsLimitrofeException {
         try {
-            this.turno.reagrupar(origen, destino);
-        } catch (ElJugadorNoTieneTurnoException e) {
+            this.turno.reagrupar(origen, destino, cantidad);
+        }
+        catch (ElJugadorNoTieneTurnoException e) {
             throw new ElJugadorNoTieneTurnoException();
         }
     }
@@ -120,7 +95,7 @@ public class Jugador {
     }
 
     public void recibirTarjeta(Tarjeta tarjeta){
-        tarjetas.put(tarjeta.nombrePais(), tarjeta);
+        tarjetas.put(tarjeta.obtenerPais(), tarjeta);
     }
 
     public void activarTarjetaPais(Pais unPais) throws TarjetaNoEncontradaException, JugadorNoPoseePaisDeLaTarjetaException, ActivacionTarjetaEnRondaEquivocadaException, ElJugadorNoTieneTurnoException, LaTarjetaYaFueActivadaException {
@@ -129,7 +104,7 @@ public class Jugador {
     }
 
     public Tarjeta buscarTarjeta(Pais unPais) throws TarjetaNoEncontradaException {
-        if (tarjetas.containsKey(unPais.obtenerNombre())) return tarjetas.get(unPais.obtenerNombre());
+        if (tarjetas.containsKey(unPais)) return tarjetas.get(unPais);
         else throw new TarjetaNoEncontradaException();
     }
 
@@ -145,27 +120,27 @@ public class Jugador {
         return nombre;
     }
 
-    public boolean poseeTresPaisesLimitrofes() {
-        return paisesDominados.stream().anyMatch(pais -> (int) pais.getPaisesLimitrofes().stream().filter(pais1 -> pais1.dominadoPor() == this).count() >= 2);
+    public boolean poseeLimitrofes(int cantLimitrofes) {
+        return paisesDominados.stream().anyMatch(pais -> (int) pais.getPaisesLimitrofes().stream().filter(pais1 -> pais1.dominadoPor() == this).count() >= cantLimitrofes-1);
     }
 
-    public ArrayList<Tarjeta> pedirTarjetasACanjear() {
-        return usuario.pedirTarjetasACanjear();
+    public void canjearTarjetas(ArrayList<Tarjeta> tarjetas) throws JugadorSinTarjetasException, SinCanjeHabilitadoException, LaTarjetaYaEstaDesactivadaException {
+        if (!comprobarTarjetas(tarjetas)) throw new JugadorSinTarjetasException();
+        canje = canje.habilitarCanje(tarjetas);
+        devolverTarjetas(tarjetas);
     }
 
-    public void solicitarCanje() throws JugadorSinTarjetasException, SinCanjeHabilitadoException, LaTarjetaYaEstaDesactivadaException {
-        if (tarjetas.size() == 0) throw new JugadorSinTarjetasException();
-        else {
-            ArrayList<Tarjeta> tarjetasACanjear = this.pedirTarjetasACanjear();
-            canje = canje.habilitarCanje(tarjetasACanjear);
-            devolverTarjetas(tarjetasACanjear);
+    boolean comprobarTarjetas(ArrayList<Tarjeta> tarjetas){
+        for (Tarjeta t: tarjetas){
+            if (!this.tarjetas.containsValue(t)) return false;
         }
+        return true;
     }
 
     public void devolverTarjetas(ArrayList<Tarjeta> tarjetasADevolver) throws LaTarjetaYaEstaDesactivadaException {
         for (Tarjeta tarjeta : tarjetasADevolver) {
             tarjeta.desactivar();
-            tarjetas.remove(tarjeta.nombrePais());
+            tarjetas.remove(tarjeta.obtenerPais());
         }
     }
 

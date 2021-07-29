@@ -11,9 +11,9 @@ public class JugadoresTest {
     @Test
     public void siHay3JugadoresLuegoDe3IteracionesVuelveAlPrimero() {
         Jugadores jugadores = new Jugadores();
-        Jugador jugador1 = new Jugador();
-        Jugador jugador2 = new Jugador();
-        Jugador jugador3 = new Jugador();
+        Jugador jugador1 = new Jugador( "Juani");
+        Jugador jugador2 = new Jugador( "Naza");
+        Jugador jugador3 = new Jugador( "Cami");
         jugadores.agregarJugador(jugador1);
         jugadores.agregarJugador(jugador2);
         jugadores.agregarJugador(jugador3);
@@ -33,9 +33,9 @@ public class JugadoresTest {
     @Test
     public void siSeSeteaAlJugador2ComoPrimerJugadorElNextDelIteradorDevuelveEseJugador() {
         Jugadores jugadores = new Jugadores();
-        Jugador jugador1 = new Jugador();
-        Jugador jugador2 = new Jugador();
-        Jugador jugador3 = new Jugador();
+        Jugador jugador1 = new Jugador( "Martin");
+        Jugador jugador2 = new Jugador( "Cami");
+        Jugador jugador3 = new Jugador( "Naza");
         jugadores.agregarJugador(jugador1);
         jugadores.agregarJugador(jugador2);
         jugadores.agregarJugador(jugador3);
