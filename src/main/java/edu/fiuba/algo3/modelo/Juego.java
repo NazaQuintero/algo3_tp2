@@ -8,7 +8,6 @@ import edu.fiuba.algo3.modelo.turnos.SinTurno;
 import edu.fiuba.algo3.modelo.turnos.Turno;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 
 public class Juego {
