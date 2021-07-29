@@ -10,7 +10,7 @@
     -fx-font-weight: bold;
     -fx-border-width: 3;
     -fx-border-color: black;
-    -fx-background-color: blue;
+    -fx-background-color: salmon;
 }
 
 .exitButton {
@@ -22,6 +22,10 @@
 .startButton {
     -fx-background-color: green;
     -fx-font-size: 32px;
+}
+
+.startButton:hover {
+    -fx-background-color: -fx-shadow-highlight-color;
 }
 
 .comboBox {
