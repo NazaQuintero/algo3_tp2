@@ -19,7 +19,7 @@ public class ConTurno implements Turno {
 
     public ConTurno(Jugadores jugadores) {
         this.jugadores = jugadores;
-        this.setRonda(new Ataque());
+        this.setRonda(new Colocacion());
         this.cambiarJugadorActual();
         this.cantidadDeTurnosJugados = 0;
     }
@@ -32,7 +32,7 @@ public class ConTurno implements Turno {
         return this.actual;
     }
 
-    public void seleccionarPrimerJugador(int valor) {
+    public void seleccionarPrimerJugador(int valor) throws JugadorNoExisteException{
         this.jugadores.setPrimerJugador(valor);
         this.jugadores.obtenerJugador(valor).setTurno(this);
         this.cambiarJugadorActual();
@@ -70,24 +70,18 @@ public class ConTurno implements Turno {
         this.ronda = unaRonda;
     }
 
-    public void finalizarRonda() {
+    public void finalizarRonda(Jugador jugador) throws ElJugadorNoTieneTurnoException {
+
+        if (jugador != this.actual) throw new ElJugadorNoTieneTurnoException();
         this.ronda.finalizarRonda(this);
     }
 
-    public Resultado atacarA(Pais atacante, Pais defensor, int cantidadEjercitos) throws NoEsRondaDeAtaqueException {
-        try {
-            return this.ronda.atacarA(atacante, defensor, cantidadEjercitos);
-        } catch (ElPaisNoEsLimitrofeException | EjercitosInsuficientesException e) {
-            throw new NoEsRondaDeAtaqueException();
-        }
+    public Resultado atacarA(Pais atacante, Pais defensor, int cantidadEjercitos) throws NoEsRondaDeAtaqueException, EjercitosInsuficientesException, ElPaisNoEsLimitrofeException {
+        return this.ronda.atacarA(atacante, defensor, cantidadEjercitos);
     }
 
     public void reagrupar(Pais origen, Pais destino, int cantidad) throws NoEsRondaDeReagrupeException, ElPaisNoEsLimitrofeException { // o lo q sea la firma
-        try {
-            this.ronda.reagrupar(origen, destino, cantidad);
-        } catch (NoEsRondaDeReagrupeException e) {
-            throw new NoEsRondaDeReagrupeException();
-        }
+        this.ronda.reagrupar(origen, destino, cantidad);
     }
 
     public void colocarEjercitos(Pais unPais, int cantidadEjercitos) throws NoEsRondaDeColocacionException {

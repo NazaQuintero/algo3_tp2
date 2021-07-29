@@ -4,16 +4,13 @@ import edu.fiuba.algo3.modelo.batallasDeDados.ProcesadorResultado;
 import edu.fiuba.algo3.modelo.batallasDeDados.Resultado;
 import edu.fiuba.algo3.modelo.batallasDeDados.ResultadoBatalla;
 import edu.fiuba.algo3.modelo.continentes.Continente;
-import edu.fiuba.algo3.modelo.excepciones.EjercitosInsuficientesException;
-import edu.fiuba.algo3.modelo.excepciones.ElJugadorNoTieneTurnoException;
-import edu.fiuba.algo3.modelo.excepciones.ElPaisNoEsLimitrofeException;
-import edu.fiuba.algo3.modelo.excepciones.NoEsRondaDeColocacionException;
+import edu.fiuba.algo3.modelo.excepciones.*;
 
 import java.util.*;
 
 
 public class Tablero {
-    private HashMap<String,Pais> paises;
+    private final HashMap<String,Pais> paises;
 
     public Tablero() {
         paises = new HashMap<>();
@@ -21,20 +18,27 @@ public class Tablero {
 
     public void agregarPais(Pais pais){ paises.put(pais.nombre, pais); }
 
-    public void repartirPaises(ArrayList<Jugador> jugadores) throws NoEsRondaDeColocacionException, ElJugadorNoTieneTurnoException {
+    public void repartirPaises(Jugadores jugadores){
         ArrayList<Pais> paises = new ArrayList<>(this.paises.values());
         Collections.shuffle(paises);
+        int cant_jugadores = jugadores.obtenerCantidad();
 
-        int cant_jugadores = jugadores.size();
-        for (int i = 0; i < paises.size(); i++) jugadores.get(i % cant_jugadores).colocarEjercitos(paises.get(i), 1);
+        // No se levanta ninguna excepcion en esta fase
+        try{
+            for (int i = 0; i < paises.size(); i++){
+                Jugador jugador = jugadores.obtenerJugador(i % cant_jugadores);
+                jugador.colocarEjercitos(paises.get(i), 1);
+            }
+        }
+        catch (ElJugadorNoTieneTurnoException | NoEsRondaDeColocacionException | JugadorNoExisteException ignored){}
     }
 
     public Pais obtenerPais(String nombrePais) {
         return paises.get(nombrePais);
     }
 
-    public void ataque(String paisAtacante, String paisDefensor, int cantidadEjercitos) throws ElPaisNoEsLimitrofeException, EjercitosInsuficientesException {
-        Resultado resultado = obtenerPais(paisAtacante).atacarA(obtenerPais(paisDefensor), cantidadEjercitos);
+    public void ataque(Jugador jugador, String paisAtacante, String paisDefensor, int cantidadEjercitos) throws ElPaisNoEsLimitrofeException, EjercitosInsuficientesException, ElJugadorNoTieneTurnoException, NoEsRondaDeAtaqueException {
+        Resultado resultado = jugador.atacarA(obtenerPais(paisAtacante), obtenerPais(paisDefensor), cantidadEjercitos);
         ProcesadorResultado.obtenerInstancia().procesar(resultado);
     }
 

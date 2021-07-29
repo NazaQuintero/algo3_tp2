@@ -21,11 +21,11 @@ public class Jugador {
 
     private final int id;
     private String color = "";
-    private ArrayList<Objetivo> objetivos = new ArrayList<>();
-    private String nombre;
+    private final ArrayList<Objetivo> objetivos = new ArrayList<>();
+    private final String nombre;
     private Turno turno = new SinTurno();
-    private ArrayList<Pais> paisesDominados = new ArrayList<>();
-    private HashMap<Pais, Tarjeta> tarjetas = new HashMap<>();
+    private final ArrayList<Pais> paisesDominados = new ArrayList<>();
+    private final HashMap<Pais, Tarjeta> tarjetas = new HashMap<>();
     private Canje canje;
 
     public Jugador(int id, String nombre){
@@ -35,17 +35,12 @@ public class Jugador {
         this.nombre =  nombre;
     }
 
-
     public String mostrarColor() {
         return color;
     }
 
     public int cantidadPaisesDominados() {
         return paisesDominados.size();
-    }
-
-    public int obtenerId() {
-        return this.id;
     }
 
     public void colocarEjercitos(Pais pais, int cantidadEjercitos) throws ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException {
@@ -63,22 +58,20 @@ public class Jugador {
         this.color = color;
     }
 
-    public Dados tirarDados(Pais pais) { return pais.tirarDados(); }
-
     public void setTurno(Turno unTurno) {
         this.turno = unTurno;
     }
 
-    public void finalizarRonda() {
-        this.turno.finalizarRonda();
+    public void finalizarRonda() throws ElJugadorNoTieneTurnoException{
+        this.turno.finalizarRonda(this);
     }
 
-    public Resultado atacarA(Pais paisAtacante, Pais paisDefensor, int cantidadEjercitos) throws ElJugadorNoTieneTurnoException, NoEsRondaDeAtaqueException {
+    public Resultado atacarA(Pais paisAtacante, Pais paisDefensor, int cantidadEjercitos) throws ElJugadorNoTieneTurnoException, NoEsRondaDeAtaqueException, EjercitosInsuficientesException, ElPaisNoEsLimitrofeException {
         Resultado resultado = new ResultadoBatallaNulo();
        if (this.puedeAtacar()){
            resultado = turno.atacarA(paisAtacante, paisDefensor, cantidadEjercitos);
        } else {
-           turno.finalizarRonda();
+           turno.finalizarRonda(this);
        }
         return resultado;
     }

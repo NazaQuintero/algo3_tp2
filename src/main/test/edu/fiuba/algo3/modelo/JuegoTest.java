@@ -1,9 +1,6 @@
 package edu.fiuba.algo3.modelo;
 
-import edu.fiuba.algo3.modelo.excepciones.CantidadDeJugadoresInsuficienteException;
-import edu.fiuba.algo3.modelo.excepciones.ElJugadorNoTieneTurnoException;
-import edu.fiuba.algo3.modelo.excepciones.NoEsRondaDeColocacionException;
-import edu.fiuba.algo3.modelo.excepciones.PaisOcupadoPorOtroJugadorException;
+import edu.fiuba.algo3.modelo.excepciones.*;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -11,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class JuegoTest {
 
     @Test
-    public void elJuegoNoComienzaSinUnMinimoDe2Jugadores() {
+    public void elJuegoNoComienzaSinUnMinimoDe2Jugadores() throws ArchivoDeTarjetasNoEncontradoException, ArchivoDePaisesNoEncontradoException {
 
         Juego juego = new Juego();
         juego.agregarJugador("Juani");
@@ -19,8 +16,9 @@ public class JuegoTest {
     }
 
 
+
     @Test
-    public void seColocan1EjercitosEnElMismoPais() throws NoEsRondaDeColocacionException, ElJugadorNoTieneTurnoException {
+    public void seColocan1EjercitosEnElMismoPais() throws NoEsRondaDeColocacionException, ElJugadorNoTieneTurnoException, JugadorNoExisteException, ArchivoDeTarjetasNoEncontradoException, ArchivoDePaisesNoEncontradoException {
 
         Juego juego = new Juego();
 
@@ -36,7 +34,7 @@ public class JuegoTest {
 
 
     @Test
-    public void seRepartenEquitativamente25PaisesEntreDosJugadores() throws CantidadDeJugadoresInsuficienteException, ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException {
+    public void seRepartenEquitativamente25PaisesEntreDosJugadores() throws JugadorNoExisteException, CantidadDeJugadoresInsuficienteException, ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException, ArchivoDeTarjetasNoEncontradoException, ArchivoDePaisesNoEncontradoException {
         Juego juego = new Juego();
         juego.agregarJugador("Martin");
         juego.agregarJugador("Juani");
@@ -44,6 +42,24 @@ public class JuegoTest {
 
         assertEquals(25,juego.cantidadPaisesDominados("Martin"));
         assertEquals(25,juego.cantidadPaisesDominados("Juani"));
+    }
+
+    @Test
+    public void funcionaLaRondaInicialDeColocacion() throws JugadorNoExisteException, CantidadDeJugadoresInsuficienteException, ArchivoDeTarjetasNoEncontradoException, ArchivoDePaisesNoEncontradoException{
+        Juego juego = new Juego();
+        juego.agregarJugador("Martin");
+        juego.agregarJugador("Naza");
+        juego.agregarJugador("Jueni");
+        juego.agregarJugador("Fran");
+        juego.agregarJugador("Cami");
+
+        juego.comenzar();
+
+
+
+
+
+
     }
 
 }

@@ -29,7 +29,7 @@ public class SinTurno implements Turno {
     }
 
     @Override
-    public void finalizarRonda() {
+    public void finalizarRonda(Jugador jugador) {
     }
 
     @Override

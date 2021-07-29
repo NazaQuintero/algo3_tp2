@@ -3,6 +3,9 @@ package edu.fiuba.algo3.modelo;
 import edu.fiuba.algo3.modelo.excepciones.*;
 import edu.fiuba.algo3.modelo.objetivos.*;
 import edu.fiuba.algo3.modelo.tarjetas.Tarjeta;
+import edu.fiuba.algo3.modelo.turnos.ConTurno;
+import edu.fiuba.algo3.modelo.turnos.SinTurno;
+import edu.fiuba.algo3.modelo.turnos.Turno;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -12,63 +15,47 @@ public class Juego {
     static final String ARCHIVO_PAISES = "paises.json";
     static final String ARCHIVO_TARJETAS = "tarjetas.json";
 
-    private Tablero tablero;
-    private ArrayList<Jugador> jugadores;
-    private ArrayList<Tarjeta> tarjetas;
-    private ArrayList<Objetivo> objetivos;
+    private final Tablero tablero;
+    private final Jugadores jugadores;
+    private final ArrayList<Tarjeta> tarjetas;
+    private Turno turno = new SinTurno();
 
-    public Juego() {
+    public Juego() throws ArchivoDePaisesNoEncontradoException, ArchivoDeTarjetasNoEncontradoException{
         tablero = new Tablero();
-        jugadores = new ArrayList<>();
+        jugadores = new Jugadores();
         tarjetas = new ArrayList<>();
-        objetivos = new ArrayList<>();
 
-        try {
-            CargarJuego.cargarPaisesAlTablero(tablero, ARCHIVO_PAISES);
-            CargarJuego.cargarTarjetas(tarjetas, ARCHIVO_TARJETAS, tablero);
-            CargarJuego.cargarObjetivos(objetivos, jugadores);
-        }
-
-        //Error al cargar los archivos
-        catch (Exception e) { e.printStackTrace(); }
+        CargarJuego.cargarPaisesAlTablero(tablero, ARCHIVO_PAISES);
+        CargarJuego.cargarTarjetas(tarjetas, ARCHIVO_TARJETAS, tablero);
     }
 
     public void agregarJugador(String nombre){
-        Jugador jugador = new Jugador(jugadores.size(), nombre);
-        jugadores.add(jugador);
+        Jugador jugador = new Jugador(jugadores.obtenerCantidad(), nombre);
+        jugadores.agregarJugador(jugador);
     }
 
-    public void comenzar() throws CantidadDeJugadoresInsuficienteException, ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException {
-        if (jugadores.size() < 2) throw new CantidadDeJugadoresInsuficienteException();
+    public void comenzar() throws CantidadDeJugadoresInsuficienteException {
+        if (jugadores.obtenerCantidad() < 2) throw new CantidadDeJugadoresInsuficienteException();
         else tablero.repartirPaises(jugadores);
-
-        asignarObjetivos();
+        jugadores.mezclar();
+        Objetivos.asignarObjetivos(jugadores);
+        turno = new ConTurno(jugadores);
     }
 
-    // Crea los objetivos de Ocupacion y Destruccion y le asigna uno a cada Jugador
-    private void asignarObjetivos() {
-        CargarJuego.cargarObjetivos(objetivos, jugadores);
-        for (Jugador jugador: jugadores) jugador.asignarObjetivo(nuevoObjetivo());
+    public void finalizarRonda(String nombreJugador) throws JugadorNoExisteException, ElJugadorNoTieneTurnoException {
+        turno.finalizarRonda(jugadores.obtenerJugador(nombreJugador));
     }
 
-    private Objetivo nuevoObjetivo() {
-        Random r = new Random();
-        return objetivos.remove(r.nextInt(objetivos.size())-1);
+    public void ataque(String jugador, String paisAtacante, String paisDefensor, int cantidadEjercitos) throws ElPaisNoEsLimitrofeException, EjercitosInsuficientesException, JugadorNoExisteException, ElJugadorNoTieneTurnoException, NoEsRondaDeAtaqueException {
+        tablero.ataque(jugadores.obtenerJugador(jugador), paisAtacante, paisDefensor, cantidadEjercitos);
     }
 
-    public void ataque(String paisAtacante, String paisDefensor, int cantidadEjercitos) throws ElPaisNoEsLimitrofeException, EjercitosInsuficientesException {
-        tablero.ataque(paisAtacante, paisDefensor, cantidadEjercitos);
+    public void colocarEjercitos(String nombreJugador, String nombrePais, int cantidadEjercitos) throws ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException, JugadorNoExisteException{
+        tablero.colocarEjercitos(jugadores.obtenerJugador(nombreJugador), nombrePais, cantidadEjercitos);
     }
 
-    public void colocarEjercitos(String nombreJugador, String nombrePais, int cantidadEjercitos) throws ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException{
-        tablero.colocarEjercitos(obtenerJugador(nombreJugador), nombrePais, cantidadEjercitos);
-    }
-
-    public int cantidadPaisesDominados(String nombre){
-        return  obtenerJugador(nombre).cantidadPaisesDominados();
-    }
-    private Jugador obtenerJugador(String nombre){
-        return jugadores.stream().filter(jugador -> nombre.equals(jugador.obtenerNombre())).findFirst().orElse(new Jugador(-1,""));
+    public int cantidadPaisesDominados(String nombre) throws JugadorNoExisteException{
+        return  jugadores.obtenerJugador(nombre).cantidadPaisesDominados();
     }
 
     public int cantidadEjercitosEn(String nombrePais) {

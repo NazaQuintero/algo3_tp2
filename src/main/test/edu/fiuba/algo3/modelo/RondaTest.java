@@ -55,8 +55,6 @@ public class RondaTest {
         Turno turno = new ConTurno(jugadores);
         turno.seleccionarPrimerJugador(0);
 
-        // Al finalizarRonda se pasa a la ronda de Reagrupe (no se puede atacar)
-        jugador1.finalizarRonda();
         assertThrows(NoEsRondaDeAtaqueException.class, () -> jugador1.atacarA(arg, jpn, 1));
     }
 
@@ -92,6 +90,7 @@ public class RondaTest {
         jugador1.colocarEjercitos(jpn, 1);
 
         Turno turno = new ConTurno(jugadores);
+        turno.setRonda(new Ataque());
         turno.seleccionarPrimerJugador(0);
         assertThrows(NoEsRondaDeColocacionException.class, () -> jugador1.colocarEjercitos(arg, 3));
     }
@@ -113,11 +112,6 @@ public class RondaTest {
 
         Turno turno = new ConTurno(jugadores);
         turno.seleccionarPrimerJugador(0);
-
-        jugador1.finalizarRonda(); // No ataca
-        jugador1.finalizarRonda(); // No reagrupa
-        jugador2.finalizarRonda(); // No ataca
-        jugador2.finalizarRonda(); // No reagrupa
 
         // Le toca la colocacion al jugador1
         jugador1.colocarEjercitos(arg, 2);
@@ -198,7 +192,7 @@ public class RondaTest {
     }
 
     @Test
-    public void seJuegaUnaRondaCon3JugadoresJugador2DominaAsiaNadieAtacaPeroSiColocan() throws ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException {
+    public void seJuegaUnaRondaCon3JugadoresJugador2DominaAsiaNadieAtacaPeroSiColocan() throws ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException, JugadorNoExisteException {
         Jugadores jugadores = new Jugadores();
         Jugador jugador1 = new Jugador(0, "Martin");
         Jugador jugador2 = new Jugador(1, "Naza");
@@ -274,6 +268,7 @@ public class RondaTest {
         jpn.ejercito.setDados(dadosDefensor);
 
         Turno unTurno = new ConTurno(jugadores);
+        unTurno.setRonda(new Ataque());
         unTurno.seleccionarPrimerJugador(0);
 
         //Ataque al primer pais del jugador2

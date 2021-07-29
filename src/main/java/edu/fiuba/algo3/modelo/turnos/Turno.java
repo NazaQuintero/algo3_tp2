@@ -11,7 +11,7 @@ import edu.fiuba.algo3.modelo.rondas.Ronda;
 public interface Turno {
     int obtenerCantidadDeTurnosPorRonda();
     Jugador obtenerJugadorTurnoActual();
-    void seleccionarPrimerJugador(int valor);
+    void seleccionarPrimerJugador(int valor) throws JugadorNoExisteException;
     Ronda obtenerRondaActual();
     int obtenerCantidadDeRondasJugadas();
     int obtenerCantidadDeTurnosJugados();
@@ -22,9 +22,9 @@ public interface Turno {
 
     void finalizarTurnoActual();
 
-    void finalizarRonda();
+    void finalizarRonda(Jugador jugador) throws ElJugadorNoTieneTurnoException;
 
-    Resultado atacarA(Pais atacante, Pais defensor, int cantidadEjercitos) throws ElJugadorNoTieneTurnoException, NoEsRondaDeAtaqueException;
+    Resultado atacarA(Pais atacante, Pais defensor, int cantidadEjercitos) throws ElJugadorNoTieneTurnoException, NoEsRondaDeAtaqueException, EjercitosInsuficientesException, ElPaisNoEsLimitrofeException;
 
     void reagrupar(Pais origen, Pais destino, int cantidad) throws NoEsRondaDeReagrupeException, ElJugadorNoTieneTurnoException, ElPaisNoEsLimitrofeException;
 
