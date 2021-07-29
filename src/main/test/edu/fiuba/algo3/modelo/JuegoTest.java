@@ -1,9 +1,6 @@
 package edu.fiuba.algo3.modelo;
 
-import edu.fiuba.algo3.modelo.excepciones.CantidadDeJugadoresInsuficienteException;
-import edu.fiuba.algo3.modelo.excepciones.ElJugadorNoTieneTurnoException;
-import edu.fiuba.algo3.modelo.excepciones.NoEsRondaDeColocacionException;
-import edu.fiuba.algo3.modelo.excepciones.PaisOcupadoPorOtroJugadorException;
+import edu.fiuba.algo3.modelo.excepciones.*;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -22,7 +19,7 @@ public class JuegoTest {
 
 
     @Test
-    public void seColocan1EjercitosEnElMismoPais() throws NoEsRondaDeColocacionException, ElJugadorNoTieneTurnoException {
+    public void seColocan1EjercitosEnElMismoPais() throws NoEsRondaDeColocacionException, ElJugadorNoTieneTurnoException, ElJugadorNoPuedeColocarMasEjercitosException {
 
         Juego juego = new Juego();
         Jugador jugador = new Jugador();
@@ -39,7 +36,7 @@ public class JuegoTest {
 
 
     @Test
-    public void seRepartenEquitativamente25PaisesEntreDosJugadores() throws CantidadDeJugadoresInsuficienteException, ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException {
+    public void seRepartenEquitativamente25PaisesEntreDosJugadores() throws CantidadDeJugadoresInsuficienteException, ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException, ElJugadorNoPuedeColocarMasEjercitosException {
         Juego juego = new Juego();
         Jugador jugadorUno = new Jugador();
         Jugador jugadorDos = new Jugador();

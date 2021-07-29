@@ -57,7 +57,7 @@ public class Jugador {
         return this.id;
     }
 
-    public void colocarEjercitos(Pais pais) throws ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException {
+    public void colocarEjercitos(Pais pais) throws ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException, ElJugadorNoPuedeColocarMasEjercitosException {
         if (paisesDominados.contains(pais)) {
             try {
                 this.turno.colocarEjercitos(pais);
@@ -173,4 +173,7 @@ public class Jugador {
         return canje;
     }
 
+    public int ordenCanje() {
+        return canje.cantidadEjercitos();
+    }
 }

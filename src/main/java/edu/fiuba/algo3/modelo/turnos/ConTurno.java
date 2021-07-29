@@ -89,7 +89,7 @@ public class ConTurno implements Turno {
         }
     }
 
-    public void colocarEjercitos(Pais unPais) throws NoEsRondaDeColocacionException {
+    public void colocarEjercitos(Pais unPais) throws NoEsRondaDeColocacionException, ElJugadorNoPuedeColocarMasEjercitosException {
         try {
             this.ronda.colocarEjercitos(unPais);
         } catch (NoEsRondaDeColocacionException e) {

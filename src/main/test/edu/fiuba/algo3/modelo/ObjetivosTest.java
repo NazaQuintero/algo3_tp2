@@ -2,6 +2,7 @@ package edu.fiuba.algo3.modelo;
 
 import edu.fiuba.algo3.modelo.continentes.Continente;
 import edu.fiuba.algo3.modelo.continentes.MultitonContinentes;
+import edu.fiuba.algo3.modelo.excepciones.ElJugadorNoPuedeColocarMasEjercitosException;
 import edu.fiuba.algo3.modelo.excepciones.ElJugadorNoTieneTurnoException;
 import edu.fiuba.algo3.modelo.excepciones.NoEsRondaDeColocacionException;
 import edu.fiuba.algo3.modelo.objetivos.*;
@@ -21,7 +22,7 @@ public class ObjetivosTest {
     }
 
     @Test
-    public void unJugadorCumpleElObjetivoGeneralDe30Paises() throws ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException {
+    public void unJugadorCumpleElObjetivoGeneralDe30Paises() throws ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException, ElJugadorNoPuedeColocarMasEjercitosException {
         Jugador jugador = new Jugador();
         for (int i = 0; i < 30; i++) jugador.colocarEjercitos(new Pais(i + ""));
 
@@ -38,7 +39,7 @@ public class ObjetivosTest {
     }
 
     @Test
-    public void unJugadorNoCumpleObjetivoDeDestruccion() throws ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException {
+    public void unJugadorNoCumpleObjetivoDeDestruccion() throws ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException, ElJugadorNoPuedeColocarMasEjercitosException {
         Jugador jugador = new Jugador();
         Jugador otroJugador = new Jugador();
         otroJugador.colocarEjercitos(new Pais("Japon"));
@@ -112,7 +113,7 @@ public class ObjetivosTest {
     }
 
     @Test
-    public void ocupacion2AmericaDelSur7DeEuropay3LimitrofesEstaCumplido() throws ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException {
+    public void ocupacion2AmericaDelSur7DeEuropay3LimitrofesEstaCumplido() throws ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException, ElJugadorNoPuedeColocarMasEjercitosException {
         MultitonContinentes.reiniciar();
         Continente americaDelSur = MultitonContinentes.obtenerInstanciaDe("America del Sur");
         Continente europa = MultitonContinentes.obtenerInstanciaDe("Europa");

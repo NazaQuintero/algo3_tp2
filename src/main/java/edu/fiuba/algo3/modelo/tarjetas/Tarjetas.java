@@ -16,9 +16,9 @@ public class Tarjetas {
         return tarjetasLocas.stream().anyMatch(tarjeta -> tarjeta.obtenerPais() == unPais);
     }
 
-    public Stream<Tarjeta> obtenerTarjetasConSimbolo(Simbolo unSimboloLoco) {
+    /*public Stream<Tarjeta> obtenerTarjetasConSimbolo(Simbolo unSimboloLoco) {
         return tarjetasLocas.stream().filter(tarjeta -> tarjeta.obtenerSimbolo() == unSimboloLoco); // esto no va a funcionar :v
-    }
+    }*/
 
     /*public TipoCanje metodoMagico() {
         if (this.hayTresSimbolosIguales()) return new TresSimbolosIguales();

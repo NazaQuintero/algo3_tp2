@@ -13,7 +13,7 @@ public interface Ronda {
     void finalizarRonda(Turno unTurno);
     Resultado atacarA(Pais atacante, Pais defensor) throws NoEsRondaDeAtaqueException, ElPaisNoEsLimitrofeException, EjercitosInsuficientesException;
     void reagrupar(Pais origen, Pais destino) throws NoEsRondaDeReagrupeException, ElPaisNoEsLimitrofeException;
-    void colocarEjercitos(Pais unPais) throws NoEsRondaDeColocacionException;
+    void colocarEjercitos(Pais unPais) throws NoEsRondaDeColocacionException, ElJugadorNoPuedeColocarMasEjercitosException;
 
     void activarTarjeta(Tarjeta unaTarjeta) throws ActivacionTarjetaEnRondaEquivocadaException, LaTarjetaYaFueActivadaException;
 }

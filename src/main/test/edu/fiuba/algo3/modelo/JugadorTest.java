@@ -198,5 +198,37 @@ public class JugadorTest {
 
     }
 
+    @Test
+    public void unJugadorQueSolicitaUnCanjeConDosTarjetasGloboYUnaBarcoNoLoPuedeObtener() throws LaTarjetaYaFueActivadaException, JugadorSinTarjetasException, LaTarjetaYaEstaDesactivadaException, SinCanjeHabilitadoException {
+        Usuario usuarioMock = mock(Usuario.class);
+        Jugador unJugador = new Jugador(1, usuarioMock);
+
+        Pais unPais1Canje = new Pais("Argentina");
+        Pais otroPais1Canje = new Pais("Brasil");
+        Pais ootroPais1Canje = new Pais("Colombia");
+
+        Tarjeta unaTarjeta1Canje = new Tarjeta(unPais1Canje, new Globo());
+        Tarjeta otraTarjeta1Canje = new Tarjeta(otroPais1Canje, new Globo());
+        Tarjeta ootraTarjeta1Canje = new Tarjeta(ootroPais1Canje, new Barco());
+
+        unaTarjeta1Canje.activar();
+        otraTarjeta1Canje.activar();
+        ootraTarjeta1Canje.activar();
+
+        unJugador.recibirTarjeta(unaTarjeta1Canje);
+        unJugador.recibirTarjeta(otraTarjeta1Canje);
+        unJugador.recibirTarjeta(ootraTarjeta1Canje);
+
+        ArrayList<Tarjeta> tarjetasElegidas1Canje = new ArrayList<>();
+        tarjetasElegidas1Canje.add(unaTarjeta1Canje);
+        tarjetasElegidas1Canje.add(otraTarjeta1Canje);
+        tarjetasElegidas1Canje.add(ootraTarjeta1Canje);
+
+        when(usuarioMock.pedirTarjetasACanjear()).thenReturn(tarjetasElegidas1Canje);
+
+        assertThrows(SinCanjeHabilitadoException.class, () -> unJugador.solicitarCanje());
+
+    }
+
 
 }

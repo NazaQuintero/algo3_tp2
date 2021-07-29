@@ -1,5 +1,7 @@
 package edu.fiuba.algo3.modelo;
 import edu.fiuba.algo3.modelo.continentes.Continente;
+import edu.fiuba.algo3.modelo.continentes.MultitonContinentes;
+import edu.fiuba.algo3.modelo.excepciones.ElJugadorNoPuedeColocarMasEjercitosException;
 import edu.fiuba.algo3.modelo.excepciones.ElJugadorNoTieneTurnoException;
 import edu.fiuba.algo3.modelo.excepciones.NoEsRondaDeColocacionException;
 
@@ -15,7 +17,7 @@ public class Tablero {
 
     public void agregarPais(Pais pais){ paises.put(pais.nombre, pais); }
 
-    public void repartirPaises(ArrayList<Jugador> jugadores) throws NoEsRondaDeColocacionException, ElJugadorNoTieneTurnoException {
+    public void repartirPaises(ArrayList<Jugador> jugadores) throws NoEsRondaDeColocacionException, ElJugadorNoTieneTurnoException, ElJugadorNoPuedeColocarMasEjercitosException {
         ArrayList<Pais> paises = new ArrayList<>(this.paises.values());
         Collections.shuffle(paises);
 

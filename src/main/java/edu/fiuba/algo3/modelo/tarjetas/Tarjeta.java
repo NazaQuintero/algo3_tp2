@@ -31,8 +31,8 @@ public class Tarjeta {
         estadoTarjeta = estadoTarjeta.desactivar();
     }
 
-    public Simbolo obtenerSimbolo() {
-        return simbolo;
+    public String obtenerSimbolo() {
+        return simbolo.obtenerDescripcion();
     }
 
     public boolean coincideSimboloCon(Tarjeta unaTarjeta) {

@@ -141,7 +141,7 @@ public class RondaTest {
 
 
     @Test
-    public void rondaConDosJugadoresNoSeAtacanYSeColocan2NuevosEjercitosCadaUno() throws ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException {
+    public void rondaConDosJugadoresNoSeAtacanYSeColocan2NuevosEjercitosCadaUno() throws ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException, ElJugadorNoPuedeColocarMasEjercitosException {
         Usuario usuarioMock1 = mock(Usuario.class);
         Usuario usuarioMock2 = mock(Usuario.class);
         when(usuarioMock1.pedirCantidad()).thenReturn(2);
@@ -279,7 +279,7 @@ public class RondaTest {
     }
 
     @Test
-    public void seJuegaUnaRondaCon3JugadoresJugador2DominaAsiaNadieAtacaPeroSiColocan() throws ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException {
+    public void seJuegaUnaRondaCon3JugadoresJugador2DominaAsiaNadieAtacaPeroSiColocan() throws ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException, ElJugadorNoPuedeColocarMasEjercitosException {
         Jugadores jugadores = new Jugadores();
         Usuario usuario1Mock = mock(Usuario.class);
         Usuario usuario2Mock = mock(Usuario.class);
@@ -304,22 +304,16 @@ public class RondaTest {
 
         Turno unTurno = new ConTurno(jugadores);
         unTurno.seleccionarPrimerJugador(0); // elegimos al jugador1 como primer jugador
-        unTurno.setRonda(new Colocacion());
+        unTurno.setRonda(new Colocacion(jugador1));
         
         Asia asia = new Asia();
         asia.agregarPais(china);
 
-        assertEquals(jugador1, unTurno.obtenerJugadorTurnoActual());
-
         jugador1.colocarEjercitos(unPais);
         jugador1.finalizarRonda();
 
-        assertEquals(jugador2, unTurno.obtenerJugadorTurnoActual());
-
         jugador2.colocarEjercitos(china);
         jugador2.finalizarRonda();
-
-        assertEquals(jugador3, unTurno.obtenerJugadorTurnoActual());
 
         jugador3.colocarEjercitos(otroPais);
         jugador3.finalizarRonda();
@@ -408,6 +402,53 @@ public class RondaTest {
         resultadoBatalla = jugador1.atacarA(paisAtacante, paisDefensor2);
         ProcesadorResultado.obtenerInstancia().procesar(resultadoBatalla);
         assertEquals(jugador1, paisDefensor2.dominadoPor());
+
+    }
+
+    @Test
+    public void unJugadorQueDominaOchoPaisesPuedeColocarCuatroEjercitos() throws ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException, ElJugadorNoPuedeColocarMasEjercitosException {
+        Usuario unUsuarioMock = mock(Usuario.class);
+        Usuario otroUsuarioMock = mock(Usuario.class);
+        Jugador unJugador = new Jugador(1, unUsuarioMock);
+        Jugador otroJugador = new Jugador(2, otroUsuarioMock);
+
+        when(unUsuarioMock.pedirCantidad()).thenReturn(2);
+
+        Pais unPais1 = new Pais("Argentina");
+        Pais unPais2 = new Pais("Bolivia");
+        Pais unPais3 = new Pais("Brasil");
+        Pais unPais4 = new Pais("Colombia");
+        Pais unPais5 = new Pais("Dinamarca");
+        Pais unPais6 = new Pais("Francia");
+        Pais unPais7 = new Pais("Grecia");
+        Pais unPais8 = new Pais("Haiti");
+
+        unPais1.colocarEjercito(new Ejercito(unJugador));
+        unPais2.colocarEjercito(new Ejercito(unJugador));
+        unPais3.colocarEjercito(new Ejercito(unJugador));
+        unPais4.colocarEjercito(new Ejercito(unJugador));
+        unPais5.colocarEjercito(new Ejercito(unJugador));
+        unPais6.colocarEjercito(new Ejercito(unJugador));
+        unPais7.colocarEjercito(new Ejercito(unJugador));
+        unPais8.colocarEjercito(new Ejercito(unJugador));
+
+        Jugadores jugadores = new Jugadores();
+        jugadores.agregarJugador(unJugador);
+        jugadores.agregarJugador(otroJugador);
+
+        Turno unTurno = new ConTurno(jugadores);
+
+        unTurno.seleccionarPrimerJugador(0);
+
+        unTurno.setRonda(new Colocacion(unJugador)); // cambiarlo en Turno
+
+        unJugador.colocarEjercitos(unPais1); // coloca 2
+        unJugador.colocarEjercitos(unPais1); // coloca 2, ya coloco 4
+
+        assertThrows(ElJugadorNoPuedeColocarMasEjercitosException.class, () -> unJugador.colocarEjercitos(unPais1));
+
+
+
 
     }
 
