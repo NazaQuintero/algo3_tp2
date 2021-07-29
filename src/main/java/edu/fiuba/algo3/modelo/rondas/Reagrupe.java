@@ -21,7 +21,7 @@ public class Reagrupe implements Ronda {
     @Override
     public void finalizarRonda(Turno unTurno) {
         unTurno.finalizarTurnoActual();
-        if(unTurno.leTocaALPrimerJugador()) unTurno.setRonda(new Colocacion());
+        if(unTurno.leTocaALPrimerJugador()) unTurno.setRonda(new Colocacion(unTurno.obtenerJugadorTurnoActual()));
         else unTurno.setRonda(new Ataque());
     }
 
