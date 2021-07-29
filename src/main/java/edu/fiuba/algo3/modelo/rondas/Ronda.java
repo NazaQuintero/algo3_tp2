@@ -15,5 +15,5 @@ public interface Ronda {
     void reagrupar(Pais origen, Pais destino) throws NoEsRondaDeReagrupeException, ElPaisNoEsLimitrofeException;
     void colocarEjercitos(Pais unPais) throws NoEsRondaDeColocacionException;
 
-    void activarTarjeta(Tarjeta unaTarjeta) throws ActivacionTarjetaEnRondaEquivocadaException;
+    void activarTarjeta(Tarjeta unaTarjeta) throws ActivacionTarjetaEnRondaEquivocadaException, LaTarjetaYaFueActivadaException;
 }
