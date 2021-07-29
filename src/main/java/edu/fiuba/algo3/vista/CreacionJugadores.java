@@ -46,6 +46,12 @@ public class CreacionJugadores extends BorderPane {
         return textFieldHBox;
     }
 
+    private Button crearBotonDeCarga() {
+        Button buttonSubmit = new Button("Cargar");
+        buttonSubmit.getStyleClass().add("startButton");
+        return buttonSubmit;
+    }
+
     private HBox crearBotoneraHorizontal(Stage stage) {
         Button buttonSubmit = new Button("Jugar");
         buttonSubmit.getStyleClass().add("startButton");
