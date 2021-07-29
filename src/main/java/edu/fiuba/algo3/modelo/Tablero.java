@@ -53,4 +53,8 @@ public class Tablero {
     public Jugador paisDominadoPor(String nombrePais) {
         return obtenerPais(nombrePais).dominadoPor();
     }
+
+    public void reagrupar(Jugador jugador, String nombrePaisOrigen, String nombrePaisDestino, int cantidadAMover) throws ElPaisNoEsLimitrofeException, NoEsRondaDeReagrupeException, ElJugadorNoTieneTurnoException {
+        jugador.reagrupar(obtenerPais(nombrePaisOrigen), obtenerPais(nombrePaisDestino), cantidadAMover);
+    }
 }

@@ -29,7 +29,7 @@ public class Juego {
     }
 
     public void agregarJugador(String nombre){
-        Jugador jugador = new Jugador(jugadores.obtenerCantidad(), nombre);
+        Jugador jugador = new Jugador(nombre);
         jugadores.agregarJugador(jugador);
     }
 
@@ -51,6 +51,9 @@ public class Juego {
 
     public void colocarEjercitos(String nombreJugador, String nombrePais, int cantidadEjercitos) throws ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException, JugadorNoExisteException{
         tablero.colocarEjercitos(jugadores.obtenerJugador(nombreJugador), nombrePais, cantidadEjercitos);
+    }
+    public void reagrupar(String nombreJugador, String nombrePaisOrigen, String nombrePaisDestino, int cantidadAMover) throws JugadorNoExisteException, ElPaisNoEsLimitrofeException, NoEsRondaDeReagrupeException, ElJugadorNoTieneTurnoException {
+        tablero.reagrupar(jugadores.obtenerJugador(nombreJugador), nombrePaisOrigen, nombrePaisDestino, cantidadAMover);
     }
 
     public int cantidadPaisesDominados(String nombre) throws JugadorNoExisteException{

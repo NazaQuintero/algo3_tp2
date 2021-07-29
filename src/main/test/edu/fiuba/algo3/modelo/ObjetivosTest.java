@@ -13,13 +13,13 @@ public class ObjetivosTest {
 
     @Test
     public void porDefectoUnJugadorNoCumpleNingunObjetivo() {
-        Jugador jugador = new Jugador(0, "Fran");
+        Jugador jugador = new Jugador( "Fran");
         assertFalse(jugador.cumpleObjetivo());
     }
 
     @Test
     public void unJugadorCumpleElObjetivoGeneralDe30Paises() throws ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException {
-        Jugador jugador = new Jugador(0, "Cami");
+        Jugador jugador = new Jugador( "Cami");
         for (int i = 0; i < 30; i++) jugador.colocarEjercitos(new Pais(i + ""), 1);
 
         assertTrue(jugador.cumpleObjetivo());
@@ -27,8 +27,8 @@ public class ObjetivosTest {
 
     @Test
     public void unJugadorCumpleObjetivoDeDestruccion() {
-        Jugador jugador1 = new Jugador(0, "Naza");
-        Jugador jugador2 = new Jugador(1, "Juani");
+        Jugador jugador1 = new Jugador( "Naza");
+        Jugador jugador2 = new Jugador( "Juani");
 
         jugador1.asignarObjetivo(new Destruccion(jugador2));
         assertTrue(jugador1.cumpleObjetivo());
@@ -36,8 +36,8 @@ public class ObjetivosTest {
 
     @Test
     public void unJugadorNoCumpleObjetivoDeDestruccion() throws ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException {
-        Jugador jugador1 = new Jugador(0, "Martin");
-        Jugador jugador2 = new Jugador(1, "Naza");
+        Jugador jugador1 = new Jugador( "Martin");
+        Jugador jugador2 = new Jugador( "Naza");
         jugador2.colocarEjercitos(new Pais("Brasil"), 1);
 
         jugador1.asignarObjetivo(new Destruccion(jugador2));
@@ -47,49 +47,49 @@ public class ObjetivosTest {
     @Test
     public void porDefectoOcupacionDeAfrica5DeAmericaDelNortey4DeEuropaNoEstaCumplido() {
         Objetivo ocupacion1 = new Ocupacion1();
-        assertFalse(ocupacion1.estaCumplido(new Jugador(0, "Martin")));
+        assertFalse(ocupacion1.estaCumplido(new Jugador( "Martin")));
     }
 
     @Test
     public void porDefectoOcupacionDeAmericaDelSur7DeEuropay3LimitrofesNoEstaCumplido() {
         Objetivo ocupacion2 = new Ocupacion2();
-        assertFalse(ocupacion2.estaCumplido(new Jugador(0, "Fran")));
+        assertFalse(ocupacion2.estaCumplido(new Jugador( "Fran")));
     }
 
     @Test
     public void porDefectoOcupacionDeAsiaY2DeAmericaDelSurNoEstaCumplido() {
         Objetivo ocupacion3 = new Ocupacion3();
-    assertFalse(ocupacion3.estaCumplido(new Jugador(0, "Naza")));
+    assertFalse(ocupacion3.estaCumplido(new Jugador( "Naza")));
     }
 
     @Test
     public void porDefectoOcupacionDeEuropa4DeAsiay2DeAmericaDelSurNoEstaCumplido() {
         Objetivo ocupacion4 = new Ocupacion4();
-        assertFalse(ocupacion4.estaCumplido(new Jugador(0, "Cami")));
+        assertFalse(ocupacion4.estaCumplido(new Jugador( "Cami")));
     }
 
     @Test
     public void porDefectoOcupacionDeAmericaDelNorte2DeOceaniaY4DeAsiaNoEstaCumplido() {
         Objetivo ocupacion5 = new Ocupacion5();
-        assertFalse(ocupacion5.estaCumplido(new Jugador(0, "Martin")));
+        assertFalse(ocupacion5.estaCumplido(new Jugador( "Martin")));
     }
 
     @Test
     public void porDefectoOcupacionDe2DeOceania2DeAfrica2DeAmericaDelSur3DeEuropa4DeAmericaDeLNorteY3DeAsiaNoEstaCumplido() {
         Objetivo ocupacion6 = new Ocupacion6();
-        assertFalse(ocupacion6.estaCumplido(new Jugador(0, "Martin")));
+        assertFalse(ocupacion6.estaCumplido(new Jugador( "Martin")));
     }
 
     @Test
     public void porDefectoOcupacionDeOceaniaAmericaDelNorteY2DeEuropaNoEstaCumplido() {
         Objetivo ocupacion7 = new Ocupacion7();
-        assertFalse(ocupacion7.estaCumplido(new Jugador(0, "Martin")));
+        assertFalse(ocupacion7.estaCumplido(new Jugador( "Martin")));
     }
 
     @Test
     public void porDefectoOcupacionDeAmericaDelSurAfricaY5DeAmericaDelNorteNoEstaCumplido() {
         Objetivo ocupacion8 = new Ocupacion8();
-        assertFalse(ocupacion8.estaCumplido(new Jugador(0, "Paul Walker")));
+        assertFalse(ocupacion8.estaCumplido(new Jugador( "Paul Walker")));
     }
 
     @Test
@@ -98,7 +98,7 @@ public class ObjetivosTest {
         Continente americaDelSur = MultitonContinentes.obtenerInstanciaDe("America del Sur");
         Continente europa = MultitonContinentes.obtenerInstanciaDe("Europa");
 
-        Jugador jugador = new Jugador(0, "Martin");
+        Jugador jugador = new Jugador( "Martin");
         jugador.asignarObjetivo(new Ocupacion2());
 
 

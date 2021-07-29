@@ -13,12 +13,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class BatallaTest {
 
     @Test
-    public void batallarEntrePaisesGanaAtacanteYColocaUnEjercitoEnElPaisDerrotado() throws ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException {
+    public void batallarEntrePaisesGanaAtacanteYColocaUnEjercitoEnElPaisDerrotado() {
 
         Pais paisAtacante = new Pais("Argentina");
         Pais paisDefensor = new Pais("Brasil");
-        Jugador jAtacante = new Jugador(0, "Martin");
-        Jugador jDefensor = new Jugador(1, "Naza");
+        Jugador jAtacante = new Jugador( "Martin");
+        Jugador jDefensor = new Jugador( "Naza");
 
 
         Dados dadosAtacante = new Dados();
@@ -54,8 +54,8 @@ public class BatallaTest {
     public void batallarEntrePaisesDefensorGanaYElAtacanteQuedaConUnSoloEjercito() {
         Pais paisAtacante = new Pais("Argentina");
         Pais paisDefensor = new Pais("Brasil");
-        Jugador jAtacante = new Jugador(0, "Martin");
-        Jugador jDefensor = new Jugador(1, "Naza");
+        Jugador jAtacante = new Jugador( "Martin");
+        Jugador jDefensor = new Jugador( "Naza");
 
 
         Dados dadosAtacante = new Dados();
@@ -88,8 +88,8 @@ public class BatallaTest {
     public void batallarEntrePaisesHayEmpateYGanaDefensor(){
         Pais paisAtacante = new Pais("Argentina");
         Pais paisDefensor = new Pais("Brasil");
-        Jugador jAtacante = new Jugador(0, "Martin");
-        Jugador jDefensor = new Jugador(1, "Naza");
+        Jugador jAtacante = new Jugador( "Martin");
+        Jugador jDefensor = new Jugador( "Naza");
 
         Dados dadosAtacante = new Dados();
         Dado dadoPersonalizadoAtacante = new DadoPersonalizado(1);

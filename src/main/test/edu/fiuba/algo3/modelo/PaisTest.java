@@ -31,7 +31,7 @@ public class PaisTest {
     public void laCantidadDeEjercitosColocadaEsCorrecta() {
 
         Pais unPais = new Pais("Argentina");
-        Ejercito ejercito = new Ejercito(new Jugador(0, "Juani"));
+        Ejercito ejercito = new Ejercito(new Jugador( "Juani"));
         ejercito.modificarCantidad(2);
         unPais.colocarEjercito(ejercito);
         assertEquals(3, unPais.cantidadEjercitos());
@@ -41,7 +41,7 @@ public class PaisTest {
     @Test
     public void alColocarUnEjercitoEstaDominadoPorUnJugador() {
 
-        Jugador unJugador = new Jugador(0, "Naza");
+        Jugador unJugador = new Jugador( "Naza");
         Pais unPais = new Pais("Argentina");
         Ejercito unEjercito = new Ejercito(unJugador);
         unPais.colocarEjercito(new Ejercito(unJugador));
@@ -52,7 +52,7 @@ public class PaisTest {
     @Test
     public void unPaisQueTenia1EjercitoPasaATener4SiElMismoJugadorVuelveAColocar() {
 
-        Jugador unJugador = new Jugador(0,"Naza");
+        Jugador unJugador = new Jugador("Naza");
         Pais unPais = new Pais("Argentina");
         unPais.colocarEjercito(new Ejercito(unJugador));
 
@@ -114,8 +114,8 @@ public class PaisTest {
         Pais paisAtacante = new Pais("Argentina");
         Pais paisDefensor = new Pais("Brasil");
         paisAtacante.limitaCon(paisDefensor);
-        Jugador jAtacante = new Jugador(0, "Martin");
-        Jugador jDefensor = new Jugador(1, "Naza");
+        Jugador jAtacante = new Jugador( "Martin");
+        Jugador jDefensor = new Jugador( "Naza");
 
         // Asigna que el Pais pertenezca a un jugador
         jAtacante.colocarEjercitos(paisAtacante, 4);
@@ -150,8 +150,8 @@ public class PaisTest {
         Pais paisAtacante = new Pais("Argentina");
         Pais paisDefensor = new Pais("Brasil");
         paisAtacante.limitaCon(paisDefensor);
-        Jugador jAtacante = new Jugador(0, "Martin");
-        Jugador jDefensor = new Jugador(1, "Naza");
+        Jugador jAtacante = new Jugador( "Martin");
+        Jugador jDefensor = new Jugador( "Naza");
 
         paisAtacante.colocarEjercito(new Ejercito(jAtacante));
         paisAtacante.modificarCantidadEjercito(3);

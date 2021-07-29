@@ -17,7 +17,6 @@ import java.util.HashMap;
 
 public class Jugador {
 
-    private final int id;
     private String color = "";
     private final ArrayList<Objetivo> objetivos = new ArrayList<>();
     private final String nombre;
@@ -26,8 +25,7 @@ public class Jugador {
     private final HashMap<Pais, Tarjeta> tarjetas = new HashMap<>();
     private Canje canje;
 
-    public Jugador(int id, String nombre){
-        this.id = id;
+    public Jugador(String nombre){
         this.objetivos.add(new General());
         this.canje = new CanjeNulo();
         this.nombre =  nombre;

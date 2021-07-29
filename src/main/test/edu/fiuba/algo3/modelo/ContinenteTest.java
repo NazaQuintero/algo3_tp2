@@ -13,7 +13,7 @@ public class ContinenteTest {
 
     @Test
     public void porDefectoNoEstaDominadoPorNadie() {
-        Jugador jugador = new Jugador(0, "Martin");
+        Jugador jugador = new Jugador( "Martin");
         Continente asia = new Asia();
         asia.agregarPais(new Pais("China"));
         assertFalse(asia.dominadoPor(jugador));
@@ -21,7 +21,7 @@ public class ContinenteTest {
 
     @Test
     public void unJugadorDomina3PaisesDeAsia() throws ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException {
-        Jugador jugador = new Jugador(0, "Martin");
+        Jugador jugador = new Jugador( "Martin");
         Pais china = new Pais("China");
         Pais india = new Pais("India");
         Pais japon = new Pais("Japon");
@@ -40,7 +40,7 @@ public class ContinenteTest {
 
     @Test
     public void unJugadorDominaTodoAsia() throws ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException {
-        Jugador jugador = new Jugador(0, "Martin");
+        Jugador jugador = new Jugador( "Martin");
         Pais china = new Pais("China");
         Pais india = new Pais("India");
         Pais japon = new Pais("Japon");
@@ -59,8 +59,8 @@ public class ContinenteTest {
 
     @Test
     public void unJugadorNoDominaTodoAsia() throws ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException {
-        Jugador jugador = new Jugador(0, "Martin");
-        Jugador jugador2 = new Jugador(1, "Frank");
+        Jugador jugador = new Jugador( "Martin");
+        Jugador jugador2 = new Jugador( "Frank");
         Pais china = new Pais("China");
         Pais india = new Pais("India");
         Pais japon = new Pais("Japon");

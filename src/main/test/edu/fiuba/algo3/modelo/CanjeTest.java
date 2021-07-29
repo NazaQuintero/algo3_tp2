@@ -16,8 +16,8 @@ import static org.mockito.Mockito.mock;
 
 public class CanjeTest {
     @Test
-    public void unJugadorSinTarjetasNoPuedeRealizarUnCanje()  {;
-        Jugador jugador = new Jugador(0, "Martin");
+    public void unJugadorSinTarjetasNoPuedeRealizarUnCanje()  {
+        Jugador jugador = new Jugador( "Martin");
         Tarjeta tarjeta = new Tarjeta(new Pais("Japon"), new Globo());
         ArrayList<Tarjeta> tarjetas = new ArrayList<>();
         tarjetas.add(tarjeta);
