@@ -1,6 +1,9 @@
 package edu.fiuba.algo3.modelo;
 
+import edu.fiuba.algo3.modelo.excepciones.JugadorNoExisteException;
+
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 
 public class Jugadores implements Iterable<Jugador> {
@@ -24,8 +27,12 @@ public class Jugadores implements Iterable<Jugador> {
         this.tamanio = jugadores.size();
     }
 
-    public Jugador obtenerJugador(int indice) {
-        return this.jugadores.get(indice); //TODO: Capturar la excepcion de ArrayList
+    public Jugador obtenerJugador(int indice) throws JugadorNoExisteException {
+        if (indice >= jugadores.size()) throw new JugadorNoExisteException();
+        return this.jugadores.get(indice);
+    }
+    public Jugador obtenerJugador(String nombre) throws JugadorNoExisteException{
+        return (this.jugadores.stream().filter(jugador -> nombre.equals(jugador.obtenerNombre())).findFirst().orElseThrow(JugadorNoExisteException::new));
     }
 
     public void setPrimerJugador(int valor) {
@@ -39,6 +46,10 @@ public class Jugadores implements Iterable<Jugador> {
 
     public Jugador obtenerSiguiente() {
         return this.it.next();
+    }
+
+    public void mezclar(){
+        Collections.shuffle(this.jugadores);
     }
 
     @Override

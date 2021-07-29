@@ -3,7 +3,6 @@ package edu.fiuba.algo3.modelo.turnos;
 import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.Pais;
 import edu.fiuba.algo3.modelo.batallasDeDados.Resultado;
-import edu.fiuba.algo3.modelo.batallasDeDados.ResultadoBatalla;
 import edu.fiuba.algo3.modelo.tarjetas.Tarjeta;
 import edu.fiuba.algo3.modelo.excepciones.*;
 import edu.fiuba.algo3.modelo.rondas.Ronda;
@@ -11,7 +10,7 @@ import edu.fiuba.algo3.modelo.rondas.Ronda;
 public interface Turno {
     int obtenerCantidadDeTurnosPorRonda();
     Jugador obtenerJugadorTurnoActual();
-    void seleccionarPrimerJugador(int valor);
+    void seleccionarPrimerJugador(int valor) throws JugadorNoExisteException;
     Ronda obtenerRondaActual();
     int obtenerCantidadDeRondasJugadas();
     int obtenerCantidadDeTurnosJugados();
@@ -22,13 +21,13 @@ public interface Turno {
 
     void finalizarTurnoActual();
 
-    void finalizarRonda();
+    void finalizarRonda(Jugador jugador) throws ElJugadorNoTieneTurnoException;
 
-    Resultado atacarA(Pais atacante, Pais defensor) throws ElJugadorNoTieneTurnoException, NoEsRondaDeAtaqueException;
+    Resultado atacarA(Pais atacante, Pais defensor, int cantidadEjercitos) throws ElJugadorNoTieneTurnoException, NoEsRondaDeAtaqueException, EjercitosInsuficientesException, ElPaisNoEsLimitrofeException;
 
-    void reagrupar(Pais origen, Pais destino) throws NoEsRondaDeReagrupeException, ElJugadorNoTieneTurnoException, ElPaisNoEsLimitrofeException;
+    void reagrupar(Pais origen, Pais destino, int cantidad) throws NoEsRondaDeReagrupeException, ElJugadorNoTieneTurnoException, ElPaisNoEsLimitrofeException;
 
-    void colocarEjercitos(Pais pais) throws NoEsRondaDeColocacionException, ElJugadorNoTieneTurnoException;
+    void colocarEjercitos(Pais pais, int cantidadEjercitos) throws NoEsRondaDeColocacionException, ElJugadorNoTieneTurnoException;
 
     void activarTarjeta(Tarjeta buscarTarjeta) throws ActivacionTarjetaEnRondaEquivocadaException, ElJugadorNoTieneTurnoException, LaTarjetaYaFueActivadaException;
 }

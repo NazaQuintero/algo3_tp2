@@ -6,24 +6,27 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+
 import com.google.gson.*;
 import edu.fiuba.algo3.modelo.continentes.*;
 import edu.fiuba.algo3.modelo.excepciones.ArchivoDePaisesNoEncontradoException;
 import edu.fiuba.algo3.modelo.excepciones.ArchivoDeTarjetasNoEncontradoException;
-import edu.fiuba.algo3.modelo.objetivos.Objetivo;
 import edu.fiuba.algo3.modelo.tarjetas.*;
 
 public class CargarJuego {
 
-    public static void cargarPaisesAlTablero(Tablero tablero, String archivoPaises) throws IOException, ArchivoDePaisesNoEncontradoException {
+    public static void cargarPaisesAlTablero(Tablero tablero, String archivoPaises) throws ArchivoDePaisesNoEncontradoException {
 
         HashMap<Pais, ArrayList<String>> limitrofes = new HashMap<>();
         HashMap<String, Pais> paises = new HashMap<>();
+        String json;
 
-        InputStream is = CargarJuego.class.getClassLoader().getResourceAsStream(archivoPaises);
-        if (is == null) throw new ArchivoDePaisesNoEncontradoException();
+        try {
+            InputStream is = CargarJuego.class.getClassLoader().getResourceAsStream(archivoPaises);
+            json = new String(is.readAllBytes(), StandardCharsets.UTF_8);
+        }
+        catch (IOException | NullPointerException e) {throw new ArchivoDePaisesNoEncontradoException();}
 
-        String json = new String(is.readAllBytes(), StandardCharsets.UTF_8);
         GsonBuilder gsonBuilder = new GsonBuilder();
 
         // Deserializer. Guarda cada Pais en "paises" y el nombre de los limitrofes en "limitrofes"
@@ -67,12 +70,13 @@ public class CargarJuego {
         }
     }
 
-    public static void cargarTarjetas(ArrayList<Tarjeta> tarjetas, String archivoTarjetas, Tablero tablero) throws IOException, ArchivoDeTarjetasNoEncontradoException {
-
-        InputStream is = CargarJuego.class.getClassLoader().getResourceAsStream(archivoTarjetas);
-        if (is == null) throw new ArchivoDeTarjetasNoEncontradoException();
-
-        String json = new String(is.readAllBytes(), StandardCharsets.UTF_8);
+    public static void cargarTarjetas(Tablero tablero, String archivoTarjetas) throws ArchivoDeTarjetasNoEncontradoException {
+        String json;
+        try {
+            InputStream is = CargarJuego.class.getClassLoader().getResourceAsStream(archivoTarjetas);
+            json = new String(is.readAllBytes(), StandardCharsets.UTF_8);
+        }
+        catch (IOException | NullPointerException e) {throw new ArchivoDeTarjetasNoEncontradoException();}
         GsonBuilder gsonBuilder = new GsonBuilder();
 
         JsonDeserializer<Tarjeta> deserializer = (jsonElement, type, jsonDeserializationContext) -> {
@@ -87,9 +91,9 @@ public class CargarJuego {
         gsonBuilder.registerTypeAdapter(Tarjeta.class, deserializer);
         Gson gson = gsonBuilder.create();
 
-        Tarjeta[] _tarjetas = gson.fromJson(json, Tarjeta[].class);
+        Tarjeta[] tarjetas = gson.fromJson(json, Tarjeta[].class);
 
-        tarjetas.addAll(Arrays.asList(_tarjetas));
+        for (Tarjeta t: tarjetas) tablero.agregarTarjeta(t);
     }
 
     private static Simbolo nuevoSimbolo(String simbolo) {

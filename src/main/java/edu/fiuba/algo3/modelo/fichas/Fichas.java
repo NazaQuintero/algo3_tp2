@@ -13,15 +13,11 @@ public interface Fichas {
 
     void modificarCantidad(int unaCantidad);
 
-    int pedirCantidadAlJugador();
-
     Dados tirarDados(Pais pais);
 
     void asignarRol(Rol unRol);
 
-//    void rolAtacante();
-//
-//    void rolDefensor();
-
     void agregarPais(Pais pais);
+
+    void setDados(Dados dados);
 }
