@@ -2,18 +2,15 @@ package edu.fiuba.algo3.modelo;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.lang.reflect.Array;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Random;
 
 import com.google.gson.*;
 import edu.fiuba.algo3.modelo.continentes.*;
 import edu.fiuba.algo3.modelo.excepciones.ArchivoDePaisesNoEncontradoException;
 import edu.fiuba.algo3.modelo.excepciones.ArchivoDeTarjetasNoEncontradoException;
-import edu.fiuba.algo3.modelo.objetivos.*;
 import edu.fiuba.algo3.modelo.tarjetas.*;
 
 public class CargarJuego {

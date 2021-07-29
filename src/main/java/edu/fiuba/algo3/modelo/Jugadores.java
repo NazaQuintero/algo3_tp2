@@ -1,6 +1,5 @@
 package edu.fiuba.algo3.modelo;
 
-import edu.fiuba.algo3.modelo.excepciones.ElJugadorNoTieneTurnoException;
 import edu.fiuba.algo3.modelo.excepciones.JugadorNoExisteException;
 
 import java.util.ArrayList;

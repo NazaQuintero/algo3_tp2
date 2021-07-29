@@ -7,7 +7,6 @@ import edu.fiuba.algo3.modelo.fichas.Ejercito;
 import edu.fiuba.algo3.modelo.rondas.Ataque;
 import edu.fiuba.algo3.modelo.rondas.Colocacion;
 import edu.fiuba.algo3.modelo.rondas.Reagrupe;
-import edu.fiuba.algo3.modelo.rondas.Ronda;
 import edu.fiuba.algo3.modelo.tarjetas.Globo;
 import edu.fiuba.algo3.modelo.tarjetas.Tarjeta;
 import edu.fiuba.algo3.modelo.turnos.ConTurno;
@@ -15,7 +14,6 @@ import edu.fiuba.algo3.modelo.turnos.Turno;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
 
 public class RondaTest {
     @Test

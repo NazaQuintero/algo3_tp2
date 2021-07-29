@@ -1,8 +1,6 @@
 package edu.fiuba.algo3.modelo;
 
-import edu.fiuba.algo3.modelo.batallasDeDados.Dados;
 import edu.fiuba.algo3.modelo.batallasDeDados.Resultado;
-import edu.fiuba.algo3.modelo.batallasDeDados.ResultadoBatalla;
 import edu.fiuba.algo3.modelo.canjes.Canje;
 import edu.fiuba.algo3.modelo.canjes.CanjeNulo;
 import edu.fiuba.algo3.modelo.batallasDeDados.ResultadoBatallaNulo;

@@ -7,7 +7,6 @@ import edu.fiuba.algo3.modelo.batallasDeDados.Resultado;
 import edu.fiuba.algo3.modelo.rondas.Colocacion;
 import edu.fiuba.algo3.modelo.tarjetas.Tarjeta;
 import edu.fiuba.algo3.modelo.excepciones.*;
-import edu.fiuba.algo3.modelo.rondas.Ataque;
 import edu.fiuba.algo3.modelo.rondas.Ronda;
 
 public class ConTurno implements Turno {
