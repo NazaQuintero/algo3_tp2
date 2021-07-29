@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.vista;
 
 import edu.fiuba.algo3.controladores.CrearJugadoresEventHandler;
+import edu.fiuba.algo3.modelo.Juego;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -17,28 +18,15 @@ import javafx.stage.Stage;
 public class SeleccionCantidadJugadores extends BorderPane {
 
     VBox panel = new VBox();
+    int cantidad = 0;
 
     public SeleccionCantidadJugadores(Stage stage) {
         this.getStylesheets().add("styles.css");
-        ObservableList<String> options = FXCollections.observableArrayList(
-                "2 Jugadores","3 Jugadores", "4 Jugadores", "5 Jugadores", "6 Jugadores"
-        );
-        ComboBox<String> comboBox = new ComboBox<>(options);
-        comboBox.getStyleClass().add("comboBox");
 
-        Button startButton = new Button("Ingresar");
+        ComboBox<String> comboBox = crearComboBox();
 
-        Button exitButton = new Button("Salir");
-        exitButton.setOnAction(e -> Platform.exit());
-
-        startButton.getStyleClass().add("startButton");
-        exitButton.getStyleClass().add("exitButton");
-        HBox botonera = new HBox(startButton, exitButton);
-        botonera.setAlignment(Pos.CENTER);
-        botonera.setSpacing(20);
-
-        Label label = new Label("Seleccione la cantidad de jugadores: ");
-        label.getStyleClass().add("title");
+        HBox botonera = this.crearBotoneraHorizontal(stage);
+        Label label = this.crearLabel();
 
         panel.getChildren().addAll(label, comboBox, botonera);
         panel.setAlignment(Pos.CENTER);
@@ -46,10 +34,44 @@ public class SeleccionCantidadJugadores extends BorderPane {
 
         this.setCenter(panel);
 
-        startButton.setOnAction(new CrearJugadoresEventHandler(stage));
-
     }
 
+    private HBox crearBotoneraHorizontal(Stage stage) {
+        Button startButton = new Button("Ingresar");
+        Button exitButton = new Button("Salir");
 
+        startButton.getStyleClass().add("startButton");
+        exitButton.getStyleClass().add("exitButton");
+
+        HBox botonera = new HBox(startButton, exitButton);
+        botonera.setAlignment(Pos.CENTER);
+        botonera.setSpacing(20);
+
+        exitButton.setOnAction(e -> Platform.exit());
+        startButton.setOnAction(new CrearJugadoresEventHandler(stage, cantidad));
+
+        return botonera;
+    }
+
+    private ComboBox<String> crearComboBox() {
+        ObservableList<String> options = FXCollections.observableArrayList(
+                "2 Jugadores","3 Jugadores", "4 Jugadores", "5 Jugadores", "6 Jugadores"
+        );
+        ComboBox<String> comboBox = new ComboBox<>(options);
+        comboBox.getStyleClass().add("comboBox");
+
+        comboBox.setOnAction(e -> {
+            this.cantidad = comboBox.getSelectionModel().getSelectedIndex() + 2;
+            // System.out.println("Cantidad: " + cantidad);
+        });
+
+        return comboBox;
+    }
+
+    private Label crearLabel() {
+        Label label = new Label("Seleccione la cantidad de jugadores: ");
+        label.getStyleClass().add("title");
+        return label;
+    }
 
 }

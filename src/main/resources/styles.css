@@ -2,7 +2,6 @@
     -fx-background-image: url("fondo.jpeg");
     -fx-background-repeat: no-repeat;
     -fx-background-size: 100% 100%;
-
 }
 
 .title {
@@ -10,18 +9,21 @@
     -fx-font-weight: bold;
     -fx-border-width: 3;
     -fx-border-color: black;
-    -fx-background-color: blue;
+    -fx-background-color: salmon;
 }
 
 .exitButton {
     -fx-background-color: red;
-    -fx-text-fill: white;
     -fx-font-size: 32px;
 }
 
 .startButton {
     -fx-background-color: green;
     -fx-font-size: 32px;
+}
+
+.button:hover {
+    -fx-background-color: -fx-shadow-highlight-color;
 }
 
 .comboBox {

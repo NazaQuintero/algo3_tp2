@@ -1,6 +1,8 @@
 package edu.fiuba.algo3.vista;
 
+import edu.fiuba.algo3.controladores.CrearJugadoresEventHandler;
 import edu.fiuba.algo3.controladores.SeleccionDeJugadoresEventHandler;
+import edu.fiuba.algo3.modelo.Juego;
 import javafx.application.Platform;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -12,8 +14,6 @@ import javafx.stage.Stage;
 
 public class MenuInicial extends VBox {
 
-    private static final int ANCHO = 250;
-    private static final int ALTO = 250;
     private Stage stage;
 
     public MenuInicial(Stage stage) {
@@ -22,11 +22,19 @@ public class MenuInicial extends VBox {
         this.setSpacing(20);
 
         this.getStylesheets().add("styles.css");
+        this.getStyleClass().add("body");
 
+        Label etiqueta = this.crearEtiquetaDeBienvenida();
+        HBox botonera = this.crearBotoneraHorizontal(stage);
+
+        this.getChildren().addAll(etiqueta, botonera);
+    }
+
+    private HBox crearBotoneraHorizontal(Stage stage) {
         Button startButton = new Button();
         Button exitButton = new Button();
-        exitButton.setText("Salir");
         startButton.setText("Jugar");
+        exitButton.setText("Salir");
 
         startButton.getStyleClass().add("startButton");
         exitButton.getStyleClass().add("exitButton");
@@ -38,13 +46,13 @@ public class MenuInicial extends VBox {
         botonera.setAlignment(Pos.CENTER);
         botonera.setSpacing(20);
 
+        return botonera;
+    }
+
+    private Label crearEtiquetaDeBienvenida() {
         Label etiqueta = new Label("Bienvenidos a A.L.T.E.G.O.!");
         etiqueta.getStyleClass().add("title");
-
-        this.getChildren().addAll(etiqueta, botonera);
-
-        this.getStyleClass().add("body");
-
+        return etiqueta;
     }
 
 

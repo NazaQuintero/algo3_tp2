@@ -9,6 +9,8 @@ import javafx.stage.Stage;
 public class SeleccionDeJugadoresEventHandler implements EventHandler<ActionEvent> {
 
     private final Stage stage;
+    private static final int ANCHO = 800;
+    private static final int ALTO = 550;
 
     public SeleccionDeJugadoresEventHandler(Stage stage) {
         this.stage = stage;
@@ -18,10 +20,8 @@ public class SeleccionDeJugadoresEventHandler implements EventHandler<ActionEven
     public void handle(ActionEvent actionEvent) {
 
         SeleccionCantidadJugadores seleccionJugadores = new SeleccionCantidadJugadores(stage);
-        Scene nuevaEscena = new Scene(seleccionJugadores);
+        Scene nuevaEscena = new Scene(seleccionJugadores, ANCHO, ALTO);
         stage.setScene(nuevaEscena);
-        stage.setTitle("Seleccion de jugadores");
-        stage.setMinHeight(600);
-        stage.setMinWidth(600);
+        stage.setTitle("A.L.T.E.G.O.");
     }
 }
