@@ -2,6 +2,8 @@ package edu.fiuba.algo3.modelo;
 
 import edu.fiuba.algo3.modelo.batallasDeDados.Dados;
 import edu.fiuba.algo3.modelo.batallasDeDados.ResultadoBatalla;
+import edu.fiuba.algo3.modelo.canjes.Canje;
+import edu.fiuba.algo3.modelo.canjes.CanjeNulo;
 import edu.fiuba.algo3.modelo.excepciones.*;
 import edu.fiuba.algo3.modelo.fichas.Ejercito;
 import edu.fiuba.algo3.modelo.objetivos.General;
@@ -23,11 +25,13 @@ public class Jugador {
     private ArrayList<Pais> paisesDominados = new ArrayList<>();
     private HashMap<String, Tarjeta> tarjetas = new HashMap<>();
     private Usuario usuario;
+    private Canje canje;
 
     public Jugador(int id, Usuario usuario) {
         this.id = id;
         this.usuario = usuario;
         this.objetivos.add(new General());
+        this.canje = new CanjeNulo();
     }
 
     public Jugador() { // despues lo volamo
@@ -107,19 +111,14 @@ public class Jugador {
         tarjetas.put(tarjeta.nombrePais(), tarjeta);
     }
 
-    public void activarTarjetaPais(Pais unPais) throws TarjetaNoEncontradaException, JugadorNoPoseePaisDeLaTarjetaException, ActivacionTarjetaEnRondaEquivocadaException, ElJugadorNoTieneTurnoException {
+    public void activarTarjetaPais(Pais unPais) throws TarjetaNoEncontradaException, JugadorNoPoseePaisDeLaTarjetaException, ActivacionTarjetaEnRondaEquivocadaException, ElJugadorNoTieneTurnoException, LaTarjetaYaFueActivadaException {
         if(!this.paisesDominados.contains(unPais)) throw new JugadorNoPoseePaisDeLaTarjetaException();
-
         this.turno.activarTarjeta(this.buscarTarjeta(unPais));
-        tarjetas.remove(unPais.obtenerNombre()); // this.mandarAlFondoDelMazo(nombrePais); deeaa
     }
 
-    private Tarjeta buscarTarjeta(Pais unPais) throws TarjetaNoEncontradaException {
-       try {
-            return this.tarjetas.get(unPais.obtenerNombre());
-        } catch (NullPointerException e) {
-            throw new TarjetaNoEncontradaException();
-        }
+    public Tarjeta buscarTarjeta(Pais unPais) throws TarjetaNoEncontradaException {
+        if (tarjetas.containsKey(unPais.obtenerNombre())) return tarjetas.get(unPais.obtenerNombre());
+        else throw new TarjetaNoEncontradaException();
     }
 
     public void asignarObjetivo(Objetivo unObjetivo) {
@@ -137,4 +136,29 @@ public class Jugador {
     public boolean poseeTresPaisesLimitrofes() {
         return paisesDominados.stream().anyMatch(pais -> (int) pais.getPaisesLimitrofes().stream().filter(pais1 -> pais1.dominadoPor() == this).count() >= 2);
     }
+
+    public ArrayList<Tarjeta> pedirTarjetasACanjear() {
+        return usuario.pedirTarjetasACanjear();
+    }
+
+    public void solicitarCanje() throws JugadorSinTarjetasException, SinCanjeHabilitadoException, LaTarjetaYaEstaDesactivadaException {
+        if (tarjetas.size() == 0) throw new JugadorSinTarjetasException();
+        else {
+            ArrayList<Tarjeta> tarjetasACanjear = this.pedirTarjetasACanjear();
+            canje = canje.habilitarCanje(tarjetasACanjear);
+            devolverTarjetas(tarjetasACanjear);
+        }
+    }
+
+    public void devolverTarjetas(ArrayList<Tarjeta> tarjetasADevolver) throws LaTarjetaYaEstaDesactivadaException {
+        for (Tarjeta tarjeta : tarjetasADevolver) {
+            tarjeta.desactivar();
+            tarjetas.remove(tarjeta.nombrePais());
+        }
+    }
+
+    public Canje obtenerCanjeActual() {
+        return canje;
+    }
+
 }

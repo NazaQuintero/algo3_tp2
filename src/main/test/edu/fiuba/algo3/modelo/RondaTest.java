@@ -184,7 +184,7 @@ public class RondaTest {
     }
 
     @Test
-    public void seActivaUnaTarjetaDePaisEnRondaDeColocacionSumandole2EjercitosADichoPais() throws JugadorNoPoseePaisDeLaTarjetaException, TarjetaNoEncontradaException, ActivacionTarjetaEnRondaEquivocadaException, ElJugadorNoTieneTurnoException {
+    public void seActivaUnaTarjetaDePaisEnRondaDeColocacionSumandole2EjercitosADichoPais() throws JugadorNoPoseePaisDeLaTarjetaException, TarjetaNoEncontradaException, ActivacionTarjetaEnRondaEquivocadaException, ElJugadorNoTieneTurnoException, LaTarjetaYaFueActivadaException {
         Jugadores jugadores = new Jugadores();
         Usuario usuario1 = new Usuario();
         Usuario usuario2 = new Usuario();
