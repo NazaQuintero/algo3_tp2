@@ -38,10 +38,6 @@ public class Colocacion implements Ronda {
         }*/
     }
 
-    public Colocacion() {
-        // borrar
-    }
-
 
     @Override
     public String obtenerDescripcion() {

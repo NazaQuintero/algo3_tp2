@@ -33,13 +33,13 @@ public class BatallaTest {
         dadosDefensor.agregarDado(dadoPersonalizadoDefensor);
         dadosDefensor.agregarDado(dadoPersonalizadoDefensor);
 
-        paisAtacante.ejercito = new Ejercito(jAtacante);
-        paisDefensor.ejercito = new Ejercito(jDefensor);
+        paisAtacante.colocarEjercito(new Ejercito(jAtacante));
+        paisDefensor.colocarEjercito(new Ejercito(jDefensor));
         paisAtacante.modificarCantidadEjercito(2);
 
         // Inyectamos los DadoPersonalizado(s) en los Ejercito(s)
-        paisAtacante.ejercito.setDados(dadosAtacante);
-        paisDefensor.ejercito.setDados(dadosDefensor);
+        paisAtacante.setDados(dadosAtacante);
+        paisDefensor.setDados(dadosDefensor);
 
 
         ResultadoBatalla resultadoBatalla = new ResultadoBatalla(paisAtacante, paisDefensor);
@@ -67,13 +67,13 @@ public class BatallaTest {
         Dado dadoPersonalizadoDefensor = new DadoPersonalizado(6);
         dadosDefensor.agregarDado(dadoPersonalizadoDefensor);
 
-        paisAtacante.ejercito = new Ejercito(jAtacante);
-        paisDefensor.ejercito = new Ejercito(jDefensor);
+        paisAtacante.colocarEjercito(new Ejercito(jAtacante));
+        paisDefensor.colocarEjercito(new Ejercito(jDefensor));
         paisAtacante.modificarCantidadEjercito(1);
         paisDefensor.modificarCantidadEjercito(1);
 
-        paisAtacante.ejercito.setDados(dadosAtacante);
-        paisDefensor.ejercito.setDados(dadosDefensor);
+        paisAtacante.setDados(dadosAtacante);
+        paisDefensor.setDados(dadosDefensor);
 
         ResultadoBatalla resultadoBatalla = new ResultadoBatalla(paisAtacante, paisDefensor);
         ProcesadorResultado.obtenerInstancia().procesar(resultadoBatalla);
@@ -99,12 +99,12 @@ public class BatallaTest {
         Dado dadoPersonalizadoDefensor = new DadoPersonalizado(1);
         dadosDefensor.agregarDado(dadoPersonalizadoDefensor);
 
-        paisAtacante.ejercito = new Ejercito(jAtacante);
-        paisDefensor.ejercito = new Ejercito(jDefensor);
+        paisAtacante.colocarEjercito(new Ejercito(jAtacante));
+        paisDefensor.colocarEjercito(new Ejercito(jDefensor));
         paisAtacante.modificarCantidadEjercito(1);
 
-        paisAtacante.ejercito.setDados(dadosAtacante);
-        paisDefensor.ejercito.setDados(dadosDefensor);
+        paisAtacante.setDados(dadosAtacante);
+        paisDefensor.setDados(dadosDefensor);
 
 
         ResultadoBatalla resultadoBatalla = new ResultadoBatalla(paisAtacante, paisDefensor);

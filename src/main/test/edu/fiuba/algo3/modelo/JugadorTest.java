@@ -49,7 +49,7 @@ public class JugadorTest {
         jugadores.agregarJugador(unJugador);
         Turno unTurno = new ConTurno(jugadores);
 
-        unTurno.setRonda(new Colocacion());
+        unTurno.setRonda(new Colocacion(jugadores.getPrimerJugador()));
         unJugador.setTurno(unTurno);
 
         Pais unPais = new Pais("Bolivia");

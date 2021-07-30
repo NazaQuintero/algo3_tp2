@@ -14,8 +14,8 @@ import edu.fiuba.algo3.modelo.roles.Defensor;
 import java.util.ArrayList;
 
 public class Pais {
-    String nombre;
-    Fichas ejercito;
+    private String nombre;
+    private Fichas ejercito;
     private ArrayList<Pais> paisesLimitrofes;
 
     public Pais(String nombre) {
@@ -90,5 +90,9 @@ public class Pais {
 
     public boolean estaLibre() {
         return this.dominadoPor() == null;
+    }
+
+    public void setDados(Dados dados) {
+        ejercito.setDados(dados);
     }
 }

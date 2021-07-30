@@ -136,7 +136,7 @@ public class RondaTest {
         Turno turno = new ConTurno(jugadores);
         turno.seleccionarPrimerJugador(0);
 
-        turno.setRonda(new Colocacion());
+        turno.setRonda(new Colocacion(jugadores.getPrimerJugador()));
 
         Tarjeta tarjeta = new Tarjeta(arg, new Globo());
         jugador1.recibirTarjeta(tarjeta);
@@ -212,7 +212,7 @@ public class RondaTest {
 
         Turno turno = new ConTurno(jugadores);
         turno.seleccionarPrimerJugador(0);
-        turno.setRonda(new Colocacion());
+        turno.setRonda(new Colocacion(jugadores.getPrimerJugador()));
 
         jugador1.colocarEjercitos(arg, 1);
         jugador1.finalizarRonda();
@@ -262,9 +262,9 @@ public class RondaTest {
         bra.colocarEjercito(new Ejercito(jugador2));
         jpn.colocarEjercito(new Ejercito(jugador2));
 
-        arg.ejercito.setDados(dadosAtacante);
-        bra.ejercito.setDados(dadosDefensor);
-        jpn.ejercito.setDados(dadosDefensor);
+        arg.setDados(dadosAtacante);
+        bra.setDados(dadosDefensor);
+        jpn.setDados(dadosDefensor);
 
         Turno unTurno = new ConTurno(jugadores);
         unTurno.setRonda(new Ataque());
