@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 
 import com.google.gson.*;
@@ -15,7 +14,7 @@ import edu.fiuba.algo3.modelo.tarjetas.*;
 
 public class CargarJuego {
 
-    public static void cargarPaisesAlTablero(Tablero tablero, String archivoPaises) throws ArchivoDePaisesNoEncontradoException {
+    public static void cargarPaisesAlJuego(Juego juego, String archivoPaises) throws ArchivoDePaisesNoEncontradoException {
 
         HashMap<Pais, ArrayList<String>> limitrofes = new HashMap<>();
         HashMap<String, Pais> paises = new HashMap<>();
@@ -51,7 +50,6 @@ public class CargarJuego {
             for (String limitrofe : arrayNombreLimitrofes) {
                 limitrofes.get(pais).add(limitrofe);
             }
-
             return pais;
         };
 
@@ -66,11 +64,11 @@ public class CargarJuego {
             for (String limitrofe: nombreLimitrofes) {
                 pais.limitaCon(paises.get(limitrofe));
             }
-            tablero.agregarPais(pais);
+            juego.agregarPais(pais);
         }
     }
 
-    public static void cargarTarjetas(Tablero tablero, String archivoTarjetas) throws ArchivoDeTarjetasNoEncontradoException {
+    public static void cargarTarjetas(Juego juego , String archivoTarjetas) throws ArchivoDeTarjetasNoEncontradoException {
         String json;
         try {
             InputStream is = CargarJuego.class.getClassLoader().getResourceAsStream(archivoTarjetas);
@@ -85,7 +83,7 @@ public class CargarJuego {
 
             String nombrePais = jsonObject.get("Pais").getAsString();
 
-            return new Tarjeta(tablero.obtenerPais(nombrePais), nuevoSimbolo(jsonObject.get("Simbolo").getAsString()));
+            return new Tarjeta(juego.obtenerPais(nombrePais), nuevoSimbolo(jsonObject.get("Simbolo").getAsString()));
         };
 
         gsonBuilder.registerTypeAdapter(Tarjeta.class, deserializer);
@@ -93,7 +91,7 @@ public class CargarJuego {
 
         Tarjeta[] tarjetas = gson.fromJson(json, Tarjeta[].class);
 
-        for (Tarjeta t: tarjetas) tablero.agregarTarjeta(t);
+        for (Tarjeta t: tarjetas) juego.agregarTarjeta(t);
     }
 
     private static Simbolo nuevoSimbolo(String simbolo) {

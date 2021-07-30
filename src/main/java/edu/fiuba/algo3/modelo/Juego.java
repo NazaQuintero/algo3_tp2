@@ -3,6 +3,7 @@ package edu.fiuba.algo3.modelo;
 import edu.fiuba.algo3.modelo.excepciones.*;
 import edu.fiuba.algo3.modelo.objetivos.*;
 import edu.fiuba.algo3.modelo.tarjetas.Tarjeta;
+import edu.fiuba.algo3.modelo.tarjetas.Tarjetas;
 import edu.fiuba.algo3.modelo.turnos.ConTurno;
 import edu.fiuba.algo3.modelo.turnos.SinTurno;
 import edu.fiuba.algo3.modelo.turnos.Turno;
@@ -15,22 +16,30 @@ public class Juego {
 
     private final Tablero tablero;
     private final Jugadores jugadores;
-    private final ArrayList<Tarjeta> tarjetas;
+    private final Tarjetas tarjetas;
     private Turno turno = new SinTurno();
 
     public Juego() throws ArchivoDePaisesNoEncontradoException, ArchivoDeTarjetasNoEncontradoException{
         tablero = new Tablero();
         jugadores = new Jugadores();
-        tarjetas = new ArrayList<>();
+        tarjetas = new Tarjetas();
 
-        CargarJuego.cargarPaisesAlTablero(tablero, ARCHIVO_PAISES);
-        CargarJuego.cargarTarjetas(tablero, ARCHIVO_TARJETAS);
+        CargarJuego.cargarPaisesAlJuego(this, ARCHIVO_PAISES);
+        CargarJuego.cargarTarjetas(this, ARCHIVO_TARJETAS);
+    }
+
+    public void agregarTarjeta(Tarjeta unaTarjeta) {
+        tarjetas.agregarTarjeta(unaTarjeta);
     }
 
     public Jugador agregarJugador(String nombre){
         Jugador jugador = new Jugador(nombre);
         jugadores.agregarJugador(jugador);
         return jugador;
+    }
+
+    public void agregarPais(Pais unPais) {
+        tablero.agregarPais(unPais);
     }
 
     public void agregarJugador(Jugador jugador){
@@ -57,6 +66,7 @@ public class Juego {
     public void colocarEjercitos(Jugador jugador, Pais pais, int cantidadEjercitos) throws ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException, JugadorNoExisteException, PaisOcupadoPorOtroJugadorException {
         tablero.colocarEjercitos(jugador, pais, cantidadEjercitos);
     }
+
     public void reagrupar(Jugador jugador, Pais paisOrigen, Pais paisDestino, int cantidadAMover) throws JugadorNoExisteException, ElPaisNoEsLimitrofeException, NoEsRondaDeReagrupeException, ElJugadorNoTieneTurnoException {
         tablero.reagrupar(jugador, paisOrigen, paisDestino, cantidadAMover);
     }
@@ -66,7 +76,7 @@ public class Juego {
     }
 
     public void recibirTarjeta(Jugador jugador, Pais paisTarjeta) {
-        tablero.recibirTarjeta(jugador, paisTarjeta);
+        tarjetas.darTarjeta(jugador, paisTarjeta);
     }
 
     public int cantidadEjercitosEn(Pais pais) {
@@ -78,11 +88,11 @@ public class Juego {
     }
 
     public void activarTarjeta(Jugador jugador, Pais pais) throws JugadorNoExisteException, ElJugadorNoTieneTurnoException, ActivacionTarjetaEnRondaEquivocadaException, LaTarjetaYaFueActivadaException, TarjetaNoEncontradaException, JugadorNoPoseePaisDeLaTarjetaException {
-        tablero.activarTarjeta(jugador, pais);
+        tarjetas.activarTarjeta(jugador, pais);
     }
 
     public void canjearTarjetas(Jugador jugador, ArrayList<Pais> paisesTarjetas) throws JugadorSinTarjetasException, LaTarjetaYaEstaDesactivadaException, SinCanjeHabilitadoException {
-        tablero.canjearTarjetas(jugador, paisesTarjetas);
+        tarjetas.canjearTarjetas(jugador, paisesTarjetas);
     }
 
     // Probablemente lo saquemos o saquemos todos los Strings y pongamos objetos
@@ -90,10 +100,12 @@ public class Juego {
     public Jugador obtenerJugador(String nombreJugador) throws JugadorNoExisteException {
         return jugadores.obtenerJugador(nombreJugador);
     }
+
     public Pais obtenerPais(String nombrePais){
         return tablero.obtenerPais(nombrePais);
     }
-    public void setTurno(){
+
+    public void iniciarTurno(){
         this.turno = new ConTurno(jugadores);
     }
 }

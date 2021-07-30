@@ -7,6 +7,7 @@ import edu.fiuba.algo3.modelo.fichas.Ejercito;
 import edu.fiuba.algo3.modelo.rondas.Ataque;
 import edu.fiuba.algo3.modelo.rondas.Colocacion;
 import edu.fiuba.algo3.modelo.rondas.Reagrupe;
+import edu.fiuba.algo3.modelo.rondas.Ronda;
 import edu.fiuba.algo3.modelo.tarjetas.Globo;
 import edu.fiuba.algo3.modelo.tarjetas.Tarjeta;
 import edu.fiuba.algo3.modelo.turnos.ConTurno;
@@ -135,7 +136,7 @@ public class RondaTest {
         Turno turno = new ConTurno(jugadores);
         turno.seleccionarPrimerJugador(0);
 
-        turno.setRonda(new Colocacion());
+        turno.setRonda(new Colocacion(jugadores.getPrimerJugador()));
 
         Tarjeta tarjeta = new Tarjeta(arg, new Globo());
         jugador1.recibirTarjeta(tarjeta);
@@ -149,7 +150,7 @@ public class RondaTest {
     @Test
     public void noSePuedeActivarUnaTarjetaDePaisEnUnaRondaDeAtaque() throws Exception{
         Jugadores jugadores = new Jugadores();
-        Jugador jugador1 = new Jugador( "Martin");
+        Jugador jugador1 = new Jugador( "Frank");
         jugadores.agregarJugador(jugador1);
 
         Pais arg = new Pais("Argentina");
@@ -211,7 +212,7 @@ public class RondaTest {
 
         Turno turno = new ConTurno(jugadores);
         turno.seleccionarPrimerJugador(0);
-        turno.setRonda(new Colocacion());
+        turno.setRonda(new Colocacion(jugadores.getPrimerJugador()));
 
         jugador1.colocarEjercitos(arg, 1);
         jugador1.finalizarRonda();
@@ -261,9 +262,9 @@ public class RondaTest {
         bra.colocarEjercito(new Ejercito(jugador2));
         jpn.colocarEjercito(new Ejercito(jugador2));
 
-        arg.ejercito.setDados(dadosAtacante);
-        bra.ejercito.setDados(dadosDefensor);
-        jpn.ejercito.setDados(dadosDefensor);
+        arg.setDados(dadosAtacante);
+        bra.setDados(dadosDefensor);
+        jpn.setDados(dadosDefensor);
 
         Turno unTurno = new ConTurno(jugadores);
         unTurno.setRonda(new Ataque());
