@@ -18,8 +18,14 @@ public class SeleccionCantidadJugadores extends BorderPane {
 
     VBox panel = new VBox();
     int cantidad = 0;
+    CreacionJugadores creacionJugadores;
+    private static final int ANCHO = 1200;
+    private static final int ALTO = 800;
 
     public SeleccionCantidadJugadores(Stage stage) {
+
+        this.creacionJugadores = new CreacionJugadores(stage);
+
         this.getStylesheets().add("styles.css");
 
         ComboBox<String> comboBox = crearComboBox();

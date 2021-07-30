@@ -30,6 +30,26 @@ public class CreacionJugadores extends BorderPane {
 
     }
 
+    public void setCantidadDeJugadores(int cantidadJugadores) {
+
+        for (int i = 0; i < cantidadJugadores; i++) {
+            this.crearFormularioDeCarga(i);
+        }
+        panel.getChildren().add(botonera);
+    }
+
+    private void crearFormularioDeCarga(int i) {
+        Label label = new Label("Ingrese el nombre del jugador " + (i+1) + ": ");
+        label.getStyleClass().add("labelText");
+        HBox textFieldHBox = crearTextFieldBox();
+        Button botonDeCarga = crearBotonDeCarga();
+        HBox hbox = new HBox();
+        hbox.getChildren().addAll(label, textFieldHBox, botonDeCarga);
+
+        panel.getChildren().addAll(hbox);
+        this.setCenter(panel);
+    }
+
     private HBox crearTextFieldBox() {
         TextField inputText = new TextField();
         inputText.getStyleClass().add("textField");
@@ -40,7 +60,7 @@ public class CreacionJugadores extends BorderPane {
 
     private Button crearBotonDeCarga() {
         Button buttonSubmit = new Button("Cargar");
-        buttonSubmit.getStyleClass().add("startButton");
+        buttonSubmit.getStyleClass().addAll("startButton", "loadButton");
         return buttonSubmit;
     }
 
@@ -58,6 +78,8 @@ public class CreacionJugadores extends BorderPane {
 
         HBox hbox = new HBox(buttonSubmit, exitButton);
         hbox.setAlignment(Pos.CENTER);
+        hbox.setSpacing(50);
+
         return hbox;
     }
 
