@@ -1,11 +1,10 @@
 package edu.fiuba.algo3.vista;
 
-import edu.fiuba.algo3.controladores.CrearJugadoresEventHandler;
-import edu.fiuba.algo3.modelo.Juego;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -48,7 +47,11 @@ public class SeleccionCantidadJugadores extends BorderPane {
         botonera.setSpacing(20);
 
         exitButton.setOnAction(e -> Platform.exit());
-        startButton.setOnAction(new CrearJugadoresEventHandler(stage, cantidad));
+        startButton.setOnAction(e -> {
+            this.creacionJugadores.setCantidadDeJugadores(cantidad);
+            Scene nuevaEscena = new Scene(this.creacionJugadores, ANCHO, ALTO);
+            stage.setScene(nuevaEscena);
+        });
 
         return botonera;
     }
@@ -60,10 +63,7 @@ public class SeleccionCantidadJugadores extends BorderPane {
         ComboBox<String> comboBox = new ComboBox<>(options);
         comboBox.getStyleClass().add("comboBox");
 
-        comboBox.setOnAction(e -> {
-            this.cantidad = comboBox.getSelectionModel().getSelectedIndex() + 2;
-            // System.out.println("Cantidad: " + cantidad);
-        });
+        comboBox.setOnAction(e -> this.cantidad = comboBox.getSelectionModel().getSelectedIndex() + 2);
 
         return comboBox;
     }

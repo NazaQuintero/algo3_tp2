@@ -22,6 +22,12 @@
     -fx-font-size: 32px;
 }
 
+.loadButton {
+    -fx-background-color: #2ecc71;
+    -fx-font-size: 24px;
+    -fx-end-margin: 30px;
+}
+
 .button:hover {
     -fx-background-color: -fx-shadow-highlight-color;
 }

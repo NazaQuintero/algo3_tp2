@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.vista;
 
 import javafx.application.Platform;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -14,33 +15,24 @@ import javafx.stage.Stage;
 public class CreacionJugadores extends BorderPane {
 
     VBox panel = new VBox();
-    VBox cajaDeBotones = new VBox();
+    HBox botonera;
     private static final int ANCHO = 1200;
     private static final int ALTO = 800;
 
-    public CreacionJugadores(Stage stage, int cantidadJugadores) {
+    public CreacionJugadores(Stage stage) {
 
         this.getStylesheets().add("styles.css");
-
-        for (int i = 0; i < 3; i++) {
-            Label label = new Label("Ingrese el nombre del jugador " + (i+1) + ": ");
-            HBox textFieldHBox = crearTextFieldBox();
-            Button botonDeCarga = crearBotonDeCarga();
-            panel.getChildren().addAll(label, textFieldHBox, botonDeCarga);
-        }
-        HBox botonera = crearBotoneraHorizontal(stage);
-        botonera.setSpacing(20);
-        cajaDeBotones.getChildren().addAll(botonera);
-        cajaDeBotones.setAlignment(Pos.BOTTOM_RIGHT);
+        botonera = crearBotoneraHorizontal(stage);
         panel.setAlignment(Pos.CENTER);
-        this.setCenter(panel);
-        this.setRight(cajaDeBotones);
+        panel.setSpacing(30);
+
+        this.setPadding(new Insets(20, 120, 20, 120));
+
     }
 
     private HBox crearTextFieldBox() {
         TextField inputText = new TextField();
-        inputText.setPrefWidth(300);
-        inputText.setPrefHeight(50);
+        inputText.getStyleClass().add("textField");
         HBox textFieldHBox = new HBox(inputText);
         textFieldHBox.setAlignment(Pos.CENTER);
         return textFieldHBox;
@@ -68,5 +60,6 @@ public class CreacionJugadores extends BorderPane {
         hbox.setAlignment(Pos.CENTER);
         return hbox;
     }
+
 
 }
