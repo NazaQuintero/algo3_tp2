@@ -24,12 +24,12 @@ public class Tablero {
     public void repartirPaises(Jugadores jugadores){
         ArrayList<Pais> paises = new ArrayList<>(this.paises.values());
         Collections.shuffle(paises);
-        int cant_jugadores = jugadores.obtenerCantidad();
+        int cantidadJugadores = jugadores.obtenerCantidad();
 
         // No se levanta ninguna excepcion en esta fase
         try{
             for (int i = 0; i < paises.size(); i++){
-                Jugador jugador = jugadores.obtenerJugador(i % cant_jugadores);
+                Jugador jugador = jugadores.obtenerJugador(i % cantidadJugadores);
                 jugador.colocarEjercitos(paises.get(i), 1);
             }
         }

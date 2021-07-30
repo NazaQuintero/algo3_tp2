@@ -54,7 +54,6 @@ public class Jugador {
     public void asignarColor(String color) {
         this.color = color;
     }
-
     public void setTurno(Turno unTurno) {
         this.turno = unTurno;
     }
@@ -130,7 +129,7 @@ public class Jugador {
         devolverTarjetas(tarjetas);
     }
 
-    boolean comprobarTarjetas(ArrayList<Tarjeta> tarjetas){
+    boolean comprobarTarjetas(ArrayList<Tarjeta> tarjetas) {
         for (Tarjeta t: tarjetas){
             if (!this.tarjetas.containsValue(t)) return false;
         }
@@ -148,4 +147,7 @@ public class Jugador {
         return canje;
     }
 
+    public int ordenCanje() {
+        return canje.cantidadEjercitos();
+    }
 }

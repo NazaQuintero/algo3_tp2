@@ -7,6 +7,7 @@ import edu.fiuba.algo3.modelo.fichas.Ejercito;
 import edu.fiuba.algo3.modelo.rondas.Ataque;
 import edu.fiuba.algo3.modelo.rondas.Colocacion;
 import edu.fiuba.algo3.modelo.rondas.Reagrupe;
+import edu.fiuba.algo3.modelo.rondas.Ronda;
 import edu.fiuba.algo3.modelo.tarjetas.Globo;
 import edu.fiuba.algo3.modelo.tarjetas.Tarjeta;
 import edu.fiuba.algo3.modelo.turnos.ConTurno;
@@ -149,7 +150,7 @@ public class RondaTest {
     @Test
     public void noSePuedeActivarUnaTarjetaDePaisEnUnaRondaDeAtaque() throws Exception{
         Jugadores jugadores = new Jugadores();
-        Jugador jugador1 = new Jugador( "Martin");
+        Jugador jugador1 = new Jugador( "Frank");
         jugadores.agregarJugador(jugador1);
 
         Pais arg = new Pais("Argentina");

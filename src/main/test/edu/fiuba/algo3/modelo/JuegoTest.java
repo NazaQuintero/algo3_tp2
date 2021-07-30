@@ -20,7 +20,6 @@ public class JuegoTest {
     }
 
 
-
     @Test
     public void seColocan1EjercitosEnElMismoPais() throws NoEsRondaDeColocacionException, ElJugadorNoTieneTurnoException, JugadorNoExisteException, ArchivoDeTarjetasNoEncontradoException, ArchivoDePaisesNoEncontradoException, PaisOcupadoPorOtroJugadorException {
 
