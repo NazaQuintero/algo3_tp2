@@ -1,14 +1,10 @@
 package edu.fiuba.algo3.modelo;
 
 import edu.fiuba.algo3.modelo.batallasDeDados.*;
-import edu.fiuba.algo3.modelo.excepciones.EjercitosInsuficientesException;
-import edu.fiuba.algo3.modelo.excepciones.ElPaisNoEsLimitrofeException;
 import edu.fiuba.algo3.modelo.fichas.Ejercito;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 public class PaisTest {
 
@@ -135,8 +131,8 @@ public class PaisTest {
         dadosDefensor.agregarDado(dadoDefensor);
         dadosDefensor.agregarDado(dadoDefensor);
 
-        paisAtacante.ejercito.setDados(dadosAtacante);
-        paisDefensor.ejercito.setDados(dadosDefensor);
+        paisAtacante.setDados(dadosAtacante);
+        paisDefensor.setDados(dadosDefensor);
 
         Resultado resultadoBatalla = paisAtacante.atacarA(paisDefensor, 3);
         ProcesadorResultado.obtenerInstancia().procesar(resultadoBatalla);
@@ -171,8 +167,8 @@ public class PaisTest {
         dadosDefensor.agregarDado(dadoDefensor);
         dadosDefensor.agregarDado(dadoDefensor);
 
-        paisAtacante.ejercito.setDados(dadosAtacante);
-        paisDefensor.ejercito.setDados(dadosDefensor);
+        paisAtacante.setDados(dadosAtacante);
+        paisDefensor.setDados(dadosDefensor);
 
         Resultado resultadoBatalla = paisAtacante.atacarA(paisDefensor, 3);
         ProcesadorResultado.obtenerInstancia().procesar(resultadoBatalla);

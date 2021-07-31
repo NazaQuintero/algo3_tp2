@@ -30,12 +30,12 @@ public class Tarjeta {
         estadoTarjeta = estadoTarjeta.desactivar();
     }
 
-    public Simbolo obtenerSimbolo() {
-        return simbolo;
+    public String obtenerSimbolo() {
+        return simbolo.obtenerDescripcion();
     }
 
     public boolean coincideSimboloCon(Tarjeta unaTarjeta) {
-        return this.obtenerSimbolo() == unaTarjeta.obtenerSimbolo();
+        return this.obtenerSimbolo().equals(unaTarjeta.obtenerSimbolo());
     }
 
     public TipoCanje compararSimbolos(Tarjeta unaTarjeta, Tarjeta otraTarjeta) {

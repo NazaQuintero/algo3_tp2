@@ -28,7 +28,7 @@ public class ObjetivosTest {
 
     @Test
     public void unJugadorCumpleObjetivoDeDestruccion() {
-        Jugador jugador1 = new Jugador( "Naza");
+        Jugador jugador1 = new Jugador( "NASA");
         Jugador jugador2 = new Jugador( "Juani");
 
         jugador1.asignarObjetivo(new Destruccion(jugador2));
@@ -38,7 +38,7 @@ public class ObjetivosTest {
     @Test
     public void unJugadorNoCumpleObjetivoDeDestruccion() throws ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException, PaisOcupadoPorOtroJugadorException {
         Jugador jugador1 = new Jugador( "Martin");
-        Jugador jugador2 = new Jugador( "Naza");
+        Jugador jugador2 = new Jugador( "NASA");
         jugador2.colocarEjercitos(new Pais("Brasil"), 1);
 
         jugador1.asignarObjetivo(new Destruccion(jugador2));

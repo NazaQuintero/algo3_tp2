@@ -18,7 +18,7 @@ public class ConTurno implements Turno {
 
     public ConTurno(Jugadores jugadores) {
         this.jugadores = jugadores;
-        this.setRonda(new Colocacion());
+        this.setRonda(new Colocacion(jugadores.getPrimerJugador()));
         this.cambiarJugadorActual();
         this.cantidadDeTurnosJugados = 0;
     }
@@ -50,7 +50,6 @@ public class ConTurno implements Turno {
         this.actual.setTurno(new SinTurno());
         this.cambiarJugadorActual();
         this.cantidadDeTurnosJugados++;
-
     }
 
     public int obtenerCantidadDeTurnosJugados() {

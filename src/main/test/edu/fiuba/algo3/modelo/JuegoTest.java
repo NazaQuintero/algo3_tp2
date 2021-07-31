@@ -1,7 +1,8 @@
 package edu.fiuba.algo3.modelo;
 
 import edu.fiuba.algo3.modelo.excepciones.*;
-import edu.fiuba.algo3.modelo.rondas.Colocacion;
+import edu.fiuba.algo3.modelo.tarjetas.Tarjeta;
+import edu.fiuba.algo3.modelo.tarjetas.Globo;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -18,7 +19,6 @@ public class JuegoTest {
         juego.agregarJugador("Juani");
         assertThrows(CantidadDeJugadoresInsuficienteException.class, juego::comenzar);
     }
-
 
 
     @Test
@@ -51,14 +51,27 @@ public class JuegoTest {
     @Test
     public void canjeFunciona() throws ArchivoDeTarjetasNoEncontradoException, ArchivoDePaisesNoEncontradoException, ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException, JugadorNoExisteException, ActivacionTarjetaEnRondaEquivocadaException, LaTarjetaYaFueActivadaException, TarjetaNoEncontradaException, JugadorNoPoseePaisDeLaTarjetaException, JugadorSinTarjetasException, LaTarjetaYaEstaDesactivadaException, SinCanjeHabilitadoException, PaisOcupadoPorOtroJugadorException {
         Juego juego = new Juego();
-        Jugador jugador = juego.agregarJugador("Martin");
-        juego.agregarJugador("Naza");
-        //juego.comenzar();
-        juego.setTurno();
-
         Pais arg = juego.obtenerPais("Argentina");
         Pais bra = juego.obtenerPais("Brasil");
         Pais chl = juego.obtenerPais("Chile");
+
+        Tarjeta unaTarjeta = new Tarjeta(arg, new Globo());
+        Tarjeta otraTarjeta = new Tarjeta(bra, new Globo());
+        Tarjeta ootraTarjeta = new Tarjeta(chl, new Globo());
+
+        juego.agregarPais(arg);
+        juego.agregarPais(bra);
+        juego.agregarPais(chl);
+
+        juego.agregarTarjeta(unaTarjeta);
+        juego.agregarTarjeta(otraTarjeta);
+        juego.agregarTarjeta(ootraTarjeta);
+
+        Jugador jugador = juego.agregarJugador("Cami");
+        juego.agregarJugador("Frank");
+
+        //juego.comenzar();
+        juego.iniciarTurno();
 
         juego.colocarEjercitos(jugador, arg, 1);
         juego.colocarEjercitos(jugador, bra, 1);
