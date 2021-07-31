@@ -4,6 +4,17 @@
     -fx-background-size: 100% 100%;
 }
 
+.board {
+    -fx-background-image: url("tablero.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 100% 100%;
+}
+
+.pais:hover {
+    -fx-cursor: hand;
+    -fx-fill: rgba(255, 255, 255, 0.50);
+}
+
 .title {
     -fx-font-size: 32px;
     -fx-font-weight: bold;
