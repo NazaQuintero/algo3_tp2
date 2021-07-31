@@ -13,10 +13,6 @@ public class VistaPais extends BorderPane {
 
         caja.setOnMouseClicked( e -> System.out.println("Pais: " + nombre));
 
-        /*caja.hoverProperty().addListener( e -> {
-            caja.setFill(Color.rgb(255, 255, 255, 0.50));
-        });*/
-
         caja.setLayoutX(x);
         caja.setLayoutY(y);
         this.getChildren().add(caja);

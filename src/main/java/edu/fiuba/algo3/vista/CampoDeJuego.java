@@ -15,12 +15,11 @@ public class CampoDeJuego extends BorderPane {
 
     }
 
-
     private void crearPaises() {
 
         VistaPais alaska = new VistaPais(45, 405, "Alaska");
 
-        this.getChildren().addAll(alaska);
+        this.getChildren().addAll(alaska, yukon);
     }
 
 }
