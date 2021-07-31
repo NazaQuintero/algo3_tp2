@@ -11,7 +11,13 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+
+import java.util.Arrays;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.concurrent.TimeUnit;
 
 
 public class SeleccionCantidadJugadores extends BorderPane {
@@ -54,9 +60,16 @@ public class SeleccionCantidadJugadores extends BorderPane {
 
         exitButton.setOnAction(e -> Platform.exit());
         startButton.setOnAction(e -> {
-            this.creacionJugadores.setCantidadDeJugadores(cantidad);
-            Scene nuevaEscena = new Scene(this.creacionJugadores, ANCHO, ALTO);
-            stage.setScene(nuevaEscena);
+            if (cantidad == 0) {
+                Label label = new Label("Debe seleccionar una cantidad para comenzar");
+                label.setTextFill(Color.RED);
+                panel.getChildren().add(label);
+            } else {
+                this.creacionJugadores.setCantidadDeJugadores(cantidad);
+                Scene nuevaEscena = new Scene(this.creacionJugadores, ANCHO, ALTO);
+                stage.setScene(nuevaEscena);
+            }
+
         });
 
         return botonera;

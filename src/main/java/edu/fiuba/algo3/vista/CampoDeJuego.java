@@ -12,7 +12,6 @@ public class CampoDeJuego extends BorderPane {
         this.getStyleClass().add("board");
 
         crearPaises();
-
     }
 
     private void crearPaises() {

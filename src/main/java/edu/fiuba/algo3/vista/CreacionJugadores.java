@@ -16,6 +16,8 @@ public class CreacionJugadores extends BorderPane {
 
     VBox panel = new VBox();
     HBox botonera;
+    private static final int ANCHO = 1900;
+    private static final int ALTO = 1060;
 
     public CreacionJugadores(Stage stage) {
 
@@ -66,9 +68,8 @@ public class CreacionJugadores extends BorderPane {
         Button buttonSubmit = new Button("Jugar");
         buttonSubmit.getStyleClass().add("startButton");
         buttonSubmit.setOnAction(e -> {
-            Scene nuevaEscena = new Scene(new CampoDeJuego(stage));
+            Scene nuevaEscena = new Scene(new CampoDeJuego(stage), ANCHO, ALTO);
             stage.setScene(nuevaEscena);
-            stage.setFullScreen(true);
         });
 
         Button exitButton = new Button("Salir");
