@@ -73,6 +73,12 @@ public class CampoDeJuego extends HBox {
         VistaPais sudafrica = new VistaPais(680, 550, "Sudafrica");
         VistaPais madagascar = new VistaPais(770, 520, "Madagascar");
 
+        // Oceania
+        VistaPais australia = new VistaPais(920, 510, "Australia");
+        VistaPais java = new VistaPais(940, 410, "Java");
+        VistaPais borneo = new VistaPais(885, 410, "Borneo");
+        VistaPais sumatra = new VistaPais(820, 450, "Sumatra");
+
 
         stackPane.getChildren().addAll(alaska, yukon, canada, groenlandia, oregon, california, mexico, nuevaYork, terranova, labrador);
 
@@ -81,6 +87,8 @@ public class CampoDeJuego extends HBox {
         stackPane.getChildren().addAll(islandia, espania, granBretania, francia, alemania,italia, polonia, rusia, suecia);
 
         stackPane.getChildren().addAll(sahara, egipto, etiopia, zaire, sudafrica, madagascar);
+
+        stackPane.getChildren().addAll(australia, java, borneo, sumatra);
 
     }
 
