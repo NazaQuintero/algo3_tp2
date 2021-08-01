@@ -66,7 +66,7 @@ public class SeleccionCantidadJugadores extends BorderPane {
                 panel.getChildren().add(label);
             } else {
                 this.creacionJugadores.setCantidadDeJugadores(cantidad);
-                Scene nuevaEscena = new Scene(this.creacionJugadores, ANCHO, ALTO);
+                Scene nuevaEscena = new Scene(this.creacionJugadores);
                 stage.setScene(nuevaEscena);
             }
 

@@ -4,15 +4,12 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
-public class VistaPais extends BorderPane {
+public class VistaPais extends Rectangle {
     public VistaPais(int x, int y, String nombre) {
-        this.getStylesheets().add("styles.css");
-        Rectangle caja = new Rectangle(x, y,70,70);
-        caja.setFill(Color.RED);
-        caja.getStyleClass().add("pais");
+        super(x, y, 50, 50);
+        setFill(Color.RED);
+        this.getStyleClass().add("pais");
 
-        caja.setOnMouseClicked( e -> System.out.println("Pais: " + nombre));
-
-        this.getChildren().add(caja);
+        this.setOnMouseClicked( e -> System.out.println("Pais: " + nombre));
     }
 }

@@ -3,14 +3,12 @@ package edu.fiuba.algo3.vista;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
+
 
 public class CreacionJugadores extends BorderPane {
 
@@ -68,8 +66,13 @@ public class CreacionJugadores extends BorderPane {
         Button buttonSubmit = new Button("Jugar");
         buttonSubmit.getStyleClass().add("startButton");
         buttonSubmit.setOnAction(e -> {
-            Scene nuevaEscena = new Scene(new CampoDeJuego(stage), ANCHO, ALTO);
-            stage.setScene(nuevaEscena);
+            CampoDeJuego campoDeJuego = new CampoDeJuego(stage);
+
+//            VistaPais alaska = new VistaPais(45, 405, "Alaska");
+//            VistaPais yukon = new VistaPais(155, 330, "Yukon");
+//
+//            campoDeJuego.getChildren().addAll(alaska, yukon);
+
         });
 
         Button exitButton = new Button("Salir");
