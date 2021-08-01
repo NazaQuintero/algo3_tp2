@@ -20,7 +20,9 @@ public class CreacionJugadores extends BorderPane {
     public CreacionJugadores(Stage stage) {
 
         this.getStylesheets().add("styles.css");
-        botonera = crearBotoneraHorizontal(stage);
+        Button buttonSubmit = this.crearBotonJugar(stage);
+        Button exitButton = this.crearExitButton();
+        botonera = crearBotoneraHorizontal(buttonSubmit, exitButton);
         panel.setAlignment(Pos.CENTER);
         panel.setSpacing(30);
 
@@ -62,28 +64,25 @@ public class CreacionJugadores extends BorderPane {
         return buttonSubmit;
     }
 
-    private HBox crearBotoneraHorizontal(Stage stage) {
-        Button buttonSubmit = new Button("Jugar");
-        buttonSubmit.getStyleClass().add("startButton");
-        buttonSubmit.setOnAction(e -> {
-            CampoDeJuego campoDeJuego = new CampoDeJuego(stage);
-
-//            VistaPais alaska = new VistaPais(45, 405, "Alaska");
-//            VistaPais yukon = new VistaPais(155, 330, "Yukon");
-//
-//            campoDeJuego.getChildren().addAll(alaska, yukon);
-
-        });
-
-        Button exitButton = new Button("Salir");
-        exitButton.getStyleClass().add("exitButton");
-        exitButton.setOnAction(e -> Platform.exit());
-
+    private HBox crearBotoneraHorizontal(Button buttonSubmit, Button exitButton) {
         HBox hbox = new HBox(buttonSubmit, exitButton);
         hbox.setAlignment(Pos.CENTER);
         hbox.setSpacing(50);
-
         return hbox;
+    }
+
+    private Button crearExitButton() {
+        Button exitButton = new Button("Salir");
+        exitButton.getStyleClass().add("exitButton");
+        exitButton.setOnAction(e -> Platform.exit());
+        return  exitButton;
+    }
+
+    private Button crearBotonJugar(Stage stage) {
+        Button buttonSubmit = new Button("Jugar");
+        buttonSubmit.getStyleClass().add("startButton");
+        buttonSubmit.setOnAction(e ->  new CampoDeJuego(stage));
+        return buttonSubmit;
     }
 
 

@@ -24,32 +24,37 @@ public class MenuInicial extends VBox {
         this.getStyleClass().add("body");
 
         Label etiqueta = this.crearEtiquetaDeBienvenida();
-        HBox botonera = this.crearBotoneraHorizontal(stage);
+        Button startButton = createStartButton();
+        Button exitButton = createExitButton();
+        HBox botonera = this.crearBotoneraHorizontal(startButton, exitButton);
 
         this.getChildren().addAll(etiqueta, botonera);
     }
 
-    private HBox crearBotoneraHorizontal(Stage stage) {
-        Button startButton = new Button();
+    private HBox crearBotoneraHorizontal(Button startButton, Button exitButton) {
+        HBox botonera = new HBox(startButton, exitButton);
+        botonera.setAlignment(Pos.CENTER);
+        botonera.setSpacing(20);
+        return botonera;
+    }
+
+    private Button createExitButton() {
         Button exitButton = new Button();
-        startButton.setText("Jugar");
         exitButton.setText("Salir");
-
-        startButton.getStyleClass().add("startButton");
         exitButton.getStyleClass().add("exitButton");
+        exitButton.setOnAction(e -> Platform.exit());
+        return exitButton;
+    }
 
+    private Button createStartButton() {
+        Button startButton = new Button();
+        startButton.setText("Jugar");
+        startButton.getStyleClass().add("startButton");
         startButton.setOnAction(e -> {
             Scene nuevaEscena = new Scene(new SeleccionCantidadJugadores(stage), ANCHO, ALTO);
             stage.setScene(nuevaEscena);
         });
-
-        exitButton.setOnAction(e -> Platform.exit());
-
-        HBox botonera = new HBox(startButton, exitButton);
-        botonera.setAlignment(Pos.CENTER);
-        botonera.setSpacing(20);
-
-        return botonera;
+        return startButton;
     }
 
     private Label crearEtiquetaDeBienvenida() {

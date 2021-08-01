@@ -11,13 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-
-import java.util.Arrays;
-import java.util.Timer;
-import java.util.TimerTask;
-import java.util.concurrent.TimeUnit;
 
 
 public class SeleccionCantidadJugadores extends BorderPane {
@@ -35,10 +29,13 @@ public class SeleccionCantidadJugadores extends BorderPane {
         this.getStylesheets().add("styles.css");
         this.getStyleClass().add("body");
 
-        ComboBox<String> comboBox = crearComboBox();
+        ComboBox<String> comboBox = this.crearComboBox();
 
-        HBox botonera = this.crearBotoneraHorizontal(stage);
         Label label = this.crearLabel();
+        Label labelError = this.crearLabelError();
+        Button startButton = this.createStartButton(stage, labelError);
+        Button exitButton = this.createExitButton();
+        HBox botonera = this.crearBotoneraHorizontal(startButton, exitButton);
 
         panel.getChildren().addAll(label, comboBox, botonera);
         panel.setAlignment(Pos.CENTER);
@@ -48,32 +45,41 @@ public class SeleccionCantidadJugadores extends BorderPane {
 
     }
 
-    private HBox crearBotoneraHorizontal(Stage stage) {
-        Button startButton = new Button("Ingresar");
-        Button exitButton = new Button("Salir");
+    private Label crearLabelError() {
+        Label label = new Label("Debe seleccionar una cantidad para comenzar");
+        label.getStyleClass().add("error");
+        return label;
+    }
 
-        startButton.getStyleClass().add("startButton");
-        exitButton.getStyleClass().add("exitButton");
-
+    private HBox crearBotoneraHorizontal(Button startButton, Button exitButton) {
         HBox botonera = new HBox(startButton, exitButton);
         botonera.setAlignment(Pos.CENTER);
         botonera.setSpacing(20);
+        return botonera;
+    }
 
-        exitButton.setOnAction(e -> Platform.exit());
+    private Button createStartButton(Stage stage, Label labelError) {
+        Button startButton = new Button("Ingresar");
+        startButton.getStyleClass().add("startButton");
         startButton.setOnAction(e -> {
             if (cantidad == 0) {
-                Label label = new Label("Debe seleccionar una cantidad para comenzar");
-                label.getStyleClass().add("error");
-                panel.getChildren().add(label);
+                if(!panel.getChildren().contains(labelError)) {
+                    panel.getChildren().add(labelError);
+                }
             } else {
                 this.creacionJugadores.setCantidadDeJugadores(cantidad);
                 Scene nuevaEscena = new Scene(this.creacionJugadores);
                 stage.setScene(nuevaEscena);
             }
-
         });
+        return startButton;
+    }
 
-        return botonera;
+    private Button createExitButton() {
+        Button exitButton = new Button("Salir");
+        exitButton.getStyleClass().add("exitButton");
+        exitButton.setOnAction(e -> Platform.exit());
+        return exitButton;
     }
 
     private ComboBox<String> crearComboBox() {
