@@ -63,7 +63,7 @@ public class SeleccionCantidadJugadores extends BorderPane {
         startButton.setOnAction(e -> {
             if (cantidad == 0) {
                 Label label = new Label("Debe seleccionar una cantidad para comenzar");
-                label.setTextFill(Color.RED);
+                label.getStyleClass().add("error");
                 panel.getChildren().add(label);
             } else {
                 this.creacionJugadores.setCantidadDeJugadores(cantidad);
