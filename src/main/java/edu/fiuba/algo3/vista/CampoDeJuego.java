@@ -79,6 +79,26 @@ public class CampoDeJuego extends HBox {
         VistaPais borneo = new VistaPais(885, 410, "Borneo");
         VistaPais sumatra = new VistaPais(820, 450, "Sumatra");
 
+        // Asia
+        VistaPais turquia = new VistaPais(740, 330, "Turquia");
+        VistaPais malasia = new VistaPais(910, 330, "Malasia");
+        VistaPais israel = new VistaPais(725, 380, "Israel");
+        VistaPais arabia = new VistaPais(770, 390, "Arabia");
+        VistaPais mongolia = new VistaPais(790, 220, "Mongolia");
+        VistaPais siberia = new VistaPais(790, 170, "Siberia");
+        VistaPais aral = new VistaPais(710, 165, "Aral");
+        VistaPais tartaria = new VistaPais(735, 115, "Tartaria");
+        VistaPais taymir = new VistaPais(787, 115, "Taymir");
+        VistaPais japon = new VistaPais(915, 170, "Japon");
+        VistaPais kamchatka = new VistaPais(840, 120, "Kamchatka");
+        VistaPais china = new VistaPais(890, 270, "China");
+        VistaPais gobi = new VistaPais(815, 270, "Gobi");
+        VistaPais iran = new VistaPais(755, 270, "Iran");
+        VistaPais india = new VistaPais(850, 360, "India");
+
+
+
+
 
         stackPane.getChildren().addAll(alaska, yukon, canada, groenlandia, oregon, california, mexico, nuevaYork, terranova, labrador);
 
@@ -89,6 +109,8 @@ public class CampoDeJuego extends HBox {
         stackPane.getChildren().addAll(sahara, egipto, etiopia, zaire, sudafrica, madagascar);
 
         stackPane.getChildren().addAll(australia, java, borneo, sumatra);
+
+        stackPane.getChildren().addAll(turquia, israel, arabia, mongolia, china, gobi, iran, siberia, kamchatka, japon, malasia, aral, india, tartaria, taymir);
 
     }
 
