@@ -54,10 +54,25 @@ public class CampoDeJuego extends HBox {
         VistaPais argentina = new VistaPais(320, 510, "Argentina");
         VistaPais chile = new VistaPais(270, 510, "Chile");
 
+        // Europa
+        VistaPais islandia = new VistaPais(420, 260, "Islandia");
+        VistaPais espania = new VistaPais(500, 390, "Espania");
+        VistaPais granBretania = new VistaPais(520, 270, "Gran Bretania");
+        VistaPais francia = new VistaPais(560, 340, "Francia");
+        VistaPais alemania = new VistaPais(620, 330, "Alemania");
+        VistaPais italia = new VistaPais(620, 390, "Italia");
+        VistaPais polonia = new VistaPais(680, 310, "Polonia");
+        VistaPais rusia = new VistaPais(680, 230, "Rusia");
+        VistaPais suecia = new VistaPais(590, 190, "Suecia");
+
 
         stackPane.getChildren().addAll(alaska, yukon, canada, groenlandia, oregon, california, mexico, nuevaYork, terranova, labrador);
 
         stackPane.getChildren().addAll(colombia, peru, brasil, uruguay, argentina, chile);
+
+        stackPane.getChildren().addAll(islandia, espania, granBretania, francia, alemania,italia, polonia, rusia, suecia);
+
+
     }
 
 }
