@@ -34,13 +34,20 @@ public class CampoDeJuego extends HBox {
 
     private void crearPaises(Pane stackPane) {
 
+        // America del Norte
         VistaPais alaska = new VistaPais(10, 260, "Alaska");
         VistaPais yukon = new VistaPais(70, 230, "Yukon");
         VistaPais canada = new VistaPais(130, 170, "Canada");
         VistaPais groenlandia = new VistaPais(320, 150, "Groenlandia");
+        VistaPais oregon = new VistaPais(80, 290, "Oregon");
+        VistaPais california = new VistaPais(130, 310, "Groenlandia");
+        VistaPais mexico = new VistaPais(185, 340, "Mexico");
+        VistaPais nuevaYork = new VistaPais(175, 260, "Nueva York");
+        VistaPais terranova = new VistaPais(210, 230, "Terranova");
+        VistaPais labrador = new VistaPais(240, 200, "Labrador");
 
 
-        stackPane.getChildren().addAll(alaska, yukon, canada, groenlandia);
+        stackPane.getChildren().addAll(alaska, yukon, canada, groenlandia, oregon, california, mexico, nuevaYork, terranova, labrador);
     }
 
 }
