@@ -33,6 +33,7 @@ public class SeleccionCantidadJugadores extends BorderPane {
         this.creacionJugadores = new CreacionJugadores(stage);
 
         this.getStylesheets().add("styles.css");
+        this.getStyleClass().add("body");
 
         ComboBox<String> comboBox = crearComboBox();
 
