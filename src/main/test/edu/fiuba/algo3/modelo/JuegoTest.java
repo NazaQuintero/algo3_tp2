@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.modelo;
 
 import edu.fiuba.algo3.modelo.excepciones.*;
+import edu.fiuba.algo3.modelo.fichas.Ejercito;
 import edu.fiuba.algo3.modelo.tarjetas.Tarjeta;
 import edu.fiuba.algo3.modelo.tarjetas.Globo;
 import org.junit.jupiter.api.Test;
@@ -22,18 +23,17 @@ public class JuegoTest {
 
 
     @Test
-    public void seColocan1EjercitosEnElMismoPais() throws NoEsRondaDeColocacionException, ElJugadorNoTieneTurnoException, JugadorNoExisteException, ArchivoDeTarjetasNoEncontradoException, ArchivoDePaisesNoEncontradoException, PaisOcupadoPorOtroJugadorException {
+    public void seColoca1EjercitoEnElMismoPais() throws ArchivoDeTarjetasNoEncontradoException, ArchivoDePaisesNoEncontradoException {
 
         Juego juego = new Juego();
 
         Jugador jugador1 = juego.agregarJugador("Juani");
         Pais pais = juego.obtenerPais("Argentina");
 
-        juego.colocarEjercitos(jugador1, pais, 1);
+        pais.colocarEjercito(new Ejercito(jugador1));
 
         assertEquals(1,juego.cantidadEjercitosEn(pais));
         assertEquals(jugador1, juego.paisDominadoPor(pais));
-
     }
 
 

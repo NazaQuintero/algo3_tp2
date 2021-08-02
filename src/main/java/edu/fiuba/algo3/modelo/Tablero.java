@@ -1,9 +1,7 @@
 package edu.fiuba.algo3.modelo;
-import edu.fiuba.algo3.modelo.batallasDeDados.ArbitroDeDado;
+
 import edu.fiuba.algo3.modelo.batallasDeDados.ProcesadorResultado;
 import edu.fiuba.algo3.modelo.batallasDeDados.Resultado;
-import edu.fiuba.algo3.modelo.batallasDeDados.ResultadoBatalla;
-import edu.fiuba.algo3.modelo.continentes.Continente;
 import edu.fiuba.algo3.modelo.excepciones.*;
 import edu.fiuba.algo3.modelo.tarjetas.Tarjeta;
 
@@ -24,7 +22,7 @@ public class Tablero {
 //    }
 
     public void repartirPaises(Jugadores jugadores) {
-        ArrayList<Pais> paises = new ArrayList<>(this.paises.values());
+        ArrayList<Pais> paises = new ArrayList<>(MultitonPaises.obtenerTodosLosPaises());
         Collections.shuffle(paises);
         int cantidadJugadores = jugadores.obtenerCantidad();
 

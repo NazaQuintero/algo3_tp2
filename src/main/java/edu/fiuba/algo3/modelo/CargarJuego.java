@@ -36,8 +36,9 @@ public class CargarJuego {
 
             // Crea el objeto pais sin limitrofes
             String nombrePais = jsonObject.get("Pais").getAsString();
-            Pais pais = new Pais(nombrePais);
-            paises.put(nombrePais, pais);
+            //paises.put(nombrePais, pais);
+            Pais pais = MultitonPaises.obtenerInstanciaDe(nombrePais);
+
             limitrofes.put(pais, new ArrayList<>());
 
             String nombreContinente = jsonObject.get("Continente").getAsString();

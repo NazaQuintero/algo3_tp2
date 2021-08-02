@@ -38,9 +38,11 @@ public class Juego {
         return jugador;
     }
 
+    /*
     public void agregarPais(Pais unPais) {
         tablero.agregarPais(unPais);
     }
+    */
 
     public void agregarJugador(Jugador jugador){
         jugadores.agregarJugador(jugador);
@@ -62,10 +64,11 @@ public class Juego {
         tablero.ataque(jAtacante, pAtacante, pDefensor, cantidadEjercitos);
     }
 
-
+    /*
     public void colocarEjercitos(Jugador jugador, Pais pais, int cantidadEjercitos) throws ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException, JugadorNoExisteException, PaisOcupadoPorOtroJugadorException {
         tablero.colocarEjercitos(jugador, pais, cantidadEjercitos);
     }
+    */
 
     public void reagrupar(Jugador jugador, Pais paisOrigen, Pais paisDestino, int cantidadAMover) throws JugadorNoExisteException, ElPaisNoEsLimitrofeException, NoEsRondaDeReagrupeException, ElJugadorNoTieneTurnoException {
         tablero.reagrupar(jugador, paisOrigen, paisDestino, cantidadAMover);
