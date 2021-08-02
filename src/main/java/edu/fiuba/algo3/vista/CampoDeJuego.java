@@ -2,6 +2,9 @@ package edu.fiuba.algo3.vista;
 
 import com.google.gson.Gson;
 import edu.fiuba.algo3.App;
+import edu.fiuba.algo3.modelo.CargarJuego;
+import edu.fiuba.algo3.modelo.MultitonPaises;
+import edu.fiuba.algo3.modelo.Pais;
 import edu.fiuba.algo3.modelo.PosicionPais;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -42,20 +45,11 @@ public class CampoDeJuego extends HBox {
     }
 
     private void crearPaises(Pane stackPane) {
-        Gson gson = new Gson();
-
-        String json2 = null;
-
-        try {
-            InputStream is = App.class.getClassLoader().getResourceAsStream(ARCHIVO_PAISES);
-            json2 = new String(is.readAllBytes(), StandardCharsets.UTF_8);
-        }
-        catch (IOException | NullPointerException e) { e.printStackTrace();}
-
-        PosicionPais[] vistaPais  = gson.fromJson(json2, PosicionPais[].class);
+        // TODO: Garantizar que para este punto el Multiton ya este cargado...
+        ArrayList<Pais> _paises = new ArrayList<>(MultitonPaises.obtenerTodosLosPaises());
 
         ArrayList<VistaPais> paises = new ArrayList<>();
-        for(PosicionPais pais: vistaPais) paises.add(new VistaPais(pais));
+        for(Pais pais: _paises) paises.add(new VistaPais(pais));
 
         stackPane.getChildren().addAll(paises);
 

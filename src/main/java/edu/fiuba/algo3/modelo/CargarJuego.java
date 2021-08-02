@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.Objects;
 
 import com.google.gson.*;
+import edu.fiuba.algo3.App;
 import edu.fiuba.algo3.modelo.continentes.*;
 import edu.fiuba.algo3.modelo.excepciones.ArchivoDePaisesNoEncontradoException;
 import edu.fiuba.algo3.modelo.excepciones.ArchivoDeTarjetasNoEncontradoException;
@@ -21,11 +22,18 @@ public class CargarJuego {
 //        HashMap<String, Pais> paises = new HashMap<>();
         String json;
 
+        Gson gson = new Gson();
+
         try {
-            InputStream is = CargarJuego.class.getClassLoader().getResourceAsStream(archivoPaises);
+            InputStream is = App.class.getClassLoader().getResourceAsStream(archivoPaises);
             json = new String(Objects.requireNonNull(is).readAllBytes(), StandardCharsets.UTF_8);
         }
-        catch (IOException | NullPointerException e) {throw new ArchivoDePaisesNoEncontradoException();}
+        catch (IOException | NullPointerException e) {
+            e.printStackTrace();
+            throw new ArchivoDePaisesNoEncontradoException();
+        }
+
+        Pais[] _paises  = gson.fromJson(json, Pais[].class);
 
         GsonBuilder gsonBuilder = new GsonBuilder();
 
@@ -55,10 +63,9 @@ public class CargarJuego {
             return pais;
         };
 
-        gsonBuilder.registerTypeAdapter(Pais.class, deserializer);
-        Gson gson = gsonBuilder.create();
+        //gsonBuilder.registerTypeAdapter(Pais.class, deserializer);
+        //Gson gson = gsonBuilder.create();
 
-        Pais[] _paises = gson.fromJson(json, Pais[].class);
 
         // Agrega a cada pais sus limitrofes
         for (Pais pais: _paises) {

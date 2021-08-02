@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.modelo;
 
+import com.google.gson.annotations.Expose;
 import edu.fiuba.algo3.modelo.batallasDeDados.Dados;
 import edu.fiuba.algo3.modelo.batallasDeDados.Resultado;
 import edu.fiuba.algo3.modelo.batallasDeDados.ResultadoBatalla;
@@ -13,7 +14,13 @@ import edu.fiuba.algo3.modelo.roles.Defensor;
 import java.util.ArrayList;
 
 public class Pais {
+    @Expose
     private String nombre;
+    @Expose
+    private int posX;
+    @Expose
+    private int posY;
+
     private Fichas ejercito;
     private ArrayList<Pais> paisesLimitrofes;
 
@@ -93,5 +100,25 @@ public class Pais {
 
     public void setDados(Dados dados) {
         ejercito.setDados(dados);
+    }
+
+    public int getPosX() {
+        return posX;
+    }
+
+    public void setPosX(int posX) {
+        this.posX = posX;
+    }
+
+    public int getPosY() {
+        return posY;
+    }
+
+    public void setPosY(int posY) {
+        this.posY = posY;
+    }
+
+    public String getNombre() {
+        return this.nombre;
     }
 }

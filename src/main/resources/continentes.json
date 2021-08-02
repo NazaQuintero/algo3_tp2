@@ -1,0 +1,58 @@
+[{
+  "nombre": "Africa",
+  "cantidadDeEjercitos": 3,
+  "paises" : [
+    {
+      "nombre": "Zaire",
+      "posX": 630,
+      "posY": 520
+    },
+    {
+      "nombre": "Etiopia",
+      "posX": 670,
+      "posY": 480
+    }
+  ]
+},
+{
+  "nombre": "Europa",
+  "cantidadDeEjercitos": 5,
+  "paises": [
+    {
+      "nombre": "Francia",
+      "posX": 560,
+      "posY": 340
+    },
+    {
+      "nombre": "Gran Bretaña",
+      "posX": 520,
+      "posY": 270
+    },
+    {
+      "nombre": "Polonia",
+      "posX": 680,
+      "posY": 310
+    },
+    {
+      "nombre": "Rusia",
+      "posX": 680,
+      "posY": 230
+    },
+    {
+      "nombre": "Italia",
+      "posX": 620,
+      "posY": 390
+    },
+    {
+      "nombre": "España",
+      "posX": 500,
+      "posY": 390
+    },
+    {
+      "nombre": "Suecia",
+      "posX": 590,
+      "posY": 190
+    }
+  ]
+}
+]

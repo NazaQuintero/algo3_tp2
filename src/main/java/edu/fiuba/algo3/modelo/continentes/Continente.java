@@ -8,6 +8,7 @@ import java.util.ArrayList;
 public abstract class Continente {
     String nombre;
     ArrayList<Pais> paises;
+    int cantidadDeEjercitos;
 
     public Continente(String nombre){
         this.nombre = nombre;
