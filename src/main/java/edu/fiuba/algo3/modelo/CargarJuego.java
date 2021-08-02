@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Objects;
 
 import com.google.gson.*;
 import edu.fiuba.algo3.modelo.continentes.*;
@@ -17,12 +18,12 @@ public class CargarJuego {
     public static void cargarPaisesAlJuego(Juego juego, String archivoPaises) throws ArchivoDePaisesNoEncontradoException {
 
         HashMap<Pais, ArrayList<String>> limitrofes = new HashMap<>();
-        HashMap<String, Pais> paises = new HashMap<>();
+//        HashMap<String, Pais> paises = new HashMap<>();
         String json;
 
         try {
             InputStream is = CargarJuego.class.getClassLoader().getResourceAsStream(archivoPaises);
-            json = new String(is.readAllBytes(), StandardCharsets.UTF_8);
+            json = new String(Objects.requireNonNull(is).readAllBytes(), StandardCharsets.UTF_8);
         }
         catch (IOException | NullPointerException e) {throw new ArchivoDePaisesNoEncontradoException();}
 
@@ -62,9 +63,9 @@ public class CargarJuego {
         for (Pais pais: _paises) {
             ArrayList<String> nombreLimitrofes = limitrofes.get(pais);
             for (String limitrofe: nombreLimitrofes) {
-                pais.limitaCon(paises.get(limitrofe));
+                pais.limitaCon(MultitonPaises.obtenerInstanciaDe(limitrofe));
             }
-            juego.agregarPais(pais);
+//            juego.agregarPais(pais);
         }
     }
 
@@ -72,7 +73,7 @@ public class CargarJuego {
         String json;
         try {
             InputStream is = CargarJuego.class.getClassLoader().getResourceAsStream(archivoTarjetas);
-            json = new String(is.readAllBytes(), StandardCharsets.UTF_8);
+            json = new String(Objects.requireNonNull(is).readAllBytes(), StandardCharsets.UTF_8);
         }
         catch (IOException | NullPointerException e) {throw new ArchivoDeTarjetasNoEncontradoException();}
         GsonBuilder gsonBuilder = new GsonBuilder();

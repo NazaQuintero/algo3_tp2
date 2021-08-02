@@ -49,7 +49,7 @@ public class JuegoTest {
     }
 
     @Test
-    public void canjeFunciona() throws ArchivoDeTarjetasNoEncontradoException, ArchivoDePaisesNoEncontradoException, ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException, JugadorNoExisteException, ActivacionTarjetaEnRondaEquivocadaException, LaTarjetaYaFueActivadaException, TarjetaNoEncontradaException, JugadorNoPoseePaisDeLaTarjetaException, JugadorSinTarjetasException, LaTarjetaYaEstaDesactivadaException, SinCanjeHabilitadoException, PaisOcupadoPorOtroJugadorException {
+    public void canjeFunciona() throws ArchivoDeTarjetasNoEncontradoException, ArchivoDePaisesNoEncontradoException, ElJugadorNoTieneTurnoException, JugadorNoExisteException, ActivacionTarjetaEnRondaEquivocadaException, LaTarjetaYaFueActivadaException, TarjetaNoEncontradaException, JugadorNoPoseePaisDeLaTarjetaException, JugadorSinTarjetasException, LaTarjetaYaEstaDesactivadaException, SinCanjeHabilitadoException {
         Juego juego = new Juego();
         Pais arg = juego.obtenerPais("Argentina");
         Pais bra = juego.obtenerPais("Brasil");
@@ -59,9 +59,9 @@ public class JuegoTest {
         Tarjeta otraTarjeta = new Tarjeta(bra, new Globo());
         Tarjeta ootraTarjeta = new Tarjeta(chl, new Globo());
 
-        juego.agregarPais(arg);
-        juego.agregarPais(bra);
-        juego.agregarPais(chl);
+//        juego.agregarPais(arg);
+//        juego.agregarPais(bra);
+//        juego.agregarPais(chl);
 
         juego.agregarTarjeta(unaTarjeta);
         juego.agregarTarjeta(otraTarjeta);
@@ -73,9 +73,12 @@ public class JuegoTest {
         //juego.comenzar();
         juego.iniciarTurno();
 
-        juego.colocarEjercitos(jugador, arg, 1);
-        juego.colocarEjercitos(jugador, bra, 1);
-        juego.colocarEjercitos(jugador, chl, 1);
+        arg.colocarEjercito(new Ejercito(jugador));
+        bra.colocarEjercito(new Ejercito(jugador));
+        chl.colocarEjercito(new Ejercito(jugador));
+//        juego.colocarEjercitos(jugador, arg, 1);
+//        juego.colocarEjercitos(jugador, bra, 1);
+//        juego.colocarEjercitos(jugador, chl, 1);
 
         juego.recibirTarjeta(jugador, arg);
         juego.recibirTarjeta(jugador, bra);
