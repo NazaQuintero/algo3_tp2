@@ -116,4 +116,19 @@ public class Pais {
     public String getNombre() {
         return this.nombre;
     }
+
+    @Override
+    public void addObserver(Observer obs) {
+        this.observers.add(obs);
+    }
+
+    @Override
+    public void removeObserver(Observer obs) {
+        this.observers.remove(obs);
+    }
+
+    @Override
+    public void notifyObservers() {
+        observers.forEach(Observer::update);
+    }
 }

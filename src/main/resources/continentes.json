@@ -7,37 +7,43 @@
       "nombre": "Zaire",
       "posX": 630,
       "posY": 520,
-      "paisesLimitrofes": []
+      "paisesLimitrofes": [],
+      "observers" : []
     },
     {
       "nombre": "Etiopia",
       "posX": 670,
       "posY": 480,
-      "paisesLimitrofes": []
+      "paisesLimitrofes": [],
+      "observers" : []
     },
     {
       "nombre": "Egipto",
       "posX": 700,
       "posY": 450,
-      "paisesLimitrofes": []
+      "paisesLimitrofes": [],
+      "observers" : []
     },
     {
       "nombre": "Madagascar",
       "posX": 770,
       "posY": 520,
-      "paisesLimitrofes": []
+      "paisesLimitrofes": [],
+      "observers" : []
     },
     {
       "nombre": "Sahara",
       "posX": 580,
       "posY": 480,
-      "paisesLimitrofes": []
+      "paisesLimitrofes": [],
+      "observers" : []
     },
     {
       "nombre": "Sudafrica",
       "posX": 680,
       "posY": 550,
-      "paisesLimitrofes": []
+      "paisesLimitrofes": [],
+      "observers" : []
     }
   ]
 },
@@ -49,55 +55,64 @@
       "nombre": "Francia",
       "posX": 560,
       "posY": 340,
-      "paisesLimitrofes": []
+      "paisesLimitrofes": [],
+      "observers" : []
     },
     {
       "nombre": "Gran Bretaña",
       "posX": 520,
       "posY": 270,
-      "paisesLimitrofes": []
+      "paisesLimitrofes": [],
+      "observers" : []
     },
     {
       "nombre": "Alemania",
       "posX": 620,
       "posY": 330,
-      "paisesLimitrofes": []
+      "paisesLimitrofes": [],
+      "observers" : []
     },
     {
       "nombre": "Islandia",
       "posX": 420,
       "posY":  260,
-      "paisesLimitrofes": []
+      "paisesLimitrofes": [],
+      "observers" : []
     },
     {
       "nombre": "Polonia",
       "posX": 680,
       "posY": 310,
-      "paisesLimitrofes": []
+      "paisesLimitrofes": [],
+      "observers" : []
     },
     {
       "nombre": "Rusia",
       "posX": 680,
       "posY": 230,
-      "paisesLimitrofes": []
+      "paisesLimitrofes": [],
+      "observers" : []
     },
     {
       "nombre": "Italia",
       "posX": 620,
       "posY": 390,
-      "paisesLimitrofes": []
+      "paisesLimitrofes": [],
+      "observers" : []
     },
     {
       "nombre": "España",
       "posX": 500,
       "posY": 390,
-      "paisesLimitrofes": []
+      "paisesLimitrofes": [],
+      "observers" : []
     },
     {
       "nombre": "Suecia",
       "posX": 590,
       "posY": 190,
-      "paisesLimitrofes": []
+      "paisesLimitrofes": [],
+      "observers" : []
     }
   ]
 },
@@ -109,61 +124,71 @@
         "nombre": "Oregon",
         "posX": 80,
         "posY": 290,
-        "paisesLimitrofes": []
+        "paisesLimitrofes": [],
+        "observers" : []
       },
       {
         "nombre": "Nueva York",
         "posX": 175,
         "posY": 260,
-        "paisesLimitrofes": []
+        "paisesLimitrofes": [],
+        "observers" : []
       },
       {
         "nombre": "Terranova",
         "posX": 210,
         "posY": 230,
-        "paisesLimitrofes": []
+        "paisesLimitrofes": [],
+        "observers" : []
       },
       {
         "nombre": "California",
         "posX": 130,
         "posY": 310,
-        "paisesLimitrofes": []
+        "paisesLimitrofes": [],
+        "observers" : []
       },
       {
         "nombre": "Canada",
         "posX": 130,
         "posY": 170,
-        "paisesLimitrofes": []
+        "paisesLimitrofes": [],
+        "observers" : []
       },
       {
         "nombre": "Yukon",
         "posX": 70,
         "posY": 230,
-        "paisesLimitrofes": []
+        "paisesLimitrofes": [],
+        "observers" : []
       },
       {
         "nombre": "Groenlandia",
         "posX": 320,
         "posY": 150,
-        "paisesLimitrofes": []
+        "paisesLimitrofes": [],
+        "observers" : []
       },
       {
         "nombre": "Alaska",
         "posX": 10,
         "posY": 260,
-        "paisesLimitrofes": []
+        "paisesLimitrofes": [],
+        "observers" : []
       },
       {
         "nombre": "Mexico",
         "posX": 185,
         "posY": 340,
-        "paisesLimitrofes": []
+        "paisesLimitrofes": [],
+        "observers" : []
       },
       {
         "nombre": "Labrador",
         "posX": 240,
         "posY": 200,
-        "paisesLimitrofes": []
+        "paisesLimitrofes": [],
+        "observers" : []
       }
     ]
   },
@@ -175,13 +200,15 @@
         "nombre": "Chile",
         "posX": 270,
         "posY": 510,
-        "paisesLimitrofes": []
+        "paisesLimitrofes": [],
+        "observers" : []
       },
       {
         "nombre": "Argentina",
         "posX": 320,
         "posY": 510,
-        "paisesLimitrofes": []
+        "paisesLimitrofes": [],
+        "observers" : []
       },
       {
         "nombre": "Uruguay",

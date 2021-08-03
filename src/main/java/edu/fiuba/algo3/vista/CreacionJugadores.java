@@ -81,7 +81,7 @@ public class CreacionJugadores extends BorderPane {
     private Button crearBotonJugar(Stage stage) {
         Button buttonSubmit = new Button("Jugar");
         buttonSubmit.getStyleClass().add("startButton");
-        buttonSubmit.setOnAction(e ->  new CampoDeJuego(stage));
+        buttonSubmit.setOnAction(e -> new CampoDeJuego(stage));
         return buttonSubmit;
     }
 
