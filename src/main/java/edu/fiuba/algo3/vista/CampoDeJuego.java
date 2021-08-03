@@ -8,6 +8,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
@@ -32,7 +33,7 @@ public class CampoDeJuego extends HBox {
         this.getChildren().add(stackPane);
         this.setAlignment(Pos.CENTER);
 
-        stage.setScene(new Scene(this, 1000, 800));
+        stage.setScene(new Scene(this, 1400, 900));
     }
 
     private void crearPaises(Pane stackPane) {
@@ -40,8 +41,14 @@ public class CampoDeJuego extends HBox {
         ArrayList<Pais> _paises = new ArrayList<>(MultitonPaises.obtenerTodosLosPaises());
 
         ArrayList<VistaPais> paises = new ArrayList<>();
-        for(Pais pais: _paises) paises.add(new VistaPais(pais));
+        ArrayList<Circle> circles = new ArrayList<>();
 
+        for(Pais pais: _paises) {
+            paises.add(new VistaPais(pais));
+            circles.add(new Circle(pais.getPosX()+25, pais.getPosY()+25, 10, pais.dominadoPor().color()));
+        }
+
+        stackPane.getChildren().addAll(circles);
         stackPane.getChildren().addAll(paises);
 
     }

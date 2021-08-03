@@ -75,7 +75,7 @@ public class CargarJuego {
 
         Gson gson = gsonBuilder.create();
         Pais[] paises = gson.fromJson(json, Pais[].class);
-        MultitonPaises.cargarPaises(new ArrayList<>(Arrays.asList(paises)));
+        //MultitonPaises.cargarPaises(new ArrayList<>(Arrays.asList(paises)));
     }
 
     public static void cargarTarjetas(Juego juego , String archivoTarjetas) throws ArchivoDeTarjetasNoEncontradoException {

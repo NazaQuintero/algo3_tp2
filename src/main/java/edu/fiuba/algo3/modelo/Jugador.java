@@ -13,13 +13,14 @@ import edu.fiuba.algo3.modelo.paises.Pais;
 import edu.fiuba.algo3.modelo.tarjetas.Tarjeta;
 import edu.fiuba.algo3.modelo.turnos.SinTurno;
 import edu.fiuba.algo3.modelo.turnos.Turno;
+import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Jugador {
 
-    private String color = "";
+    private Color color;
     private final ArrayList<Objetivo> objetivos = new ArrayList<>();
     private final String nombre;
     private Turno turno = new SinTurno();
@@ -27,13 +28,20 @@ public class Jugador {
     private final HashMap<Pais, Tarjeta> tarjetas = new HashMap<>();
     private Canje canje;
 
+    public Jugador(String nombre, Color color){
+        this.objetivos.add(new General());
+        this.canje = new CanjeNulo();
+        this.nombre = nombre;
+        this.color = color;
+    }
+
     public Jugador(String nombre){
         this.objetivos.add(new General());
         this.canje = new CanjeNulo();
-        this.nombre =  nombre;
+        this.nombre = nombre;
     }
 
-    public String mostrarColor() {
+    public Color color() {
         return color;
     }
 
@@ -53,7 +61,7 @@ public class Jugador {
         else throw new PaisOcupadoPorOtroJugadorException();
     }
 
-    public void asignarColor(String color) {
+    public void asignarColor(Color color) {
         this.color = color;
     }
     public void setTurno(Turno unTurno) {
