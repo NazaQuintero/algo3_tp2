@@ -42,7 +42,8 @@
     {
       "nombre": "Francia",
       "posX": 560,
-      "posY": 340
+      "posY": 340,
+      "paisesLimitrofes": []
     },
     {
       "nombre": "Gran Bretaña",
@@ -52,37 +53,44 @@
     {
       "nombre": "Alemania",
       "posX": 620,
-      "posY": 330
+      "posY": 330,
+      "paisesLimitrofes": []
     },
     {
       "nombre": "Islandia",
       "posX": 420,
-      "posY":  260
+      "posY":  260,
+      "paisesLimitrofes": []
     },
     {
       "nombre": "Polonia",
       "posX": 680,
-      "posY": 310
+      "posY": 310,
+      "paisesLimitrofes": []
     },
     {
       "nombre": "Rusia",
       "posX": 680,
-      "posY": 230
+      "posY": 230,
+      "paisesLimitrofes": []
     },
     {
       "nombre": "Italia",
       "posX": 620,
-      "posY": 390
+      "posY": 390,
+      "paisesLimitrofes": []
     },
     {
       "nombre": "España",
       "posX": 500,
-      "posY": 390
+      "posY": 390,
+      "paisesLimitrofes": []
     },
     {
       "nombre": "Suecia",
       "posX": 590,
-      "posY": 190
+      "posY": 190,
+      "paisesLimitrofes": []
     }
   ]
 },
@@ -93,52 +101,62 @@
       {
         "nombre": "Oregon",
         "posX": 80,
-        "posY": 290
+        "posY": 290,
+        "paisesLimitrofes": []
       },
       {
         "nombre": "Nueva York",
         "posX": 175,
-        "posY": 260
+        "posY": 260,
+        "paisesLimitrofes": []
       },
       {
         "nombre": "Terranova",
         "posX": 210,
-        "posY": 230
+        "posY": 230,
+        "paisesLimitrofes": []
       },
       {
         "nombre": "California",
         "posX": 130,
-        "posY": 310
+        "posY": 310,
+        "paisesLimitrofes": []
       },
       {
         "nombre": "Canada",
         "posX": 130,
-        "posY": 170
+        "posY": 170,
+        "paisesLimitrofes": []
       },
       {
         "nombre": "Yukon",
         "posX": 70,
-        "posY": 230
+        "posY": 230,
+        "paisesLimitrofes": []
       },
       {
         "nombre": "Groenlandia",
         "posX": 320,
-        "posY": 150
+        "posY": 150,
+        "paisesLimitrofes": []
       },
       {
         "nombre": "Alaska",
         "posX": 10,
-        "posY": 260
+        "posY": 260,
+        "paisesLimitrofes": []
       },
       {
         "nombre": "Mexico",
         "posX": 185,
-        "posY":  340
+        "posY": 340,
+        "paisesLimitrofes": []
       },
       {
         "nombre": "Labrador",
         "posX": 240,
-        "posY": 200
+        "posY": 200,
+        "paisesLimitrofes": []
       }
     ]
   },
@@ -149,27 +167,32 @@
       {
         "nombre": "Chile",
         "posX": 270,
-        "posY": 510
+        "posY": 510,
+        "paisesLimitrofes": []
       },
       {
         "nombre": "Argentina",
         "posX": 320,
-        "posY": 510
+        "posY": 510,
+        "paisesLimitrofes": []
       },
       {
         "nombre": "Uruguay",
         "posX": 370,
-        "posY": 500
+        "posY": 500,
+        "paisesLimitrofes": []
       },
       {
         "nombre": "Brasil",
         "posX": 370,
-        "posY": 430
+        "posY": 430,
+        "paisesLimitrofes": []
       },
       {
         "nombre": "Colombia",
         "posX": 290,
-        "posY": 390
+        "posY": 390,
+        "paisesLimitrofes": []
       },
       {
         "nombre": "Peru",
