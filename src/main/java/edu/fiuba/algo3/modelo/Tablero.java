@@ -1,30 +1,24 @@
 package edu.fiuba.algo3.modelo;
-import edu.fiuba.algo3.modelo.batallasDeDados.ArbitroDeDado;
+
 import edu.fiuba.algo3.modelo.batallasDeDados.ProcesadorResultado;
 import edu.fiuba.algo3.modelo.batallasDeDados.Resultado;
-import edu.fiuba.algo3.modelo.batallasDeDados.ResultadoBatalla;
-import edu.fiuba.algo3.modelo.continentes.Continente;
 import edu.fiuba.algo3.modelo.excepciones.*;
+import edu.fiuba.algo3.modelo.paises.MultitonPaises;
+import edu.fiuba.algo3.modelo.paises.Pais;
 import edu.fiuba.algo3.modelo.tarjetas.Tarjeta;
 
 import java.util.*;
 
 
 public class Tablero {
-    private final HashMap<String, Pais> paises;
     private final HashMap<Pais, Tarjeta> tarjetas;
 
     public Tablero() {
-        paises = new HashMap<>();
         tarjetas = new HashMap<>();
     }
 
-    public void agregarPais(Pais pais) {
-        paises.put(pais.obtenerNombre(), pais);
-    }
-
     public void repartirPaises(Jugadores jugadores) {
-        ArrayList<Pais> paises = new ArrayList<>(this.paises.values());
+        ArrayList<Pais> paises = new ArrayList<>(MultitonPaises.obtenerTodosLosPaises());
         Collections.shuffle(paises);
         int cantidadJugadores = jugadores.obtenerCantidad();
 
@@ -39,7 +33,8 @@ public class Tablero {
     }
 
     public Pais obtenerPais(String nombrePais) {
-        return paises.get(nombrePais);
+//        return paises.get(nombrePais);
+        return MultitonPaises.obtenerInstanciaDe(nombrePais);
     }
 
     public Tarjeta obtenerTarjeta(Pais paisTarjeta) {

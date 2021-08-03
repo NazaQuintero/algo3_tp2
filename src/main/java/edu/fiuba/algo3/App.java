@@ -1,6 +1,6 @@
 package edu.fiuba.algo3;
 
-import edu.fiuba.algo3.modelo.Juego;
+import edu.fiuba.algo3.modelo.CargarJuego;
 import edu.fiuba.algo3.vista.MenuInicial;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -16,6 +16,9 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) {
+
+
+        CargarJuego.cargarContinentes();
         MenuInicial menuInicial = new MenuInicial(stage);
         Scene presentacion = new Scene(menuInicial, ANCHO, ALTO);
         stage.setScene(presentacion);

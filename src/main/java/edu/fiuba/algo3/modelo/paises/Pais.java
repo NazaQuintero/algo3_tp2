@@ -1,11 +1,12 @@
-package edu.fiuba.algo3.modelo;
+package edu.fiuba.algo3.modelo.paises;
 
+import com.google.gson.annotations.Expose;
+import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.batallasDeDados.Dados;
 import edu.fiuba.algo3.modelo.batallasDeDados.Resultado;
 import edu.fiuba.algo3.modelo.batallasDeDados.ResultadoBatalla;
 import edu.fiuba.algo3.modelo.excepciones.EjercitosInsuficientesException;
 import edu.fiuba.algo3.modelo.excepciones.ElPaisNoEsLimitrofeException;
-import edu.fiuba.algo3.modelo.fichas.Ejercito;
 import edu.fiuba.algo3.modelo.fichas.EjercitoNulo;
 import edu.fiuba.algo3.modelo.fichas.Fichas;
 import edu.fiuba.algo3.modelo.roles.Atacante;
@@ -14,7 +15,13 @@ import edu.fiuba.algo3.modelo.roles.Defensor;
 import java.util.ArrayList;
 
 public class Pais {
+    @Expose
     private String nombre;
+    @Expose
+    private int posX;
+    @Expose
+    private int posY;
+
     private Fichas ejercito;
     private ArrayList<Pais> paisesLimitrofes;
 
@@ -22,7 +29,6 @@ public class Pais {
         this.nombre = nombre;
         this.paisesLimitrofes = new ArrayList<>();
         this.ejercito = new EjercitoNulo();
-
     }
 
     public ArrayList<Pais> getPaisesLimitrofes() {
@@ -51,12 +57,7 @@ public class Pais {
     }
 
     public void limitaCon(Pais otroPais) {
-        otroPais.agregarLimitrofe(this);
         paisesLimitrofes.add(otroPais);
-    }
-
-    private void agregarLimitrofe(Pais unPais) {
-        paisesLimitrofes.add(unPais);
     }
 
     public Resultado atacarA(Pais defensor, int cantidadDeEjercitos) throws ElPaisNoEsLimitrofeException, EjercitosInsuficientesException {
@@ -94,5 +95,25 @@ public class Pais {
 
     public void setDados(Dados dados) {
         ejercito.setDados(dados);
+    }
+
+    public int getPosX() {
+        return posX;
+    }
+
+    public void setPosX(int posX) {
+        this.posX = posX;
+    }
+
+    public int getPosY() {
+        return posY;
+    }
+
+    public void setPosY(int posY) {
+        this.posY = posY;
+    }
+
+    public String getNombre() {
+        return this.nombre;
     }
 }

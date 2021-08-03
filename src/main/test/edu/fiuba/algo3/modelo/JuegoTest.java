@@ -1,6 +1,8 @@
 package edu.fiuba.algo3.modelo;
 
 import edu.fiuba.algo3.modelo.excepciones.*;
+import edu.fiuba.algo3.modelo.fichas.Ejercito;
+import edu.fiuba.algo3.modelo.paises.Pais;
 import edu.fiuba.algo3.modelo.tarjetas.Tarjeta;
 import edu.fiuba.algo3.modelo.tarjetas.Globo;
 import org.junit.jupiter.api.Test;
@@ -22,18 +24,17 @@ public class JuegoTest {
 
 
     @Test
-    public void seColocan1EjercitosEnElMismoPais() throws NoEsRondaDeColocacionException, ElJugadorNoTieneTurnoException, JugadorNoExisteException, ArchivoDeTarjetasNoEncontradoException, ArchivoDePaisesNoEncontradoException, PaisOcupadoPorOtroJugadorException {
+    public void seColoca1EjercitoEnElMismoPais() throws ArchivoDeTarjetasNoEncontradoException, ArchivoDePaisesNoEncontradoException {
 
         Juego juego = new Juego();
 
         Jugador jugador1 = juego.agregarJugador("Juani");
         Pais pais = juego.obtenerPais("Argentina");
 
-        juego.colocarEjercitos(jugador1, pais, 1);
+        pais.colocarEjercito(new Ejercito(jugador1));
 
         assertEquals(1,juego.cantidadEjercitosEn(pais));
         assertEquals(jugador1, juego.paisDominadoPor(pais));
-
     }
 
 
@@ -49,7 +50,7 @@ public class JuegoTest {
     }
 
     @Test
-    public void canjeFunciona() throws ArchivoDeTarjetasNoEncontradoException, ArchivoDePaisesNoEncontradoException, ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException, JugadorNoExisteException, ActivacionTarjetaEnRondaEquivocadaException, LaTarjetaYaFueActivadaException, TarjetaNoEncontradaException, JugadorNoPoseePaisDeLaTarjetaException, JugadorSinTarjetasException, LaTarjetaYaEstaDesactivadaException, SinCanjeHabilitadoException, PaisOcupadoPorOtroJugadorException {
+    public void canjeFunciona() throws ArchivoDeTarjetasNoEncontradoException, ArchivoDePaisesNoEncontradoException, ElJugadorNoTieneTurnoException, JugadorNoExisteException, ActivacionTarjetaEnRondaEquivocadaException, LaTarjetaYaFueActivadaException, TarjetaNoEncontradaException, JugadorNoPoseePaisDeLaTarjetaException, JugadorSinTarjetasException, LaTarjetaYaEstaDesactivadaException, SinCanjeHabilitadoException {
         Juego juego = new Juego();
         Pais arg = juego.obtenerPais("Argentina");
         Pais bra = juego.obtenerPais("Brasil");
@@ -59,9 +60,9 @@ public class JuegoTest {
         Tarjeta otraTarjeta = new Tarjeta(bra, new Globo());
         Tarjeta ootraTarjeta = new Tarjeta(chl, new Globo());
 
-        juego.agregarPais(arg);
-        juego.agregarPais(bra);
-        juego.agregarPais(chl);
+//        juego.agregarPais(arg);
+//        juego.agregarPais(bra);
+//        juego.agregarPais(chl);
 
         juego.agregarTarjeta(unaTarjeta);
         juego.agregarTarjeta(otraTarjeta);
@@ -73,9 +74,12 @@ public class JuegoTest {
         //juego.comenzar();
         juego.iniciarTurno();
 
-        juego.colocarEjercitos(jugador, arg, 1);
-        juego.colocarEjercitos(jugador, bra, 1);
-        juego.colocarEjercitos(jugador, chl, 1);
+        arg.colocarEjercito(new Ejercito(jugador));
+        bra.colocarEjercito(new Ejercito(jugador));
+        chl.colocarEjercito(new Ejercito(jugador));
+//        juego.colocarEjercitos(jugador, arg, 1);
+//        juego.colocarEjercitos(jugador, bra, 1);
+//        juego.colocarEjercitos(jugador, chl, 1);
 
         juego.recibirTarjeta(jugador, arg);
         juego.recibirTarjeta(jugador, bra);

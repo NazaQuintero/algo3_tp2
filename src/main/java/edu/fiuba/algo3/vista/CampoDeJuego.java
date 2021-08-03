@@ -1,20 +1,49 @@
 package edu.fiuba.algo3.vista;
 
+import edu.fiuba.algo3.modelo.paises.MultitonPaises;
+import edu.fiuba.algo3.modelo.paises.Pais;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-public class CampoDeJuego extends BorderPane {
+import java.util.ArrayList;
+
+
+public class CampoDeJuego extends HBox {
 
     public CampoDeJuego(Stage stage) {
 
-        ImageView tablero = new ImageView();
-        Image image = new Image("tablero.png");
-        tablero.setFitWidth(800);
-        tablero.setFitHeight(600);
+        this.getStylesheets().add("styles.css");
 
-        tablero.setImage(image);
-        this.setCenter(tablero);
+        Image imagen = new Image("tablero.png");
+        ImageView imageView = new ImageView(imagen);
+        imageView.setPreserveRatio(true);
+        imageView.setFitWidth(1000);
+        imageView.setFitHeight(800);
+
+        Pane stackPane = new Pane();
+        stackPane.getChildren().add(imageView);
+        crearPaises(stackPane);
+
+        this.getChildren().add(stackPane);
+        this.setAlignment(Pos.CENTER);
+
+        stage.setScene(new Scene(this, 1000, 800));
     }
+
+    private void crearPaises(Pane stackPane) {
+        // TODO: Garantizar que para este punto el Multiton ya este cargado...
+        ArrayList<Pais> _paises = new ArrayList<>(MultitonPaises.obtenerTodosLosPaises());
+
+        ArrayList<VistaPais> paises = new ArrayList<>();
+        for(Pais pais: _paises) paises.add(new VistaPais(pais));
+
+        stackPane.getChildren().addAll(paises);
+
+    }
+
 }

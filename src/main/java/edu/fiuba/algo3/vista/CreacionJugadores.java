@@ -1,46 +1,58 @@
 package edu.fiuba.algo3.vista;
 
 import javafx.application.Platform;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
+
 
 public class CreacionJugadores extends BorderPane {
 
     VBox panel = new VBox();
-    VBox cajaDeBotones = new VBox();
-    private static final int ANCHO = 1200;
-    private static final int ALTO = 800;
+    HBox botonera;
+    private static final int ANCHO = 1900;
+    private static final int ALTO = 1060;
 
-    public CreacionJugadores(Stage stage, int cantidadJugadores) {
+    public CreacionJugadores(Stage stage) {
 
         this.getStylesheets().add("styles.css");
-
-        for (int i = 0; i < 3; i++) {
-            Label label = new Label("Ingrese el nombre del jugador " + (i+1) + ": ");
-            HBox textFieldHBox = crearTextFieldBox();
-            Button botonDeCarga = crearBotonDeCarga();
-            panel.getChildren().addAll(label, textFieldHBox, botonDeCarga);
-        }
-        HBox botonera = crearBotoneraHorizontal(stage);
-        botonera.setSpacing(20);
-        cajaDeBotones.getChildren().addAll(botonera);
-        cajaDeBotones.setAlignment(Pos.BOTTOM_RIGHT);
+        Button buttonSubmit = this.crearBotonJugar(stage);
+        Button exitButton = this.crearExitButton();
+        botonera = crearBotoneraHorizontal(buttonSubmit, exitButton);
         panel.setAlignment(Pos.CENTER);
+        panel.setSpacing(30);
+
+        this.setPadding(new Insets(20, 120, 20, 120));
+
+    }
+
+    public void setCantidadDeJugadores(int cantidadJugadores) {
+
+        for (int i = 0; i < cantidadJugadores; i++) {
+            this.crearFormularioDeCarga(i);
+        }
+        panel.getChildren().add(botonera);
+    }
+
+    private void crearFormularioDeCarga(int i) {
+        Label label = new Label("Ingrese el nombre del jugador " + (i+1) + ": ");
+        label.getStyleClass().add("labelText");
+        HBox textFieldHBox = crearTextFieldBox();
+        Button botonDeCarga = crearBotonDeCarga();
+        HBox hbox = new HBox();
+        hbox.getChildren().addAll(label, textFieldHBox, botonDeCarga);
+
+        panel.getChildren().addAll(hbox);
         this.setCenter(panel);
-        this.setRight(cajaDeBotones);
     }
 
     private HBox crearTextFieldBox() {
         TextField inputText = new TextField();
-        inputText.setPrefWidth(300);
-        inputText.setPrefHeight(50);
+        inputText.getStyleClass().add("textField");
         HBox textFieldHBox = new HBox(inputText);
         textFieldHBox.setAlignment(Pos.CENTER);
         return textFieldHBox;
@@ -48,25 +60,30 @@ public class CreacionJugadores extends BorderPane {
 
     private Button crearBotonDeCarga() {
         Button buttonSubmit = new Button("Cargar");
-        buttonSubmit.getStyleClass().add("startButton");
+        buttonSubmit.getStyleClass().addAll("startButton", "loadButton");
         return buttonSubmit;
     }
 
-    private HBox crearBotoneraHorizontal(Stage stage) {
-        Button buttonSubmit = new Button("Jugar");
-        buttonSubmit.getStyleClass().add("startButton");
-        buttonSubmit.setOnAction(e -> {
-            Scene nuevaEscena = new Scene(new CampoDeJuego(stage), ANCHO, ALTO);
-            stage.setScene(nuevaEscena);
-        });
+    private HBox crearBotoneraHorizontal(Button buttonSubmit, Button exitButton) {
+        HBox hbox = new HBox(buttonSubmit, exitButton);
+        hbox.setAlignment(Pos.CENTER);
+        hbox.setSpacing(50);
+        return hbox;
+    }
 
+    private Button crearExitButton() {
         Button exitButton = new Button("Salir");
         exitButton.getStyleClass().add("exitButton");
         exitButton.setOnAction(e -> Platform.exit());
-
-        HBox hbox = new HBox(buttonSubmit, exitButton);
-        hbox.setAlignment(Pos.CENTER);
-        return hbox;
+        return  exitButton;
     }
+
+    private Button crearBotonJugar(Stage stage) {
+        Button buttonSubmit = new Button("Jugar");
+        buttonSubmit.getStyleClass().add("startButton");
+        buttonSubmit.setOnAction(e ->  new CampoDeJuego(stage));
+        return buttonSubmit;
+    }
+
 
 }

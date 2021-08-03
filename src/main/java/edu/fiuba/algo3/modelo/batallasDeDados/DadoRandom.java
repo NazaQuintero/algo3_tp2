@@ -1,6 +1,4 @@
 package edu.fiuba.algo3.modelo.batallasDeDados;
-import edu.fiuba.algo3.modelo.Pais;
-import edu.fiuba.algo3.modelo.PaisIndefinido;
 
 import java.util.Random;
 

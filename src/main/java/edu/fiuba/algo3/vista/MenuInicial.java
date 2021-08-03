@@ -1,13 +1,10 @@
 package edu.fiuba.algo3.vista;
 
-import edu.fiuba.algo3.controladores.CrearJugadoresEventHandler;
-import edu.fiuba.algo3.controladores.SeleccionDeJugadoresEventHandler;
-import edu.fiuba.algo3.modelo.Juego;
 import javafx.application.Platform;
 import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -15,6 +12,8 @@ import javafx.stage.Stage;
 public class MenuInicial extends VBox {
 
     private Stage stage;
+    private static final int ANCHO = 800;
+    private static final int ALTO = 550;
 
     public MenuInicial(Stage stage) {
         this.stage = stage;
@@ -25,28 +24,37 @@ public class MenuInicial extends VBox {
         this.getStyleClass().add("body");
 
         Label etiqueta = this.crearEtiquetaDeBienvenida();
-        HBox botonera = this.crearBotoneraHorizontal(stage);
+        Button startButton = createStartButton();
+        Button exitButton = createExitButton();
+        HBox botonera = this.crearBotoneraHorizontal(startButton, exitButton);
 
         this.getChildren().addAll(etiqueta, botonera);
     }
 
-    private HBox crearBotoneraHorizontal(Stage stage) {
-        Button startButton = new Button();
-        Button exitButton = new Button();
-        startButton.setText("Jugar");
-        exitButton.setText("Salir");
-
-        startButton.getStyleClass().add("startButton");
-        exitButton.getStyleClass().add("exitButton");
-
-        startButton.setOnAction(new SeleccionDeJugadoresEventHandler(stage));
-        exitButton.setOnAction(e -> Platform.exit());
-
+    private HBox crearBotoneraHorizontal(Button startButton, Button exitButton) {
         HBox botonera = new HBox(startButton, exitButton);
         botonera.setAlignment(Pos.CENTER);
         botonera.setSpacing(20);
-
         return botonera;
+    }
+
+    private Button createExitButton() {
+        Button exitButton = new Button();
+        exitButton.setText("Salir");
+        exitButton.getStyleClass().add("exitButton");
+        exitButton.setOnAction(e -> Platform.exit());
+        return exitButton;
+    }
+
+    private Button createStartButton() {
+        Button startButton = new Button();
+        startButton.setText("Jugar");
+        startButton.getStyleClass().add("startButton");
+        startButton.setOnAction(e -> {
+            Scene nuevaEscena = new Scene(new SeleccionCantidadJugadores(stage), ANCHO, ALTO);
+            stage.setScene(nuevaEscena);
+        });
+        return startButton;
     }
 
     private Label crearEtiquetaDeBienvenida() {

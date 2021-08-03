@@ -4,10 +4,12 @@ import edu.fiuba.algo3.modelo.batallasDeDados.Resultado;
 import edu.fiuba.algo3.modelo.canjes.Canje;
 import edu.fiuba.algo3.modelo.canjes.CanjeNulo;
 import edu.fiuba.algo3.modelo.batallasDeDados.ResultadoBatallaNulo;
+import edu.fiuba.algo3.modelo.excepciones.ContinenteInvalidoException;
 import edu.fiuba.algo3.modelo.excepciones.*;
 import edu.fiuba.algo3.modelo.fichas.Ejercito;
 import edu.fiuba.algo3.modelo.objetivos.General;
 import edu.fiuba.algo3.modelo.objetivos.Objetivo;
+import edu.fiuba.algo3.modelo.paises.Pais;
 import edu.fiuba.algo3.modelo.tarjetas.Tarjeta;
 import edu.fiuba.algo3.modelo.turnos.SinTurno;
 import edu.fiuba.algo3.modelo.turnos.Turno;
@@ -112,7 +114,14 @@ public class Jugador {
     }
 
     public boolean cumpleObjetivo() {
-        return this.objetivos.stream().anyMatch(objetivo -> objetivo.estaCumplido(this));
+        return this.objetivos.stream().anyMatch(objetivo -> {
+            try {
+                return objetivo.estaCumplido(this);
+            } catch (ContinenteInvalidoException e) {
+                e.printStackTrace();
+            }
+            return false;
+        });
     }
 
     public String obtenerNombre() {

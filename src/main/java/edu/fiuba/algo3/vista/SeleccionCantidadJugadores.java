@@ -1,11 +1,10 @@
 package edu.fiuba.algo3.vista;
 
-import edu.fiuba.algo3.controladores.CrearJugadoresEventHandler;
-import edu.fiuba.algo3.modelo.Juego;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -19,14 +18,24 @@ public class SeleccionCantidadJugadores extends BorderPane {
 
     VBox panel = new VBox();
     int cantidad = 0;
+    CreacionJugadores creacionJugadores;
+    private static final int ANCHO = 1200;
+    private static final int ALTO = 800;
 
     public SeleccionCantidadJugadores(Stage stage) {
+
+        this.creacionJugadores = new CreacionJugadores(stage);
+
         this.getStylesheets().add("styles.css");
+        this.getStyleClass().add("body");
 
-        ComboBox<String> comboBox = crearComboBox();
+        ComboBox<String> comboBox = this.crearComboBox();
 
-        HBox botonera = this.crearBotoneraHorizontal(stage);
         Label label = this.crearLabel();
+        Label labelError = this.crearLabelError();
+        Button startButton = this.createStartButton(stage, labelError);
+        Button exitButton = this.createExitButton();
+        HBox botonera = this.crearBotoneraHorizontal(startButton, exitButton);
 
         panel.getChildren().addAll(label, comboBox, botonera);
         panel.setAlignment(Pos.CENTER);
@@ -36,21 +45,41 @@ public class SeleccionCantidadJugadores extends BorderPane {
 
     }
 
-    private HBox crearBotoneraHorizontal(Stage stage) {
-        Button startButton = new Button("Ingresar");
-        Button exitButton = new Button("Salir");
+    private Label crearLabelError() {
+        Label label = new Label("Debe seleccionar una cantidad para comenzar");
+        label.getStyleClass().add("error");
+        return label;
+    }
 
-        startButton.getStyleClass().add("startButton");
-        exitButton.getStyleClass().add("exitButton");
-
+    private HBox crearBotoneraHorizontal(Button startButton, Button exitButton) {
         HBox botonera = new HBox(startButton, exitButton);
         botonera.setAlignment(Pos.CENTER);
         botonera.setSpacing(20);
-
-        exitButton.setOnAction(e -> Platform.exit());
-        startButton.setOnAction(new CrearJugadoresEventHandler(stage, cantidad));
-
         return botonera;
+    }
+
+    private Button createStartButton(Stage stage, Label labelError) {
+        Button startButton = new Button("Ingresar");
+        startButton.getStyleClass().add("startButton");
+        startButton.setOnAction(e -> {
+            if (cantidad == 0) {
+                if(!panel.getChildren().contains(labelError)) {
+                    panel.getChildren().add(labelError);
+                }
+            } else {
+                this.creacionJugadores.setCantidadDeJugadores(cantidad);
+                Scene nuevaEscena = new Scene(this.creacionJugadores);
+                stage.setScene(nuevaEscena);
+            }
+        });
+        return startButton;
+    }
+
+    private Button createExitButton() {
+        Button exitButton = new Button("Salir");
+        exitButton.getStyleClass().add("exitButton");
+        exitButton.setOnAction(e -> Platform.exit());
+        return exitButton;
     }
 
     private ComboBox<String> crearComboBox() {
@@ -60,10 +89,7 @@ public class SeleccionCantidadJugadores extends BorderPane {
         ComboBox<String> comboBox = new ComboBox<>(options);
         comboBox.getStyleClass().add("comboBox");
 
-        comboBox.setOnAction(e -> {
-            this.cantidad = comboBox.getSelectionModel().getSelectedIndex() + 2;
-            // System.out.println("Cantidad: " + cantidad);
-        });
+        comboBox.setOnAction(e -> this.cantidad = comboBox.getSelectionModel().getSelectedIndex() + 2);
 
         return comboBox;
     }

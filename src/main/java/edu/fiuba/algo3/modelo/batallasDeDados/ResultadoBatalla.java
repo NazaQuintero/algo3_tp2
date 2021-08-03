@@ -1,6 +1,6 @@
 package edu.fiuba.algo3.modelo.batallasDeDados;
 
-import edu.fiuba.algo3.modelo.Pais;
+import edu.fiuba.algo3.modelo.paises.Pais;
 import edu.fiuba.algo3.modelo.victorias.Victoria;
 
 import java.util.ArrayList;

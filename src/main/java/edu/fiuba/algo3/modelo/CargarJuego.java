@@ -4,75 +4,85 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Arrays;
+import java.util.Objects;
 
 import com.google.gson.*;
+import edu.fiuba.algo3.App;
 import edu.fiuba.algo3.modelo.continentes.*;
 import edu.fiuba.algo3.modelo.excepciones.ArchivoDePaisesNoEncontradoException;
 import edu.fiuba.algo3.modelo.excepciones.ArchivoDeTarjetasNoEncontradoException;
+import edu.fiuba.algo3.modelo.paises.MultitonPaises;
+import edu.fiuba.algo3.modelo.paises.Pais;
 import edu.fiuba.algo3.modelo.tarjetas.*;
 
 public class CargarJuego {
 
-    public static void cargarPaisesAlJuego(Juego juego, String archivoPaises) throws ArchivoDePaisesNoEncontradoException {
+    public static void cargarContinentes() {
+        String json = null;
 
-        HashMap<Pais, ArrayList<String>> limitrofes = new HashMap<>();
-        HashMap<String, Pais> paises = new HashMap<>();
+        Gson gson = new Gson();
+
+        try {
+            InputStream is = App.class.getClassLoader().getResourceAsStream("continentes.json");
+            json = new String(Objects.requireNonNull(is).readAllBytes(), StandardCharsets.UTF_8);
+        }
+        catch (IOException | NullPointerException e) {
+            e.printStackTrace();
+        }
+
+        Continente[] _continentes  = gson.fromJson(json, Continente[].class);
+        for(Continente continente: _continentes) {
+            continente.setEjercitosNulos();
+            MultitonPaises.cargarPaises(continente.getPaises());
+        }
+        MultitonContinentes.cargarContinentes(_continentes);
+
+    }
+
+    public static void cargarPaisesLimitrofes(String archivoPaises) throws ArchivoDePaisesNoEncontradoException {
+
         String json;
 
         try {
-            InputStream is = CargarJuego.class.getClassLoader().getResourceAsStream(archivoPaises);
-            json = new String(is.readAllBytes(), StandardCharsets.UTF_8);
+            InputStream is = App.class.getClassLoader().getResourceAsStream(archivoPaises);
+            json = new String(Objects.requireNonNull(is).readAllBytes(), StandardCharsets.UTF_8);
+        } catch (IOException | NullPointerException e) {
+            e.printStackTrace();
+            throw new ArchivoDePaisesNoEncontradoException();
         }
-        catch (IOException | NullPointerException e) {throw new ArchivoDePaisesNoEncontradoException();}
-
-        GsonBuilder gsonBuilder = new GsonBuilder();
 
         // Deserializer. Guarda cada Pais en "paises" y el nombre de los limitrofes en "limitrofes"
         JsonDeserializer<Pais> deserializer = (jsonElement, type, jsonDeserializationContext) -> {
 
             JsonObject jsonObject = jsonElement.getAsJsonObject();
 
-            // Crea el objeto pais sin limitrofes
             String nombrePais = jsonObject.get("Pais").getAsString();
-            Pais pais = new Pais(nombrePais);
-            paises.put(nombrePais, pais);
-            limitrofes.put(pais, new ArrayList<>());
 
-            String nombreContinente = jsonObject.get("Continente").getAsString();
-            Continente continente = MultitonContinentes.obtenerInstanciaDe(nombreContinente);
+            Pais pais = MultitonPaises.obtenerInstanciaDe(nombrePais);
 
-            continente.agregarPais(pais);
-
-            String nombresLimitrofes = jsonObject.get("Limita con").getAsString();
+            String nombresLimitrofes = jsonObject.get("limitrofes").getAsString();
             String[] arrayNombreLimitrofes = nombresLimitrofes.split(",");
 
-            for (String limitrofe : arrayNombreLimitrofes) {
-                limitrofes.get(pais).add(limitrofe);
-            }
+            for (String limitrofe : arrayNombreLimitrofes)
+                pais.limitaCon(MultitonPaises.obtenerInstanciaDe(limitrofe));
+
             return pais;
         };
 
+        GsonBuilder gsonBuilder = new GsonBuilder();
         gsonBuilder.registerTypeAdapter(Pais.class, deserializer);
+
         Gson gson = gsonBuilder.create();
-
-        Pais[] _paises = gson.fromJson(json, Pais[].class);
-
-        // Agrega a cada pais sus limitrofes
-        for (Pais pais: _paises) {
-            ArrayList<String> nombreLimitrofes = limitrofes.get(pais);
-            for (String limitrofe: nombreLimitrofes) {
-                pais.limitaCon(paises.get(limitrofe));
-            }
-            juego.agregarPais(pais);
-        }
+        Pais[] paises = gson.fromJson(json, Pais[].class);
+        MultitonPaises.cargarPaises(new ArrayList<>(Arrays.asList(paises)));
     }
 
     public static void cargarTarjetas(Juego juego , String archivoTarjetas) throws ArchivoDeTarjetasNoEncontradoException {
         String json;
         try {
             InputStream is = CargarJuego.class.getClassLoader().getResourceAsStream(archivoTarjetas);
-            json = new String(is.readAllBytes(), StandardCharsets.UTF_8);
+            json = new String(Objects.requireNonNull(is).readAllBytes(), StandardCharsets.UTF_8);
         }
         catch (IOException | NullPointerException e) {throw new ArchivoDeTarjetasNoEncontradoException();}
         GsonBuilder gsonBuilder = new GsonBuilder();

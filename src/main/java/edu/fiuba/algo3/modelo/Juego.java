@@ -2,6 +2,7 @@ package edu.fiuba.algo3.modelo;
 
 import edu.fiuba.algo3.modelo.excepciones.*;
 import edu.fiuba.algo3.modelo.objetivos.*;
+import edu.fiuba.algo3.modelo.paises.Pais;
 import edu.fiuba.algo3.modelo.tarjetas.Tarjeta;
 import edu.fiuba.algo3.modelo.tarjetas.Tarjetas;
 import edu.fiuba.algo3.modelo.turnos.ConTurno;
@@ -24,7 +25,8 @@ public class Juego {
         jugadores = new Jugadores();
         tarjetas = new Tarjetas();
 
-        CargarJuego.cargarPaisesAlJuego(this, ARCHIVO_PAISES);
+        CargarJuego.cargarContinentes();
+        CargarJuego.cargarPaisesLimitrofes(ARCHIVO_PAISES);
         CargarJuego.cargarTarjetas(this, ARCHIVO_TARJETAS);
     }
 
@@ -38,9 +40,11 @@ public class Juego {
         return jugador;
     }
 
+    /*
     public void agregarPais(Pais unPais) {
         tablero.agregarPais(unPais);
     }
+    */
 
     public void agregarJugador(Jugador jugador){
         jugadores.agregarJugador(jugador);
@@ -62,10 +66,11 @@ public class Juego {
         tablero.ataque(jAtacante, pAtacante, pDefensor, cantidadEjercitos);
     }
 
-
+    /*
     public void colocarEjercitos(Jugador jugador, Pais pais, int cantidadEjercitos) throws ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException, JugadorNoExisteException, PaisOcupadoPorOtroJugadorException {
         tablero.colocarEjercitos(jugador, pais, cantidadEjercitos);
     }
+    */
 
     public void reagrupar(Jugador jugador, Pais paisOrigen, Pais paisDestino, int cantidadAMover) throws JugadorNoExisteException, ElPaisNoEsLimitrofeException, NoEsRondaDeReagrupeException, ElJugadorNoTieneTurnoException {
         tablero.reagrupar(jugador, paisOrigen, paisDestino, cantidadAMover);

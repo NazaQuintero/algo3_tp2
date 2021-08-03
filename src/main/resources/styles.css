@@ -1,7 +1,22 @@
+* {
+    -fx-font-family: "Calibri";
+}
+
 .body {
     -fx-background-image: url("fondo.jpeg");
     -fx-background-repeat: no-repeat;
     -fx-background-size: 100% 100%;
+}
+
+.board {
+    -fx-background-image: url("tablero.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 100% 100%;
+}
+
+.pais:hover {
+    -fx-cursor: hand;
+    -fx-fill: rgba(255, 255, 255, 0.50);
 }
 
 .title {
@@ -10,6 +25,18 @@
     -fx-border-width: 3;
     -fx-border-color: black;
     -fx-background-color: salmon;
+}
+
+.labelText {
+    -fx-font-size: 24px;
+}
+
+.error {
+    -fx-font-size: 32px;
+    -fx-font-weight: bold;
+    -fx-background-color: yellow;
+    -fx-border-color: black;
+    -fx-text-fill: red;
 }
 
 .exitButton {
@@ -22,7 +49,14 @@
     -fx-font-size: 32px;
 }
 
+.loadButton {
+    -fx-background-color: #2ecc71;
+    -fx-font-size: 24px;
+    -fx-end-margin: 30px;
+}
+
 .button:hover {
+    -fx-cursor: hand;
     -fx-background-color: -fx-shadow-highlight-color;
 }
 
@@ -30,7 +64,7 @@
     -fx-pref-width: 300px;
     -fx-pref-height: 50px;
     -fx-font-size: 24px;
-
+    -fx-cursor: hand;
 }
 
 .textField {
