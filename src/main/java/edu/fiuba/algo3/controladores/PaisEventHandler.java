@@ -26,6 +26,5 @@ public class PaisEventHandler implements EventHandler<ActionEvent> {
             pais.modificarCantidadEjercito(1);
         }
         pais.notifyObservers();
-        System.out.println("Hola desde el handler: " + pais.getNombre());
     }
 }
