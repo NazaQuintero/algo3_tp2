@@ -6,6 +6,7 @@ import edu.fiuba.algo3.modelo.rondas.Colocacion;
 import edu.fiuba.algo3.modelo.tarjetas.*;
 import edu.fiuba.algo3.modelo.turnos.ConTurno;
 import edu.fiuba.algo3.modelo.turnos.Turno;
+import javafx.scene.paint.Color;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -19,20 +20,21 @@ public class JugadorTest {
     @Test
     public void seCreaUnJugadorConColorRosa() {
 
-        Jugador jugador = new Jugador( "Cami");
-        jugador.asignarColor("rosa");
+        Jugador jugador = new Jugador( "Cami",Color.PINK);
 
-        assertEquals(jugador.mostrarColor(), "rosa");
+        assertEquals(jugador.color(), Color.PINK);
 
     }
 
+    /*
     @Test
     public void porDefectoUnJugadorNoTieneColorAsignado() {
 
         Jugador jugador = new Jugador( "Cami");
 
-        assertEquals(jugador.mostrarColor(), "");
+        assertEquals(jugador.color(), "");
     }
+    */
 
     @Test
     public void porDefectoUnJugadorNoTienePaises() {

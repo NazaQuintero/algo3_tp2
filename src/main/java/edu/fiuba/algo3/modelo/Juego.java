@@ -8,6 +8,8 @@ import edu.fiuba.algo3.modelo.tarjetas.Tarjetas;
 import edu.fiuba.algo3.modelo.turnos.ConTurno;
 import edu.fiuba.algo3.modelo.turnos.SinTurno;
 import edu.fiuba.algo3.modelo.turnos.Turno;
+import javafx.scene.paint.Color;
+
 import java.util.ArrayList;
 
 
@@ -32,6 +34,12 @@ public class Juego {
 
     public void agregarTarjeta(Tarjeta unaTarjeta) {
         tarjetas.agregarTarjeta(unaTarjeta);
+    }
+
+    public Jugador agregarJugador(String nombre, Color color){
+        Jugador jugador = new Jugador(nombre, color);
+        jugadores.agregarJugador(jugador);
+        return jugador;
     }
 
     public Jugador agregarJugador(String nombre){

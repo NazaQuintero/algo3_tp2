@@ -1,5 +1,9 @@
 package edu.fiuba.algo3.vista;
 
+import edu.fiuba.algo3.modelo.Juego;
+import edu.fiuba.algo3.modelo.excepciones.ArchivoDePaisesNoEncontradoException;
+import edu.fiuba.algo3.modelo.excepciones.ArchivoDeTarjetasNoEncontradoException;
+import edu.fiuba.algo3.modelo.excepciones.CantidadDeJugadoresInsuficienteException;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -7,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 
@@ -14,8 +19,8 @@ public class CreacionJugadores extends BorderPane {
 
     VBox panel = new VBox();
     HBox botonera;
-    private static final int ANCHO = 1900;
-    private static final int ALTO = 1060;
+    Label errorLabel;
+    private Juego juego;
 
     public CreacionJugadores(Stage stage) {
 
@@ -27,7 +32,6 @@ public class CreacionJugadores extends BorderPane {
         panel.setSpacing(30);
 
         this.setPadding(new Insets(20, 120, 20, 120));
-
     }
 
     public void setCantidadDeJugadores(int cantidadJugadores) {
@@ -50,12 +54,11 @@ public class CreacionJugadores extends BorderPane {
         this.setCenter(panel);
     }
 
-    private HBox crearTextFieldBox() {
+    private TextField crearTextField() {
         TextField inputText = new TextField();
         inputText.getStyleClass().add("textField");
-        HBox textFieldHBox = new HBox(inputText);
-        textFieldHBox.setAlignment(Pos.CENTER);
-        return textFieldHBox;
+        inputText.setAlignment(Pos.CENTER);
+        return inputText;
     }
 
     private Button crearBotonDeCarga() {
@@ -75,15 +78,28 @@ public class CreacionJugadores extends BorderPane {
         Button exitButton = new Button("Salir");
         exitButton.getStyleClass().add("exitButton");
         exitButton.setOnAction(e -> Platform.exit());
-        return  exitButton;
+        return exitButton;
     }
 
     private Button crearBotonJugar(Stage stage) {
         Button buttonSubmit = new Button("Jugar");
         buttonSubmit.getStyleClass().add("startButton");
-        buttonSubmit.setOnAction(e -> new CampoDeJuego(stage));
+        buttonSubmit.setOnAction(e -> {
+            try {
+                juego.comenzar();
+                new CampoDeJuego(stage);
+            } catch (CantidadDeJugadoresInsuficienteException ex) {
+                errorLabel.setVisible(true);
+            }
+        });
+
         return buttonSubmit;
     }
 
-
+    private Label crearLabelError() {
+        Label label = new Label("Debe cargar los nombres de todos los jugadores para comenzar");
+        label.getStyleClass().add("error");
+        label.setVisible(false);
+        return label;
+    }
 }
