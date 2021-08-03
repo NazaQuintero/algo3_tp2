@@ -1,9 +1,5 @@
 package edu.fiuba.algo3.modelo;
 
-import edu.fiuba.algo3.modelo.continentes.Continenta;
-import edu.fiuba.algo3.modelo.continentes.Continente;
-import edu.fiuba.algo3.modelo.continentes.ContinenteInvalidoException;
-import edu.fiuba.algo3.modelo.continentes.MultitonContinentes;
 import edu.fiuba.algo3.modelo.excepciones.ElJugadorNoTieneTurnoException;
 import edu.fiuba.algo3.modelo.excepciones.NoEsRondaDeColocacionException;
 import edu.fiuba.algo3.modelo.excepciones.PaisOcupadoPorOtroJugadorException;

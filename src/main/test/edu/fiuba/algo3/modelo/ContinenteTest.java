@@ -1,8 +1,6 @@
 package edu.fiuba.algo3.modelo;
 
-import edu.fiuba.algo3.modelo.continentes.Asia;
 import edu.fiuba.algo3.modelo.continentes.Continente;
-import edu.fiuba.algo3.modelo.excepciones.ElJugadorNoPuedeColocarMasEjercitosException;
 import edu.fiuba.algo3.modelo.excepciones.ElJugadorNoTieneTurnoException;
 import edu.fiuba.algo3.modelo.excepciones.NoEsRondaDeColocacionException;
 import edu.fiuba.algo3.modelo.excepciones.PaisOcupadoPorOtroJugadorException;
@@ -10,13 +8,12 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-
 public class ContinenteTest {
 
     @Test
     public void porDefectoNoEstaDominadoPorNadie() {
         Jugador jugador = new Jugador( "Martin");
-        Continente asia = new Asia();
+        Continente asia = new Continente("Asia");
         asia.agregarPais(new Pais("China"));
         assertFalse(asia.dominadoPor(jugador));
     }
@@ -32,7 +29,7 @@ public class ContinenteTest {
         jugador.colocarEjercitos(india, 1);
         jugador.colocarEjercitos(japon, 1);
 
-        Continente asia = new Asia();
+        Continente asia = new Continente("Asia");
         asia.agregarPais(china);
         asia.agregarPais(india);
         asia.agregarPais(japon);
@@ -51,7 +48,7 @@ public class ContinenteTest {
         jugador.colocarEjercitos(india, 1);
         jugador.colocarEjercitos(japon, 1);
 
-        Continente asia = new Asia();
+        Continente asia = new Continente("Asia");
         asia.agregarPais(china);
         asia.agregarPais(india);
         asia.agregarPais(japon);
@@ -71,7 +68,7 @@ public class ContinenteTest {
         jugador.colocarEjercitos(india, 1);
         jugador2.colocarEjercitos(japon, 1);
 
-        Continente asia = new Asia();
+        Continente asia = new Continente("Asia");
         asia.agregarPais(china);
         asia.agregarPais(india);
         asia.agregarPais(japon);

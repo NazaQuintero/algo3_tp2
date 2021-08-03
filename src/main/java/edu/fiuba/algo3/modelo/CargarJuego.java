@@ -3,8 +3,6 @@ package edu.fiuba.algo3.modelo;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Objects;
 
 import com.google.gson.*;
@@ -29,8 +27,8 @@ public class CargarJuego {
             e.printStackTrace();
         }
 
-        Continenta[] _continentes  = gson.fromJson(json, Continenta[].class);
-        for(Continenta continente: _continentes) {
+        Continente[] _continentes  = gson.fromJson(json, Continente[].class);
+        for(Continente continente: _continentes) {
             continente.setEjercitosNulos();
             MultitonPaises.cargarPaises(continente.getPaises());
         }
@@ -55,7 +53,6 @@ public class CargarJuego {
 
             JsonObject jsonObject = jsonElement.getAsJsonObject();
 
-            // Crea el objeto pais sin limitrofes
             String nombrePais = jsonObject.get("Pais").getAsString();
 
             Pais pais = MultitonPaises.obtenerInstanciaDe(nombrePais);

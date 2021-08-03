@@ -1,18 +1,20 @@
 package edu.fiuba.algo3.modelo;
 
 import edu.fiuba.algo3.modelo.batallasDeDados.*;
-import edu.fiuba.algo3.modelo.continentes.Asia;
+import edu.fiuba.algo3.modelo.continentes.Continente;
 import edu.fiuba.algo3.modelo.excepciones.*;
 import edu.fiuba.algo3.modelo.fichas.Ejercito;
 import edu.fiuba.algo3.modelo.rondas.Ataque;
 import edu.fiuba.algo3.modelo.rondas.Colocacion;
 import edu.fiuba.algo3.modelo.rondas.Reagrupe;
-import edu.fiuba.algo3.modelo.rondas.Ronda;
 import edu.fiuba.algo3.modelo.tarjetas.Globo;
 import edu.fiuba.algo3.modelo.tarjetas.Tarjeta;
 import edu.fiuba.algo3.modelo.turnos.ConTurno;
 import edu.fiuba.algo3.modelo.turnos.Turno;
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -206,7 +208,7 @@ public class RondaTest {
         Pais jpn = new Pais("Japon");
         Pais rsa = new Pais("Rusia");
 
-        Asia asia = new Asia();
+        Continente asia = new Continente("Asia");
         asia.agregarPais(jpn);
         asia.agregarPais(rsa);
 
