@@ -214,25 +214,29 @@
         "nombre": "Uruguay",
         "posX": 370,
         "posY": 500,
-        "paisesLimitrofes": []
+        "paisesLimitrofes": [],
+        "observers" : []
       },
       {
         "nombre": "Brasil",
         "posX": 370,
         "posY": 430,
-        "paisesLimitrofes": []
+        "paisesLimitrofes": [],
+        "observers" : []
       },
       {
         "nombre": "Colombia",
         "posX": 290,
         "posY": 390,
-        "paisesLimitrofes": []
+        "paisesLimitrofes": [],
+        "observers" : []
       },
       {
         "nombre": "Peru",
         "posX": 290,
         "posY": 440,
-        "paisesLimitrofes": []
+        "paisesLimitrofes": [],
+        "observers" : []
       }
     ]
   },
@@ -244,25 +248,29 @@
         "nombre": "Australia",
         "posX": 920,
         "posY": 510,
-        "paisesLimitrofes": []
+        "paisesLimitrofes": [],
+        "observers" : []
       },
       {
         "nombre": "Borneo",
         "posX": 885,
         "posY": 410,
-        "paisesLimitrofes": []
+        "paisesLimitrofes": [],
+        "observers" : []
       },
       {
         "nombre": "Sumatra",
         "posX": 820,
         "posY": 450,
-        "paisesLimitrofes": []
+        "paisesLimitrofes": [],
+        "observers" : []
       },
       {
         "nombre": "Java",
         "posX": 940,
         "posY": 410,
-        "paisesLimitrofes": []
+        "paisesLimitrofes": [],
+        "observers" : []
       }
     ]
   },
@@ -274,91 +282,106 @@
         "nombre": "Tartaria",
         "posX": 735,
         "posY": 115,
-        "paisesLimitrofes": []
+        "paisesLimitrofes": [],
+        "observers" : []
       },
       {
         "nombre": "Mongolia",
         "posX": 790,
         "posY": 220,
-        "paisesLimitrofes": []
+        "paisesLimitrofes": [],
+        "observers" : []
       },
       {
         "nombre": "Kamtchatka",
         "posX": 840,
         "posY": 120,
-        "paisesLimitrofes": []
+        "paisesLimitrofes": [],
+        "observers" : []
       },
       {
         "nombre": "Turquia",
         "posX": 740,
         "posY": 330,
-        "paisesLimitrofes": []
+        "paisesLimitrofes": [],
+        "observers" : []
       },
       {
         "nombre": "Iran",
         "posX": 755,
         "posY": 270,
-        "paisesLimitrofes": []
+        "paisesLimitrofes": [],
+        "observers" : []
       },
       {
         "nombre": "Israel",
         "posX": 725,
         "posY": 380,
-        "paisesLimitrofes": []
+        "paisesLimitrofes": [],
+        "observers" : []
       },
       {
         "nombre": "Taymir",
         "posX": 787,
         "posY": 115,
-        "paisesLimitrofes": []
+        "paisesLimitrofes": [],
+        "observers" : []
       },
       {
         "nombre": "Aral",
         "posX": 710,
         "posY": 165,
-        "paisesLimitrofes": []
+        "paisesLimitrofes": [],
+        "observers" : []
       },
       {
         "nombre": "Siberia",
         "posX": 790,
         "posY": 170,
-        "paisesLimitrofes": []
+        "paisesLimitrofes": [],
+        "observers" : []
       },
       {
         "nombre": "Japon",
         "posX": 915,
         "posY": 170,
-        "paisesLimitrofes": []
+        "paisesLimitrofes": [],
+        "observers" : []
       },
       {
         "nombre": "Gobi",
         "posX": 815,
         "posY": 270,
-        "paisesLimitrofes": []
+        "paisesLimitrofes": [],
+        "observers" : []
       },
       {
         "nombre": "Arabia",
         "posX": 770,
         "posY": 390,
-        "paisesLimitrofes": []
+        "paisesLimitrofes": [],
+        "observers" : []
       },
       {
         "nombre": "India",
         "posX": 850,
         "posY": 360,
-        "paisesLimitrofes": []
+        "paisesLimitrofes": [],
+        "observers" : []
       },
       {
         "nombre": "China",
         "posX": 890,
         "posY": 270,
-        "paisesLimitrofes": []
+        "paisesLimitrofes": [],
+        "observers" : []
       },
       {
         "nombre": "Malasia",
         "posX": 910,
         "posY": 330,
-        "paisesLimitrofes": []
+        "paisesLimitrofes": [],
+        "observers" : []
       }
     ]
   }
