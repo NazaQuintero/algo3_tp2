@@ -24,6 +24,11 @@ public class CreacionJugadores extends BorderPane {
 
     public CreacionJugadores(Stage stage) {
 
+        try {
+            juego = new Juego();
+        } catch (Exception e) {
+            Platform.exit();
+        }
         this.getStylesheets().add("styles.css");
         Button buttonSubmit = this.crearBotonJugar(stage);
         Button exitButton = this.crearExitButton();
@@ -39,16 +44,18 @@ public class CreacionJugadores extends BorderPane {
         for (int i = 0; i < cantidadJugadores; i++) {
             this.crearFormularioDeCarga(i);
         }
+        errorLabel = crearLabelError();
+        panel.getChildren().add(errorLabel);
         panel.getChildren().add(botonera);
     }
 
     private void crearFormularioDeCarga(int i) {
         Label label = new Label("Ingrese el nombre del jugador " + (i+1) + ": ");
         label.getStyleClass().add("labelText");
-        HBox textFieldHBox = crearTextFieldBox();
-        Button botonDeCarga = crearBotonDeCarga();
+        TextField txtField = crearTextField();
+        Button botonDeCarga = crearBotonDeCarga(txtField, getColor(i));
         HBox hbox = new HBox();
-        hbox.getChildren().addAll(label, textFieldHBox, botonDeCarga);
+        hbox.getChildren().addAll(label, txtField, botonDeCarga);
 
         panel.getChildren().addAll(hbox);
         this.setCenter(panel);
@@ -61,8 +68,21 @@ public class CreacionJugadores extends BorderPane {
         return inputText;
     }
 
-    private Button crearBotonDeCarga() {
+    private Color getColor(int i){
+        switch (i) {
+            case 0: return Color.RED;
+            case 1: return Color.BLUE;
+            case 2: return Color.YELLOW;
+            case 3: return Color.GREEN;
+            case 4: return Color.BLACK;
+            case 5: return Color.MAGENTA;
+        }
+        return Color.RED;
+    }
+
+    private Button crearBotonDeCarga(TextField tField, Color color) {
         Button buttonSubmit = new Button("Cargar");
+        buttonSubmit.setOnAction(e -> juego.agregarJugador(tField.getText(), color));
         buttonSubmit.getStyleClass().addAll("startButton", "loadButton");
         return buttonSubmit;
     }

@@ -32,11 +32,11 @@
 }
 
 .error {
-    -fx-font-size: 32px;
+    -fx-font-size: 25px;
     -fx-font-weight: bold;
-    -fx-background-color: yellow;
+    -fx-background-color: #C50000;
     -fx-border-color: black;
-    -fx-text-fill: red;
+    -fx-text-fill: white;
 }
 
 .exitButton {
