@@ -2,7 +2,7 @@ package edu.fiuba.algo3.modelo.turnos;
 
 import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.Jugadores;
-import edu.fiuba.algo3.modelo.Pais;
+import edu.fiuba.algo3.modelo.paises.Pais;
 import edu.fiuba.algo3.modelo.batallasDeDados.Resultado;
 import edu.fiuba.algo3.modelo.rondas.Colocacion;
 import edu.fiuba.algo3.modelo.tarjetas.Tarjeta;

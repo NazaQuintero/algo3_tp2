@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.modelo;
+package edu.fiuba.algo3.modelo.paises;
 
 import java.util.ArrayList;
 import java.util.Collection;

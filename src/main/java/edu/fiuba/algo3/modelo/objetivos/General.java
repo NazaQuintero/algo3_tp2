@@ -1,7 +1,7 @@
 package edu.fiuba.algo3.modelo.objetivos;
 
 import edu.fiuba.algo3.modelo.Jugador;
-import edu.fiuba.algo3.modelo.continentes.ContinenteInvalidoException;
+import edu.fiuba.algo3.modelo.excepciones.ContinenteInvalidoException;
 
 public class General implements Objetivo {
 

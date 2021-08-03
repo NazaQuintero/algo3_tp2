@@ -1,7 +1,7 @@
-package edu.fiuba.algo3.modelo;
+package edu.fiuba.algo3.modelo.paises;
 
 import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
+import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.batallasDeDados.Dados;
 import edu.fiuba.algo3.modelo.batallasDeDados.Resultado;
 import edu.fiuba.algo3.modelo.batallasDeDados.ResultadoBatalla;
@@ -57,12 +57,7 @@ public class Pais {
     }
 
     public void limitaCon(Pais otroPais) {
-        otroPais.agregarLimitrofe(this);
         paisesLimitrofes.add(otroPais);
-    }
-
-    private void agregarLimitrofe(Pais unPais) {
-        paisesLimitrofes.add(unPais);
     }
 
     public Resultado atacarA(Pais defensor, int cantidadDeEjercitos) throws ElPaisNoEsLimitrofeException, EjercitosInsuficientesException {

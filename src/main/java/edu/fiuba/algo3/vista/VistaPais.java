@@ -1,6 +1,6 @@
 package edu.fiuba.algo3.vista;
 
-import edu.fiuba.algo3.modelo.Pais;
+import edu.fiuba.algo3.modelo.paises.Pais;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 

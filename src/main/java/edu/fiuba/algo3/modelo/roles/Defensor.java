@@ -1,10 +1,10 @@
 package edu.fiuba.algo3.modelo.roles;
 
 import edu.fiuba.algo3.modelo.batallasDeDados.Dados;
-import edu.fiuba.algo3.modelo.Pais;
+import edu.fiuba.algo3.modelo.paises.Pais;
 
 public class Defensor implements Rol {
-    int cantidadEjercitos = 0;
+    int cantidadEjercitos;
     public Defensor(int cantidadEjercitos){
         this.cantidadEjercitos = cantidadEjercitos;
     }

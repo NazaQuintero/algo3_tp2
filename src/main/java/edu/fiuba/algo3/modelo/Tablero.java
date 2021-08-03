@@ -3,6 +3,8 @@ package edu.fiuba.algo3.modelo;
 import edu.fiuba.algo3.modelo.batallasDeDados.ProcesadorResultado;
 import edu.fiuba.algo3.modelo.batallasDeDados.Resultado;
 import edu.fiuba.algo3.modelo.excepciones.*;
+import edu.fiuba.algo3.modelo.paises.MultitonPaises;
+import edu.fiuba.algo3.modelo.paises.Pais;
 import edu.fiuba.algo3.modelo.tarjetas.Tarjeta;
 
 import java.util.*;

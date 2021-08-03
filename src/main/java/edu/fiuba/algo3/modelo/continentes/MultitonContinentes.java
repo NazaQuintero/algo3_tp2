@@ -1,5 +1,7 @@
 package edu.fiuba.algo3.modelo.continentes;
 
+import edu.fiuba.algo3.modelo.excepciones.ContinenteInvalidoException;
+
 import java.util.HashMap;
 
 public class MultitonContinentes {

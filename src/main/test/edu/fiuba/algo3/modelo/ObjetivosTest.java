@@ -1,9 +1,11 @@
 package edu.fiuba.algo3.modelo;
 
+import edu.fiuba.algo3.modelo.excepciones.ContinenteInvalidoException;
 import edu.fiuba.algo3.modelo.excepciones.ElJugadorNoTieneTurnoException;
 import edu.fiuba.algo3.modelo.excepciones.NoEsRondaDeColocacionException;
 import edu.fiuba.algo3.modelo.excepciones.PaisOcupadoPorOtroJugadorException;
 import edu.fiuba.algo3.modelo.objetivos.*;
+import edu.fiuba.algo3.modelo.paises.Pais;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -53,7 +55,7 @@ public class ObjetivosTest {
         Objetivo ocupacion1 = new Ocupacion1();
         try {
             assertFalse(ocupacion1.estaCumplido(new Jugador( "Martin")));
-        } catch (edu.fiuba.algo3.modelo.continentes.ContinenteInvalidoException e) {
+        } catch (ContinenteInvalidoException e) {
             e.printStackTrace();
         }
     }
@@ -64,7 +66,7 @@ public class ObjetivosTest {
         Objetivo ocupacion2 = new Ocupacion2();
         try {
             assertFalse(ocupacion2.estaCumplido(new Jugador( "Fran")));
-        } catch (edu.fiuba.algo3.modelo.continentes.ContinenteInvalidoException e) {
+        } catch (ContinenteInvalidoException e) {
             e.printStackTrace();
         }
     }
@@ -75,7 +77,7 @@ public class ObjetivosTest {
         Objetivo ocupacion3 = new Ocupacion3();
         try {
             assertFalse(ocupacion3.estaCumplido(new Jugador( "Naza")));
-        } catch (edu.fiuba.algo3.modelo.continentes.ContinenteInvalidoException e) {
+        } catch (ContinenteInvalidoException e) {
             e.printStackTrace();
         }
     }
@@ -86,7 +88,7 @@ public class ObjetivosTest {
         Objetivo ocupacion4 = new Ocupacion4();
         try {
             assertFalse(ocupacion4.estaCumplido(new Jugador( "Cami")));
-        } catch (edu.fiuba.algo3.modelo.continentes.ContinenteInvalidoException e) {
+        } catch (ContinenteInvalidoException e) {
             e.printStackTrace();
         }
     }
@@ -97,7 +99,7 @@ public class ObjetivosTest {
         Objetivo ocupacion5 = new Ocupacion5();
         try {
             assertFalse(ocupacion5.estaCumplido(new Jugador( "Martin")));
-        } catch (edu.fiuba.algo3.modelo.continentes.ContinenteInvalidoException e) {
+        } catch (ContinenteInvalidoException e) {
             e.printStackTrace();
         }
     }
@@ -108,7 +110,7 @@ public class ObjetivosTest {
         Objetivo ocupacion6 = new Ocupacion6();
         try {
             assertFalse(ocupacion6.estaCumplido(new Jugador( "Martin")));
-        } catch (edu.fiuba.algo3.modelo.continentes.ContinenteInvalidoException e) {
+        } catch (ContinenteInvalidoException e) {
             e.printStackTrace();
         }
     }
@@ -119,7 +121,7 @@ public class ObjetivosTest {
         Objetivo ocupacion7 = new Ocupacion7();
         try {
             assertFalse(ocupacion7.estaCumplido(new Jugador( "Martin")));
-        } catch (edu.fiuba.algo3.modelo.continentes.ContinenteInvalidoException e) {
+        } catch (ContinenteInvalidoException e) {
             e.printStackTrace();
         }
     }
@@ -130,7 +132,7 @@ public class ObjetivosTest {
         Objetivo ocupacion8 = new Ocupacion8();
         try {
             assertFalse(ocupacion8.estaCumplido(new Jugador( "Paul Walker")));
-        } catch (edu.fiuba.algo3.modelo.continentes.ContinenteInvalidoException e) {
+        } catch (ContinenteInvalidoException e) {
             e.printStackTrace();
         }
     }

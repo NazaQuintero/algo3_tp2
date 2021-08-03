@@ -1,7 +1,7 @@
 package edu.fiuba.algo3.modelo.continentes;
 
 import edu.fiuba.algo3.modelo.Jugador;
-import edu.fiuba.algo3.modelo.Pais;
+import edu.fiuba.algo3.modelo.paises.Pais;
 import edu.fiuba.algo3.modelo.fichas.EjercitoNulo;
 
 import java.util.ArrayList;

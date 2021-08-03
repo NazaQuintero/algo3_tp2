@@ -2,9 +2,9 @@ package edu.fiuba.algo3.modelo;
 
 import edu.fiuba.algo3.modelo.excepciones.LaTarjetaYaEstaDesactivadaException;
 import edu.fiuba.algo3.modelo.excepciones.LaTarjetaYaFueActivadaException;
+import edu.fiuba.algo3.modelo.paises.Pais;
 import edu.fiuba.algo3.modelo.tarjetas.Globo;
 import edu.fiuba.algo3.modelo.tarjetas.Barco;
-import edu.fiuba.algo3.modelo.tarjetas.Simbolo;
 import edu.fiuba.algo3.modelo.tarjetas.Tarjeta;
 import org.junit.jupiter.api.Test;
 
@@ -16,7 +16,7 @@ public class TarjetaTest {
     public void unaTarjetaEstaDesactivadaPorDefecto() {
         Pais unPais = new Pais("Argentina");
         Tarjeta unaTarjeta = new Tarjeta(unPais, new Globo());
-        assertThrows(LaTarjetaYaEstaDesactivadaException.class, () -> unaTarjeta.desactivar());
+        assertThrows(LaTarjetaYaEstaDesactivadaException.class, unaTarjeta::desactivar);
     }
 
     @Test
@@ -24,7 +24,7 @@ public class TarjetaTest {
         Pais unPais = new Pais("Argentina");
         Tarjeta unaTarjeta = new Tarjeta(unPais, new Globo());
         unaTarjeta.activar();
-        assertThrows(LaTarjetaYaFueActivadaException.class, () -> unaTarjeta.activar());
+        assertThrows(LaTarjetaYaFueActivadaException.class, unaTarjeta::activar);
 
     }
 

@@ -10,6 +10,8 @@ import edu.fiuba.algo3.App;
 import edu.fiuba.algo3.modelo.continentes.*;
 import edu.fiuba.algo3.modelo.excepciones.ArchivoDePaisesNoEncontradoException;
 import edu.fiuba.algo3.modelo.excepciones.ArchivoDeTarjetasNoEncontradoException;
+import edu.fiuba.algo3.modelo.paises.MultitonPaises;
+import edu.fiuba.algo3.modelo.paises.Pais;
 import edu.fiuba.algo3.modelo.tarjetas.*;
 
 public class CargarJuego {
@@ -68,6 +70,10 @@ public class CargarJuego {
 
         GsonBuilder gsonBuilder = new GsonBuilder();
         gsonBuilder.registerTypeAdapter(Pais.class, deserializer);
+
+        Gson gson = gsonBuilder.create();
+        Pais[] paises = gson.fromJson(json, Pais[].class);
+        MultitonPaises.cargarPaises(new ArrayList<>(Arrays.asList(paises)));
     }
 
     public static void cargarTarjetas(Juego juego , String archivoTarjetas) throws ArchivoDeTarjetasNoEncontradoException {

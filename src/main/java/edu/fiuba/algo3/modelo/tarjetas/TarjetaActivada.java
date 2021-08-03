@@ -1,6 +1,6 @@
 package edu.fiuba.algo3.modelo.tarjetas;
 
-import edu.fiuba.algo3.modelo.Pais;
+import edu.fiuba.algo3.modelo.paises.Pais;
 import edu.fiuba.algo3.modelo.excepciones.LaTarjetaYaFueActivadaException;
 
 public class TarjetaActivada implements EstadoTarjeta {
