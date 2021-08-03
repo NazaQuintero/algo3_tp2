@@ -1,4 +1,5 @@
-[{
+[
+  {
   "nombre": "Africa",
   "cantidadDeEjercitos": 3,
   "paises" : [
@@ -11,10 +12,30 @@
       "nombre": "Etiopia",
       "posX": 670,
       "posY": 480
+    },
+    {
+      "nombre": "Egipto",
+      "posX": 700,
+      "posY": 450
+    },
+    {
+      "nombre": "Madagascar",
+      "posX": 770,
+      "posY": 520
+    },
+    {
+      "nombre": "Sahara",
+      "posX": 580,
+      "posY": 480
+    },
+    {
+      "nombre": "Sudafrica",
+      "posX": 680,
+      "posY": 550
     }
   ]
 },
-{
+  {
   "nombre": "Europa",
   "cantidadDeEjercitos": 5,
   "paises": [
@@ -27,6 +48,16 @@
       "nombre": "Gran Bretaña",
       "posX": 520,
       "posY": 270
+    },
+    {
+      "nombre": "Alemania",
+      "posX": 620,
+      "posY": 330
+    },
+    {
+      "nombre": "Islandia",
+      "posX": 420,
+      "posY":  260
     },
     {
       "nombre": "Polonia",
@@ -54,5 +85,204 @@
       "posY": 190
     }
   ]
-}
+},
+  {
+    "nombre": "America del Norte",
+    "cantidadDeEjercitos": 5,
+    "paises": [
+      {
+        "nombre": "Oregon",
+        "posX": 80,
+        "posY": 290
+      },
+      {
+        "nombre": "Nueva York",
+        "posX": 175,
+        "posY": 260
+      },
+      {
+        "nombre": "Terranova",
+        "posX": 210,
+        "posY": 230
+      },
+      {
+        "nombre": "California",
+        "posX": 130,
+        "posY": 310
+      },
+      {
+        "nombre": "Canada",
+        "posX": 130,
+        "posY": 170
+      },
+      {
+        "nombre": "Yukon",
+        "posX": 70,
+        "posY": 230
+      },
+      {
+        "nombre": "Groenlandia",
+        "posX": 320,
+        "posY": 150
+      },
+      {
+        "nombre": "Alaska",
+        "posX": 10,
+        "posY": 260
+      },
+      {
+        "nombre": "Mexico",
+        "posX": 185,
+        "posY":  340
+      },
+      {
+        "nombre": "Labrador",
+        "posX": 240,
+        "posY": 200
+      }
+    ]
+  },
+  {
+    "nombre": "America del Sur",
+    "cantidadDeEjercitos": 3,
+    "paises": [
+      {
+        "nombre": "Chile",
+        "posX": 270,
+        "posY": 510
+      },
+      {
+        "nombre": "Argentina",
+        "posX": 320,
+        "posY": 510
+      },
+      {
+        "nombre": "Uruguay",
+        "posX": 370,
+        "posY": 500
+      },
+      {
+        "nombre": "Brasil",
+        "posX": 370,
+        "posY": 430
+      },
+      {
+        "nombre": "Colombia",
+        "posX": 290,
+        "posY": 390
+      },
+      {
+        "nombre": "Peru",
+        "posX": 290,
+        "posY": 440
+      }
+    ]
+  },
+  {
+    "nombre": "Oceania",
+    "cantidadDeEjercitos": 2,
+    "paises": [
+      {
+        "nombre": "Australia",
+        "posX": 920,
+        "posY": 510
+      },
+      {
+        "nombre": "Borneo",
+        "posX": 885,
+        "posY": 410
+      },
+      {
+        "nombre": "Sumatra",
+        "posX": 820,
+        "posY": 450
+      },
+      {
+        "nombre": "Java",
+        "posX": 940,
+        "posY": 410
+      }
+    ]
+  },
+  {
+    "nombre": "Asia",
+    "cantidadDeEjercitos": 7,
+    "paises": [
+      {
+        "nombre": "Tartaria",
+        "posX": 735,
+        "posY": 115
+      },
+      {
+        "nombre": "Mongolia",
+        "posX": 790,
+        "posY": 220
+      },
+      {
+        "nombre": "Kamtchatka",
+        "posX": 840,
+        "posY": 120
+      },
+      {
+        "nombre": "Turquia",
+        "posX": 740,
+        "posY": 330
+      },
+      {
+        "nombre": "Iran",
+        "posX": 755,
+        "posY": 270
+      },
+      {
+        "nombre": "Israel",
+        "posX": 725,
+        "posY": 380
+      },
+      {
+        "nombre": "Taymir",
+        "posX": 787,
+        "posY": 115
+      },
+      {
+        "nombre": "Aral",
+        "posX": 710,
+        "posY": 165
+      },
+      {
+        "nombre": "Siberia",
+        "posX": 790,
+        "posY": 170
+      },
+      {
+        "nombre": "Japon",
+        "posX": 915,
+        "posY": 170
+      },
+      {
+        "nombre": "Gobi",
+        "posX": 815,
+        "posY": 270
+      },
+      {
+        "nombre": "Arabia",
+        "posX": 770,
+        "posY": 390
+      },
+      {
+        "nombre": "India",
+        "posX": 850,
+        "posY": 360
+      },
+      {
+        "nombre": "China",
+        "posX": 890,
+        "posY": 270
+      },
+      {
+        "nombre": "Malasia",
+        "posX": 910,
+        "posY": 330
+      }
+    ]
+  }
 ]

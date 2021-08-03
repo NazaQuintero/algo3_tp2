@@ -24,7 +24,8 @@ public class Juego {
         jugadores = new Jugadores();
         tarjetas = new Tarjetas();
 
-        CargarJuego.cargarPaisesAlJuego(this, ARCHIVO_PAISES);
+        CargarJuego.cargarContinentes();
+        CargarJuego.cargarPaisesLimitrofes(ARCHIVO_PAISES);
         CargarJuego.cargarTarjetas(this, ARCHIVO_TARJETAS);
     }
 

@@ -16,26 +16,39 @@ import edu.fiuba.algo3.modelo.tarjetas.*;
 
 public class CargarJuego {
 
-    public static void cargarPaisesAlJuego(Juego juego, String archivoPaises) throws ArchivoDePaisesNoEncontradoException {
-
-        HashMap<Pais, ArrayList<String>> limitrofes = new HashMap<>();
-//        HashMap<String, Pais> paises = new HashMap<>();
-        String json;
+    public static void cargarContinentes() {
+        String json = null;
 
         Gson gson = new Gson();
 
         try {
-            InputStream is = App.class.getClassLoader().getResourceAsStream(archivoPaises);
+            InputStream is = App.class.getClassLoader().getResourceAsStream("continentes.json");
             json = new String(Objects.requireNonNull(is).readAllBytes(), StandardCharsets.UTF_8);
         }
         catch (IOException | NullPointerException e) {
             e.printStackTrace();
-            throw new ArchivoDePaisesNoEncontradoException();
         }
 
-        Pais[] _paises  = gson.fromJson(json, Pais[].class);
+        Continenta[] _continentes  = gson.fromJson(json, Continenta[].class);
+        for(Continenta continente: _continentes) {
+            continente.setEjercitosNulos();
+            MultitonPaises.cargarPaises(continente.getPaises());
+        }
+        MultitonContinentes.cargarContinentes(_continentes);
 
-        GsonBuilder gsonBuilder = new GsonBuilder();
+    }
+
+    public static void cargarPaisesLimitrofes(String archivoPaises) throws ArchivoDePaisesNoEncontradoException {
+
+        String json;
+
+        try {
+            InputStream is = App.class.getClassLoader().getResourceAsStream(archivoPaises);
+            json = new String(Objects.requireNonNull(is).readAllBytes(), StandardCharsets.UTF_8);
+        } catch (IOException | NullPointerException e) {
+            e.printStackTrace();
+            throw new ArchivoDePaisesNoEncontradoException();
+        }
 
         // Deserializer. Guarda cada Pais en "paises" y el nombre de los limitrofes en "limitrofes"
         JsonDeserializer<Pais> deserializer = (jsonElement, type, jsonDeserializationContext) -> {
@@ -44,37 +57,20 @@ public class CargarJuego {
 
             // Crea el objeto pais sin limitrofes
             String nombrePais = jsonObject.get("Pais").getAsString();
-            //paises.put(nombrePais, pais);
+
             Pais pais = MultitonPaises.obtenerInstanciaDe(nombrePais);
 
-            limitrofes.put(pais, new ArrayList<>());
-
-            String nombreContinente = jsonObject.get("Continente").getAsString();
-            Continente continente = MultitonContinentes.obtenerInstanciaDe(nombreContinente);
-
-            continente.agregarPais(pais);
-
-            String nombresLimitrofes = jsonObject.get("Limita con").getAsString();
+            String nombresLimitrofes = jsonObject.get("limitrofes").getAsString();
             String[] arrayNombreLimitrofes = nombresLimitrofes.split(",");
 
-            for (String limitrofe : arrayNombreLimitrofes) {
-                limitrofes.get(pais).add(limitrofe);
-            }
+            for (String limitrofe : arrayNombreLimitrofes)
+                pais.limitaCon(MultitonPaises.obtenerInstanciaDe(limitrofe));
+
             return pais;
         };
 
-        //gsonBuilder.registerTypeAdapter(Pais.class, deserializer);
-        //Gson gson = gsonBuilder.create();
-
-
-        // Agrega a cada pais sus limitrofes
-        for (Pais pais: _paises) {
-            ArrayList<String> nombreLimitrofes = limitrofes.get(pais);
-            for (String limitrofe: nombreLimitrofes) {
-                pais.limitaCon(MultitonPaises.obtenerInstanciaDe(limitrofe));
-            }
-//            juego.agregarPais(pais);
-        }
+        GsonBuilder gsonBuilder = new GsonBuilder();
+        gsonBuilder.registerTypeAdapter(Pais.class, deserializer);
     }
 
     public static void cargarTarjetas(Juego juego , String archivoTarjetas) throws ArchivoDeTarjetasNoEncontradoException {

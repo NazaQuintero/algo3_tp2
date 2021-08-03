@@ -1,10 +1,13 @@
 package edu.fiuba.algo3;
 
 import com.google.gson.Gson;
+import edu.fiuba.algo3.modelo.CargarJuego;
 import edu.fiuba.algo3.modelo.Pais;
 import edu.fiuba.algo3.modelo.PosicionPais;
 import edu.fiuba.algo3.modelo.continentes.Africa;
+import edu.fiuba.algo3.modelo.continentes.Continenta;
 import edu.fiuba.algo3.modelo.continentes.Continente;
+import edu.fiuba.algo3.modelo.continentes.MultitonContinentes;
 import edu.fiuba.algo3.modelo.excepciones.ArchivoDePaisesNoEncontradoException;
 import edu.fiuba.algo3.vista.MenuInicial;
 import javafx.application.Application;
@@ -27,20 +30,8 @@ public class App extends Application {
     @Override
     public void start(Stage stage) {
 
-        String json = null;
 
-        Gson gson = new Gson();
-
-        try {
-            InputStream is = App.class.getClassLoader().getResourceAsStream("continentes.json");
-            json = new String(Objects.requireNonNull(is).readAllBytes(), StandardCharsets.UTF_8);
-        }
-        catch (IOException | NullPointerException e) {
-            e.printStackTrace();
-        }
-
-        Africa[] _continentes  = gson.fromJson(json, Africa[].class); //No anda, no se puede instanciar clase abstracta
-
+        CargarJuego.cargarContinentes();
         MenuInicial menuInicial = new MenuInicial(stage);
         Scene presentacion = new Scene(menuInicial, ANCHO, ALTO);
         stage.setScene(presentacion);

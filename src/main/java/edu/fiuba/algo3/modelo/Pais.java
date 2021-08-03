@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.modelo;
 
 import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 import edu.fiuba.algo3.modelo.batallasDeDados.Dados;
 import edu.fiuba.algo3.modelo.batallasDeDados.Resultado;
 import edu.fiuba.algo3.modelo.batallasDeDados.ResultadoBatalla;
@@ -28,7 +29,6 @@ public class Pais {
         this.nombre = nombre;
         this.paisesLimitrofes = new ArrayList<>();
         this.ejercito = new EjercitoNulo();
-
     }
 
     public ArrayList<Pais> getPaisesLimitrofes() {

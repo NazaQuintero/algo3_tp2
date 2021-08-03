@@ -9,17 +9,11 @@ import java.util.*;
 
 
 public class Tablero {
-//    private final HashMap<String, Pais> paises;
     private final HashMap<Pais, Tarjeta> tarjetas;
 
     public Tablero() {
-//        paises = new HashMap<>();
         tarjetas = new HashMap<>();
     }
-
-//    public void agregarPais(Pais pais) {
-//        paises.put(pais.obtenerNombre(), pais);
-//    }
 
     public void repartirPaises(Jugadores jugadores) {
         ArrayList<Pais> paises = new ArrayList<>(MultitonPaises.obtenerTodosLosPaises());
