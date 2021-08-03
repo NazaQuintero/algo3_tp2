@@ -1,9 +1,6 @@
 package edu.fiuba.algo3.modelo;
 
-import edu.fiuba.algo3.modelo.excepciones.ContinenteInvalidoException;
-import edu.fiuba.algo3.modelo.excepciones.ElJugadorNoTieneTurnoException;
-import edu.fiuba.algo3.modelo.excepciones.NoEsRondaDeColocacionException;
-import edu.fiuba.algo3.modelo.excepciones.PaisOcupadoPorOtroJugadorException;
+import edu.fiuba.algo3.modelo.excepciones.*;
 import edu.fiuba.algo3.modelo.objetivos.*;
 import edu.fiuba.algo3.modelo.paises.Pais;
 import org.junit.jupiter.api.Test;
@@ -13,14 +10,14 @@ import static org.junit.jupiter.api.Assertions.*;
 public class ObjetivosTest {
 
     @Test
-    public void porDefectoUnJugadorNoCumpleNingunObjetivo() {
+    public void porDefectoUnJugadorNoCumpleNingunObjetivo() throws ArchivoDeContinentesNoEncontradoException {
         CargarJuego.cargarContinentes();
         Jugador jugador = new Jugador( "Fran");
         assertFalse(jugador.cumpleObjetivo());
     }
 
     @Test
-    public void unJugadorCumpleElObjetivoGeneralDe30Paises() throws ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException, PaisOcupadoPorOtroJugadorException {
+    public void unJugadorCumpleElObjetivoGeneralDe30Paises() throws ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException, PaisOcupadoPorOtroJugadorException, ArchivoDeContinentesNoEncontradoException {
         CargarJuego.cargarContinentes();
         Jugador jugador = new Jugador( "Cami");
         for (int i = 0; i < 30; i++) jugador.colocarEjercitos(new Pais(i + ""), 1);
@@ -29,7 +26,7 @@ public class ObjetivosTest {
     }
 
     @Test
-    public void unJugadorCumpleObjetivoDeDestruccion() {
+    public void unJugadorCumpleObjetivoDeDestruccion() throws ArchivoDeContinentesNoEncontradoException {
         CargarJuego.cargarContinentes();
         Jugador jugador1 = new Jugador( "NASA");
         Jugador jugador2 = new Jugador( "Juani");
@@ -39,7 +36,7 @@ public class ObjetivosTest {
     }
 
     @Test
-    public void unJugadorNoCumpleObjetivoDeDestruccion() throws ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException, PaisOcupadoPorOtroJugadorException {
+    public void unJugadorNoCumpleObjetivoDeDestruccion() throws ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException, PaisOcupadoPorOtroJugadorException, ArchivoDeContinentesNoEncontradoException {
         CargarJuego.cargarContinentes();
         Jugador jugador1 = new Jugador( "Martin");
         Jugador jugador2 = new Jugador( "NASA");
@@ -50,7 +47,7 @@ public class ObjetivosTest {
     }
 
     @Test
-    public void porDefectoOcupacionDeAfrica5DeAmericaDelNortey4DeEuropaNoEstaCumplido() {
+    public void porDefectoOcupacionDeAfrica5DeAmericaDelNortey4DeEuropaNoEstaCumplido() throws ArchivoDeContinentesNoEncontradoException {
         CargarJuego.cargarContinentes();
         Objetivo ocupacion1 = new Ocupacion1();
         try {
@@ -61,7 +58,7 @@ public class ObjetivosTest {
     }
 
     @Test
-    public void porDefectoOcupacionDeAmericaDelSur7DeEuropay3LimitrofesNoEstaCumplido() {
+    public void porDefectoOcupacionDeAmericaDelSur7DeEuropay3LimitrofesNoEstaCumplido() throws ArchivoDeContinentesNoEncontradoException {
         CargarJuego.cargarContinentes();
         Objetivo ocupacion2 = new Ocupacion2();
         try {
@@ -72,7 +69,7 @@ public class ObjetivosTest {
     }
 
     @Test
-    public void porDefectoOcupacionDeAsiaY2DeAmericaDelSurNoEstaCumplido() {
+    public void porDefectoOcupacionDeAsiaY2DeAmericaDelSurNoEstaCumplido() throws ArchivoDeContinentesNoEncontradoException {
         CargarJuego.cargarContinentes();
         Objetivo ocupacion3 = new Ocupacion3();
         try {
@@ -83,7 +80,7 @@ public class ObjetivosTest {
     }
 
     @Test
-    public void porDefectoOcupacionDeEuropa4DeAsiay2DeAmericaDelSurNoEstaCumplido() {
+    public void porDefectoOcupacionDeEuropa4DeAsiay2DeAmericaDelSurNoEstaCumplido() throws ArchivoDeContinentesNoEncontradoException {
         CargarJuego.cargarContinentes();
         Objetivo ocupacion4 = new Ocupacion4();
         try {
@@ -94,7 +91,7 @@ public class ObjetivosTest {
     }
 
     @Test
-    public void porDefectoOcupacionDeAmericaDelNorte2DeOceaniaY4DeAsiaNoEstaCumplido() {
+    public void porDefectoOcupacionDeAmericaDelNorte2DeOceaniaY4DeAsiaNoEstaCumplido() throws ArchivoDeContinentesNoEncontradoException {
         CargarJuego.cargarContinentes();
         Objetivo ocupacion5 = new Ocupacion5();
         try {
@@ -105,7 +102,7 @@ public class ObjetivosTest {
     }
 
     @Test
-    public void porDefectoOcupacionDe2DeOceania2DeAfrica2DeAmericaDelSur3DeEuropa4DeAmericaDeLNorteY3DeAsiaNoEstaCumplido() {
+    public void porDefectoOcupacionDe2DeOceania2DeAfrica2DeAmericaDelSur3DeEuropa4DeAmericaDeLNorteY3DeAsiaNoEstaCumplido() throws ArchivoDeContinentesNoEncontradoException {
         CargarJuego.cargarContinentes();
         Objetivo ocupacion6 = new Ocupacion6();
         try {
@@ -116,7 +113,7 @@ public class ObjetivosTest {
     }
 
     @Test
-    public void porDefectoOcupacionDeOceaniaAmericaDelNorteY2DeEuropaNoEstaCumplido() {
+    public void porDefectoOcupacionDeOceaniaAmericaDelNorteY2DeEuropaNoEstaCumplido() throws ArchivoDeContinentesNoEncontradoException {
         CargarJuego.cargarContinentes();
         Objetivo ocupacion7 = new Ocupacion7();
         try {
@@ -127,7 +124,7 @@ public class ObjetivosTest {
     }
 
     @Test
-    public void porDefectoOcupacionDeAmericaDelSurAfricaY5DeAmericaDelNorteNoEstaCumplido() {
+    public void porDefectoOcupacionDeAmericaDelSurAfricaY5DeAmericaDelNorteNoEstaCumplido() throws ArchivoDeContinentesNoEncontradoException {
         CargarJuego.cargarContinentes();
         Objetivo ocupacion8 = new Ocupacion8();
         try {

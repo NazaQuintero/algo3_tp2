@@ -17,7 +17,6 @@ public class App extends Application {
     @Override
     public void start(Stage stage) {
 
-        CargarJuego.cargarContinentes();
         MenuInicial menuInicial = new MenuInicial(stage);
         Scene presentacion = new Scene(menuInicial, ANCHO, ALTO);
         stage.setScene(presentacion);

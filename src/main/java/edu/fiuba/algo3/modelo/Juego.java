@@ -14,38 +14,32 @@ import java.util.ArrayList;
 
 
 public class Juego {
-    static final String ARCHIVO_PAISES = "paises.json";
-    static final String ARCHIVO_TARJETAS = "tarjetas.json";
 
     private final Tablero tablero;
     private final Jugadores jugadores;
     private final Tarjetas tarjetas;
     private Turno turno = new SinTurno();
 
-    public Juego() throws ArchivoDePaisesNoEncontradoException, ArchivoDeTarjetasNoEncontradoException{
+    public Juego() throws ArchivoDeContinentesNoEncontradoException, ArchivoDePaisesNoEncontradoException, ArchivoDeTarjetasNoEncontradoException {
         tablero = new Tablero();
         jugadores = new Jugadores();
         tarjetas = new Tarjetas();
 
         CargarJuego.cargarContinentes();
-        CargarJuego.cargarPaisesLimitrofes(ARCHIVO_PAISES);
-        CargarJuego.cargarTarjetas(this, ARCHIVO_TARJETAS);
+        CargarJuego.cargarPaisesLimitrofes();
+        CargarJuego.cargarTarjetas(this);
     }
 
     public void agregarTarjeta(Tarjeta unaTarjeta) {
         tarjetas.agregarTarjeta(unaTarjeta);
     }
 
-    public Jugador agregarJugador(String nombre, Color color){
-        Jugador jugador = new Jugador(nombre, color);
-        jugadores.agregarJugador(jugador);
-        return jugador;
+    public void agregarJugador(String nombre, Color color){
+        jugadores.agregarJugador(new Jugador(nombre, color));
     }
 
-    public Jugador agregarJugador(String nombre){
-        Jugador jugador = new Jugador(nombre);
-        jugadores.agregarJugador(jugador);
-        return jugador;
+    public void agregarJugador(String nombre){
+        jugadores.agregarJugador(new Jugador(nombre));
     }
 
     /*

@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.modelo;
 
 import edu.fiuba.algo3.modelo.continentes.Continente;
+import edu.fiuba.algo3.modelo.excepciones.ArchivoDeContinentesNoEncontradoException;
 import edu.fiuba.algo3.modelo.excepciones.ContinenteInvalidoException;
 import edu.fiuba.algo3.modelo.continentes.MultitonContinentes;
 import org.junit.jupiter.api.Test;
@@ -11,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class MultitonTest {
 
     @Test
-    public void alPedir2VecesElMismoContinenteLaInstanciaObtenidaDeContinenteEsLaMisma() throws ContinenteInvalidoException {
+    public void alPedir2VecesElMismoContinenteLaInstanciaObtenidaDeContinenteEsLaMisma() throws ContinenteInvalidoException, ArchivoDeContinentesNoEncontradoException {
         CargarJuego.cargarContinentes();
         Continente continente1 = MultitonContinentes.obtenerInstanciaDe("Africa");
         Continente continente2 = MultitonContinentes.obtenerInstanciaDe("Africa");
@@ -26,7 +27,7 @@ public class MultitonTest {
     }
 
     @Test
-    public void alPedirUnContinenteDevuelveCorrectamente() throws ContinenteInvalidoException {
+    public void alPedirUnContinenteDevuelveCorrectamente() throws ContinenteInvalidoException, ArchivoDeContinentesNoEncontradoException {
         CargarJuego.cargarContinentes();
         Continente continente1 = MultitonContinentes.obtenerInstanciaDe("Oceania");
 

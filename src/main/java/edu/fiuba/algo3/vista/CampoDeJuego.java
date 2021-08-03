@@ -37,7 +37,7 @@ public class CampoDeJuego extends HBox {
     }
 
     private void crearPaises(Pane stackPane) {
-        // TODO: Garantizar que para este punto el Multiton ya este cargado...
+
         ArrayList<Pais> _paises = new ArrayList<>(MultitonPaises.obtenerTodosLosPaises());
 
         ArrayList<VistaPais> paises = new ArrayList<>();
