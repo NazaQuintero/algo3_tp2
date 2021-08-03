@@ -20,14 +20,14 @@ public class VistaPais extends Rectangle implements Observer {
         pais.addObserver(this);
         setFill(new Color(0f,0f,0f,0));
         this.getStyleClass().add("pais");
-        this.setOnMouseClicked(e -> new PaisEventHandler(pais, this));
+        this.setOnMouseClicked(new PaisEventHandler(pais));
     }
 
     @Override
     public void update() {
         this.fichas = pais.cantidadEjercitos();
         this.label.setText(Integer.toString(this.fichas));
-        System.out.println("Hay "+ this.fichas + " ejercito en \n Pais:" + this.pais.getNombre() + "pertenece a " +
+        System.out.println("Hay "+ this.fichas + " ejercito/s en " + this.pais.getNombre() + " que pertenece a " +
                 pais.dominadoPor().obtenerNombre());
     }
 }

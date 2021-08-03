@@ -44,7 +44,7 @@ public class SeleccionCantidadJugadores extends BorderPane {
     }
 
     private Label crearLabelError() {
-        Label label = new Label("Debe seleccionar una cantidad para comenzar");
+        Label label = new Label("Debe seleccionar una cantidad de jugadores para comenzar");
         label.getStyleClass().add("error");
         return label;
     }

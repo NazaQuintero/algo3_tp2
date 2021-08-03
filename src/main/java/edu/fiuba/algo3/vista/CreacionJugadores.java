@@ -36,6 +36,7 @@ public class CreacionJugadores extends BorderPane {
             Platform.exit();
         }
         this.getStylesheets().add("styles.css");
+        this.getStyleClass().add("body");
         Button buttonSubmit = this.crearBotonJugar(stage);
         Button exitButton = this.crearExitButton();
         botonera = crearBotoneraHorizontal(buttonSubmit, exitButton);
@@ -61,7 +62,7 @@ public class CreacionJugadores extends BorderPane {
         textFields.add(txtField);
         HBox hbox = new HBox();
         hbox.getChildren().addAll(label, txtField);
-
+        hbox.setSpacing(20);
         panel.getChildren().addAll(hbox);
         this.setCenter(panel);
     }
