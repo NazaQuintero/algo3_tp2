@@ -19,7 +19,7 @@ public class PaisEventHandler implements EventHandler<ActionEvent> {
     }
 
     @Override
-    public void handle(ActionEvent actionEvent) {
+    public void handle(ActionEvent actionEvent) { // el primer click en un pais no hace nada
         if(pais.cantidadEjercitos() == 0) {
             pais.colocarEjercito(new Ejercito(new Jugador("kukamonga")));
         } else {

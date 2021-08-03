@@ -32,7 +32,7 @@ public class CampoDeJuego extends HBox {
         this.getChildren().add(stackPane);
         this.setAlignment(Pos.CENTER);
 
-        stage.setScene(new Scene(this, 1000, 800));
+        stage.setScene(new Scene(this, 1400, 900));
     }
 
     private void crearPaises(Pane stackPane) {
