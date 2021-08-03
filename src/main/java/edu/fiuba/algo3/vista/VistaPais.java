@@ -19,7 +19,6 @@ public class VistaPais extends Rectangle implements Observer {
         pais.addObserver(this);
         setFill(new Color(0f,0f,0f,0.25));
         this.getStyleClass().add("pais");
-        //this.setOnMouseClicked( e -> System.out.println("Pais: " + nombre));
         this.setOnMouseClicked(e -> new PaisEventHandler(pais, this));
     }
 
