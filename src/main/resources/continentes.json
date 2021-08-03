@@ -6,32 +6,38 @@
     {
       "nombre": "Zaire",
       "posX": 630,
-      "posY": 520
+      "posY": 520,
+      "paisesLimitrofes": []
     },
     {
       "nombre": "Etiopia",
       "posX": 670,
-      "posY": 480
+      "posY": 480,
+      "paisesLimitrofes": []
     },
     {
       "nombre": "Egipto",
       "posX": 700,
-      "posY": 450
+      "posY": 450,
+      "paisesLimitrofes": []
     },
     {
       "nombre": "Madagascar",
       "posX": 770,
-      "posY": 520
+      "posY": 520,
+      "paisesLimitrofes": []
     },
     {
       "nombre": "Sahara",
       "posX": 580,
-      "posY": 480
+      "posY": 480,
+      "paisesLimitrofes": []
     },
     {
       "nombre": "Sudafrica",
       "posX": 680,
-      "posY": 550
+      "posY": 550,
+      "paisesLimitrofes": []
     }
   ]
 },
@@ -48,7 +54,8 @@
     {
       "nombre": "Gran Bretaña",
       "posX": 520,
-      "posY": 270
+      "posY": 270,
+      "paisesLimitrofes": []
     },
     {
       "nombre": "Alemania",
@@ -197,7 +204,8 @@
       {
         "nombre": "Peru",
         "posX": 290,
-        "posY": 440
+        "posY": 440,
+        "paisesLimitrofes": []
       }
     ]
   },
@@ -208,22 +216,26 @@
       {
         "nombre": "Australia",
         "posX": 920,
-        "posY": 510
+        "posY": 510,
+        "paisesLimitrofes": []
       },
       {
         "nombre": "Borneo",
         "posX": 885,
-        "posY": 410
+        "posY": 410,
+        "paisesLimitrofes": []
       },
       {
         "nombre": "Sumatra",
         "posX": 820,
-        "posY": 450
+        "posY": 450,
+        "paisesLimitrofes": []
       },
       {
         "nombre": "Java",
         "posX": 940,
-        "posY": 410
+        "posY": 410,
+        "paisesLimitrofes": []
       }
     ]
   },
@@ -234,77 +246,92 @@
       {
         "nombre": "Tartaria",
         "posX": 735,
-        "posY": 115
+        "posY": 115,
+        "paisesLimitrofes": []
       },
       {
         "nombre": "Mongolia",
         "posX": 790,
-        "posY": 220
+        "posY": 220,
+        "paisesLimitrofes": []
       },
       {
         "nombre": "Kamtchatka",
         "posX": 840,
-        "posY": 120
+        "posY": 120,
+        "paisesLimitrofes": []
       },
       {
         "nombre": "Turquia",
         "posX": 740,
-        "posY": 330
+        "posY": 330,
+        "paisesLimitrofes": []
       },
       {
         "nombre": "Iran",
         "posX": 755,
-        "posY": 270
+        "posY": 270,
+        "paisesLimitrofes": []
       },
       {
         "nombre": "Israel",
         "posX": 725,
-        "posY": 380
+        "posY": 380,
+        "paisesLimitrofes": []
       },
       {
         "nombre": "Taymir",
         "posX": 787,
-        "posY": 115
+        "posY": 115,
+        "paisesLimitrofes": []
       },
       {
         "nombre": "Aral",
         "posX": 710,
-        "posY": 165
+        "posY": 165,
+        "paisesLimitrofes": []
       },
       {
         "nombre": "Siberia",
         "posX": 790,
-        "posY": 170
+        "posY": 170,
+        "paisesLimitrofes": []
       },
       {
         "nombre": "Japon",
         "posX": 915,
-        "posY": 170
+        "posY": 170,
+        "paisesLimitrofes": []
       },
       {
         "nombre": "Gobi",
         "posX": 815,
-        "posY": 270
+        "posY": 270,
+        "paisesLimitrofes": []
       },
       {
         "nombre": "Arabia",
         "posX": 770,
-        "posY": 390
+        "posY": 390,
+        "paisesLimitrofes": []
       },
       {
         "nombre": "India",
         "posX": 850,
-        "posY": 360
+        "posY": 360,
+        "paisesLimitrofes": []
       },
       {
         "nombre": "China",
         "posX": 890,
-        "posY": 270
+        "posY": 270,
+        "paisesLimitrofes": []
       },
       {
         "nombre": "Malasia",
         "posX": 910,
-        "posY": 330
+        "posY": 330,
+        "paisesLimitrofes": []
       }
     ]
   }
