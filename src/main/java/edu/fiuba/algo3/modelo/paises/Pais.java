@@ -50,6 +50,7 @@ public class Pais implements Subject {
     public void colocarEjercito(Fichas ejercito) {
         this.ejercito = ejercito;
         this.ejercito.agregarPais(this);
+        this.notifyObservers();
     }
 
     public void modificarCantidadEjercito(int aumentarEn) {
