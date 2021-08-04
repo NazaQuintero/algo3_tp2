@@ -3,6 +3,7 @@ package edu.fiuba.algo3.vista;
 import edu.fiuba.algo3.modelo.Juego;
 import edu.fiuba.algo3.modelo.paises.MultitonPaises;
 import edu.fiuba.algo3.modelo.paises.Pais;
+import edu.fiuba.algo3.modelo.turnos.Turno;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -18,6 +19,7 @@ public class CampoDeJuego extends HBox {
 
     private final Juego juego;
     private final ArrayList<VistaPais> vistasPaises = new ArrayList<>();
+    private Pais paisSeleccionado;
 
     public CampoDeJuego(Stage stage, Juego juego) {
         this.juego = juego;
@@ -64,4 +66,11 @@ public class CampoDeJuego extends HBox {
 
     public void mostrarPaises() { for (VistaPais vista : vistasPaises) vista.activar(); }
 
+    public void setPaisSeleccionado(Pais pais) {
+        this.paisSeleccionado = pais;
+    }
+
+    public Pais getPaisSeleccionado() {
+        return paisSeleccionado;
+    }
 }
