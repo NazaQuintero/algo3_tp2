@@ -19,7 +19,8 @@ public class JuegoTest {
     public void elJuegoNoComienzaSinUnMinimoDe2Jugadores() throws ArchivoDeTarjetasNoEncontradoException, ArchivoDePaisesNoEncontradoException, ArchivoDeContinentesNoEncontradoException {
 
         Juego juego = new Juego();
-        juego.agregarJugador("Juani");
+        Jugador jugador = new Jugador("Juani", Color.AQUA);
+        juego.agregarJugador(jugador);
         assertThrows(CantidadDeJugadoresInsuficienteException.class, juego::comenzar);
     }
 

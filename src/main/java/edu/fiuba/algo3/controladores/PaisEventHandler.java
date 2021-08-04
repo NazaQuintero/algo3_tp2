@@ -15,7 +15,7 @@ public class PaisEventHandler implements EventHandler<MouseEvent> {
     @Override
     public void handle(MouseEvent mouseEvent) {
 
-        pais.modificarCantidadEjercito(1);
+        //pais.modificarCantidadEjercito(1);
         pais.notifyObservers();
     }
 

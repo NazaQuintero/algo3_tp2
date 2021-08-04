@@ -34,14 +34,6 @@ public class Juego {
         tarjetas.agregarTarjeta(unaTarjeta);
     }
 
-    public void agregarJugador(String nombre, Color color){
-        jugadores.agregarJugador(new Jugador(nombre, color));
-    }
-
-    public void agregarJugador(String nombre){
-        jugadores.agregarJugador(new Jugador(nombre));
-    }
-
     public void agregarJugador(Jugador jugador){
         jugadores.agregarJugador(jugador);
     }

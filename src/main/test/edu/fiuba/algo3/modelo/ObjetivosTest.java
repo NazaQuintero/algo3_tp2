@@ -3,6 +3,7 @@ package edu.fiuba.algo3.modelo;
 import edu.fiuba.algo3.modelo.excepciones.*;
 import edu.fiuba.algo3.modelo.objetivos.*;
 import edu.fiuba.algo3.modelo.paises.Pais;
+import javafx.scene.paint.Color;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -12,14 +13,14 @@ public class ObjetivosTest {
     @Test
     public void porDefectoUnJugadorNoCumpleNingunObjetivo() throws ArchivoDeContinentesNoEncontradoException {
         CargarJuego.cargarContinentes();
-        Jugador jugador = new Jugador( "Fran");
+        Jugador jugador = new Jugador( "Fran", Color.RED);
         assertFalse(jugador.cumpleObjetivo());
     }
 
     @Test
     public void unJugadorCumpleElObjetivoGeneralDe30Paises() throws ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException, PaisOcupadoPorOtroJugadorException, ArchivoDeContinentesNoEncontradoException {
         CargarJuego.cargarContinentes();
-        Jugador jugador = new Jugador( "Cami");
+        Jugador jugador = new Jugador( "Cami", Color.RED);
         for (int i = 0; i < 30; i++) jugador.colocarEjercitos(new Pais(i + ""), 1);
 
         assertTrue(jugador.cumpleObjetivo());
@@ -28,8 +29,8 @@ public class ObjetivosTest {
     @Test
     public void unJugadorCumpleObjetivoDeDestruccion() throws ArchivoDeContinentesNoEncontradoException {
         CargarJuego.cargarContinentes();
-        Jugador jugador1 = new Jugador( "NASA");
-        Jugador jugador2 = new Jugador( "Juani");
+        Jugador jugador1 = new Jugador( "NASA", Color.RED);
+        Jugador jugador2 = new Jugador( "Juani", Color.RED);
 
         jugador1.asignarObjetivo(new Destruccion(jugador2));
         assertTrue(jugador1.cumpleObjetivo());
@@ -38,8 +39,8 @@ public class ObjetivosTest {
     @Test
     public void unJugadorNoCumpleObjetivoDeDestruccion() throws ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException, PaisOcupadoPorOtroJugadorException, ArchivoDeContinentesNoEncontradoException {
         CargarJuego.cargarContinentes();
-        Jugador jugador1 = new Jugador( "Martin");
-        Jugador jugador2 = new Jugador( "NASA");
+        Jugador jugador1 = new Jugador( "Martin", Color.RED);
+        Jugador jugador2 = new Jugador( "NASA", Color.RED);
         jugador2.colocarEjercitos(new Pais("Brasil"), 1);
 
         jugador1.asignarObjetivo(new Destruccion(jugador2));
@@ -51,7 +52,7 @@ public class ObjetivosTest {
         CargarJuego.cargarContinentes();
         Objetivo ocupacion1 = new Ocupacion1();
         try {
-            assertFalse(ocupacion1.estaCumplido(new Jugador( "Martin")));
+            assertFalse(ocupacion1.estaCumplido(new Jugador( "Martin", Color.RED)));
         } catch (ContinenteInvalidoException e) {
             e.printStackTrace();
         }
@@ -62,7 +63,7 @@ public class ObjetivosTest {
         CargarJuego.cargarContinentes();
         Objetivo ocupacion2 = new Ocupacion2();
         try {
-            assertFalse(ocupacion2.estaCumplido(new Jugador( "Fran")));
+            assertFalse(ocupacion2.estaCumplido(new Jugador( "Fran", Color.RED)));
         } catch (ContinenteInvalidoException e) {
             e.printStackTrace();
         }
@@ -73,7 +74,7 @@ public class ObjetivosTest {
         CargarJuego.cargarContinentes();
         Objetivo ocupacion3 = new Ocupacion3();
         try {
-            assertFalse(ocupacion3.estaCumplido(new Jugador( "Naza")));
+            assertFalse(ocupacion3.estaCumplido(new Jugador( "Naza", Color.RED)));
         } catch (ContinenteInvalidoException e) {
             e.printStackTrace();
         }
@@ -84,7 +85,7 @@ public class ObjetivosTest {
         CargarJuego.cargarContinentes();
         Objetivo ocupacion4 = new Ocupacion4();
         try {
-            assertFalse(ocupacion4.estaCumplido(new Jugador( "Cami")));
+            assertFalse(ocupacion4.estaCumplido(new Jugador( "Cami", Color.RED)));
         } catch (ContinenteInvalidoException e) {
             e.printStackTrace();
         }
@@ -95,7 +96,7 @@ public class ObjetivosTest {
         CargarJuego.cargarContinentes();
         Objetivo ocupacion5 = new Ocupacion5();
         try {
-            assertFalse(ocupacion5.estaCumplido(new Jugador( "Martin")));
+            assertFalse(ocupacion5.estaCumplido(new Jugador( "Martin", Color.RED)));
         } catch (ContinenteInvalidoException e) {
             e.printStackTrace();
         }
@@ -106,7 +107,7 @@ public class ObjetivosTest {
         CargarJuego.cargarContinentes();
         Objetivo ocupacion6 = new Ocupacion6();
         try {
-            assertFalse(ocupacion6.estaCumplido(new Jugador( "Martin")));
+            assertFalse(ocupacion6.estaCumplido(new Jugador( "Martin", Color.RED)));
         } catch (ContinenteInvalidoException e) {
             e.printStackTrace();
         }
@@ -117,7 +118,7 @@ public class ObjetivosTest {
         CargarJuego.cargarContinentes();
         Objetivo ocupacion7 = new Ocupacion7();
         try {
-            assertFalse(ocupacion7.estaCumplido(new Jugador( "Martin")));
+            assertFalse(ocupacion7.estaCumplido(new Jugador( "Martin", Color.RED)));
         } catch (ContinenteInvalidoException e) {
             e.printStackTrace();
         }
@@ -128,44 +129,10 @@ public class ObjetivosTest {
         CargarJuego.cargarContinentes();
         Objetivo ocupacion8 = new Ocupacion8();
         try {
-            assertFalse(ocupacion8.estaCumplido(new Jugador( "Paul Walker")));
+            assertFalse(ocupacion8.estaCumplido(new Jugador( "Paul Walker", Color.RED)));
         } catch (ContinenteInvalidoException e) {
             e.printStackTrace();
         }
     }
-
-//    @Test
-//    public void ocupacion2AmericaDelSur7DeEuropay3LimitrofesEstaCumplido() throws ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException, PaisOcupadoPorOtroJugadorException, ContinenteInvalidoException {
-//        MultitonContinentes.reiniciar();
-//        Continenta americaDelSur = MultitonContinentes.obtenerInstanciaDe("America del Sur");
-//        Continenta europa = MultitonContinentes.obtenerInstanciaDe("Europa");
-//
-//        Jugador jugador = new Jugador( "Martin");
-//        jugador.asignarObjetivo(new Ocupacion2());
-//
-//
-//        for(int i = 0; i < 7; i++) {
-//            Pais paisEuropa = new Pais(i+"");
-//            europa.agregarPais(paisEuropa);
-//            jugador.colocarEjercitos(paisEuropa, 1);
-//        }
-//        Pais arg = new Pais("Argentina");
-//        Pais uru = new Pais("Uruguay");
-//        Pais chl = new Pais("Chile");
-//
-//        americaDelSur.agregarPais(arg);
-//        americaDelSur.agregarPais(uru);
-//        americaDelSur.agregarPais(chl);
-//
-//        arg.limitaCon(uru);
-//        arg.limitaCon(chl);
-//
-//        jugador.colocarEjercitos(arg, 1);
-//        jugador.colocarEjercitos(uru, 1);
-//        jugador.colocarEjercitos(chl, 1);
-//
-//        assertTrue(jugador.cumpleObjetivo());
-//
-//    }
 
 }

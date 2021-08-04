@@ -30,7 +30,7 @@ public class JugadorTest {
     @Test
     public void porDefectoUnJugadorNoTieneColorAsignado() {
 
-        Jugador jugador = new Jugador( "Cami");
+        Jugador jugador = new Jugador( "Cami", Color.RED);
 
         assertEquals(jugador.color(), "");
     }
@@ -39,7 +39,7 @@ public class JugadorTest {
     @Test
     public void porDefectoUnJugadorNoTienePaises() {
 
-        Jugador jugador = new Jugador( "Cami");
+        Jugador jugador = new Jugador( "Cami", Color.RED);
 
         assertEquals(jugador.cantidadPaisesDominados(), 0);
     }
@@ -47,7 +47,7 @@ public class JugadorTest {
 
     @Test
     public void luegoDeQueElJugadorActivaUnaTarjetaEstaQuedaActivadaYNoSePuedeVolverAActivar() throws Exception{
-        Jugador unJugador = new Jugador( "Cami");
+        Jugador unJugador = new Jugador( "Cami", Color.RED);
         Jugadores jugadores = new Jugadores();
         jugadores.agregarJugador(unJugador);
         Turno unTurno = new ConTurno(jugadores);
@@ -67,7 +67,7 @@ public class JugadorTest {
 
     @Test
     public void luegoDeCanjearTarjetasElJugadorYaNoLasPosee() throws Exception {
-        Jugador jugador = new Jugador( "Martin");
+        Jugador jugador = new Jugador( "Martin", Color.RED);
 
         Pais arg = new Pais("Argentina");
         Pais bra = new Pais("Brasil");
@@ -98,7 +98,7 @@ public class JugadorTest {
 
     @Test
     public void unJugadorQueNoRealizoCanjesRecibeUnPrimerCanjeAlSolicitarUnoYPuedeColocar4EjercitosExtra() throws LaTarjetaYaFueActivadaException, JugadorSinTarjetasException, LaTarjetaYaEstaDesactivadaException, SinCanjeHabilitadoException {
-        Jugador jugador = new Jugador( "Martin");
+        Jugador jugador = new Jugador( "Martin", Color.RED);
 
         Pais arg = new Pais("Argentina");
         Pais bra = new Pais("Brasil");
@@ -127,7 +127,7 @@ public class JugadorTest {
 
     @Test
     public void unJugadorQueRealizoUnCanjeRecibeUnSegundoCanjeAlSolicitarOtroYPuedeColocar7EjercitosExtra() throws LaTarjetaYaFueActivadaException, JugadorSinTarjetasException, LaTarjetaYaEstaDesactivadaException, SinCanjeHabilitadoException {
-        Jugador jugador = new Jugador( "Martin");
+        Jugador jugador = new Jugador( "Martin", Color.RED);
 
         Pais arg = new Pais("Argentina");
         Pais bra = new Pais("Brasil");
@@ -182,7 +182,7 @@ public class JugadorTest {
 
     @Test
     public void unJugadorQueSolicitaUnCanjeConDosTarjetasGloboYUnaBarcoNoLoPuedeObtener() throws LaTarjetaYaFueActivadaException {
-        Jugador unJugador = new Jugador("Frank");
+        Jugador unJugador = new Jugador("Frank", Color.RED);
 
         Pais unPais1Canje = new Pais("Argentina");
         Pais otroPais1Canje = new Pais("Brasil");

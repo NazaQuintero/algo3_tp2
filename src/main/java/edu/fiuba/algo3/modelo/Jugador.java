@@ -35,12 +35,6 @@ public class Jugador {
         this.color = color;
     }
 
-    public Jugador(String nombre){
-        this.objetivos.add(new General());
-        this.canje = new CanjeNulo();
-        this.nombre = nombre;
-    }
-
     public Color color() {
         return color;
     }

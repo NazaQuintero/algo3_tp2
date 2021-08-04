@@ -28,7 +28,7 @@ public class PaisTest {
     public void laCantidadDeEjercitosColocadaEsCorrecta() {
 
         Pais unPais = new Pais("Argentina");
-        Ejercito ejercito = new Ejercito(new Jugador( "Juani"));
+        Ejercito ejercito = new Ejercito(new Jugador( "Juani", Color.RED));
         ejercito.modificarCantidad(2);
         unPais.colocarEjercito(ejercito);
         assertEquals(3, unPais.cantidadEjercitos());
@@ -38,7 +38,7 @@ public class PaisTest {
     @Test
     public void alColocarUnEjercitoEstaDominadoPorUnJugador() {
 
-        Jugador unJugador = new Jugador( "Naza");
+        Jugador unJugador = new Jugador( "Naza", Color.RED);
         Pais unPais = new Pais("Argentina");
         Ejercito unEjercito = new Ejercito(unJugador);
         unPais.colocarEjercito(new Ejercito(unJugador));
@@ -49,7 +49,7 @@ public class PaisTest {
     @Test
     public void unPaisQueTenia1EjercitoPasaATener4SiElMismoJugadorVuelveAColocar() {
 
-        Jugador unJugador = new Jugador("Naza");
+        Jugador unJugador = new Jugador("Naza", Color.BLUE);
         Pais unPais = new Pais("Argentina");
         unPais.colocarEjercito(new Ejercito(unJugador));
 
@@ -111,8 +111,8 @@ public class PaisTest {
         Pais paisAtacante = new Pais("Argentina");
         Pais paisDefensor = new Pais("Brasil");
         paisAtacante.limitaCon(paisDefensor);
-        Jugador jAtacante = new Jugador( "Martin");
-        Jugador jDefensor = new Jugador( "Naza");
+        Jugador jAtacante = new Jugador( "Martin", Color.RED);
+        Jugador jDefensor = new Jugador( "Naza", Color.RED);
 
         // Asigna que el Pais pertenezca a un jugador
         jAtacante.colocarEjercitos(paisAtacante, 4);

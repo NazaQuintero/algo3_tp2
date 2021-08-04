@@ -15,6 +15,7 @@ import java.util.ArrayList;
 
 public class CreacionJugadores extends BorderPane {
 
+    private final Stage stage;
     VBox panel = new VBox();
     HBox botonera;
     Label errorLabel;
@@ -23,13 +24,14 @@ public class CreacionJugadores extends BorderPane {
 
     public CreacionJugadores(Stage stage) {
 
+        this.stage = stage;
         try { juego = new Juego(); }
         catch (Exception e) { Platform.exit(); }
         this.getStylesheets().add("styles.css");
         this.getStyleClass().add("body");
 
         errorLabel = crearLabelError();
-        Button buttonSubmit = this.crearBotonJugar(stage);
+        Button buttonSubmit = this.crearBotonJugar();
         Button exitButton = this.crearExitButton();
         botonera = crearBotoneraHorizontal(buttonSubmit, exitButton);
         panel.setAlignment(Pos.CENTER);
@@ -62,6 +64,7 @@ public class CreacionJugadores extends BorderPane {
         TextField inputText = new TextField();
         inputText.getStyleClass().add("textField");
         inputText.setAlignment(Pos.CENTER);
+        inputText.setOnKeyPressed(new FormJugadoresEventHandler(errorLabel, juego, textFields, stage));
         return inputText;
     }
 
@@ -80,7 +83,7 @@ public class CreacionJugadores extends BorderPane {
         return exitButton;
     }
 
-    private Button crearBotonJugar(Stage stage) {
+    private Button crearBotonJugar() {
         Button buttonSubmit = new Button("Jugar");
         buttonSubmit.getStyleClass().add("startButton");
         buttonSubmit.setOnMouseClicked(new FormJugadoresEventHandler(errorLabel, juego, textFields, stage));

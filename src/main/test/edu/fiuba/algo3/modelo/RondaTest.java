@@ -12,6 +12,7 @@ import edu.fiuba.algo3.modelo.tarjetas.Globo;
 import edu.fiuba.algo3.modelo.tarjetas.Tarjeta;
 import edu.fiuba.algo3.modelo.turnos.ConTurno;
 import edu.fiuba.algo3.modelo.turnos.Turno;
+import javafx.scene.paint.Color;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -20,8 +21,8 @@ public class RondaTest {
     @Test
     public void unJugadorNoPuedeAtacarSiNoTieneTurno() throws Exception {
         Jugadores jugadores = new Jugadores();
-        Jugador jugador1 = new Jugador( "Martin");
-        Jugador jugador2 = new Jugador( "Juani");
+        Jugador jugador1 = new Jugador( "Martin", Color.RED);
+        Jugador jugador2 = new Jugador( "Juani", Color.RED);
         jugadores.agregarJugador(jugador1);
         jugadores.agregarJugador(jugador2);
 
@@ -40,8 +41,8 @@ public class RondaTest {
     @Test
     public void elJugadorConTurnoNoPuedeAtacarSiLaRondaNoEsDeAtaque() throws Exception{
         Jugadores jugadores = new Jugadores();
-        Jugador jugador1 = new Jugador( "Martin");
-        Jugador jugador2 = new Jugador( "Naza");
+        Jugador jugador1 = new Jugador( "Martin", Color.RED);
+        Jugador jugador2 = new Jugador( "Naza", Color.RED);
         jugadores.agregarJugador(jugador1);
         jugadores.agregarJugador(jugador2);
 
@@ -61,7 +62,7 @@ public class RondaTest {
     @Test
     public void elJugadorConTurnoNoPuedeReagruparSiLaRondaNoEsDeReagrupe() throws Exception{
         Jugadores jugadores = new Jugadores();
-        Jugador jugador1 = new Jugador( "Martin");
+        Jugador jugador1 = new Jugador( "Martin", Color.RED);
         jugadores.agregarJugador(jugador1);
 
         Pais arg = new Pais("Argentina");
@@ -79,7 +80,7 @@ public class RondaTest {
     @Test
     public void elJugadorConTurnoNoPuedeColocarEjercitosSiLaRondaNoEsDeColocacion() throws Exception{
         Jugadores jugadores = new Jugadores();
-        Jugador jugador1 = new Jugador( "Martin");
+        Jugador jugador1 = new Jugador( "Martin", Color.RED);
         jugadores.agregarJugador(jugador1);
 
         Pais arg = new Pais("Argentina");
@@ -98,8 +99,8 @@ public class RondaTest {
     @Test
     public void rondaConDosJugadoresNoSeAtacanYSeColocan2NuevosEjercitosCadaUno() throws Exception {
         Jugadores jugadores = new Jugadores();
-        Jugador jugador1 = new Jugador( "Martin");
-        Jugador jugador2 = new Jugador( "Naza");
+        Jugador jugador1 = new Jugador( "Martin", Color.RED);
+        Jugador jugador2 = new Jugador( "Naza", Color.RED);
         jugadores.agregarJugador(jugador1);
         jugadores.agregarJugador(jugador2);
 
@@ -126,7 +127,7 @@ public class RondaTest {
     @Test
     public void seActivaUnaTarjetaDePaisEnRondaDeColocacionSumandole2EjercitosADichoPais() throws Exception {
         Jugadores jugadores = new Jugadores();
-        Jugador jugador1 = new Jugador( "Martin");
+        Jugador jugador1 = new Jugador( "Martin", Color.RED);
         jugadores.agregarJugador(jugador1);
 
         Pais arg = new Pais("Argentina");
@@ -150,7 +151,7 @@ public class RondaTest {
     @Test
     public void noSePuedeActivarUnaTarjetaDePaisEnUnaRondaDeAtaque() throws Exception{
         Jugadores jugadores = new Jugadores();
-        Jugador jugador1 = new Jugador( "Frank");
+        Jugador jugador1 = new Jugador( "Frank", Color.RED);
         jugadores.agregarJugador(jugador1);
 
         Pais arg = new Pais("Argentina");
@@ -171,7 +172,7 @@ public class RondaTest {
     @Test
     public void noSePuedeActivarUnaTarjetaDePaisEnUnaRondaDeReagrupe() throws Exception{
         Jugadores jugadores = new Jugadores();
-        Jugador jugador1 = new Jugador( "Martin");
+        Jugador jugador1 = new Jugador( "Martin", Color.RED);
         jugadores.agregarJugador(jugador1);
 
         Pais arg = new Pais("Argentina");
@@ -193,9 +194,9 @@ public class RondaTest {
     @Test
     public void seJuegaUnaRondaCon3JugadoresJugador2DominaAsiaNadieAtacaPeroSiColocan() throws ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException, JugadorNoExisteException, PaisOcupadoPorOtroJugadorException {
         Jugadores jugadores = new Jugadores();
-        Jugador jugador1 = new Jugador( "Martin");
-        Jugador jugador2 = new Jugador( "Naza");
-        Jugador jugador3 = new Jugador( "Juani");
+        Jugador jugador1 = new Jugador( "Martin", Color.RED);
+        Jugador jugador2 = new Jugador( "Naza", Color.RED);
+        Jugador jugador3 = new Jugador( "Juani", Color.RED);
 
         jugadores.agregarJugador(jugador1);
         jugadores.agregarJugador(jugador2);
@@ -233,8 +234,8 @@ public class RondaTest {
     @Test
     public void rondaDeAtaqueEntre2JugadoresJugador1AtacaYConquista2PaisesDelJugador2() throws Exception {
         Jugadores jugadores = new Jugadores();
-        Jugador jugador1 = new Jugador( "Martin");
-        Jugador jugador2 = new Jugador( "Naza");
+        Jugador jugador1 = new Jugador( "Martin", Color.RED);
+        Jugador jugador2 = new Jugador( "Naza", Color.RED);
 
         jugadores.agregarJugador(jugador1);
         jugadores.agregarJugador(jugador2);
