@@ -12,12 +12,10 @@ import javafx.scene.shape.Rectangle;
 
 public class VistaPais extends StackPane implements Observer {
     Pais pais;
-    Fichas ejercito;
 
     public VistaPais(Pais pais) {
         this.getStylesheets().add("styles.css");
         this.pais = pais;
-        this.ejercito = pais.getEjercito();
         this.setLayoutX(pais.getPosX());
         this.setLayoutY(pais.getPosY());
 
@@ -33,7 +31,7 @@ public class VistaPais extends StackPane implements Observer {
     private Label crearLabelCantEjercitos(){
         Label cantEjercitos = new Label();
         cantEjercitos.getStyleClass().add("ejercito");
-        cantEjercitos.setText(Integer.toString(ejercito.obtenerCantidad()));
+        cantEjercitos.setText(Integer.toString(pais.cantidadEjercitos()));
         return cantEjercitos;
     }
 
@@ -50,7 +48,7 @@ public class VistaPais extends StackPane implements Observer {
         Label l = (Label) this.getChildren().get(1);
         l.setText(Integer.toString(pais.cantidadEjercitos()));
 
-        System.out.println("Hay "+ this.ejercito.obtenerCantidad() + " ejercito/s en " + this.pais.getNombre() +
+        System.out.println("Hay "+ this.pais.cantidadEjercitos() + " ejercito/s en " + this.pais.getNombre() +
                 " que pertenece a " + pais.dominadoPor().obtenerNombre());
     }
 }
