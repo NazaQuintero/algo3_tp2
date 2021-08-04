@@ -26,7 +26,6 @@ public class CargarJuego {
             json = new String(Objects.requireNonNull(is).readAllBytes(), StandardCharsets.UTF_8);
         }
         catch (IOException | NullPointerException e) {
-            e.printStackTrace();
             throw new ArchivoDeContinentesNoEncontradoException();
         }
 

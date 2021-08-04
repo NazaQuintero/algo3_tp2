@@ -11,11 +11,6 @@ import java.util.*;
 
 
 public class Tablero {
-    private final HashMap<Pais, Tarjeta> tarjetas;
-
-    public Tablero() {
-        tarjetas = new HashMap<>();
-    }
 
     public void repartirPaises(Jugadores jugadores) {
         ArrayList<Pais> paises = new ArrayList<>(MultitonPaises.obtenerTodosLosPaises());
@@ -30,15 +25,6 @@ public class Tablero {
             }
         } catch (ElJugadorNoTieneTurnoException | NoEsRondaDeColocacionException | JugadorNoExisteException | PaisOcupadoPorOtroJugadorException ignored) {
         }
-    }
-
-    public Pais obtenerPais(String nombrePais) {
-//        return paises.get(nombrePais);
-        return MultitonPaises.obtenerInstanciaDe(nombrePais);
-    }
-
-    public Tarjeta obtenerTarjeta(Pais paisTarjeta) {
-        return tarjetas.get(paisTarjeta);
     }
 
     public void ataque(Jugador jugador, Pais pAtacante, Pais pDefensor, int cantidadEjercitos) throws ElPaisNoEsLimitrofeException, EjercitosInsuficientesException, ElJugadorNoTieneTurnoException, NoEsRondaDeAtaqueException {
@@ -66,8 +52,4 @@ public class Tablero {
         return jugador.cantidadPaisesDominados();
     }
 
-
-    public void agregarTarjeta(Tarjeta t) {
-        tarjetas.put(t.obtenerPais(), t);
-    }
 }
