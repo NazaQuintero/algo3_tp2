@@ -16,17 +16,13 @@ import edu.fiuba.algo3.modelo.tarjetas.*;
 
 public class CargarJuego {
 
-    private static final String ARCHIVO_CONTINENTES = "continentes.json";
-    private static final String ARCHIVO_PAISES = "paises.json";
-    private static final String ARCHIVO_TARJETAS = "tarjetas.json";
-
-    public static void cargarContinentes() throws ArchivoDeContinentesNoEncontradoException {
+    public static void cargarContinentes(String archivoContinentes) throws ArchivoDeContinentesNoEncontradoException {
         String json;
 
         Gson gson = new Gson();
 
         try {
-            InputStream is = App.class.getClassLoader().getResourceAsStream(ARCHIVO_CONTINENTES);
+            InputStream is = App.class.getClassLoader().getResourceAsStream(archivoContinentes);
             json = new String(Objects.requireNonNull(is).readAllBytes(), StandardCharsets.UTF_8);
         }
         catch (IOException | NullPointerException e) {
@@ -43,11 +39,11 @@ public class CargarJuego {
 
     }
 
-    public static void cargarPaisesLimitrofes() throws ArchivoDePaisesNoEncontradoException {
+    public static void cargarPaisesLimitrofes(String archivoPaises) throws ArchivoDePaisesNoEncontradoException {
         String json;
 
         try {
-            InputStream is = App.class.getClassLoader().getResourceAsStream(ARCHIVO_PAISES);
+            InputStream is = App.class.getClassLoader().getResourceAsStream(archivoPaises);
             json = new String(Objects.requireNonNull(is).readAllBytes(), StandardCharsets.UTF_8);
         } catch (IOException | NullPointerException e) {
             e.printStackTrace();
@@ -79,10 +75,10 @@ public class CargarJuego {
         //MultitonPaises.cargarPaises(new ArrayList<>(Arrays.asList(paises)));
     }
 
-    public static void cargarTarjetas(Juego juego) throws ArchivoDeTarjetasNoEncontradoException {
+    public static void cargarTarjetas(Juego juego, String archivoTarjetas) throws ArchivoDeTarjetasNoEncontradoException {
         String json;
         try {
-            InputStream is = CargarJuego.class.getClassLoader().getResourceAsStream(ARCHIVO_TARJETAS);
+            InputStream is = CargarJuego.class.getClassLoader().getResourceAsStream(archivoTarjetas);
             json = new String(Objects.requireNonNull(is).readAllBytes(), StandardCharsets.UTF_8);
         }
         catch (IOException | NullPointerException e) {throw new ArchivoDeTarjetasNoEncontradoException();}
