@@ -49,10 +49,6 @@ public class JuegoTest {
         Tarjeta otraTarjeta = new Tarjeta(bra, new Globo());
         Tarjeta ootraTarjeta = new Tarjeta(chl, new Globo());
 
-//        juego.agregarPais(arg);
-//        juego.agregarPais(bra);
-//        juego.agregarPais(chl);
-
         juego.agregarTarjeta(unaTarjeta);
         juego.agregarTarjeta(otraTarjeta);
         juego.agregarTarjeta(ootraTarjeta);
@@ -68,9 +64,6 @@ public class JuegoTest {
         arg.colocarEjercito(new Ejercito(jugador));
         bra.colocarEjercito(new Ejercito(jugador));
         chl.colocarEjercito(new Ejercito(jugador));
-//        juego.colocarEjercitos(jugador, arg, 1);
-//        juego.colocarEjercitos(jugador, bra, 1);
-//        juego.colocarEjercitos(jugador, chl, 1);
 
         juego.recibirTarjeta(jugador, arg);
         juego.recibirTarjeta(jugador, bra);
