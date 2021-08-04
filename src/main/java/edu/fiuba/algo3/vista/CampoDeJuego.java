@@ -17,6 +17,7 @@ import java.util.ArrayList;
 public class CampoDeJuego extends HBox {
 
     private final Juego juego;
+    private final ArrayList<VistaPais> vistasPaises = new ArrayList<>();
 
     public CampoDeJuego(Stage stage, Juego juego) {
         this.juego = juego;
