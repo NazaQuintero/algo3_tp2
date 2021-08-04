@@ -55,9 +55,6 @@ public class Jugador {
         else throw new PaisOcupadoPorOtroJugadorException();
     }
 
-    public void asignarColor(Color color) {
-        this.color = color;
-    }
     public void setTurno(Turno unTurno) {
         this.turno = unTurno;
     }
@@ -68,12 +65,12 @@ public class Jugador {
 
     public Resultado atacarA(Pais paisAtacante, Pais paisDefensor, int cantidadEjercitos) throws ElJugadorNoTieneTurnoException, NoEsRondaDeAtaqueException, EjercitosInsuficientesException, ElPaisNoEsLimitrofeException {
         Resultado resultado = new ResultadoBatallaNulo();
-       if (this.puedeAtacar()){
-           resultado = turno.atacarA(paisAtacante, paisDefensor, cantidadEjercitos);
-       } else {
-           turno.finalizarRonda(this);
-       }
-        return resultado;
+        if (this.puedeAtacar()){
+            resultado = turno.atacarA(paisAtacante, paisDefensor, cantidadEjercitos);
+        } else {
+            turno.finalizarRonda(this);
+        }
+            return resultado;
     }
 
     private boolean puedeAtacar() {
