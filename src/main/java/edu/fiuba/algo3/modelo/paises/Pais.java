@@ -54,6 +54,7 @@ public class Pais implements Subject {
 
     public void modificarCantidadEjercito(int aumentarEn) {
         this.ejercito.modificarCantidad(aumentarEn);
+        this.notifyObservers();
     }
 
     public boolean esLimitrofeCon(Pais otroPais) {

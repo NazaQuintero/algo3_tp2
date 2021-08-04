@@ -1,10 +1,14 @@
 package edu.fiuba.algo3.vista;
 
+import edu.fiuba.algo3.controladores.AtaqueEventHandler;
 import edu.fiuba.algo3.controladores.PaisEventHandler;
 import edu.fiuba.algo3.modelo.observables.Observer;
 import edu.fiuba.algo3.modelo.paises.Pais;
 import edu.fiuba.algo3.modelo.fichas.Fichas;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Circle;
@@ -27,7 +31,8 @@ public class VistaPais extends StackPane implements Observer {
 
         Circle ficha = new Circle(10, pais.dominadoPor().color());
         Label cantEjercitos = crearLabelCantEjercitos();
-        Rectangle boton = crearBotonPais();
+        VBox formularioDeAtaque = crearFormularioDeAtaque();
+        Rectangle boton = crearBotonPais(formularioDeAtaque);
 
         this.getChildren().addAll(ficha, cantEjercitos, boton);
 
@@ -41,12 +46,27 @@ public class VistaPais extends StackPane implements Observer {
         return cantEjercitos;
     }
 
-    private Rectangle crearBotonPais(){
+    private Rectangle crearBotonPais(VBox formularioDeAtaque){
         Rectangle boton = new Rectangle(50, 50);
         boton.setFill(new Color(0f,0f,0f,0));
         boton.getStyleClass().add("pais");
-        boton.setOnMouseClicked(new PaisEventHandler(this));
+        boton.setOnMouseClicked(new PaisEventHandler(this, campoDeJuego, formularioDeAtaque));
         return boton;
+    }
+
+    private VBox crearFormularioDeAtaque() {
+        Label label = new Label("Ingrese la cantidad de ejercitos para atacar: ");
+        label.getStyleClass().add("labelText");
+        TextField inputText = new TextField();
+        inputText.getStyleClass().add("textField");
+        Button botonAtacar = new Button("Atacarrr!!!");
+        botonAtacar.getStyleClass().add("startButton");
+        botonAtacar.setOnMouseClicked(new AtaqueEventHandler(campoDeJuego, pais, inputText));
+
+        campoDeJuego.setSpacing(50);
+        VBox vBox = new VBox(label, inputText, botonAtacar);
+        vBox.setSpacing(10);
+        return vBox;
     }
 
     @Override
