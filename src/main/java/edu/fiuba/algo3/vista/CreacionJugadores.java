@@ -26,6 +26,8 @@ public class CreacionJugadores extends BorderPane {
         catch (Exception e) { Platform.exit(); }
         this.getStylesheets().add("styles.css");
         this.getStyleClass().add("body");
+
+        errorLabel = crearLabelError();
         Button buttonSubmit = this.crearBotonJugar(stage);
         Button exitButton = this.crearExitButton();
         botonera = crearBotoneraHorizontal(buttonSubmit, exitButton);
@@ -39,7 +41,6 @@ public class CreacionJugadores extends BorderPane {
         for (int i = 0; i < cantidadJugadores; i++) {
             this.crearFormularioDeCarga(i);
         }
-        errorLabel = crearLabelError();
         panel.getChildren().add(errorLabel);
         panel.getChildren().add(botonera);
     }
