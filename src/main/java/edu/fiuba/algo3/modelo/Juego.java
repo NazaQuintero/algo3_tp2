@@ -15,6 +15,10 @@ import java.util.ArrayList;
 
 public class Juego {
 
+    private static final String ARCHIVO_CONTINENTES = "continentes.json";
+    private static final String ARCHIVO_PAISES = "paises.json";
+    private static final String ARCHIVO_TARJETAS = "tarjetas.json";
+
     private final Tablero tablero;
     private final Jugadores jugadores;
     private final Tarjetas tarjetas;
@@ -25,9 +29,9 @@ public class Juego {
         jugadores = new Jugadores();
         tarjetas = new Tarjetas();
 
-        CargarJuego.cargarContinentes();
-        CargarJuego.cargarPaisesLimitrofes();
-        CargarJuego.cargarTarjetas(this);
+        CargarJuego.cargarContinentes(ARCHIVO_CONTINENTES);
+        CargarJuego.cargarPaisesLimitrofes(ARCHIVO_PAISES);
+        CargarJuego.cargarTarjetas(this, ARCHIVO_TARJETAS);
     }
 
     public void agregarTarjeta(Tarjeta unaTarjeta) {

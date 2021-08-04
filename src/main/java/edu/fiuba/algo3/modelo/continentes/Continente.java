@@ -21,10 +21,6 @@ public class Continente {
         return nombre;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
     public ArrayList<Pais> getPaises() {
         return paises;
     }

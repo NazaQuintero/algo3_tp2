@@ -11,9 +11,17 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class MultitonTest {
 
+    private static final String ARCHIVO_CONTINENTES = "continentes.json";
+
+    @Test
+    public void laCantidadDeContinentesEsCeroLuegoDeReiniciar() {
+        MultitonContinentes.reiniciar();
+        assertEquals(0, MultitonContinentes.cantidadDeContinentes());
+    }
+
     @Test
     public void alPedir2VecesElMismoContinenteLaInstanciaObtenidaDeContinenteEsLaMisma() throws ContinenteInvalidoException, ArchivoDeContinentesNoEncontradoException {
-        CargarJuego.cargarContinentes();
+        CargarJuego.cargarContinentes(ARCHIVO_CONTINENTES);
         Continente continente1 = MultitonContinentes.obtenerInstanciaDe("Africa");
         Continente continente2 = MultitonContinentes.obtenerInstanciaDe("Africa");
 
@@ -28,7 +36,7 @@ public class MultitonTest {
 
     @Test
     public void alPedirUnContinenteDevuelveCorrectamente() throws ContinenteInvalidoException, ArchivoDeContinentesNoEncontradoException {
-        CargarJuego.cargarContinentes();
+        CargarJuego.cargarContinentes(ARCHIVO_CONTINENTES);
         Continente continente1 = MultitonContinentes.obtenerInstanciaDe("Oceania");
 
         assertEquals("Oceania",continente1.getNombre());

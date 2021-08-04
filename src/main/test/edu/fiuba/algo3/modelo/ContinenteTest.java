@@ -8,9 +8,26 @@ import edu.fiuba.algo3.modelo.paises.Pais;
 import javafx.scene.paint.Color;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ContinenteTest {
+
+    @Test
+    public void porDefectoLaCantidadDeEjercitosEsCero() {
+        Continente asia = new Continente("Asia");
+        assertEquals(0, asia.getCantidadDeEjercitos());
+    }
+
+    @Test
+    public void laCantidadDeEjercitosEsLaCorrectaLuegoDeSetearleUnaCantidadDeEjercitos() {
+        Continente asia = new Continente("Asia");
+        asia.setCantidadDeEjercitos(3);
+        assertEquals(3, asia.getCantidadDeEjercitos());
+    }
 
     @Test
     public void porDefectoNoEstaDominadoPorNadie() {
@@ -76,6 +93,20 @@ public class ContinenteTest {
         asia.agregarPais(japon);
 
         assertFalse(asia.dominadoPor(jugador));
+    }
+
+    @Test
+    public void luegoDeSetearPaisesGetPaisesDevuelveLosPaisesCorrectos() {
+        Pais china = new Pais("China");
+        Pais india = new Pais("India");
+        Pais japon = new Pais("Japon");
+
+        ArrayList<Pais> paises = new ArrayList<>(Arrays.asList(china, india, japon));
+
+        Continente asia = new Continente("Asia");
+        asia.setPaises(paises);
+
+        assertEquals(paises, asia.getPaises());
     }
 
 }

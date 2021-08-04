@@ -28,12 +28,12 @@ public class Reagrupe implements Ronda {
     }
 
     public void reagrupar(Pais origen, Pais destino, int cantidad) throws ElPaisNoEsLimitrofeException {
-        try {
-            if(this.puedeReagrupar(origen)) {
+        if(this.puedeReagrupar(origen)) {
+            try {
                 origen.reagrupar(destino, cantidad);
+            } catch (ElPaisNoEsLimitrofeException e) {
+                e.printStackTrace();
             }
-        } catch (ElPaisNoEsLimitrofeException e) {
-            throw new ElPaisNoEsLimitrofeException();
         }
     }
 

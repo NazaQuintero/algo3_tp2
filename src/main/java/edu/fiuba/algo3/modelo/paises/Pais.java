@@ -7,7 +7,6 @@ import edu.fiuba.algo3.modelo.batallasDeDados.Resultado;
 import edu.fiuba.algo3.modelo.batallasDeDados.ResultadoBatalla;
 import edu.fiuba.algo3.modelo.excepciones.EjercitosInsuficientesException;
 import edu.fiuba.algo3.modelo.excepciones.ElPaisNoEsLimitrofeException;
-import edu.fiuba.algo3.modelo.fichas.Ejercito;
 import edu.fiuba.algo3.modelo.fichas.EjercitoNulo;
 import edu.fiuba.algo3.modelo.fichas.Fichas;
 import edu.fiuba.algo3.modelo.observables.Observer;
@@ -15,21 +14,20 @@ import edu.fiuba.algo3.modelo.observables.Subject;
 import edu.fiuba.algo3.modelo.roles.Atacante;
 import edu.fiuba.algo3.modelo.roles.Defensor;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Pais implements Subject {
     @Expose
-    private String nombre;
+    private final String nombre;
     @Expose
     private int posX;
     @Expose
     private int posY;
 
-    private ArrayList<Observer> observers = new ArrayList<>();
+    private final ArrayList<Observer> observers = new ArrayList<>();
 
     private Fichas ejercito;
-    private ArrayList<Pais> paisesLimitrofes;
+    private final ArrayList<Pais> paisesLimitrofes;
 
     public Pais(String nombre) {
         this.nombre = nombre;
