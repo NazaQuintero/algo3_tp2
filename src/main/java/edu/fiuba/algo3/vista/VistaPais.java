@@ -13,11 +13,15 @@ import javafx.scene.shape.Rectangle;
 import java.util.ArrayList;
 
 public class VistaPais extends StackPane implements Observer {
-    Pais pais;
+    private CampoDeJuego campoDeJuego;
+    private Pais pais;
+    private ArrayList<VistaPais> vistaLimitrofes = new ArrayList<>();
 
-    public VistaPais(Pais pais) {
+    public VistaPais(Pais pais, CampoDeJuego campoDeJuego) {
         this.getStylesheets().add("styles.css");
         this.pais = pais;
+        this.campoDeJuego = campoDeJuego;
+
         this.setLayoutX(pais.getPosX());
         this.setLayoutY(pais.getPosY());
 
@@ -41,7 +45,7 @@ public class VistaPais extends StackPane implements Observer {
         Rectangle boton = new Rectangle(50, 50);
         boton.setFill(new Color(0f,0f,0f,0));
         boton.getStyleClass().add("pais");
-        boton.setOnMouseClicked(new PaisEventHandler(pais));
+        boton.setOnMouseClicked(new PaisEventHandler(this));
         return boton;
     }
 

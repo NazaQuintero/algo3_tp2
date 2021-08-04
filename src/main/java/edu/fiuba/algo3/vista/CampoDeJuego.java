@@ -34,7 +34,6 @@ public class CampoDeJuego extends HBox {
 
         this.getChildren().add(stackPane);
         this.setAlignment(Pos.CENTER);
-
         stage.setScene(new Scene(this, 1400, 900));
     }
 
@@ -52,5 +51,16 @@ public class CampoDeJuego extends HBox {
         }
         stackPane.getChildren().addAll(vistasPaises);
     }
+
+    public void resaltarLimitrofes(VistaPais vistaPais) {
+        ArrayList<VistaPais> vistaLimitrofes = vistaPais.getVistaLimitrofes();
+        for (VistaPais vista : vistasPaises) {
+            if (!vistaLimitrofes.contains(vista) || (vistaPais.getPais().dominadoPor() == vista.getPais().dominadoPor())){
+               vista.desactivar();
+            }
+        }
+    }
+
+    public void mostrarPaises() { for (VistaPais vista : vistasPaises) vista.activar(); }
 
 }
