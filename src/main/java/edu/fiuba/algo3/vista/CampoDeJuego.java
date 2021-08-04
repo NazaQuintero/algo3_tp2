@@ -1,7 +1,9 @@
 package edu.fiuba.algo3.vista;
 
+import edu.fiuba.algo3.modelo.Juego;
 import edu.fiuba.algo3.modelo.paises.MultitonPaises;
 import edu.fiuba.algo3.modelo.paises.Pais;
+import edu.fiuba.algo3.modelo.turnos.Turno;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -16,8 +18,10 @@ import java.util.ArrayList;
 
 public class CampoDeJuego extends HBox {
 
-    public CampoDeJuego(Stage stage) {
+    private final Juego juego;
 
+    public CampoDeJuego(Stage stage, Juego juego) {
+        this.juego = juego;
         this.getStylesheets().add("styles.css");
 
         Image imagen = new Image("tablero.png");
@@ -37,20 +41,12 @@ public class CampoDeJuego extends HBox {
     }
 
     private void crearPaises(Pane stackPane) {
-        // TODO: Garantizar que para este punto el Multiton ya este cargado...
+
         ArrayList<Pais> _paises = new ArrayList<>(MultitonPaises.obtenerTodosLosPaises());
 
-        ArrayList<VistaPais> paises = new ArrayList<>();
-        ArrayList<Circle> circles = new ArrayList<>();
-
         for(Pais pais: _paises) {
-            paises.add(new VistaPais(pais));
-            circles.add(new Circle(pais.getPosX()+25, pais.getPosY()+25, 10, pais.dominadoPor().color()));
+            stackPane.getChildren().add(new VistaPais(pais));
         }
-
-        stackPane.getChildren().addAll(circles);
-        stackPane.getChildren().addAll(paises);
-
     }
 
 }

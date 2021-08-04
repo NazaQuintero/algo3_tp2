@@ -29,6 +29,7 @@
 
 .labelText {
     -fx-font-size: 24px;
+    -fx-background-color: salmon;
 }
 
 .error {
@@ -76,7 +77,8 @@
 .textField.valid{
     -fx-focus-color: #198754;
     -fx-faint-focus-color: #19875422;
-
+    -fx-opacity: 1;
+    -fx-text-fill: grey;
     -fx-highlight-fill: -fx-accent;
     -fx-highlight-text-fill: white;
     -fx-background-color:
@@ -92,7 +94,7 @@
 .textField.invalid {
     -fx-focus-color: #d35244;
     -fx-faint-focus-color: #d3524422;
-
+    -fx-opacity: 1;
     -fx-highlight-fill: -fx-accent;
     -fx-highlight-text-fill: white;
     -fx-background-color:
@@ -103,4 +105,9 @@
     -fx-background-insets: -0.2, 1, -1.4, 3;
     -fx-background-radius: 3, 2, 4, 0;
     -fx-prompt-text-fill: transparent;
+}
+
+.label.ejercito{
+    -fx-font-size: 20px;
+    -fx-text-fill: white;
 }

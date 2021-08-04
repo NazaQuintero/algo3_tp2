@@ -6,6 +6,7 @@ import edu.fiuba.algo3.modelo.paises.MultitonPaises;
 import edu.fiuba.algo3.modelo.paises.Pais;
 import edu.fiuba.algo3.modelo.tarjetas.Tarjeta;
 import edu.fiuba.algo3.modelo.tarjetas.Globo;
+import javafx.scene.paint.Color;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -16,34 +17,22 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class JuegoTest {
 
     @Test
-    public void elJuegoNoComienzaSinUnMinimoDe2Jugadores() throws ArchivoDeTarjetasNoEncontradoException, ArchivoDePaisesNoEncontradoException {
+    public void elJuegoNoComienzaSinUnMinimoDe2Jugadores() throws ArchivoDeTarjetasNoEncontradoException, ArchivoDePaisesNoEncontradoException, ArchivoDeContinentesNoEncontradoException {
 
         Juego juego = new Juego();
-        juego.agregarJugador("Juani");
+        Jugador jugador = new Jugador("Juani", Color.AQUA);
+        juego.agregarJugador(jugador);
         assertThrows(CantidadDeJugadoresInsuficienteException.class, juego::comenzar);
     }
 
-
     @Test
-    public void seColoca1EjercitoEnElMismoPais() throws ArchivoDeTarjetasNoEncontradoException, ArchivoDePaisesNoEncontradoException {
-
+    public void seRepartenEquitativamente25PaisesEntreDosJugadores() throws CantidadDeJugadoresInsuficienteException, ArchivoDeTarjetasNoEncontradoException, ArchivoDePaisesNoEncontradoException, ArchivoDeContinentesNoEncontradoException {
         Juego juego = new Juego();
+        Jugador jugador1 = new Jugador("Martin", Color.BLUE);
+        Jugador jugador2 = new Jugador("Juani", Color.RED);
 
-        Jugador jugador1 = juego.agregarJugador("Juani");
-        Pais pais = juego.obtenerPais("Argentina");
-
-        pais.colocarEjercito(new Ejercito(jugador1));
-
-        assertEquals(1,juego.cantidadEjercitosEn(pais));
-        assertEquals(jugador1, juego.paisDominadoPor(pais));
-    }
-
-
-    @Test
-    public void seRepartenEquitativamente25PaisesEntreDosJugadores() throws CantidadDeJugadoresInsuficienteException, ArchivoDeTarjetasNoEncontradoException, ArchivoDePaisesNoEncontradoException {
-        Juego juego = new Juego();
-        Jugador jugador1 = juego.agregarJugador("Martin");
-        Jugador jugador2 = juego.agregarJugador("Juani");
+        juego.agregarJugador(jugador1);
+        juego.agregarJugador(jugador2);
         juego.comenzar();
 
         assertEquals(25,juego.cantidadPaisesDominados(jugador1));
@@ -51,26 +40,24 @@ public class JuegoTest {
     }
 
     @Test
-    public void canjeFunciona() throws ArchivoDeTarjetasNoEncontradoException, ArchivoDePaisesNoEncontradoException, ElJugadorNoTieneTurnoException, JugadorNoExisteException, ActivacionTarjetaEnRondaEquivocadaException, LaTarjetaYaFueActivadaException, TarjetaNoEncontradaException, JugadorNoPoseePaisDeLaTarjetaException, JugadorSinTarjetasException, LaTarjetaYaEstaDesactivadaException, SinCanjeHabilitadoException {
+    public void canjeFunciona() throws ArchivoDeTarjetasNoEncontradoException, ArchivoDePaisesNoEncontradoException, ElJugadorNoTieneTurnoException, JugadorNoExisteException, ActivacionTarjetaEnRondaEquivocadaException, LaTarjetaYaFueActivadaException, TarjetaNoEncontradaException, JugadorNoPoseePaisDeLaTarjetaException, JugadorSinTarjetasException, LaTarjetaYaEstaDesactivadaException, SinCanjeHabilitadoException, ArchivoDeContinentesNoEncontradoException {
         Juego juego = new Juego();
-        Pais arg = juego.obtenerPais("Argentina");
-        Pais bra = juego.obtenerPais("Brasil");
-        Pais chl = juego.obtenerPais("Chile");
+        Pais arg = MultitonPaises.obtenerInstanciaDe("Argentina");
+        Pais bra = MultitonPaises.obtenerInstanciaDe("Brasil");
+        Pais chl = MultitonPaises.obtenerInstanciaDe("Chile");
 
         Tarjeta unaTarjeta = new Tarjeta(arg, new Globo());
         Tarjeta otraTarjeta = new Tarjeta(bra, new Globo());
         Tarjeta ootraTarjeta = new Tarjeta(chl, new Globo());
 
-//        juego.agregarPais(arg);
-//        juego.agregarPais(bra);
-//        juego.agregarPais(chl);
-
         juego.agregarTarjeta(unaTarjeta);
         juego.agregarTarjeta(otraTarjeta);
         juego.agregarTarjeta(ootraTarjeta);
 
-        Jugador jugador = juego.agregarJugador("Cami");
-        juego.agregarJugador("Frank");
+        Jugador jugador = new Jugador("Cami", Color.RED);
+
+        juego.agregarJugador(jugador);
+        juego.agregarJugador(new Jugador("Frank", Color.PINK));
 
         //juego.comenzar();
         juego.iniciarTurno();
@@ -78,9 +65,6 @@ public class JuegoTest {
         arg.colocarEjercito(new Ejercito(jugador));
         bra.colocarEjercito(new Ejercito(jugador));
         chl.colocarEjercito(new Ejercito(jugador));
-//        juego.colocarEjercitos(jugador, arg, 1);
-//        juego.colocarEjercitos(jugador, bra, 1);
-//        juego.colocarEjercitos(jugador, chl, 1);
 
         juego.recibirTarjeta(jugador, arg);
         juego.recibirTarjeta(jugador, bra);

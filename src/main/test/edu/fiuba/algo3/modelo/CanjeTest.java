@@ -7,6 +7,7 @@ import edu.fiuba.algo3.modelo.excepciones.JugadorSinTarjetasException;
 import edu.fiuba.algo3.modelo.paises.Pais;
 import edu.fiuba.algo3.modelo.tarjetas.Globo;
 import edu.fiuba.algo3.modelo.tarjetas.Tarjeta;
+import javafx.scene.paint.Color;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -18,7 +19,7 @@ import static org.mockito.Mockito.mock;
 public class CanjeTest {
     @Test
     public void unJugadorSinTarjetasNoPuedeRealizarUnCanje()  {
-        Jugador jugador = new Jugador( "Martin");
+        Jugador jugador = new Jugador( "Martin", Color.BLUE);
         Tarjeta tarjeta = new Tarjeta(new Pais("Japon"), new Globo());
         ArrayList<Tarjeta> tarjetas = new ArrayList<>();
         tarjetas.add(tarjeta);

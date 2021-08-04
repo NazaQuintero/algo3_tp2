@@ -5,6 +5,7 @@ import edu.fiuba.algo3.modelo.excepciones.ElJugadorNoTieneTurnoException;
 import edu.fiuba.algo3.modelo.excepciones.NoEsRondaDeColocacionException;
 import edu.fiuba.algo3.modelo.excepciones.PaisOcupadoPorOtroJugadorException;
 import edu.fiuba.algo3.modelo.paises.Pais;
+import javafx.scene.paint.Color;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -13,7 +14,7 @@ public class ContinenteTest {
 
     @Test
     public void porDefectoNoEstaDominadoPorNadie() {
-        Jugador jugador = new Jugador( "Martin");
+        Jugador jugador = new Jugador( "Martin", Color.BLUE);
         Continente asia = new Continente("Asia");
         asia.agregarPais(new Pais("China"));
         assertFalse(asia.dominadoPor(jugador));
@@ -21,7 +22,7 @@ public class ContinenteTest {
 
     @Test
     public void unJugadorDomina3PaisesDeAsia() throws ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException, PaisOcupadoPorOtroJugadorException {
-        Jugador jugador = new Jugador( "Martin");
+        Jugador jugador = new Jugador( "Martin", Color.BLUE);
         Pais china = new Pais("China");
         Pais india = new Pais("India");
         Pais japon = new Pais("Japon");
@@ -40,7 +41,7 @@ public class ContinenteTest {
 
     @Test
     public void unJugadorDominaTodoAsia() throws ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException, PaisOcupadoPorOtroJugadorException {
-        Jugador jugador = new Jugador( "Martin");
+        Jugador jugador = new Jugador( "Martin", Color.BLUE);
         Pais china = new Pais("China");
         Pais india = new Pais("India");
         Pais japon = new Pais("Japon");
@@ -59,8 +60,8 @@ public class ContinenteTest {
 
     @Test
     public void unJugadorNoDominaTodoAsia() throws ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException, PaisOcupadoPorOtroJugadorException {
-        Jugador jugador = new Jugador( "Martin");
-        Jugador jugador2 = new Jugador( "Frank");
+        Jugador jugador = new Jugador( "Martin", Color.BLUE);
+        Jugador jugador2 = new Jugador( "Frank", Color.BLUE);
         Pais china = new Pais("China");
         Pais india = new Pais("India");
         Pais japon = new Pais("Japon");

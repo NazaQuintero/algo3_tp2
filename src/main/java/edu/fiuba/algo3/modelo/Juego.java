@@ -14,45 +14,25 @@ import java.util.ArrayList;
 
 
 public class Juego {
-    static final String ARCHIVO_PAISES = "paises.json";
-    static final String ARCHIVO_TARJETAS = "tarjetas.json";
 
     private final Tablero tablero;
     private final Jugadores jugadores;
     private final Tarjetas tarjetas;
     private Turno turno = new SinTurno();
 
-    public Juego() throws ArchivoDePaisesNoEncontradoException, ArchivoDeTarjetasNoEncontradoException{
+    public Juego() throws ArchivoDeContinentesNoEncontradoException, ArchivoDePaisesNoEncontradoException, ArchivoDeTarjetasNoEncontradoException {
         tablero = new Tablero();
         jugadores = new Jugadores();
         tarjetas = new Tarjetas();
 
         CargarJuego.cargarContinentes();
-        CargarJuego.cargarPaisesLimitrofes(ARCHIVO_PAISES);
-        CargarJuego.cargarTarjetas(this, ARCHIVO_TARJETAS);
+        CargarJuego.cargarPaisesLimitrofes();
+        CargarJuego.cargarTarjetas(this);
     }
 
     public void agregarTarjeta(Tarjeta unaTarjeta) {
         tarjetas.agregarTarjeta(unaTarjeta);
     }
-
-    public Jugador agregarJugador(String nombre, Color color){
-        Jugador jugador = new Jugador(nombre, color);
-        jugadores.agregarJugador(jugador);
-        return jugador;
-    }
-
-    public Jugador agregarJugador(String nombre){
-        Jugador jugador = new Jugador(nombre);
-        jugadores.agregarJugador(jugador);
-        return jugador;
-    }
-
-    /*
-    public void agregarPais(Pais unPais) {
-        tablero.agregarPais(unPais);
-    }
-    */
 
     public void agregarJugador(Jugador jugador){
         jugadores.agregarJugador(jugador);
@@ -74,11 +54,6 @@ public class Juego {
         tablero.ataque(jAtacante, pAtacante, pDefensor, cantidadEjercitos);
     }
 
-    /*
-    public void colocarEjercitos(Jugador jugador, Pais pais, int cantidadEjercitos) throws ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException, JugadorNoExisteException, PaisOcupadoPorOtroJugadorException {
-        tablero.colocarEjercitos(jugador, pais, cantidadEjercitos);
-    }
-    */
 
     public void reagrupar(Jugador jugador, Pais paisOrigen, Pais paisDestino, int cantidadAMover) throws JugadorNoExisteException, ElPaisNoEsLimitrofeException, NoEsRondaDeReagrupeException, ElJugadorNoTieneTurnoException {
         tablero.reagrupar(jugador, paisOrigen, paisDestino, cantidadAMover);
@@ -106,16 +81,6 @@ public class Juego {
 
     public void canjearTarjetas(Jugador jugador, ArrayList<Pais> paisesTarjetas) throws JugadorSinTarjetasException, LaTarjetaYaEstaDesactivadaException, SinCanjeHabilitadoException {
         tarjetas.canjearTarjetas(jugador, paisesTarjetas);
-    }
-
-    // Probablemente lo saquemos o saquemos todos los Strings y pongamos objetos
-    // Hoy pregunto como nos conviene laburarlo
-    public Jugador obtenerJugador(String nombreJugador) throws JugadorNoExisteException {
-        return jugadores.obtenerJugador(nombreJugador);
-    }
-
-    public Pais obtenerPais(String nombrePais){
-        return tablero.obtenerPais(nombrePais);
     }
 
     public void iniciarTurno(){

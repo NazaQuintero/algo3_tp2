@@ -3,6 +3,7 @@ package edu.fiuba.algo3.modelo;
 import edu.fiuba.algo3.modelo.batallasDeDados.*;
 import edu.fiuba.algo3.modelo.fichas.Ejercito;
 import edu.fiuba.algo3.modelo.paises.Pais;
+import javafx.scene.paint.Color;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -14,8 +15,8 @@ public class BatallaTest {
 
         Pais paisAtacante = new Pais("Argentina");
         Pais paisDefensor = new Pais("Brasil");
-        Jugador jAtacante = new Jugador( "Martin");
-        Jugador jDefensor = new Jugador( "Naza");
+        Jugador jAtacante = new Jugador( "Martin", Color.RED);
+        Jugador jDefensor = new Jugador( "Naza", Color.RED);
 
 
         Dados dadosAtacante = new Dados();
@@ -51,8 +52,8 @@ public class BatallaTest {
     public void batallarEntrePaisesDefensorGanaYElAtacanteQuedaConUnSoloEjercito() {
         Pais paisAtacante = new Pais("Argentina");
         Pais paisDefensor = new Pais("Brasil");
-        Jugador jAtacante = new Jugador( "Martin");
-        Jugador jDefensor = new Jugador( "Naza");
+        Jugador jAtacante = new Jugador( "Martin", Color.RED);
+        Jugador jDefensor = new Jugador( "Naza", Color.RED);
 
 
         Dados dadosAtacante = new Dados();
@@ -85,8 +86,8 @@ public class BatallaTest {
     public void batallarEntrePaisesHayEmpateYGanaDefensor(){
         Pais paisAtacante = new Pais("Argentina");
         Pais paisDefensor = new Pais("Brasil");
-        Jugador jAtacante = new Jugador( "Martin");
-        Jugador jDefensor = new Jugador( "Naza");
+        Jugador jAtacante = new Jugador( "Martin", Color.RED);
+        Jugador jDefensor = new Jugador( "Naza", Color.RED);
 
         Dados dadosAtacante = new Dados();
         Dado dadoPersonalizadoAtacante = new DadoPersonalizado(1);

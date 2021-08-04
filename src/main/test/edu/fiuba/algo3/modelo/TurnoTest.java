@@ -6,6 +6,7 @@ import edu.fiuba.algo3.modelo.rondas.Ataque;
 import edu.fiuba.algo3.modelo.rondas.Ronda;
 import edu.fiuba.algo3.modelo.turnos.ConTurno;
 import edu.fiuba.algo3.modelo.turnos.Turno;
+import javafx.scene.paint.Color;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -17,9 +18,9 @@ public class TurnoTest {
     public void laCantidadDeTurnosEs3siLaCantidadDeJugadoresEs3() {
 
         Jugadores jugadores = new Jugadores();
-        Jugador jugador1 = new Jugador( "Martin");
-        Jugador jugador2 = new Jugador( "Cami");
-        Jugador jugador3 = new Jugador( "Naza");
+        Jugador jugador1 = new Jugador( "Martin", Color.BLUE);
+        Jugador jugador2 = new Jugador( "Cami", Color.BLUE);
+        Jugador jugador3 = new Jugador( "Naza", Color.BLUE);
         jugadores.agregarJugador(jugador1);
         jugadores.agregarJugador(jugador2);
         jugadores.agregarJugador(jugador3);
@@ -31,9 +32,9 @@ public class TurnoTest {
     @Test
     public void porDefectoElTurnoEsDelJugadorNumero1() {
         Jugadores jugadores = new Jugadores();
-        Jugador jugador1 = new Jugador( "Naza");
-        Jugador jugador2 = new Jugador( "Fran");
-        Jugador jugador3 = new Jugador( "Juani");
+        Jugador jugador1 = new Jugador( "Naza", Color.BLUE);
+        Jugador jugador2 = new Jugador( "Fran", Color.BLUE);
+        Jugador jugador3 = new Jugador( "Juani", Color.BLUE);
         jugadores.agregarJugador(jugador1);
         jugadores.agregarJugador(jugador2);
         jugadores.agregarJugador(jugador3);
@@ -45,9 +46,9 @@ public class TurnoTest {
     @Test
     public void sePuedeCambiarElJugadorInicial() throws JugadorNoExisteException {
         Jugadores jugadores = new Jugadores();
-        Jugador jugador1 = new Jugador( "Fran");
-        Jugador jugador2 = new Jugador( "Juani");
-        Jugador jugador3 = new Jugador( "Cami");
+        Jugador jugador1 = new Jugador( "Fran", Color.BLUE);
+        Jugador jugador2 = new Jugador( "Juani", Color.BLUE);
+        Jugador jugador3 = new Jugador( "Cami", Color.BLUE);
         jugadores.agregarJugador(jugador1);
         jugadores.agregarJugador(jugador2);
         jugadores.agregarJugador(jugador3);
@@ -60,8 +61,8 @@ public class TurnoTest {
     @Test
     public void alFinalizarElAtaqueDelJugador2ElTurnoSigueSiendoDeJugador2() throws ElJugadorNoTieneTurnoException {
         Jugadores jugadores = new Jugadores();
-        Jugador jugador1 = new Jugador( "Juani");
-        Jugador jugador2 = new Jugador( "Martin");
+        Jugador jugador1 = new Jugador( "Juani", Color.BLUE);
+        Jugador jugador2 = new Jugador( "Martin", Color.BLUE);
         jugadores.agregarJugador(jugador1);
         jugadores.agregarJugador(jugador2);
 
@@ -75,9 +76,9 @@ public class TurnoTest {
     @Test
     public void alFinalizarElTurnoDelJugador3ElTurnoDelSiguienteJugadorEsDelJugador1() throws JugadorNoExisteException, ElJugadorNoTieneTurnoException {
         Jugadores jugadores = new Jugadores();
-        Jugador jugador1 = new Jugador( "Martin");
-        Jugador jugador2 = new Jugador( "Naza");
-        Jugador jugador3 = new Jugador( "Juani");
+        Jugador jugador1 = new Jugador( "Martin", Color.BLUE);
+        Jugador jugador2 = new Jugador( "Naza"  , Color.BLUE);
+        Jugador jugador3 = new Jugador( "Juani" , Color.BLUE);
         jugadores.agregarJugador(jugador1);
         jugadores.agregarJugador(jugador2);
         jugadores.agregarJugador(jugador3);
@@ -93,7 +94,7 @@ public class TurnoTest {
     @Test
     public void porDefectoLaCantidadDeTurnosJugadosEsCero() {
         Jugadores jugadores = new Jugadores();
-        jugadores.agregarJugador(new Jugador( "Martin"));
+        jugadores.agregarJugador(new Jugador( "Martin", Color.RED));
         Turno turno = new ConTurno(jugadores);
         assertEquals(0, turno.obtenerCantidadDeTurnosJugados());
     }
@@ -101,9 +102,9 @@ public class TurnoTest {
     @Test
     public void luegoDeQueElJugador2TerminoDeReagruparLeTocaRondaDeAtaqueAlJugador3() throws JugadorNoExisteException, ElJugadorNoTieneTurnoException {
         Jugadores jugadores = new Jugadores();
-        Jugador jugador1 = new Jugador( "Martin");
-        Jugador jugador2 = new Jugador( "Naza");
-        Jugador jugador3 = new Jugador( "Juani");
+        Jugador jugador1 = new Jugador( "Martin", Color.BLUE);
+        Jugador jugador2 = new Jugador( "Naza", Color.BLUE);
+        Jugador jugador3 = new Jugador( "Juani", Color.BLUE);
         jugadores.agregarJugador(jugador1);
         jugadores.agregarJugador(jugador2);
         jugadores.agregarJugador(jugador3);
@@ -121,8 +122,8 @@ public class TurnoTest {
     @Test
     public void luegoDeQueElTodosAtacaronYDefendieronTocaColocacion() throws ElJugadorNoTieneTurnoException {
         Jugadores jugadores = new Jugadores();
-        Jugador jugador1 = new Jugador( "Martin");
-        Jugador jugador2 = new Jugador( "Naza");
+        Jugador jugador1 = new Jugador( "Martin", Color.BLUE);
+        Jugador jugador2 = new Jugador( "Naza", Color.BLUE);
         jugadores.agregarJugador(jugador1);
         jugadores.agregarJugador(jugador2);
 
@@ -143,9 +144,9 @@ public class TurnoTest {
     @Test
     public void luegoDeFinalizar3TurnosLaCantidadDeTurnosJugadosEs3() throws ElJugadorNoTieneTurnoException {
         Jugadores jugadores = new Jugadores();
-        Jugador jugador1 = new Jugador( "Martin");
-        Jugador jugador2 = new Jugador( "Naza");
-        Jugador jugador3 = new Jugador( "Juani");
+        Jugador jugador1 = new Jugador( "Martin", Color.BLUE);
+        Jugador jugador2 = new Jugador( "Naza", Color.BLUE);
+        Jugador jugador3 = new Jugador( "Juani", Color.BLUE);
         jugadores.agregarJugador(jugador1);
         jugadores.agregarJugador(jugador2);
         jugadores.agregarJugador(jugador3);
@@ -162,7 +163,7 @@ public class TurnoTest {
     @Test
     public void porDefectoLaPrimerRondaEsDeColocacion() {
         Jugadores jugadores = new Jugadores();
-        jugadores.agregarJugador(new Jugador( "Martin"));
+        jugadores.agregarJugador(new Jugador( "Martin", Color.BLUE));
         Turno turno = new ConTurno(jugadores);
         Ronda unaRonda = turno.obtenerRondaActual();
         assertEquals("Colocacion", unaRonda.obtenerDescripcion());
@@ -171,9 +172,9 @@ public class TurnoTest {
     @Test
     public void cuandoLeTocaNuevamenteAlPrimerJugadorLaRondaEsDeAtaque() throws ElJugadorNoTieneTurnoException {
         Jugadores jugadores = new Jugadores();
-        Jugador jugador1 = new Jugador( "Martin");
-        Jugador jugador2 = new Jugador( "Naza");
-        Jugador jugador3 = new Jugador( "Juani");
+        Jugador jugador1 = new Jugador( "Martin", Color.BLUE);
+        Jugador jugador2 = new Jugador( "Naza", Color.BLUE);
+        Jugador jugador3 = new Jugador( "Juani", Color.BLUE);
         jugadores.agregarJugador(jugador1);
         jugadores.agregarJugador(jugador2);
         jugadores.agregarJugador(jugador3);
@@ -192,9 +193,9 @@ public class TurnoTest {
     @Test
     public void cuandoLaRondaEsDeReagrupePorPrimeraVezLaCantidadDeRondasJugadasEs0() throws ElJugadorNoTieneTurnoException {
         Jugadores jugadores = new Jugadores();
-        Jugador jugador1 = new Jugador( "Martin");
-        Jugador jugador2 = new Jugador( "Naza");
-        Jugador jugador3 = new Jugador( "Juani");
+        Jugador jugador1 = new Jugador( "Martin", Color.BLUE);
+        Jugador jugador2 = new Jugador( "Naza", Color.BLUE);
+        Jugador jugador3 = new Jugador( "Juani", Color.BLUE);
         jugadores.agregarJugador(jugador1);
         jugadores.agregarJugador(jugador2);
         jugadores.agregarJugador(jugador3);
@@ -207,9 +208,9 @@ public class TurnoTest {
     @Test
     public void despuesDeLaColocacionInicialVieneRondaDeAtaque() throws ElJugadorNoTieneTurnoException {
         Jugadores jugadores = new Jugadores();
-        Jugador jugador1 = new Jugador( "Martin");
-        Jugador jugador2 = new Jugador( "Naza");
-        Jugador jugador3 = new Jugador( "Juani");
+        Jugador jugador1 = new Jugador( "Martin", Color.BLUE);
+        Jugador jugador2 = new Jugador( "Naza"  , Color.BLUE);
+        Jugador jugador3 = new Jugador( "Juani" , Color.BLUE);
         jugadores.agregarJugador(jugador1);
         jugadores.agregarJugador(jugador2);
         jugadores.agregarJugador(jugador3);

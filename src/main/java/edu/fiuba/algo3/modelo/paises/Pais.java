@@ -7,6 +7,7 @@ import edu.fiuba.algo3.modelo.batallasDeDados.Resultado;
 import edu.fiuba.algo3.modelo.batallasDeDados.ResultadoBatalla;
 import edu.fiuba.algo3.modelo.excepciones.EjercitosInsuficientesException;
 import edu.fiuba.algo3.modelo.excepciones.ElPaisNoEsLimitrofeException;
+import edu.fiuba.algo3.modelo.fichas.Ejercito;
 import edu.fiuba.algo3.modelo.fichas.EjercitoNulo;
 import edu.fiuba.algo3.modelo.fichas.Fichas;
 import edu.fiuba.algo3.modelo.observables.Observer;
@@ -135,5 +136,9 @@ public class Pais implements Subject {
     @Override
     public void notifyObservers() {
         observers.forEach(Observer::update);
+    }
+
+    public Fichas getEjercito() {
+        return ejercito;
     }
 }
