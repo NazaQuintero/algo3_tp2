@@ -85,14 +85,7 @@ public class CreacionJugadores extends BorderPane {
         }
         return Color.RED;
     }
-/*
-    private Button crearBotonDeCarga(TextField tField, Color color) {
-        Button buttonSubmit = new Button("Cargar");
-        buttonSubmit.setOnAction(e -> juego.agregarJugador(tField.getText(), color));
-        buttonSubmit.getStyleClass().addAll("startButton", "loadButton");
-        return buttonSubmit;
-    }
-*/
+
     private HBox crearBotoneraHorizontal(Button buttonSubmit, Button exitButton) {
         HBox hbox = new HBox(buttonSubmit, exitButton);
         hbox.setAlignment(Pos.CENTER);
