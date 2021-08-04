@@ -26,7 +26,6 @@ public class CargarJuego {
             json = new String(Objects.requireNonNull(is).readAllBytes(), StandardCharsets.UTF_8);
         }
         catch (IOException | NullPointerException e) {
-            e.printStackTrace();
             throw new ArchivoDeContinentesNoEncontradoException();
         }
 
@@ -46,7 +45,6 @@ public class CargarJuego {
             InputStream is = App.class.getClassLoader().getResourceAsStream(archivoPaises);
             json = new String(Objects.requireNonNull(is).readAllBytes(), StandardCharsets.UTF_8);
         } catch (IOException | NullPointerException e) {
-            e.printStackTrace();
             throw new ArchivoDePaisesNoEncontradoException();
         }
 

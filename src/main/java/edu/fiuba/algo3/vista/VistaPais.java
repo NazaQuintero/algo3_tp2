@@ -10,12 +10,18 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 
-public class VistaPais extends StackPane implements Observer {
-    Pais pais;
+import java.util.ArrayList;
 
-    public VistaPais(Pais pais) {
+public class VistaPais extends StackPane implements Observer {
+    private CampoDeJuego campoDeJuego;
+    private Pais pais;
+    private ArrayList<VistaPais> vistaLimitrofes = new ArrayList<>();
+
+    public VistaPais(Pais pais, CampoDeJuego campoDeJuego) {
         this.getStylesheets().add("styles.css");
         this.pais = pais;
+        this.campoDeJuego = campoDeJuego;
+
         this.setLayoutX(pais.getPosX());
         this.setLayoutY(pais.getPosY());
 
@@ -39,7 +45,7 @@ public class VistaPais extends StackPane implements Observer {
         Rectangle boton = new Rectangle(50, 50);
         boton.setFill(new Color(0f,0f,0f,0));
         boton.getStyleClass().add("pais");
-        boton.setOnMouseClicked(new PaisEventHandler(pais));
+        boton.setOnMouseClicked(new PaisEventHandler(this));
         return boton;
     }
 
@@ -51,4 +57,33 @@ public class VistaPais extends StackPane implements Observer {
         System.out.println("Hay "+ this.pais.cantidadEjercitos() + " ejercito/s en " + this.pais.getNombre() +
                 " que pertenece a " + pais.dominadoPor().obtenerNombre());
     }
+
+    public ArrayList<Pais> getLimitrofes() {
+        return pais.getPaisesLimitrofes();
+    }
+
+    public void setVistaLimitrofe(VistaPais vistaPais){
+        vistaLimitrofes.add(vistaPais);
+    }
+    public Pais getPais(){
+        return pais;
+    }
+
+    public void resaltarLimitrofes(){
+        campoDeJuego.resaltarLimitrofes(this);
+    }
+
+    public ArrayList<VistaPais> getVistaLimitrofes() { return vistaLimitrofes; }
+
+    public void desactivar(){
+        this.setDisable(true);
+        String color = pais.dominadoPor().color().toString();
+        ((Circle) this.getChildren().get(0)).setFill(Color.web(color, 0.4));
+    }
+
+    public void activar() {
+        this.setDisable(false);
+        ((Circle) this.getChildren().get(0)).setFill(pais.dominadoPor().color());
+    }
+
 }
