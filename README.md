@@ -1,4 +1,4 @@
-![tp2](https://github.com/NazaQuintero/algo3_tp2/actions/workflows/build.yml/badge.svg) [![codecov.io](http://codecov.io/github/ReactiveX/RxJava/coverage.svg?branch=3.x)](https://codecov.io/gh/NazaQuintero/algo3_tp2)
+![tp2](https://github.com/NazaQuintero/algo3_tp2/actions/workflows/build.yml/badge.svg) [![codecov](https://codecov.io/gh/NazaQuintero/algo3_tp2/branch/master/graph/badge.svg)](https://codecov.io/gh/NazaQuintero/algo3_tp2)
 
 # TP2 Algoritmos 3: A.L.T.E.G.O.
 
