@@ -40,17 +40,9 @@ public class CampoDeJuego extends HBox {
 
         ArrayList<Pais> _paises = new ArrayList<>(MultitonPaises.obtenerTodosLosPaises());
 
-        ArrayList<VistaPais> paises = new ArrayList<>();
-        ArrayList<Circle> circles = new ArrayList<>();
-
         for(Pais pais: _paises) {
-            paises.add(new VistaPais(pais));
-            circles.add(new Circle(pais.getPosX()+25, pais.getPosY()+25, 10, pais.dominadoPor().color()));
+            stackPane.getChildren().add(new VistaPais(pais));
         }
-
-        stackPane.getChildren().addAll(circles);
-        stackPane.getChildren().addAll(paises);
-
     }
 
 }
