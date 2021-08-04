@@ -94,7 +94,7 @@ public class CargarJuego {
 
             String nombrePais = jsonObject.get("Pais").getAsString();
 
-            return new Tarjeta(juego.obtenerPais(nombrePais), nuevoSimbolo(jsonObject.get("Simbolo").getAsString()));
+            return new Tarjeta(MultitonPaises.obtenerInstanciaDe(nombrePais), nuevoSimbolo(jsonObject.get("Simbolo").getAsString()));
         };
 
         gsonBuilder.registerTypeAdapter(Tarjeta.class, deserializer);

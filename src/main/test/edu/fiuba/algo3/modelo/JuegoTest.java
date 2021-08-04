@@ -40,9 +40,9 @@ public class JuegoTest {
     @Test
     public void canjeFunciona() throws ArchivoDeTarjetasNoEncontradoException, ArchivoDePaisesNoEncontradoException, ElJugadorNoTieneTurnoException, JugadorNoExisteException, ActivacionTarjetaEnRondaEquivocadaException, LaTarjetaYaFueActivadaException, TarjetaNoEncontradaException, JugadorNoPoseePaisDeLaTarjetaException, JugadorSinTarjetasException, LaTarjetaYaEstaDesactivadaException, SinCanjeHabilitadoException, ArchivoDeContinentesNoEncontradoException {
         Juego juego = new Juego();
-        Pais arg = juego.obtenerPais("Argentina");
-        Pais bra = juego.obtenerPais("Brasil");
-        Pais chl = juego.obtenerPais("Chile");
+        Pais arg = MultitonPaises.obtenerInstanciaDe("Argentina");
+        Pais bra = MultitonPaises.obtenerInstanciaDe("Brasil");
+        Pais chl = MultitonPaises.obtenerInstanciaDe("Chile");
 
         Tarjeta unaTarjeta = new Tarjeta(arg, new Globo());
         Tarjeta otraTarjeta = new Tarjeta(bra, new Globo());
