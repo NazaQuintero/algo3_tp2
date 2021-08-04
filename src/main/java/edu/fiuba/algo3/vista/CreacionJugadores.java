@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.vista;
 
+import edu.fiuba.algo3.controladores.FormJugadoresEventHandler;
 import edu.fiuba.algo3.modelo.Juego;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
