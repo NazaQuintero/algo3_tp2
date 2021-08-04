@@ -3,6 +3,7 @@ package edu.fiuba.algo3.modelo;
 import edu.fiuba.algo3.modelo.batallasDeDados.*;
 import edu.fiuba.algo3.modelo.fichas.Ejercito;
 import edu.fiuba.algo3.modelo.paises.Pais;
+import javafx.scene.paint.Color;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -147,8 +148,8 @@ public class PaisTest {
         Pais paisAtacante = new Pais("Argentina");
         Pais paisDefensor = new Pais("Brasil");
         paisAtacante.limitaCon(paisDefensor);
-        Jugador jAtacante = new Jugador( "Martin");
-        Jugador jDefensor = new Jugador( "Naza");
+        Jugador jAtacante = new Jugador( "Martin", Color.RED);
+        Jugador jDefensor = new Jugador( "Naza"  , Color.RED);
 
         paisAtacante.colocarEjercito(new Ejercito(jAtacante));
         paisAtacante.modificarCantidadEjercito(3);

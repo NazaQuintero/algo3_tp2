@@ -76,9 +76,9 @@ public class TurnoTest {
     @Test
     public void alFinalizarElTurnoDelJugador3ElTurnoDelSiguienteJugadorEsDelJugador1() throws JugadorNoExisteException, ElJugadorNoTieneTurnoException {
         Jugadores jugadores = new Jugadores();
-        Jugador jugador1 = new Jugador( "Martin");
-        Jugador jugador2 = new Jugador( "Naza");
-        Jugador jugador3 = new Jugador( "Juani");
+        Jugador jugador1 = new Jugador( "Martin", Color.BLUE);
+        Jugador jugador2 = new Jugador( "Naza"  , Color.BLUE);
+        Jugador jugador3 = new Jugador( "Juani" , Color.BLUE);
         jugadores.agregarJugador(jugador1);
         jugadores.agregarJugador(jugador2);
         jugadores.agregarJugador(jugador3);
@@ -94,7 +94,7 @@ public class TurnoTest {
     @Test
     public void porDefectoLaCantidadDeTurnosJugadosEsCero() {
         Jugadores jugadores = new Jugadores();
-        jugadores.agregarJugador(new Jugador( "Martin"));
+        jugadores.agregarJugador(new Jugador( "Martin", Color.RED));
         Turno turno = new ConTurno(jugadores);
         assertEquals(0, turno.obtenerCantidadDeTurnosJugados());
     }
@@ -208,9 +208,9 @@ public class TurnoTest {
     @Test
     public void despuesDeLaColocacionInicialVieneRondaDeAtaque() throws ElJugadorNoTieneTurnoException {
         Jugadores jugadores = new Jugadores();
-        Jugador jugador1 = new Jugador( "Martin");
-        Jugador jugador2 = new Jugador( "Naza");
-        Jugador jugador3 = new Jugador( "Juani");
+        Jugador jugador1 = new Jugador( "Martin", Color.BLUE);
+        Jugador jugador2 = new Jugador( "Naza"  , Color.BLUE);
+        Jugador jugador3 = new Jugador( "Juani" , Color.BLUE);
         jugadores.agregarJugador(jugador1);
         jugadores.agregarJugador(jugador2);
         jugadores.agregarJugador(jugador3);

@@ -6,6 +6,7 @@ import edu.fiuba.algo3.modelo.paises.MultitonPaises;
 import edu.fiuba.algo3.modelo.paises.Pais;
 import edu.fiuba.algo3.modelo.tarjetas.Tarjeta;
 import edu.fiuba.algo3.modelo.tarjetas.Globo;
+import javafx.scene.paint.Color;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -27,8 +28,8 @@ public class JuegoTest {
     @Test
     public void seRepartenEquitativamente25PaisesEntreDosJugadores() throws CantidadDeJugadoresInsuficienteException, ArchivoDeTarjetasNoEncontradoException, ArchivoDePaisesNoEncontradoException, ArchivoDeContinentesNoEncontradoException {
         Juego juego = new Juego();
-        Jugador jugador1 = new Jugador("Martin");
-        Jugador jugador2 = new Jugador("Juani");
+        Jugador jugador1 = new Jugador("Martin", Color.BLUE);
+        Jugador jugador2 = new Jugador("Juani", Color.RED);
 
         juego.agregarJugador(jugador1);
         juego.agregarJugador(jugador2);
@@ -53,10 +54,10 @@ public class JuegoTest {
         juego.agregarTarjeta(otraTarjeta);
         juego.agregarTarjeta(ootraTarjeta);
 
-        Jugador jugador = new Jugador("Cami");
+        Jugador jugador = new Jugador("Cami", Color.RED);
 
         juego.agregarJugador(jugador);
-        juego.agregarJugador("Frank");
+        juego.agregarJugador(new Jugador("Frank", Color.PINK));
 
         //juego.comenzar();
         juego.iniciarTurno();
