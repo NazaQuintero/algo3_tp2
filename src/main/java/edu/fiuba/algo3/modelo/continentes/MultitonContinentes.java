@@ -13,6 +13,10 @@ public class MultitonContinentes {
         _continentes = new HashMap<>();
     }
 
+    public static int cantidadDeContinentes() {
+        return _continentes.size();
+    }
+
     public static void cargarContinentes(Continente[] continentes) {
         for(Continente continente: continentes) _continentes.put(continente.getNombre(), continente);
     }

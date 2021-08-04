@@ -12,6 +12,12 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class MultitonTest {
 
     @Test
+    public void laCantidadDeContinentesEsCeroLuegoDeReiniciar() throws ContinenteInvalidoException, ArchivoDeContinentesNoEncontradoException {
+        MultitonContinentes.reiniciar();
+        assertEquals(0, MultitonContinentes.cantidadDeContinentes());
+    }
+
+    @Test
     public void alPedir2VecesElMismoContinenteLaInstanciaObtenidaDeContinenteEsLaMisma() throws ContinenteInvalidoException, ArchivoDeContinentesNoEncontradoException {
         CargarJuego.cargarContinentes();
         Continente continente1 = MultitonContinentes.obtenerInstanciaDe("Africa");
