@@ -13,6 +13,9 @@
     -fx-background-repeat: no-repeat;
     -fx-background-size: 100% 100%;
 }
+.pais{
+    -fx-border-color: white;
+}
 
 .pais:hover {
     -fx-cursor: hand;
@@ -104,4 +107,9 @@
     -fx-background-insets: -0.2, 1, -1.4, 3;
     -fx-background-radius: 3, 2, 4, 0;
     -fx-prompt-text-fill: transparent;
+}
+
+.label.ejercito{
+    -fx-font-size: 20px;
+    -fx-text-fill: white;
 }
