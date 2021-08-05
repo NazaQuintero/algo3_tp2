@@ -74,6 +74,15 @@
     -fx-font-size: 24px;
 }
 
+.cantEjercitos {
+    -fx-max-width: 50px;
+    -fx-max-height: 50px;
+    -fx-pref-width: 50px;
+    -fx-pref-height: 50px;
+    -fx-font-size: 24px;
+    -fx-alignment: center;
+}
+
 .textField.valid {
     -fx-focus-color: #198754;
     -fx-faint-focus-color: #19875422;
