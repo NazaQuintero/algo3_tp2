@@ -59,7 +59,7 @@ public class VistaPais extends StackPane implements Observer {
         Label label = new Label("Ingrese la cantidad de ejércitos para atacar: ");
         label.getStyleClass().add("labelText");
         TextField inputText = new TextField();
-        inputText.getStyleClass().add("textField");
+        inputText.getStyleClass().add("cantEjercitos");
         Button botonAtacar = new Button("Atacar!");
         botonAtacar.getStyleClass().add("startButton");
         //botonAtacar.setOnMouseClicked(new AtaqueEventHandler(campoDeJuego, pais, inputText));

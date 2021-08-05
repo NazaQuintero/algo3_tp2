@@ -6,18 +6,23 @@ import edu.fiuba.algo3.modelo.paises.Pais;
 import edu.fiuba.algo3.modelo.turnos.Turno;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Separator;
+import javafx.scene.control.ToolBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
 
 
-public class CampoDeJuego extends HBox {
+public class CampoDeJuego extends BorderPane {
 
     private final Juego juego;
     private final ArrayList<VistaPais> vistasPaises = new ArrayList<>();
