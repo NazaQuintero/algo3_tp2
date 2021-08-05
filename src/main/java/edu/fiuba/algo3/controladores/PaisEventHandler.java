@@ -33,11 +33,13 @@ public class PaisEventHandler implements EventHandler<MouseEvent> {
         if (campoDeJuego.getPaisSeleccionado() == null) {
             pais.modificarCantidadEjercito(1);
             vistaPais.resaltarLimitrofes();
+            vistaPais.marcarComoSeleccionada();
             campoDeJuego.setPaisSeleccionado(pais);
         } else {
 
             if(!campoDeJuego.getChildren().contains(formularioDeAtaque)) {
                 campoDeJuego.getChildren().add(formularioDeAtaque);
+                formularioDeAtaque.getChildren().get(1).requestFocus();
             }
         }
 

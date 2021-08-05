@@ -57,11 +57,10 @@ public class CampoDeJuego extends HBox {
 
     public void resaltarLimitrofes(VistaPais vistaPais) {
         ArrayList<VistaPais> vistaLimitrofes = vistaPais.getVistaLimitrofes();
-        for (VistaPais vista : vistasPaises) {
-            if (!vistaLimitrofes.contains(vista) || (vistaPais.getPais().dominadoPor() == vista.getPais().dominadoPor())){
+        for (VistaPais vista : vistasPaises)
+            if (!vistaLimitrofes.contains(vista) || (vistaPais.getPais().dominadoPor() == vista.getPais().dominadoPor()))
                vista.desactivar();
-            }
-        }
+
     }
 
     public void mostrarPaises() { for (VistaPais vista : vistasPaises) vista.activar(); }

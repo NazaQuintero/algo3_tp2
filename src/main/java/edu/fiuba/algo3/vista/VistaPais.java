@@ -4,7 +4,7 @@ import edu.fiuba.algo3.controladores.AtaqueEventHandler;
 import edu.fiuba.algo3.controladores.PaisEventHandler;
 import edu.fiuba.algo3.modelo.observables.Observer;
 import edu.fiuba.algo3.modelo.paises.Pais;
-import edu.fiuba.algo3.modelo.fichas.Fichas;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -29,7 +29,7 @@ public class VistaPais extends StackPane implements Observer {
         this.setLayoutX(pais.getPosX());
         this.setLayoutY(pais.getPosY());
 
-        Circle ficha = new Circle(10, pais.dominadoPor().color());
+        Circle ficha = new Circle(10, pais.dominadoPor().getColor());
         Label cantEjercitos = crearLabelCantEjercitos();
         VBox formularioDeAtaque = crearFormularioDeAtaque();
         Rectangle boton = crearBotonPais(formularioDeAtaque);
@@ -46,7 +46,7 @@ public class VistaPais extends StackPane implements Observer {
         return cantEjercitos;
     }
 
-    private Rectangle crearBotonPais(VBox formularioDeAtaque){
+    private Rectangle crearBotonPais(VBox formularioDeAtaque) {
         Rectangle boton = new Rectangle(50, 50);
         boton.setFill(new Color(0f,0f,0f,0));
         boton.getStyleClass().add("pais");
@@ -55,23 +55,25 @@ public class VistaPais extends StackPane implements Observer {
     }
 
     private VBox crearFormularioDeAtaque() {
-        Label label = new Label("Ingrese la cantidad de ejercitos para atacar: ");
+        Label label = new Label("Ingrese la cantidad de ejércitos para atacar: ");
         label.getStyleClass().add("labelText");
         TextField inputText = new TextField();
         inputText.getStyleClass().add("textField");
-        Button botonAtacar = new Button("Atacarrr!!!");
+        Button botonAtacar = new Button("Atacar!");
         botonAtacar.getStyleClass().add("startButton");
         botonAtacar.setOnMouseClicked(new AtaqueEventHandler(campoDeJuego, pais, inputText));
 
         campoDeJuego.setSpacing(50);
         VBox vBox = new VBox(label, inputText, botonAtacar);
         vBox.setSpacing(10);
+        vBox.setAlignment(Pos.CENTER);
         return vBox;
     }
 
     @Override
     public void update() {
         Label l = (Label) this.getChildren().get(1);
+        ((Circle) this.getChildren().get(0)).setFill(pais.dominadoPor().getColor());
         l.setText(Integer.toString(pais.cantidadEjercitos()));
 
         System.out.println("Hay "+ this.pais.cantidadEjercitos() + " ejercito/s en " + this.pais.getNombre() +
@@ -85,6 +87,7 @@ public class VistaPais extends StackPane implements Observer {
     public void setVistaLimitrofe(VistaPais vistaPais){
         vistaLimitrofes.add(vistaPais);
     }
+    
     public Pais getPais(){
         return pais;
     }
@@ -97,13 +100,18 @@ public class VistaPais extends StackPane implements Observer {
 
     public void desactivar(){
         this.setDisable(true);
-        String color = pais.dominadoPor().color().toString();
+        String color = pais.dominadoPor().getColor().toString();
         ((Circle) this.getChildren().get(0)).setFill(Color.web(color, 0.4));
     }
 
     public void activar() {
         this.setDisable(false);
-        ((Circle) this.getChildren().get(0)).setFill(pais.dominadoPor().color());
+        ((Circle) this.getChildren().get(0)).setFill(pais.dominadoPor().getColor());
     }
 
+    public void marcarComoSeleccionada() {
+        this.setDisable(true);
+        Color color = pais.dominadoPor().getColor();
+        ((Circle) this.getChildren().get(0)).setFill(color.brighter());
+    }
 }
