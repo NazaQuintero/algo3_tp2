@@ -36,11 +36,14 @@ public class PaisEventHandler implements EventHandler<MouseEvent> {
             vistaPais.marcarComoSeleccionada();
             campoDeJuego.setPaisSeleccionado(pais);
         } else {
+            VBox form = (VBox) campoDeJuego.getRight();
+            form.setVisible(true);
 
-            if(!campoDeJuego.getChildren().contains(formularioDeAtaque)) {
-                campoDeJuego.getChildren().add(formularioDeAtaque);
-                formularioDeAtaque.getChildren().get(1).requestFocus();
-            }
+            Button boton = (Button) form.getChildren().get(2);
+            TextField textField = (TextField) form.getChildren().get(1);
+
+            boton.setOnMouseClicked(new AtaqueEventHandler(campoDeJuego, pais, textField));
+            form.getChildren().get(1).requestFocus();
         }
 
     }

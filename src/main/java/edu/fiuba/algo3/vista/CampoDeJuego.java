@@ -4,10 +4,12 @@ import edu.fiuba.algo3.modelo.Juego;
 import edu.fiuba.algo3.modelo.paises.MultitonPaises;
 import edu.fiuba.algo3.modelo.paises.Pais;
 import edu.fiuba.algo3.modelo.turnos.Turno;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -35,8 +37,24 @@ public class CampoDeJuego extends HBox {
         stackPane.getChildren().add(imageView);
         crearVistasPaises(stackPane);
 
-        this.getChildren().add(stackPane);
-        this.setAlignment(Pos.CENTER);
+        Button btnNew = new Button("New");
+        Button btnPause = new Button("Pause");
+        Button btnQuit = new Button("Quit");
+        ToolBar toolBar = new ToolBar();
+        toolBar.getItems().addAll(
+                new Separator(),
+                btnNew,
+                btnPause,
+                btnQuit
+        );
+
+        HBox anHbox = new HBox(stackPane);
+        anHbox.setAlignment(Pos.CENTER);
+        VBox aVbox = new VBox(anHbox);
+        aVbox.setAlignment(Pos.CENTER);
+        setMargin(this, new Insets(50,50,50,50));
+        this.setCenter(aVbox);
+
         stage.setScene(new Scene(this, 1400, 900));
     }
 

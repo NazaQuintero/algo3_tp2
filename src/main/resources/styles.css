@@ -74,7 +74,7 @@
     -fx-font-size: 24px;
 }
 
-.textField.valid{
+.textField.valid {
     -fx-focus-color: #198754;
     -fx-faint-focus-color: #19875422;
     -fx-opacity: 1;
@@ -107,7 +107,7 @@
     -fx-prompt-text-fill: transparent;
 }
 
-.label.ejercito{
+.label.ejercito {
     -fx-font-size: 20px;
     -fx-text-fill: white;
 }

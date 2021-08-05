@@ -6,6 +6,7 @@ import edu.fiuba.algo3.modelo.victorias.Victoria;
 import java.util.ArrayList;
 
 public class ResultadoBatalla implements Resultado {
+
     private final Pais atacante;
     private final Pais defensor;
     private ArrayList<Victoria> resultados;

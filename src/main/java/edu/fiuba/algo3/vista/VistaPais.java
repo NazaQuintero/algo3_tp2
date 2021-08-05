@@ -32,6 +32,7 @@ public class VistaPais extends StackPane implements Observer {
         Circle ficha = new Circle(10, pais.dominadoPor().getColor());
         Label cantEjercitos = crearLabelCantEjercitos();
         VBox formularioDeAtaque = crearFormularioDeAtaque();
+        campoDeJuego.setRight(formularioDeAtaque);
         Rectangle boton = crearBotonPais(formularioDeAtaque);
 
         this.getChildren().addAll(ficha, cantEjercitos, boton);
@@ -61,12 +62,12 @@ public class VistaPais extends StackPane implements Observer {
         inputText.getStyleClass().add("textField");
         Button botonAtacar = new Button("Atacar!");
         botonAtacar.getStyleClass().add("startButton");
-        botonAtacar.setOnMouseClicked(new AtaqueEventHandler(campoDeJuego, pais, inputText));
+        //botonAtacar.setOnMouseClicked(new AtaqueEventHandler(campoDeJuego, pais, inputText));
 
-        campoDeJuego.setSpacing(50);
         VBox vBox = new VBox(label, inputText, botonAtacar);
         vBox.setSpacing(10);
         vBox.setAlignment(Pos.CENTER);
+        vBox.setVisible(false);
         return vBox;
     }
 

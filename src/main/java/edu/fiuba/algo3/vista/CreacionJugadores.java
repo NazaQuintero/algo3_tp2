@@ -68,7 +68,6 @@ public class CreacionJugadores extends BorderPane {
         return inputText;
     }
 
-
     private HBox crearBotoneraHorizontal(Button buttonSubmit, Button exitButton) {
         HBox hbox = new HBox(buttonSubmit, exitButton);
         hbox.setAlignment(Pos.CENTER);
@@ -89,8 +88,6 @@ public class CreacionJugadores extends BorderPane {
         buttonSubmit.setOnMouseClicked(new FormJugadoresEventHandler(errorLabel, juego, textFields, stage));
         return buttonSubmit;
     }
-
-
 
     private Label crearLabelError() {
         Label label = new Label("Debe cargar los nombres de todos los jugadores para comenzar");
