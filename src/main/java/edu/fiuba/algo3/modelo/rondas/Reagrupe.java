@@ -13,13 +13,13 @@ public class Reagrupe implements Ronda {
 
     @Override
     public String obtenerDescripcion() {
-        return "Reagrupe";
+        return "Ronda de reagrupe";
     }
 
     @Override
     public void finalizarRonda(Turno unTurno) {
         unTurno.finalizarTurnoActual();
-        if(unTurno.leTocaALPrimerJugador()) unTurno.setRonda(new Colocacion(unTurno.obtenerJugadorTurnoActual()));
+        if (unTurno.leTocaALPrimerJugador()) unTurno.setRonda(new Colocacion(unTurno.obtenerJugadorTurnoActual()));
         else unTurno.setRonda(new Ataque());
     }
 
@@ -28,7 +28,7 @@ public class Reagrupe implements Ronda {
     }
 
     public void reagrupar(Pais origen, Pais destino, int cantidad) throws ElPaisNoEsLimitrofeException {
-        if(this.puedeReagrupar(origen)) {
+        if (this.puedeReagrupar(origen)) {
             try {
                 origen.reagrupar(destino, cantidad);
             } catch (ElPaisNoEsLimitrofeException e) {

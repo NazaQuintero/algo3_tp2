@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.modelo.turnos;
 
 import edu.fiuba.algo3.modelo.Jugador;
+import edu.fiuba.algo3.modelo.observables.Observer;
 import edu.fiuba.algo3.modelo.paises.Pais;
 import edu.fiuba.algo3.modelo.batallasDeDados.ResultadoBatalla;
 import edu.fiuba.algo3.modelo.tarjetas.Tarjeta;
@@ -42,8 +43,7 @@ public class SinTurno implements Turno {
     }
 
     @Override
-    public void setRonda(Ronda unaRonda) {
-    }
+    public void setRonda(Ronda unaRonda) {}
 
     @Override
     public boolean leTocaALPrimerJugador() {
@@ -51,7 +51,7 @@ public class SinTurno implements Turno {
     }
 
     @Override
-    public void finalizarTurnoActual() { }
+    public void finalizarTurnoActual() {}
 
     @Override
     public ResultadoBatalla atacarA(Pais atacante, Pais defensor, int cantidadEjercitos) throws ElJugadorNoTieneTurnoException {
@@ -72,4 +72,14 @@ public class SinTurno implements Turno {
     public void activarTarjeta(Tarjeta buscarTarjeta) throws ElJugadorNoTieneTurnoException {
         throw new ElJugadorNoTieneTurnoException();
     }
+
+    @Override
+    public void addObserver(Observer obs) {}
+
+    @Override
+    public void removeObserver(Observer obs) {}
+
+    @Override
+    public void notifyObservers() {}
+
 }

@@ -61,6 +61,7 @@ public class CampoDeJuego extends BorderPane {
         aVbox.setAlignment(Pos.CENTER);
         setMargin(this, new Insets(50,50,50,50));
         this.setCenter(aVbox);
+        this.setRight(new MenuLateralDerecho(this, juego));
 
         stage.setScene(new Scene(this, 1500, 900));
         stage.centerOnScreen();

@@ -30,7 +30,6 @@ public class VistaPais extends StackPane implements Observer {
 
         Circle ficha = new Circle(10, pais.dominadoPor().getColor());
         Label cantEjercitos = crearLabelCantEjercitos();
-        campoDeJuego.setRight(crearFormularioDeAtaque());
         Rectangle boton = crearBotonPais();
 
         this.getChildren().addAll(ficha, cantEjercitos, boton);
@@ -51,21 +50,6 @@ public class VistaPais extends StackPane implements Observer {
         boton.getStyleClass().add("pais");
         boton.setOnMouseClicked(new PaisEventHandler(this, campoDeJuego));
         return boton;
-    }
-
-    private VBox crearFormularioDeAtaque() {
-        Label label = new Label("Ingrese la cantidad de ejércitos para atacar: ");
-        label.getStyleClass().add("labelText");
-        TextField inputText = new TextField();
-        inputText.getStyleClass().add("cantEjercitos");
-        Button botonAtacar = new Button("Atacar!");
-        botonAtacar.getStyleClass().add("startButton");
-
-        VBox vBox = new VBox(label, inputText, botonAtacar);
-        vBox.setSpacing(10);
-        vBox.setAlignment(Pos.CENTER);
-        vBox.setVisible(false);
-        return vBox;
     }
 
     @Override

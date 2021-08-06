@@ -35,8 +35,8 @@ public class JuegoTest {
         juego.agregarJugador(jugador2);
         juego.comenzar();
 
-        assertEquals(25,juego.cantidadPaisesDominados(jugador1));
-        assertEquals(25,juego.cantidadPaisesDominados(jugador2));
+        assertEquals(25,jugador1.cantidadPaisesDominados());
+        assertEquals(25,jugador2.cantidadPaisesDominados());
     }
 
     @Test

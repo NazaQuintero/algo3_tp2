@@ -2,6 +2,7 @@ package edu.fiuba.algo3.controladores;
 
 import edu.fiuba.algo3.modelo.paises.Pais;
 import edu.fiuba.algo3.vista.CampoDeJuego;
+import edu.fiuba.algo3.vista.MenuLateralDerecho;
 import edu.fiuba.algo3.vista.VistaPais;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
@@ -34,8 +35,11 @@ public class PaisEventHandler implements EventHandler<MouseEvent> {
             campoDeJuego.setTop(crearVBoxLabel());
         } else {
             campoDeJuego.getTop().setVisible(false);
-            VBox form = (VBox) campoDeJuego.getRight();
-            form.setVisible(true);
+            MenuLateralDerecho menuLateral = (MenuLateralDerecho) campoDeJuego.getRight();
+
+            menuLateral.getChildren().forEach(e -> e.setVisible(true));
+
+            VBox form = (VBox) menuLateral.getChildren().get(1);
 
             Button boton = (Button) form.getChildren().get(2);
             TextField textField = (TextField) form.getChildren().get(1);

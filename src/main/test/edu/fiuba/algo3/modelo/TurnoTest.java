@@ -137,7 +137,7 @@ public class TurnoTest {
         turno.finalizarRonda(jugador2);
 
         Ronda ronda = turno.obtenerRondaActual();
-        assertEquals("Colocacion", ronda.obtenerDescripcion());
+        assertEquals("Ronda de colocación", ronda.obtenerDescripcion());
     }
 
 
@@ -166,7 +166,7 @@ public class TurnoTest {
         jugadores.agregarJugador(new Jugador( "Martin", Color.BLUE));
         Turno turno = new ConTurno(jugadores);
         Ronda unaRonda = turno.obtenerRondaActual();
-        assertEquals("Colocacion", unaRonda.obtenerDescripcion());
+        assertEquals("Ronda de colocación", unaRonda.obtenerDescripcion());
     }
 
     @Test
@@ -187,7 +187,7 @@ public class TurnoTest {
 
         Ronda unaRonda = turno.obtenerRondaActual();
         assertEquals(jugador1, turno.obtenerJugadorTurnoActual());
-        assertEquals("Ataque", unaRonda.obtenerDescripcion());
+        assertEquals("Ronda de ataque", unaRonda.obtenerDescripcion());
     }
 
     @Test
@@ -222,7 +222,7 @@ public class TurnoTest {
         turno.finalizarRonda(jugador3);
 
         Ronda unaRonda = turno.obtenerRondaActual();
-        assertEquals("Ataque", unaRonda.obtenerDescripcion());
+        assertEquals("Ronda de ataque", unaRonda.obtenerDescripcion());
     }
 
 }
