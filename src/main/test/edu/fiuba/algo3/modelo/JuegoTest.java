@@ -55,9 +55,9 @@ public class JuegoTest {
         juego.agregarTarjeta(ootraTarjeta);
 
         Jugador jugador = new Jugador("Cami", Color.RED);
-
+        Jugador otroJugador = new Jugador("Frank", Color.PINK);
         juego.agregarJugador(jugador);
-        juego.agregarJugador(new Jugador("Frank", Color.PINK));
+        juego.agregarJugador(otroJugador);
 
         //juego.comenzar();
         juego.iniciarTurno();

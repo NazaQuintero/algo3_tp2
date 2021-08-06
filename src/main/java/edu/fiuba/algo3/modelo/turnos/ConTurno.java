@@ -11,12 +11,15 @@ import edu.fiuba.algo3.modelo.tarjetas.Tarjeta;
 import edu.fiuba.algo3.modelo.excepciones.*;
 import edu.fiuba.algo3.modelo.rondas.Ronda;
 
+import java.util.ArrayList;
+
 public class ConTurno implements Turno {
 
     private final Jugadores jugadores;
     private Jugador actual;
     private Ronda ronda;
     private int cantidadDeTurnosJugados;
+    private ArrayList<Observer> observers = new ArrayList<>();
 
     public ConTurno(Jugadores jugadores) {
         this.jugadores = jugadores;

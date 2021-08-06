@@ -2,6 +2,8 @@ package edu.fiuba.algo3.modelo.continentes;
 
 import edu.fiuba.algo3.modelo.excepciones.ContinenteInvalidoException;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 
 public class MultitonContinentes {
@@ -24,6 +26,10 @@ public class MultitonContinentes {
     public static Continente obtenerInstanciaDe(String nombreDeContinente) throws ContinenteInvalidoException {
         if(_continentes.get(nombreDeContinente) == null) throw new ContinenteInvalidoException();
         return _continentes.get(nombreDeContinente);
+    }
+
+    public static Collection<Continente> obtenerContinentes() {
+        return _continentes.values();
     }
 
 }

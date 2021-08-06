@@ -23,11 +23,9 @@ public class Colocacion implements Ronda {
         this.cantidadEjercitosColocables = 3;
         if (unJugador.cantidadPaisesDominados() > 6) this.cantidadEjercitosColocables = unJugador.cantidadPaisesDominados() / 2;
         this.cantidadEjercitosColocables += unJugador.ordenCanje();
-        /*for (int i = 0; i < 6; i++) {
-            if (MultitonContinentes.obtenerInstanciaDe(nombresContinentes[i]).dominadoPor(unJugador)) {
-                this.cantidadEjercitosColocables += MultitonContinentes.obtenerInstanciaDe(nombresContinentes[i]).obtenerCantidadEjercito();
-            }
-        }*/
+
+        MultitonContinentes.obtenerContinentes().stream().filter(continente -> continente.dominadoPor(unJugador))
+                .forEach(continente -> cantidadEjercitosColocables += continente.getCantidadDeEjercitos());
     }
 
     @Override
