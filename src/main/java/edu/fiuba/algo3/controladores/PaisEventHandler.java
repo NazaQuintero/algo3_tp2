@@ -1,7 +1,5 @@
 package edu.fiuba.algo3.controladores;
 
-import edu.fiuba.algo3.modelo.excepciones.EjercitosInsuficientesException;
-import edu.fiuba.algo3.modelo.excepciones.ElPaisNoEsLimitrofeException;
 import edu.fiuba.algo3.modelo.paises.Pais;
 import edu.fiuba.algo3.vista.CampoDeJuego;
 import edu.fiuba.algo3.vista.VistaPais;
@@ -17,14 +15,12 @@ public class PaisEventHandler implements EventHandler<MouseEvent> {
 
     private final CampoDeJuego campoDeJuego;
     private final VistaPais vistaPais;
-    private final VBox formularioDeAtaque;
-    private Pais pais;
+    private final Pais pais;
 
-    public PaisEventHandler(VistaPais vistaPais, CampoDeJuego campoDeJuego, VBox formularioDeAtaque) {
+    public PaisEventHandler(VistaPais vistaPais, CampoDeJuego campoDeJuego) {
         this.pais = vistaPais.getPais();
         this.vistaPais = vistaPais;
         this.campoDeJuego = campoDeJuego;
-        this.formularioDeAtaque = formularioDeAtaque;
     }
 
     @Override
@@ -35,7 +31,9 @@ public class PaisEventHandler implements EventHandler<MouseEvent> {
             vistaPais.resaltarLimitrofes();
             vistaPais.marcarComoSeleccionada();
             campoDeJuego.setPaisSeleccionado(pais);
+            campoDeJuego.setTop(crearVBoxLabel());
         } else {
+            campoDeJuego.getTop().setVisible(false);
             VBox form = (VBox) campoDeJuego.getRight();
             form.setVisible(true);
 
@@ -43,9 +41,19 @@ public class PaisEventHandler implements EventHandler<MouseEvent> {
             TextField textField = (TextField) form.getChildren().get(1);
 
             boton.setOnMouseClicked(new AtaqueEventHandler(campoDeJuego, pais, textField));
-            form.getChildren().get(1).requestFocus();
+            textField.setOnKeyPressed(new AtaqueEventHandler(campoDeJuego, pais, textField));
+            textField.requestFocus();
         }
 
+    }
+
+    private VBox crearVBoxLabel() {
+        Label label = new Label("Seleccione el pais a atacar");
+        label.getStyleClass().add("labelText");
+        VBox vBox = new VBox(label);
+        vBox.setAlignment(Pos.CENTER);
+
+        return vBox;
     }
 
 }

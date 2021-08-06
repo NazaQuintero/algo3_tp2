@@ -16,17 +16,20 @@ import java.util.ArrayList;
 public class CreacionJugadores extends BorderPane {
 
     private final Stage stage;
-    VBox panel = new VBox();
-    HBox botonera;
-    Label errorLabel;
+    private VBox panel = new VBox();
+    private HBox botonera;
+    private Label errorLabel;
     private Juego juego;
-    ArrayList<TextField> textFields = new ArrayList<>();
+    private ArrayList<TextField> textFields = new ArrayList<>();
 
     public CreacionJugadores(Stage stage) {
 
         this.stage = stage;
         try { juego = new Juego(); }
-        catch (Exception e) { Platform.exit(); }
+        catch (Exception e) {
+            e.printStackTrace();
+            Platform.exit();
+        }
         this.getStylesheets().add("styles.css");
         this.getStyleClass().add("body");
 

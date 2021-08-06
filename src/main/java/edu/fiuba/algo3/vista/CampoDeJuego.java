@@ -42,6 +42,7 @@ public class CampoDeJuego extends BorderPane {
         stackPane.getChildren().add(imageView);
         crearVistasPaises(stackPane);
 
+        /*
         Button btnNew = new Button("New");
         Button btnPause = new Button("Pause");
         Button btnQuit = new Button("Quit");
@@ -52,6 +53,7 @@ public class CampoDeJuego extends BorderPane {
                 btnPause,
                 btnQuit
         );
+        */
 
         HBox anHbox = new HBox(stackPane);
         anHbox.setAlignment(Pos.CENTER);
@@ -60,7 +62,8 @@ public class CampoDeJuego extends BorderPane {
         setMargin(this, new Insets(50,50,50,50));
         this.setCenter(aVbox);
 
-        stage.setScene(new Scene(this, 1400, 900));
+        stage.setScene(new Scene(this, 1500, 900));
+        stage.centerOnScreen();
     }
 
     private void crearVistasPaises(Pane stackPane) {
