@@ -21,6 +21,7 @@ public class MenuLateralDerecho extends VBox implements Observer {
     private TextField inputText;
     private Label labelDeAyuda;
     private Label labelDeError;
+    private VBox resultadoDeAtaque;
 
     public MenuLateralDerecho(CampoDeJuego campoDeJuego, Juego juego) {
         this.campoDeJuego = campoDeJuego;
@@ -28,6 +29,7 @@ public class MenuLateralDerecho extends VBox implements Observer {
         juego.getTurno().addObserver(this);
         this.formularioDeAccion = crearFormularioDeAccion();
         this.getChildren().addAll(crearDescripcionDeRonda(), this.formularioDeAccion);
+        this.setResultadoDeAtaque(new VBox());
         this.setSpacing(50);
         this.setAlignment(Pos.CENTER);
     }
@@ -106,5 +108,16 @@ public class MenuLateralDerecho extends VBox implements Observer {
         this.inputText.setVisible(true);
         this.botonAccion.setVisible(true);
         this.botonAccion.setText("Reagrupar!");
+    }
+
+    public void setResultadoDeAtaque(VBox resultadoDeAtaque) {
+        this.resultadoDeAtaque = resultadoDeAtaque;
+        this.getChildren().add(resultadoDeAtaque);
+    }
+
+    public void limpiarResultadoDeBatalla() {
+        if(this.getChildren().get(2) != null) {
+            this.getChildren().remove(2);
+        }
     }
 }

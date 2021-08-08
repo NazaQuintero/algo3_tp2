@@ -37,20 +37,22 @@ public class AtaqueEventHandler implements EventHandler<Event>  {
 
     @Override
     public void handle(Event event) {
+        MenuLateralDerecho menuLateral = (MenuLateralDerecho) campoDeJuego.getRight();
         if (event.getEventType() == MouseEvent.MOUSE_CLICKED || ((KeyEvent) event).getCode() == KeyCode.ENTER) {
             try {
+                menuLateral.limpiarResultadoDeBatalla();
                 int cantidadDeEjercitos = Integer.parseInt(inputText.getText());
                 Resultado resultado = atacante.atacarA(defensor, cantidadDeEjercitos);
                 mostrarAtaque();
                 ProcesadorResultado.obtenerInstancia().procesar(resultado);
                 campoDeJuego.setPaisSeleccionado(null);
+                campoDeJuego.mostrarPaisesDelJugadorActual();
                 System.out.println("Se ejecuto el ataque de " + atacante.getNombre() + " a " + defensor.getNombre());
             } catch (ElPaisNoEsLimitrofeException | NumberFormatException | EjercitosInsuficientesException e) {
                 inputText.getStyleClass().add("invalid");
                 inputText.clear();
                 inputText.requestFocus();
 
-                MenuLateralDerecho menuLateral = (MenuLateralDerecho) campoDeJuego.getRight();
                 VBox form = (VBox) menuLateral.getChildren().get(1);
 
                 form.getChildren().get(3).setVisible(true);
@@ -74,7 +76,7 @@ public class AtaqueEventHandler implements EventHandler<Event>  {
         VBox vBox = new VBox(hBox1, hBox2);
         vBox.setSpacing(20);
         MenuLateralDerecho menuLateralDerecho = (MenuLateralDerecho) campoDeJuego.getRight();
-        menuLateralDerecho.getChildren().add(vBox);
+        menuLateralDerecho.setResultadoDeAtaque(vBox);
     }
 
     private Label crearLabel(Pais pais) {
