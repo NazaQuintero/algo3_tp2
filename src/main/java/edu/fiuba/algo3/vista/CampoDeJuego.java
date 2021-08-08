@@ -87,12 +87,18 @@ public class CampoDeJuego extends BorderPane implements Observer {
         stackPane.getChildren().addAll(vistasPaises);
     }
 
-    public void resaltarLimitrofes(VistaPais vistaPais) {
+    public void resaltarLimitrofesAdversarios(VistaPais vistaPais) {
         ArrayList<VistaPais> vistaLimitrofes = vistaPais.getVistaLimitrofes();
         for (VistaPais vista : vistasPaises)
             if (!vistaLimitrofes.contains(vista) || (vistaPais.getPais().dominadoPor() == vista.getPais().dominadoPor()))
                vista.desactivar();
+    }
 
+    public void resaltarLimitrofesPropios(VistaPais vistaPais) {
+        ArrayList<VistaPais> vistaLimitrofes = vistaPais.getVistaLimitrofes();
+        for (VistaPais vista : vistasPaises)
+            if (!vistaLimitrofes.contains(vista) || (vistaPais.getPais().dominadoPor() != vista.getPais().dominadoPor()))
+                vista.desactivar();
     }
 
     public void mostrarPaises() { for (VistaPais vista : vistasPaises) vista.activar(); }

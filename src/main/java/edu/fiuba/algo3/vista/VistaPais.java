@@ -71,8 +71,12 @@ public class VistaPais extends StackPane implements Observer {
         return pais;
     }
 
-    public void resaltarLimitrofes(){
-        campoDeJuego.resaltarLimitrofes(this);
+    public void resaltarLimitrofesAdversarios(){
+        campoDeJuego.resaltarLimitrofesAdversarios(this);
+    }
+
+    public void resaltarLimitrofesPropios() {
+        campoDeJuego.resaltarLimitrofesPropios(this);
     }
 
     public ArrayList<VistaPais> getVistaLimitrofes() { return vistaLimitrofes; }
@@ -97,4 +101,5 @@ public class VistaPais extends StackPane implements Observer {
     public Jugador getJugadorDominante() {
         return this.pais.dominadoPor();
     }
+
 }

@@ -41,7 +41,7 @@ public class PaisEventHandler implements EventHandler<MouseEvent> {
 
             if (campoDeJuego.getPaisSeleccionado() == null) {
                 campoDeJuego.mostrarPaises();
-                vistaPais.resaltarLimitrofes();
+                vistaPais.resaltarLimitrofesAdversarios();
                 vistaPais.marcarComoSeleccionada();
                 campoDeJuego.setPaisSeleccionado(pais);
                 campoDeJuego.setTop(crearVBoxLabel());
@@ -58,6 +58,7 @@ public class PaisEventHandler implements EventHandler<MouseEvent> {
             if(campoDeJuego.getPaisSeleccionado() == null) {
                 vistaPais.marcarComoSeleccionada();
                 campoDeJuego.setPaisSeleccionado(pais);
+                vistaPais.resaltarLimitrofesPropios();
             } else {
                 ReagrupeEventHandler reagrupeEventHandler = new ReagrupeEventHandler(campoDeJuego, pais, textField);
                 menuLateral.setAccion(reagrupeEventHandler);
