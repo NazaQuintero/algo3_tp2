@@ -130,7 +130,6 @@ public class CampoDeJuego extends BorderPane implements Observer {
         } else if (this.juego.getTurno().obtenerRondaActual().obtenerDescripcion().equals("Ronda de ataque")) {
             this.menuLateralDerecho.mostrarFormularioDeAtaque();
         } else {
-            this.menuLateralDerecho.limpiarResultadoDeBatalla();
             this.menuLateralDerecho.mostrarFormularioDeReagrupe();
         }
     }

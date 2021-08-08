@@ -16,7 +16,6 @@ public class FinalizarRondaEventHandler implements EventHandler<Event> {
 
     @Override
     public void handle(Event event) {
-        System.out.println("Finalizar Ronda llamado..");
         Jugador jugador = campoDeJuego.getTurno().obtenerJugadorTurnoActual();
         try {
             campoDeJuego.getTurno().finalizarRonda(jugador);

@@ -7,11 +7,9 @@ import edu.fiuba.algo3.vista.MenuLateralDerecho;
 import edu.fiuba.algo3.vista.VistaPais;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 public class PaisEventHandler implements EventHandler<MouseEvent> {
@@ -33,18 +31,13 @@ public class PaisEventHandler implements EventHandler<MouseEvent> {
         MenuLateralDerecho menuLateral = (MenuLateralDerecho) campoDeJuego.getRight();
         VBox form = (VBox) menuLateral.getChildren().get(1);
         TextField textField = (TextField) form.getChildren().get(1);
-        HBox botones = (HBox) form.getChildren().get(2);
-        Button botonAccion = (Button) botones.getChildren().get(0);
-        Button botonFinalizarRonda = (Button) botones.getChildren().get(1);
-        FinalizarRondaEventHandler finalizarRondaEventHandler = new FinalizarRondaEventHandler(campoDeJuego);
-        botonFinalizarRonda.setOnMouseClicked(finalizarRondaEventHandler);
 
         if (ronda.obtenerDescripcion() == "Ronda de colocación") {
             System.out.println("Estamos en Ronda de Colocacion rey");
             campoDeJuego.mostrarPaisesDelJugadorActual();
             pais.modificarCantidadEjercito(1);
         } else if(ronda.obtenerDescripcion() == "Ronda de ataque") {
-            System.out.println("Estamos en Ronda de ataque papu");
+            System.out.println("Estamos en Ronda de Ataque papu");
 
             if (campoDeJuego.getPaisSeleccionado() == null) {
                 campoDeJuego.mostrarPaises();
@@ -54,16 +47,23 @@ public class PaisEventHandler implements EventHandler<MouseEvent> {
                 campoDeJuego.setTop(crearVBoxLabel());
             } else {
                 campoDeJuego.getTop().setVisible(false);
-
                 AtaqueEventHandler ataqueEventHandler = new AtaqueEventHandler(campoDeJuego, pais, textField);
-                botonAccion.setOnMouseClicked(ataqueEventHandler);
-
-                textField.setOnKeyPressed(ataqueEventHandler);
+                menuLateral.setAccion(ataqueEventHandler);
                 textField.requestFocus();
             }
 
         } else {
             System.out.println("No queda otra que ragrupar mi ciela");
+            campoDeJuego.mostrarPaisesDelJugadorActual();
+            if(campoDeJuego.getPaisSeleccionado() == null) {
+                vistaPais.marcarComoSeleccionada();
+                campoDeJuego.setPaisSeleccionado(pais);
+            } else {
+                ReagrupeEventHandler reagrupeEventHandler = new ReagrupeEventHandler(campoDeJuego, pais, textField);
+                menuLateral.setAccion(reagrupeEventHandler);
+                textField.requestFocus();
+            }
+
         }
 
 

@@ -1,8 +1,11 @@
 package edu.fiuba.algo3.vista;
 
 import edu.fiuba.algo3.controladores.AtaqueEventHandler;
+import edu.fiuba.algo3.controladores.FinalizarRondaEventHandler;
 import edu.fiuba.algo3.modelo.Juego;
 import edu.fiuba.algo3.modelo.observables.Observer;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -18,6 +21,7 @@ public class MenuLateralDerecho extends VBox implements Observer {
     private Label descripcionDeRonda;
     private Label descripcionDeTurno;
     private Button botonAccion;
+    private Button botonFinalizarRonda;
     private TextField inputText;
     private Label labelDeAyuda;
     private Label labelDeError;
@@ -48,8 +52,9 @@ public class MenuLateralDerecho extends VBox implements Observer {
         this.botonAccion = new Button("Atacar!");
         botonAccion.getStyleClass().add("startButton");
 
-        Button botonFinalizarRonda = new Button("Finalizar Ronda");
+        this.botonFinalizarRonda = new Button("Finalizar Ronda");
         botonFinalizarRonda.getStyleClass().add("exitButton");
+        this.botonFinalizarRonda.setOnMouseClicked(new FinalizarRondaEventHandler(campoDeJuego));
 
         HBox botones = new HBox(botonAccion, botonFinalizarRonda);
 
@@ -77,11 +82,6 @@ public class MenuLateralDerecho extends VBox implements Observer {
         this.descripcionDeRonda.setText(this.juego.getTurno().obtenerRondaActual().obtenerDescripcion());
         this.descripcionDeTurno.setText("Es el turno de: " + this.juego.getTurno().obtenerJugadorTurnoActual().obtenerNombre());
         campoDeJuego.mostrarPaisesDelJugadorActual();
-    }
-
-    public void mostrar() {
-        this.getChildren().get(0).setVisible(true);
-        this.getChildren().get(1).setVisible(true);
     }
 
     public void mostrarFormularioDeColocacion() {
@@ -119,5 +119,10 @@ public class MenuLateralDerecho extends VBox implements Observer {
         if(this.getChildren().get(2) != null) {
             this.getChildren().remove(2);
         }
+    }
+
+    public void setAccion(EventHandler<Event> eventHandler) {
+        this.botonAccion.setOnMouseClicked(eventHandler);
+        this.inputText.setOnKeyPressed(eventHandler);
     }
 }
