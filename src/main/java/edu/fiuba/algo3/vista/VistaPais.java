@@ -1,13 +1,10 @@
 package edu.fiuba.algo3.vista;
 
 import edu.fiuba.algo3.controladores.PaisEventHandler;
+import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.observables.Observer;
 import edu.fiuba.algo3.modelo.paises.Pais;
-import javafx.geometry.Pos;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Circle;
@@ -95,5 +92,9 @@ public class VistaPais extends StackPane implements Observer {
         this.setDisable(true);
         Color color = pais.dominadoPor().getColor();
         ((Circle) this.getChildren().get(0)).setFill(color.brighter());
+    }
+
+    public Jugador getJugadorDominante() {
+        return this.pais.dominadoPor();
     }
 }

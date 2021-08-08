@@ -43,6 +43,7 @@ public class AtaqueEventHandler implements EventHandler<Event>  {
                 Resultado resultado = atacante.atacarA(defensor, cantidadDeEjercitos);
                 mostrarAtaque();
                 ProcesadorResultado.obtenerInstancia().procesar(resultado);
+                campoDeJuego.setPaisSeleccionado(null);
                 System.out.println("Se ejecuto el ataque de " + atacante.getNombre() + " a " + defensor.getNombre());
             } catch (ElPaisNoEsLimitrofeException | NumberFormatException | EjercitosInsuficientesException e) {
                 inputText.getStyleClass().add("invalid");

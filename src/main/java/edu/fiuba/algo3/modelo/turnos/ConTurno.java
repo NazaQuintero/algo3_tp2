@@ -77,6 +77,7 @@ public class ConTurno implements Turno {
 
         if (jugador != this.actual) throw new ElJugadorNoTieneTurnoException();
         this.ronda.finalizarRonda(this);
+        this.notifyObservers();
     }
 
     public Resultado atacarA(Pais atacante, Pais defensor, int cantidadEjercitos) throws NoEsRondaDeAtaqueException, EjercitosInsuficientesException, ElPaisNoEsLimitrofeException {
