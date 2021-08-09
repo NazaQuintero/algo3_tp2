@@ -77,6 +77,9 @@ public class AtaqueEventHandler implements EventHandler<Event>  {
         vBox.setSpacing(20);
         MenuLateralDerecho menuLateralDerecho = (MenuLateralDerecho) campoDeJuego.getRight();
         menuLateralDerecho.setResultadoDeAtaque(vBox);
+
+        atacante.getEjercito().setDados(null);
+        defensor.getEjercito().setDados(null);
     }
 
     private Label crearLabel(Pais pais) {

@@ -32,11 +32,11 @@ public class PaisEventHandler implements EventHandler<MouseEvent> {
         VBox form = (VBox) menuLateral.getChildren().get(1);
         TextField textField = (TextField) form.getChildren().get(1);
 
-        if (ronda.obtenerDescripcion() == "Ronda de colocación") {
+        if (ronda.obtenerDescripcion().equals("Ronda de colocación")) {
             System.out.println("Estamos en Ronda de Colocacion rey");
             campoDeJuego.mostrarPaisesDelJugadorActual();
             pais.modificarCantidadEjercito(1);
-        } else if(ronda.obtenerDescripcion() == "Ronda de ataque") {
+        } else if(ronda.obtenerDescripcion().equals("Ronda de ataque")) {
             System.out.println("Estamos en Ronda de Ataque papu");
 
             if (campoDeJuego.getPaisSeleccionado() == null) {
@@ -44,22 +44,28 @@ public class PaisEventHandler implements EventHandler<MouseEvent> {
                 vistaPais.resaltarLimitrofesAdversarios();
                 vistaPais.marcarComoSeleccionada();
                 campoDeJuego.setPaisSeleccionado(pais);
-                campoDeJuego.setTop(crearVBoxLabel());
+                menuLateral.setTextoLabelAyuda("Seleccione el Pais al que \n desea atacar.");
             } else {
-                campoDeJuego.getTop().setVisible(false);
+                menuLateral.setTextoLabelAyuda("Indique la cantidad de Ejercitos \n con los que desea atacar");
+                menuLateral.setInputTextVisible(true);
+                menuLateral.setBotonAccionVisible(true);
                 AtaqueEventHandler ataqueEventHandler = new AtaqueEventHandler(campoDeJuego, pais, textField);
                 menuLateral.setAccion(ataqueEventHandler);
                 textField.requestFocus();
             }
 
         } else {
-            System.out.println("No queda otra que ragrupar mi ciela");
+            System.out.println("No queda otra que reagrupar mi ciela");
             campoDeJuego.mostrarPaisesDelJugadorActual();
             if(campoDeJuego.getPaisSeleccionado() == null) {
                 vistaPais.marcarComoSeleccionada();
                 campoDeJuego.setPaisSeleccionado(pais);
                 vistaPais.resaltarLimitrofesPropios();
+                menuLateral.setTextoLabelAyuda("Seleccione el Pais al que \n desea enviar sus tropas.");
             } else {
+                menuLateral.setTextoLabelAyuda("Indique la cantidad de Ejercitos \n que desea reagrupar");
+                menuLateral.setInputTextVisible(true);
+                menuLateral.setBotonAccionVisible(true);
                 ReagrupeEventHandler reagrupeEventHandler = new ReagrupeEventHandler(campoDeJuego, pais, textField);
                 menuLateral.setAccion(reagrupeEventHandler);
                 textField.requestFocus();

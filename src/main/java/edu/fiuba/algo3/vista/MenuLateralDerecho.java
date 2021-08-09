@@ -1,6 +1,5 @@
 package edu.fiuba.algo3.vista;
 
-import edu.fiuba.algo3.controladores.AtaqueEventHandler;
 import edu.fiuba.algo3.controladores.FinalizarRondaEventHandler;
 import edu.fiuba.algo3.modelo.Juego;
 import edu.fiuba.algo3.modelo.observables.Observer;
@@ -95,19 +94,20 @@ public class MenuLateralDerecho extends VBox implements Observer {
     public void mostrarFormularioDeAtaque() {
         this.getChildren().get(0).setVisible(true);
         this.getChildren().get(1).setVisible(true);
-        this.labelDeAyuda.setText("Ingrese la cantidad de ejércitos: ");
-        this.inputText.setVisible(true);
-        this.botonAccion.setVisible(true);
+        this.inputText.setVisible(false);
+        this.botonAccion.setVisible(false);
         this.botonAccion.setText("Atacar!");
+        this.labelDeAyuda.setText("Haga click sobre su pais con \n el que desee atacar");
     }
 
 
     public void mostrarFormularioDeReagrupe() {
         this.getChildren().get(0).setVisible(true);
         this.getChildren().get(1).setVisible(true);
-        this.inputText.setVisible(true);
-        this.botonAccion.setVisible(true);
+        this.inputText.setVisible(false);
+        this.botonAccion.setVisible(false);
         this.botonAccion.setText("Reagrupar!");
+        this.labelDeAyuda.setText("Seleccione el Pais desde el \n que desea reagrupar.");
     }
 
     public void setResultadoDeAtaque(VBox resultadoDeAtaque) {
@@ -124,5 +124,17 @@ public class MenuLateralDerecho extends VBox implements Observer {
     public void setAccion(EventHandler<Event> eventHandler) {
         this.botonAccion.setOnMouseClicked(eventHandler);
         this.inputText.setOnKeyPressed(eventHandler);
+    }
+
+    public void setTextoLabelAyuda(String texto) {
+        this.labelDeAyuda.setText(texto);
+    }
+
+    public void setInputTextVisible(boolean b) {
+        this.inputText.setVisible(b);
+    }
+
+    public void setBotonAccionVisible(boolean b) {
+        this.botonAccion.setVisible(b);
     }
 }
