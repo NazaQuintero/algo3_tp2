@@ -20,7 +20,7 @@ public class ObjetivosTest {
     }
 
     @Test
-    public void unJugadorCumpleElObjetivoGeneralDe30Paises() throws ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException, PaisOcupadoPorOtroJugadorException, ArchivoDeContinentesNoEncontradoException {
+    public void unJugadorCumpleElObjetivoGeneralDe30Paises() throws ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException, PaisOcupadoPorOtroJugadorException, ArchivoDeContinentesNoEncontradoException, NoQuedanMasEjercitosPorColocarException {
         CargarJuego.cargarContinentes(ARCHIVO_CONTINENTES);
         Jugador jugador = new Jugador( "Cami", Color.RED);
         for (int i = 0; i < 30; i++) jugador.colocarEjercitos(new Pais(i + ""), 1);
@@ -39,7 +39,7 @@ public class ObjetivosTest {
     }
 
     @Test
-    public void unJugadorNoCumpleObjetivoDeDestruccion() throws ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException, PaisOcupadoPorOtroJugadorException, ArchivoDeContinentesNoEncontradoException {
+    public void unJugadorNoCumpleObjetivoDeDestruccion() throws ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException, PaisOcupadoPorOtroJugadorException, ArchivoDeContinentesNoEncontradoException, NoQuedanMasEjercitosPorColocarException {
         CargarJuego.cargarContinentes(ARCHIVO_CONTINENTES);
         Jugador jugador1 = new Jugador( "Martin", Color.RED);
         Jugador jugador2 = new Jugador( "NASA", Color.RED);

@@ -43,7 +43,7 @@ public class Jugador {
         return paisesDominados.size();
     }
 
-    public void colocarEjercitos(Pais pais, int cantidadEjercitos) throws ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException, PaisOcupadoPorOtroJugadorException {
+    public void colocarEjercitos(Pais pais, int cantidadEjercitos) throws ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException, PaisOcupadoPorOtroJugadorException, NoQuedanMasEjercitosPorColocarException {
         if (paisesDominados.contains(pais)) {
             this.turno.colocarEjercitos(pais, cantidadEjercitos);
         }

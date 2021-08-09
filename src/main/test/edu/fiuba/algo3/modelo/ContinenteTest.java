@@ -3,6 +3,7 @@ package edu.fiuba.algo3.modelo;
 import edu.fiuba.algo3.modelo.continentes.Continente;
 import edu.fiuba.algo3.modelo.excepciones.ElJugadorNoTieneTurnoException;
 import edu.fiuba.algo3.modelo.excepciones.NoEsRondaDeColocacionException;
+import edu.fiuba.algo3.modelo.excepciones.NoQuedanMasEjercitosPorColocarException;
 import edu.fiuba.algo3.modelo.excepciones.PaisOcupadoPorOtroJugadorException;
 import edu.fiuba.algo3.modelo.paises.Pais;
 import javafx.scene.paint.Color;
@@ -38,7 +39,7 @@ public class ContinenteTest {
     }
 
     @Test
-    public void unJugadorDomina3PaisesDeAsia() throws ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException, PaisOcupadoPorOtroJugadorException {
+    public void unJugadorDomina3PaisesDeAsia() throws ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException, PaisOcupadoPorOtroJugadorException, NoQuedanMasEjercitosPorColocarException {
         Jugador jugador = new Jugador( "Martin", Color.BLUE);
         Pais china = new Pais("China");
         Pais india = new Pais("India");
@@ -57,7 +58,7 @@ public class ContinenteTest {
     }
 
     @Test
-    public void unJugadorDominaTodoAsia() throws ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException, PaisOcupadoPorOtroJugadorException {
+    public void unJugadorDominaTodoAsia() throws ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException, PaisOcupadoPorOtroJugadorException, NoQuedanMasEjercitosPorColocarException {
         Jugador jugador = new Jugador( "Martin", Color.BLUE);
         Pais china = new Pais("China");
         Pais india = new Pais("India");
@@ -76,7 +77,7 @@ public class ContinenteTest {
     }
 
     @Test
-    public void unJugadorNoDominaTodoAsia() throws ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException, PaisOcupadoPorOtroJugadorException {
+    public void unJugadorNoDominaTodoAsia() throws ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException, PaisOcupadoPorOtroJugadorException, NoQuedanMasEjercitosPorColocarException {
         Jugador jugador = new Jugador( "Martin", Color.BLUE);
         Jugador jugador2 = new Jugador( "Frank", Color.BLUE);
         Pais china = new Pais("China");

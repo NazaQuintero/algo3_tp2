@@ -2,6 +2,7 @@ package edu.fiuba.algo3.modelo.rondas;
 
 import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.continentes.MultitonContinentes;
+import edu.fiuba.algo3.modelo.excepciones.NoQuedanMasEjercitosPorColocarException;
 import edu.fiuba.algo3.modelo.observables.Observer;
 import edu.fiuba.algo3.modelo.paises.Pais;
 import edu.fiuba.algo3.modelo.batallasDeDados.Resultado;
@@ -14,6 +15,10 @@ import edu.fiuba.algo3.modelo.excepciones.NoEsRondaDeReagrupeException;
 public class Colocacion implements Ronda {
 
     private int cantidadEjercitosColocables;
+
+    public int getCantidadEjercitosColocables() {
+        return cantidadEjercitosColocables;
+    }
 
     public Colocacion(Jugador unJugador) {
         calcularEjercitosColocables(unJugador);
@@ -48,13 +53,14 @@ public class Colocacion implements Ronda {
         throw new NoEsRondaDeReagrupeException();
     }
 
-    public void colocarEjercitos(Pais unPais, int cantidadEjercitos) {
+    public void colocarEjercitos(Pais unPais, int cantidadEjercitos) throws NoQuedanMasEjercitosPorColocarException {
         if (this.cantidadEjercitosColocables > 0) {
             if (cantidadEjercitos <= this.cantidadEjercitosColocables) {
                 unPais.modificarCantidadEjercito(cantidadEjercitos);
                 this.cantidadEjercitosColocables -= cantidadEjercitos;
             } // else chequear que ingrese una cantidad valida o que elija no colocar mas
         }
+        else throw new NoQuedanMasEjercitosPorColocarException();
     }
 
     public void activarTarjeta(Tarjeta unaTarjeta) throws LaTarjetaYaFueActivadaException {

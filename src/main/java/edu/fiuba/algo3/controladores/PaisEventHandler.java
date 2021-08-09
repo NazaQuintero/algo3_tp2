@@ -1,5 +1,7 @@
 package edu.fiuba.algo3.controladores;
 
+import edu.fiuba.algo3.modelo.excepciones.NoEsRondaDeColocacionException;
+import edu.fiuba.algo3.modelo.excepciones.NoQuedanMasEjercitosPorColocarException;
 import edu.fiuba.algo3.modelo.paises.Pais;
 import edu.fiuba.algo3.modelo.rondas.Ronda;
 import edu.fiuba.algo3.vista.CampoDeJuego;
@@ -29,13 +31,24 @@ public class PaisEventHandler implements EventHandler<MouseEvent> {
 
         Ronda ronda = this.campoDeJuego.getTurno().obtenerRondaActual();
         MenuLateralDerecho menuLateral = (MenuLateralDerecho) campoDeJuego.getRight();
-        VBox form = (VBox) menuLateral.getChildren().get(1);
-        TextField textField = (TextField) form.getChildren().get(1);
+        VBox formularioDeAccion = (VBox) menuLateral.getChildren().get(1);
+        TextField textField = (TextField) formularioDeAccion.getChildren().get(1);
 
         if (ronda.obtenerDescripcion().equals("Ronda de colocación")) {
             System.out.println("Estamos en Ronda de Colocacion rey");
+
             campoDeJuego.mostrarPaisesDelJugadorActual();
-            pais.modificarCantidadEjercito(1);
+            try {
+                ronda.colocarEjercitos(pais,1);
+                menuLateral.update();
+            } catch (NoEsRondaDeColocacionException | NoQuedanMasEjercitosPorColocarException e) {
+
+                menuLateral.mostrarErrorColocacion();
+                Label labelDeError = (Label)(formularioDeAccion.getChildren().get(3));
+                labelDeError.setText("No quedan más ejércitos por colocar");
+                labelDeError.setVisible(true);
+            }
+
         } else if(ronda.obtenerDescripcion().equals("Ronda de ataque")) {
             System.out.println("Estamos en Ronda de Ataque papu");
 
@@ -49,15 +62,14 @@ public class PaisEventHandler implements EventHandler<MouseEvent> {
                 menuLateral.setTextoLabelAyuda("Indique la cantidad de Ejercitos \n con los que desea atacar");
                 menuLateral.setInputTextVisible(true);
                 menuLateral.setBotonAccionVisible(true);
-                AtaqueEventHandler ataqueEventHandler = new AtaqueEventHandler(campoDeJuego, pais, textField);
-                menuLateral.setAccion(ataqueEventHandler);
+                menuLateral.setAccion(new AtaqueEventHandler(campoDeJuego, pais, textField));
                 textField.requestFocus();
             }
 
         } else {
             System.out.println("No queda otra que reagrupar mi ciela");
             campoDeJuego.mostrarPaisesDelJugadorActual();
-            if(campoDeJuego.getPaisSeleccionado() == null) {
+            if (campoDeJuego.getPaisSeleccionado() == null) {
                 vistaPais.marcarComoSeleccionada();
                 campoDeJuego.setPaisSeleccionado(pais);
                 vistaPais.resaltarLimitrofesPropios();
@@ -73,17 +85,6 @@ public class PaisEventHandler implements EventHandler<MouseEvent> {
 
         }
 
-
-
-    }
-
-    private VBox crearVBoxLabel() {
-        Label label = new Label("Seleccione el pais a atacar");
-        label.getStyleClass().add("labelText");
-        VBox vBox = new VBox(label);
-        vBox.setAlignment(Pos.CENTER);
-
-        return vBox;
     }
 
 }

@@ -88,7 +88,7 @@ public class ConTurno implements Turno {
         this.ronda.reagrupar(origen, destino, cantidad);
     }
 
-    public void colocarEjercitos(Pais unPais, int cantidadEjercitos) throws NoEsRondaDeColocacionException {
+    public void colocarEjercitos(Pais unPais, int cantidadEjercitos) throws NoEsRondaDeColocacionException, NoQuedanMasEjercitosPorColocarException {
         this.ronda.colocarEjercitos(unPais, cantidadEjercitos);
     }
 
