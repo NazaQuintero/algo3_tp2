@@ -14,10 +14,11 @@ public class VistaTarjeta implements Observer {
 
     private final Image imagenTarjeta;
     private final ImageView view;
+    private final Tarjeta tarjeta;
 
     public VistaTarjeta(Tarjeta tarjeta) {
-        this.imagenTarjeta = new Image(tarjeta.nombrePais() + "_" + tarjeta.obtenerSimbolo() + ".png");
-        //ImageView imageView = new ImageView(imagenTarjeta);
+        this.tarjeta = tarjeta;
+        this.imagenTarjeta = new Image(tarjeta.obtenerSimbolo()+".png");
         this.view = new ImageView(imagenTarjeta);
         view.setPreserveRatio(true);
         view.setFitWidth(82);
@@ -29,8 +30,11 @@ public class VistaTarjeta implements Observer {
         return this.view;
     }
 
+    public String obtenerNombrePais() { return tarjeta.obtenerPais().getNombre(); }
+
     @Override
     public void update() {
 
     }
+
 }

@@ -42,11 +42,12 @@ public class Juego {
         jugadores.agregarJugador(jugador);
     }
 
-    public void comenzar() throws CantidadDeJugadoresInsuficienteException {
+    public void comenzar() throws CantidadDeJugadoresInsuficienteException { // eesto en Juego
         if (jugadores.obtenerCantidad() < 2) throw new CantidadDeJugadoresInsuficienteException();
         tablero.repartirPaises(jugadores);
         jugadores.mezclar();
         Objetivos.asignarObjetivos(jugadores);
+        tarjetas.repartir(jugadores);
         turno = new ConTurno(jugadores);
     }
 

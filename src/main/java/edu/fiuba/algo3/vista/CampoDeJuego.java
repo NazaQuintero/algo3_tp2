@@ -29,15 +29,18 @@ public class CampoDeJuego extends HBox {
 
     private final Juego juego;
     private final ArrayList<VistaPais> vistasPaises = new ArrayList<>();
-    private final ArrayList<VistaTarjeta> vistasTarjetas = new ArrayList<>();
+    private ArrayList<VistaTarjeta> vistasTarjetas = new ArrayList<>();
+    private final MenuLateralDerecho menuLateralDerecho;
     private Pais paisSeleccionado;
 
     public CampoDeJuego(Stage stage, Juego juego) {
         this.juego = juego;
+        this.menuLateralDerecho = new MenuLateralDerecho(this, juego);
         this.getStylesheets().add("styles.css");
+        this.juego.getTurno().addObserver(this);
 
         Button botonTarjetas = new Button("Ver tarjetas");
-        botonTarjetas.setOnAction(e -> mostrarTETAS());
+        botonTarjetas.setOnAction(e -> mostrarTarjetas());
 
         Image imagen = new Image("tablero.png");
         ImageView imageView = new ImageView(imagen);
@@ -48,27 +51,44 @@ public class CampoDeJuego extends HBox {
         Pane stackPane = new Pane();
         stackPane.getChildren().addAll(imageView, botonTarjetas);
         crearVistasPaises(stackPane);
-        crearVistasTarjetas();// es el layout eso sin mostrarse igual, solo inicializarlas, seria una partecita del metodo del boton de ver tarjetas  tarjetasJugadorActual y no se que mierda es stackpane pero ahi se harian las vbistas de las tarjetetas  @camila
+        crearVistasTarjetas();
 
+        /*
+        Button btnNew = new Button("New");
+        Button btnPause = new Button("Pause");
+        Button btnQuit = new Button("Quit");
+        ToolBar toolBar = new ToolBar();
+        toolBar.getItems().addAll(
+                new Separator(),
+                btnNew,
+                btnPause,
+                btnQuit
+        );
+        */
+
+        HBox anHbox = new HBox(stackPane);
+        anHbox.setAlignment(Pos.CENTER);
+        VBox aVbox = new VBox(anHbox);
+        aVbox.setAlignment(Pos.CENTER);
+        setMargin(this, new Insets(50,50,50,50));
+        this.setCenter(aVbox);
+        this.setRight(this.menuLateralDerecho);
+        this.mostrarPaisesDelJugadorActual();
+        this.mostrarMenuLateralDerecho();
+
+        //stage.setScene(new Scene(this, 1500, 900)); // esto lo voy a poner mas chico por ahora xq en mi pantalla se corta tod0
+        stage.setScene(new Scene(this, 1000, 600));
+        stage.centerOnScreen();
         this.getChildren().add(stackPane); // a ver ahi mandale npi xddd
-        this.setAlignment(Pos.CENTER);
-        stage.setScene(new Scene(this, 1400, 900));
+        //stage.setScene(new Scene(this, 1400, 900)); // esto lo voy a poner mas chico por ahora xq en mi pantalla se corta tod0
+        stage.setScene(new Scene(this, 1000, 600));
 
     }
 
     private void crearVistasTarjetas() {
-        ArrayList<Tarjeta> tarjetasJugadorActual = new ArrayList<>();
-
-        Pais pais = new Pais("Argentina");
-        Simbolo simbolo = new Globo();
-        Tarjeta tarjeta = new Tarjeta(pais, simbolo);
-        tarjetasJugadorActual.add(tarjeta);
-        tarjetasJugadorActual.add(tarjeta);
-        tarjetasJugadorActual.add(tarjeta);
-        tarjetasJugadorActual.add(tarjeta);
-        tarjetasJugadorActual.add(tarjeta);
-
-        for (Tarjeta t : tarjetasJugadorActual) vistasTarjetas.add(new VistaTarjeta(t));
+        vistasTarjetas = new ArrayList<>();
+        Jugador unJugador = this.juego.getTurno().obtenerJugadorTurnoActual();
+        for (Tarjeta t : unJugador.obtenerTarjetas()) vistasTarjetas.add(new VistaTarjeta(t));
     }
 
     private void crearVistasPaises(Pane stackPane) {
@@ -105,7 +125,7 @@ public class CampoDeJuego extends HBox {
         return paisSeleccionado;
     }
 
-    public void mostrarTETAS() { // WTF no habia notado ese mnombre
+    public void mostrarTarjetas() {
 
         Stage ventanaTarjetas = new Stage();
         ventanaTarjetas.initModality(Modality.APPLICATION_MODAL);
@@ -125,7 +145,8 @@ public class CampoDeJuego extends HBox {
                 j = 0;
                 i++;
             }
-            Button botonTarjeta = new Button("", v.obtenerImagen()); // garcias
+            Button botonTarjeta = new Button(v.obtenerNombrePais(), v.obtenerImagen());
+            botonTarjeta.setContentDisplay(ContentDisplay.BOTTOM);
 
             botonTarjeta.setMaxWidth(82);
             botonTarjeta.setMaxHeight(250);
@@ -136,9 +157,9 @@ public class CampoDeJuego extends HBox {
         }
 
         HBox layoutBotones = new HBox();
-        Button botonActivar = new Button("Activar tarjeta"); //poggerino
-        Button botonCanjear = new Button("Canjear tarjetas"); // poggerinox
-        Button botonCancelar = new Button("Cancelar"); // poggerinoxxx
+        Button botonActivar = new Button("Activar tarjeta");
+        Button botonCanjear = new Button("Canjear tarjetas");
+        Button botonCancelar = new Button("Cancelar");
 
         layoutBotones.setMargin(botonActivar, new Insets(20,40,20,40));
         layoutBotones.setMargin(botonCanjear, new Insets(20,40,20,40));
@@ -147,7 +168,7 @@ public class CampoDeJuego extends HBox {
         botonCancelar.setOnAction(e -> ventanaTarjetas.close());
         layoutBotones.getChildren().addAll(botonActivar, botonCanjear, botonCancelar);
 
-        BorderPane layout = new BorderPane(); // lei border pene :pogo: 0W0 no se si esto funcara probemo ok
+        BorderPane layout = new BorderPane();
         layout.setCenter(layoutTarjetas);
         layout.setBottom(layoutBotones);
 
