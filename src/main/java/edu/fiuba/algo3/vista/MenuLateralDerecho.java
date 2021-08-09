@@ -37,7 +37,6 @@ public class MenuLateralDerecho extends VBox implements Observer {
         this.setAlignment(Pos.CENTER);
     }
 
-
     private VBox crearFormularioDeAccion() {
         this.labelDeAyuda = new Label("");
         labelDeAyuda.getStyleClass().add("labelText");
@@ -56,6 +55,7 @@ public class MenuLateralDerecho extends VBox implements Observer {
         this.botonFinalizarRonda.setOnMouseClicked(new FinalizarRondaEventHandler(campoDeJuego));
 
         HBox botones = new HBox(botonAccion, botonFinalizarRonda);
+        botones.setSpacing(10);
 
         VBox vBox = new VBox(labelDeAyuda, inputText, botones, labelDeError);
         vBox.setSpacing(10);
@@ -71,9 +71,7 @@ public class MenuLateralDerecho extends VBox implements Observer {
         this.descripcionDeTurno = new Label("Es el turno de: " + this.juego.getTurno().obtenerJugadorTurnoActual().obtenerNombre());
         this.descripcionDeTurno.getStyleClass().add("labelText");
 
-        VBox vBox = new VBox(this.descripcionDeRonda, this.descripcionDeTurno);
-
-        return vBox;
+        return new VBox(this.descripcionDeRonda, this.descripcionDeTurno);
     }
 
     @Override
@@ -116,8 +114,10 @@ public class MenuLateralDerecho extends VBox implements Observer {
     }
 
     public void limpiarResultadoDeBatalla() {
-        if(this.getChildren().get(2) != null) {
+        try {
             this.getChildren().remove(2);
+        } catch (Exception ignored) {
+
         }
     }
 

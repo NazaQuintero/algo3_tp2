@@ -133,10 +133,12 @@ public class CampoDeJuego extends BorderPane implements Observer {
     public void update() {
         if(this.juego.getTurno().obtenerRondaActual().obtenerDescripcion().equals("Ronda de colocación")) {
             this.menuLateralDerecho.mostrarFormularioDeColocacion();
+            menuLateralDerecho.limpiarResultadoDeBatalla();
         } else if (this.juego.getTurno().obtenerRondaActual().obtenerDescripcion().equals("Ronda de ataque")) {
             this.menuLateralDerecho.mostrarFormularioDeAtaque();
         } else {
             this.menuLateralDerecho.mostrarFormularioDeReagrupe();
+            menuLateralDerecho.limpiarResultadoDeBatalla();
         }
     }
 }
