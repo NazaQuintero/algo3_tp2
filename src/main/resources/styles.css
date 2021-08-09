@@ -74,7 +74,16 @@
     -fx-font-size: 24px;
 }
 
-.textField.valid{
+.cantEjercitos {
+    -fx-max-width: 70px;
+    -fx-max-height: 50px;
+    -fx-pref-width: 70px;
+    -fx-pref-height: 50px;
+    -fx-font-size: 24px;
+    -fx-alignment: center;
+}
+
+.textField.valid {
     -fx-focus-color: #198754;
     -fx-faint-focus-color: #19875422;
     -fx-opacity: 1;
@@ -91,7 +100,7 @@
     -fx-prompt-text-fill: transparent;
 }
 
-.textField.invalid {
+.invalid {
     -fx-focus-color: #d35244;
     -fx-faint-focus-color: #d3524422;
     -fx-opacity: 1;
@@ -107,7 +116,7 @@
     -fx-prompt-text-fill: transparent;
 }
 
-.label.ejercito{
+.label.ejercito {
     -fx-font-size: 20px;
     -fx-text-fill: white;
 }

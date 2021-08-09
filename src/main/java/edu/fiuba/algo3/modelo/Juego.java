@@ -2,7 +2,9 @@ package edu.fiuba.algo3.modelo;
 
 import edu.fiuba.algo3.modelo.excepciones.*;
 import edu.fiuba.algo3.modelo.objetivos.*;
+import edu.fiuba.algo3.modelo.observables.Subject;
 import edu.fiuba.algo3.modelo.paises.Pais;
+import edu.fiuba.algo3.modelo.rondas.Ronda;
 import edu.fiuba.algo3.modelo.tarjetas.Tarjeta;
 import edu.fiuba.algo3.modelo.tarjetas.Tarjetas;
 import edu.fiuba.algo3.modelo.turnos.ConTurno;
@@ -50,33 +52,8 @@ public class Juego {
         turno = new ConTurno(jugadores);
     }
 
-    public void finalizarRonda(Jugador jugador) throws ElJugadorNoTieneTurnoException {
-        turno.finalizarRonda(jugador);
-    }
-
-    public void ataque(Jugador jAtacante, Pais pAtacante, Pais pDefensor, int cantidadEjercitos) throws ElJugadorNoTieneTurnoException, EjercitosInsuficientesException, NoEsRondaDeAtaqueException, ElPaisNoEsLimitrofeException {
-        tablero.ataque(jAtacante, pAtacante, pDefensor, cantidadEjercitos);
-    }
-
-
-    public void reagrupar(Jugador jugador, Pais paisOrigen, Pais paisDestino, int cantidadAMover) throws JugadorNoExisteException, ElPaisNoEsLimitrofeException, NoEsRondaDeReagrupeException, ElJugadorNoTieneTurnoException {
-        tablero.reagrupar(jugador, paisOrigen, paisDestino, cantidadAMover);
-    }
-
-    public int cantidadPaisesDominados(Jugador jugador){
-        return tablero.cantidadPaisesDominados(jugador);
-    }
-
     public void recibirTarjeta(Jugador jugador, Pais paisTarjeta) {
         tarjetas.darTarjeta(jugador, paisTarjeta);
-    }
-
-    public int cantidadEjercitosEn(Pais pais) {
-        return tablero.cantidadEjercitosEn(pais);
-    }
-
-    public Jugador paisDominadoPor(Pais pais) {
-        return tablero.paisDominadoPor(pais);
     }
 
     public void activarTarjeta(Jugador jugador, Pais pais) throws JugadorNoExisteException, ElJugadorNoTieneTurnoException, ActivacionTarjetaEnRondaEquivocadaException, LaTarjetaYaFueActivadaException, TarjetaNoEncontradaException, JugadorNoPoseePaisDeLaTarjetaException {
@@ -89,5 +66,13 @@ public class Juego {
 
     public void iniciarTurno(){
         this.turno = new ConTurno(jugadores);
+    }
+
+    public Ronda getRonda() {
+        return turno.obtenerRondaActual();
+    }
+
+    public Turno getTurno() {
+        return turno;
     }
 }

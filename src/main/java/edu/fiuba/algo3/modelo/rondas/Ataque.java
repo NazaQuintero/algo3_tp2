@@ -10,7 +10,7 @@ public class Ataque implements Ronda {
 
     @Override
     public String obtenerDescripcion() {
-        return "Ataque";
+        return "Ronda de ataque";
     }
 
     public void finalizarRonda(Turno unTurno) {
@@ -37,6 +37,5 @@ public class Ataque implements Ronda {
     public void activarTarjeta(Tarjeta unaTarjeta) throws ActivacionTarjetaEnRondaEquivocadaException {
         throw new ActivacionTarjetaEnRondaEquivocadaException();
     }
-
 
 }

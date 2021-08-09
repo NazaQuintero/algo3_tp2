@@ -35,7 +35,7 @@ public class Jugador {
         this.color = color;
     }
 
-    public Color color() {
+    public Color getColor() {
         return color;
     }
 

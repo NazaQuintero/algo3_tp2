@@ -19,6 +19,7 @@ public class MenuInicial extends VBox {
         this.stage = stage;
         this.setAlignment(Pos.CENTER);
         this.setSpacing(20);
+        stage.centerOnScreen();
 
         this.getStylesheets().add("styles.css");
         this.getStyleClass().add("body");

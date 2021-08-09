@@ -22,4 +22,7 @@ public interface Fichas extends Subject {
     void agregarPais(Pais pais);
 
     void setDados(Dados dados);
+
+    Dados getDados();
+
 }

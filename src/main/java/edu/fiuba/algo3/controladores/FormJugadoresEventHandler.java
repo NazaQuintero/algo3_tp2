@@ -34,7 +34,7 @@ public class FormJugadoresEventHandler implements EventHandler<Event> {
 
     @Override
     public void handle(Event event) {
-        if (event.getEventType() == MouseEvent.MOUSE_CLICKED || ((KeyEvent) event).getCode() == KeyCode.ENTER){
+        if (event.getEventType() == MouseEvent.MOUSE_CLICKED || ((KeyEvent) event).getCode() == KeyCode.ENTER) {
             boolean jugadoresCargados = validarTextFields();
             if (jugadoresCargados) {
                 try {

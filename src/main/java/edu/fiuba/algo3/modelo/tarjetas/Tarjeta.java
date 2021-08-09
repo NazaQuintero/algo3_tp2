@@ -18,10 +18,6 @@ public class Tarjeta {
 
     public Pais obtenerPais(){ return pais; }
 
-    public String nombrePais() {
-        return pais.obtenerNombre();
-    }
-
     public void activar() throws LaTarjetaYaFueActivadaException {
         estadoTarjeta = estadoTarjeta.activar(pais);
     }

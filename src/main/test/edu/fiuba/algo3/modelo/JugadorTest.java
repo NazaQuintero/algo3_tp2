@@ -22,7 +22,7 @@ public class JugadorTest {
 
         Jugador jugador = new Jugador( "Cami",Color.PINK);
 
-        assertEquals(jugador.color(), Color.PINK);
+        assertEquals(jugador.getColor(), Color.PINK);
 
     }
 

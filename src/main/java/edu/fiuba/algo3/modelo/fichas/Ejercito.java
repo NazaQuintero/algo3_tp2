@@ -17,6 +17,10 @@ public class Ejercito implements Fichas {
     private Dados dados;
     private ArrayList<Observer> observers = new ArrayList<>();
 
+    public Dados getDados() {
+        return dados;
+    }
+
     public Ejercito(Jugador jugador) {
         this.jugador = jugador;
         this.cantidad = 1;
@@ -41,8 +45,8 @@ public class Ejercito implements Fichas {
     @Override
     public Dados tirarDados(Pais pais) {
         if (dados != null) return dados;
-
-        return this.rol.tirarDados(pais);
+        dados = this.rol.tirarDados(pais);
+        return dados;
     }
 
     public void asignarRol(Rol unRol) { this.rol = unRol; }
