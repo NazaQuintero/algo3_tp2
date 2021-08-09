@@ -1,42 +1,42 @@
 package edu.fiuba.algo3.vista;
 
 import edu.fiuba.algo3.modelo.Juego;
+import edu.fiuba.algo3.modelo.Jugador;
+import edu.fiuba.algo3.modelo.observables.Observer;
 import edu.fiuba.algo3.modelo.paises.MultitonPaises;
 import edu.fiuba.algo3.modelo.paises.Pais;
-import edu.fiuba.algo3.modelo.tarjetas.Globo;
-import edu.fiuba.algo3.modelo.tarjetas.Simbolo;
 import edu.fiuba.algo3.modelo.tarjetas.Tarjeta;
 import edu.fiuba.algo3.modelo.turnos.Turno;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ContentDisplay;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.*;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.scene.layout.BorderPane;
 
 import java.util.ArrayList;
 
 
-public class CampoDeJuego extends HBox {
+public class CampoDeJuego extends BorderPane implements Observer {
 
     private final Juego juego;
     private final ArrayList<VistaPais> vistasPaises = new ArrayList<>();
     private ArrayList<VistaTarjeta> vistasTarjetas = new ArrayList<>();
-    private final MenuLateralDerecho menuLateralDerecho;
     private Pais paisSeleccionado;
+
+    private MenuLateralDerecho menuLateralDerecho;
 
     public CampoDeJuego(Stage stage, Juego juego) {
         this.juego = juego;
         this.menuLateralDerecho = new MenuLateralDerecho(this, juego);
         this.getStylesheets().add("styles.css");
+        this.juego.getTurno().addObserver(this);
         this.juego.getTurno().addObserver(this);
 
         Button botonTarjetas = new Button("Ver tarjetas");
@@ -106,16 +106,31 @@ public class CampoDeJuego extends HBox {
         stackPane.getChildren().addAll(vistasPaises);
     }
 
-    public void resaltarLimitrofes(VistaPais vistaPais) {
+    public void resaltarLimitrofesAdversarios(VistaPais vistaPais) {
         ArrayList<VistaPais> vistaLimitrofes = vistaPais.getVistaLimitrofes();
-        for (VistaPais vista : vistasPaises) {
-            if (!vistaLimitrofes.contains(vista) || (vistaPais.getPais().dominadoPor() == vista.getPais().dominadoPor())){
+        for (VistaPais vista : vistasPaises)
+            if (!vistaLimitrofes.contains(vista) || (vistaPais.getPais().dominadoPor() == vista.getPais().dominadoPor()))
                vista.desactivar();
-            }
-        }
+    }
+
+    public void resaltarLimitrofesPropios(VistaPais vistaPais) {
+        ArrayList<VistaPais> vistaLimitrofes = vistaPais.getVistaLimitrofes();
+        for (VistaPais vista : vistasPaises)
+            if (!vistaLimitrofes.contains(vista) || (vistaPais.getPais().dominadoPor() != vista.getPais().dominadoPor()))
+                vista.desactivar();
     }
 
     public void mostrarPaises() { for (VistaPais vista : vistasPaises) vista.activar(); }
+
+    public void mostrarPaisesDelJugadorActual() {
+        this.mostrarPaises();
+        Jugador unJugador = this.juego.getTurno().obtenerJugadorTurnoActual();
+        for (VistaPais vista: vistasPaises) {
+            if(vista.getJugadorDominante() != unJugador) {
+                vista.desactivar();
+            }
+        }
+    }
 
     public void setPaisSeleccionado(Pais pais) {
         this.paisSeleccionado = pais;
@@ -177,6 +192,23 @@ public class CampoDeJuego extends HBox {
         ventanaTarjetas.showAndWait();
     }
 
-}
 
-// https://www.youtube.com/watch?v=c5vh7jtrW2Y&ab_channel=Tjokanche y esto que es
+    public Turno getTurno() {
+        return this.juego.getTurno();
+    }
+
+    private void mostrarMenuLateralDerecho() {
+        this.menuLateralDerecho.mostrarFormularioDeColocacion();
+    }
+
+    @Override
+    public void update() {
+        if(this.juego.getTurno().obtenerRondaActual().obtenerDescripcion().equals("Ronda de colocación")) {
+            this.menuLateralDerecho.mostrarFormularioDeColocacion();
+        } else if (this.juego.getTurno().obtenerRondaActual().obtenerDescripcion().equals("Ronda de ataque")) {
+            this.menuLateralDerecho.mostrarFormularioDeAtaque();
+        } else {
+            this.menuLateralDerecho.mostrarFormularioDeReagrupe();
+        }
+    }
+}

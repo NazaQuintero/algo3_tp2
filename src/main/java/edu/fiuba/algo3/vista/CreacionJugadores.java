@@ -16,17 +16,20 @@ import java.util.ArrayList;
 public class CreacionJugadores extends BorderPane {
 
     private final Stage stage;
-    VBox panel = new VBox();
-    HBox botonera;
-    Label errorLabel;
+    private VBox panel = new VBox();
+    private HBox botonera;
+    private Label errorLabel;
     private Juego juego;
-    ArrayList<TextField> textFields = new ArrayList<>();
+    private ArrayList<TextField> textFields = new ArrayList<>();
 
     public CreacionJugadores(Stage stage) {
 
         this.stage = stage;
         try { juego = new Juego(); }
-        catch (Exception e) { Platform.exit(); }
+        catch (Exception e) {
+            e.printStackTrace();
+            Platform.exit();
+        }
         this.getStylesheets().add("styles.css");
         this.getStyleClass().add("body");
 
@@ -68,7 +71,6 @@ public class CreacionJugadores extends BorderPane {
         return inputText;
     }
 
-
     private HBox crearBotoneraHorizontal(Button buttonSubmit, Button exitButton) {
         HBox hbox = new HBox(buttonSubmit, exitButton);
         hbox.setAlignment(Pos.CENTER);
@@ -89,8 +91,6 @@ public class CreacionJugadores extends BorderPane {
         buttonSubmit.setOnMouseClicked(new FormJugadoresEventHandler(errorLabel, juego, textFields, stage));
         return buttonSubmit;
     }
-
-
 
     private Label crearLabelError() {
         Label label = new Label("Debe cargar los nombres de todos los jugadores para comenzar");

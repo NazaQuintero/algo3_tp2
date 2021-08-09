@@ -14,5 +14,4 @@ public class Atacante implements Rol {
         return new Dados(this.cantidadEjercitos);
     }
 
-
 }

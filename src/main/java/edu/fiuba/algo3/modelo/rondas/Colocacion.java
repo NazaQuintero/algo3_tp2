@@ -1,6 +1,8 @@
 package edu.fiuba.algo3.modelo.rondas;
 
 import edu.fiuba.algo3.modelo.Jugador;
+import edu.fiuba.algo3.modelo.continentes.MultitonContinentes;
+import edu.fiuba.algo3.modelo.observables.Observer;
 import edu.fiuba.algo3.modelo.paises.Pais;
 import edu.fiuba.algo3.modelo.batallasDeDados.Resultado;
 import edu.fiuba.algo3.modelo.excepciones.LaTarjetaYaFueActivadaException;
@@ -12,8 +14,6 @@ import edu.fiuba.algo3.modelo.excepciones.NoEsRondaDeReagrupeException;
 public class Colocacion implements Ronda {
 
     private int cantidadEjercitosColocables;
-    private String[] nombresContinentes = {"Africa", "America del Norte", "America del Sur", "Asia", "Europa", "Oceania"};
-
 
     public Colocacion(Jugador unJugador) {
         calcularEjercitosColocables(unJugador);
@@ -23,17 +23,14 @@ public class Colocacion implements Ronda {
         this.cantidadEjercitosColocables = 3;
         if (unJugador.cantidadPaisesDominados() > 6) this.cantidadEjercitosColocables = unJugador.cantidadPaisesDominados() / 2;
         this.cantidadEjercitosColocables += unJugador.ordenCanje();
-        /*for (int i = 0; i < 6; i++) {
-            if (MultitonContinentes.obtenerInstanciaDe(nombresContinentes[i]).dominadoPor(unJugador)) {
-                this.cantidadEjercitosColocables += MultitonContinentes.obtenerInstanciaDe(nombresContinentes[i]).obtenerCantidadEjercito();
-            }
-        }*/
-    }
 
+        MultitonContinentes.obtenerContinentes().stream().filter(continente -> continente.dominadoPor(unJugador))
+                .forEach(continente -> cantidadEjercitosColocables += continente.getCantidadDeEjercitos());
+    }
 
     @Override
     public String obtenerDescripcion() {
-        return "Colocacion";
+        return "Ronda de colocación";
     }
 
     @Override
@@ -60,15 +57,8 @@ public class Colocacion implements Ronda {
         }
     }
 
-    /*
-    public void colocarEjercitos(Jugador jugador) {
-
-        int cantidadEjercitosAColocar = jugador.cantidadPaisesDominados()/2;
-
-    }
-    */
-
     public void activarTarjeta(Tarjeta unaTarjeta) throws LaTarjetaYaFueActivadaException {
         unaTarjeta.activar();
     }
+
 }

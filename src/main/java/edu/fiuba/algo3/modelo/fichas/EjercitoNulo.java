@@ -7,6 +7,7 @@ import edu.fiuba.algo3.modelo.paises.Pais;
 import edu.fiuba.algo3.modelo.roles.Rol;
 
 public class EjercitoNulo implements Fichas {
+
     public Jugador obtenerJugador() {
         return null;
     }
@@ -29,6 +30,11 @@ public class EjercitoNulo implements Fichas {
 
     public void agregarPais(Pais pais) {}
     public void setDados(Dados dados) {}
+
+    @Override
+    public Dados getDados() {
+        return null;
+    }
 
     @Override
     public void addObserver(Observer obs) {}

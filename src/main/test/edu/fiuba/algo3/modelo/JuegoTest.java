@@ -35,8 +35,8 @@ public class JuegoTest {
         juego.agregarJugador(jugador2);
         juego.comenzar();
 
-        assertEquals(25,juego.cantidadPaisesDominados(jugador1));
-        assertEquals(25,juego.cantidadPaisesDominados(jugador2));
+        assertEquals(25,jugador1.cantidadPaisesDominados());
+        assertEquals(25,jugador2.cantidadPaisesDominados());
     }
 
     @Test
@@ -55,9 +55,9 @@ public class JuegoTest {
         juego.agregarTarjeta(ootraTarjeta);
 
         Jugador jugador = new Jugador("Cami", Color.RED);
-
+        Jugador otroJugador = new Jugador("Frank", Color.PINK);
         juego.agregarJugador(jugador);
-        juego.agregarJugador(new Jugador("Frank", Color.PINK));
+        juego.agregarJugador(otroJugador);
 
         //juego.comenzar();
         juego.iniciarTurno();

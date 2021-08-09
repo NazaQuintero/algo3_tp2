@@ -2,6 +2,8 @@ package edu.fiuba.algo3.modelo.turnos;
 
 import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.Jugadores;
+import edu.fiuba.algo3.modelo.observables.Observer;
+import edu.fiuba.algo3.modelo.observables.Subject;
 import edu.fiuba.algo3.modelo.paises.Pais;
 import edu.fiuba.algo3.modelo.batallasDeDados.Resultado;
 import edu.fiuba.algo3.modelo.rondas.Colocacion;
@@ -9,12 +11,15 @@ import edu.fiuba.algo3.modelo.tarjetas.Tarjeta;
 import edu.fiuba.algo3.modelo.excepciones.*;
 import edu.fiuba.algo3.modelo.rondas.Ronda;
 
+import java.util.ArrayList;
+
 public class ConTurno implements Turno {
 
     private final Jugadores jugadores;
     private Jugador actual;
     private Ronda ronda;
     private int cantidadDeTurnosJugados;
+    private ArrayList<Observer> observers = new ArrayList<>();
 
     public ConTurno(Jugadores jugadores) {
         this.jugadores = jugadores;
@@ -72,13 +77,14 @@ public class ConTurno implements Turno {
 
         if (jugador != this.actual) throw new ElJugadorNoTieneTurnoException();
         this.ronda.finalizarRonda(this);
+        this.notifyObservers();
     }
 
     public Resultado atacarA(Pais atacante, Pais defensor, int cantidadEjercitos) throws NoEsRondaDeAtaqueException, EjercitosInsuficientesException, ElPaisNoEsLimitrofeException {
         return this.ronda.atacarA(atacante, defensor, cantidadEjercitos);
     }
 
-    public void reagrupar(Pais origen, Pais destino, int cantidad) throws NoEsRondaDeReagrupeException, ElPaisNoEsLimitrofeException { // o lo q sea la firma
+    public void reagrupar(Pais origen, Pais destino, int cantidad) throws NoEsRondaDeReagrupeException, ElPaisNoEsLimitrofeException {
         this.ronda.reagrupar(origen, destino, cantidad);
     }
 
@@ -88,6 +94,21 @@ public class ConTurno implements Turno {
 
     public void activarTarjeta(Tarjeta unaTarjeta) throws ActivacionTarjetaEnRondaEquivocadaException, LaTarjetaYaFueActivadaException {
         this.ronda.activarTarjeta(unaTarjeta);
+    }
+
+    @Override
+    public void addObserver(Observer obs) {
+        this.observers.add(obs);
+    }
+
+    @Override
+    public void removeObserver(Observer obs) {
+
+    }
+
+    @Override
+    public void notifyObservers() {
+        observers.forEach(Observer::update);
     }
 
 }
