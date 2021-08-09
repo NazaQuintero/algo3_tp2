@@ -166,7 +166,7 @@ public class TurnoTest {
         jugadores.agregarJugador(new Jugador( "Martin", Color.BLUE));
         Turno turno = new ConTurno(jugadores);
         Ronda unaRonda = turno.obtenerRondaActual();
-        assertEquals("Ronda de colocación", unaRonda.obtenerDescripcion());
+        assertEquals("Ronda de colocación inicial", unaRonda.obtenerDescripcion());
     }
 
     @Test
@@ -181,6 +181,9 @@ public class TurnoTest {
 
         Turno turno = new ConTurno(jugadores);
 
+        turno.finalizarRonda(jugador1);
+        turno.finalizarRonda(jugador2);
+        turno.finalizarRonda(jugador3);
         turno.finalizarRonda(jugador1);
         turno.finalizarRonda(jugador2);
         turno.finalizarRonda(jugador3);
@@ -206,7 +209,7 @@ public class TurnoTest {
     }
 
     @Test
-    public void despuesDeLaColocacionInicialVieneRondaDeAtaque() throws ElJugadorNoTieneTurnoException {
+    public void despuesDeLaColocacionInicialVieneLaColocacionSecundaria() throws ElJugadorNoTieneTurnoException {
         Jugadores jugadores = new Jugadores();
         Jugador jugador1 = new Jugador( "Martin", Color.BLUE);
         Jugador jugador2 = new Jugador( "Naza"  , Color.BLUE);
@@ -222,7 +225,7 @@ public class TurnoTest {
         turno.finalizarRonda(jugador3);
 
         Ronda unaRonda = turno.obtenerRondaActual();
-        assertEquals("Ronda de ataque", unaRonda.obtenerDescripcion());
+        assertEquals("Ronda de colocación secundaria", unaRonda.obtenerDescripcion());
     }
 
 }
