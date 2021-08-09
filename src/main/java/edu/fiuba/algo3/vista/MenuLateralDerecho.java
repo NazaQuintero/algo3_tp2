@@ -3,7 +3,7 @@ package edu.fiuba.algo3.vista;
 import edu.fiuba.algo3.controladores.FinalizarRondaEventHandler;
 import edu.fiuba.algo3.modelo.Juego;
 import edu.fiuba.algo3.modelo.observables.Observer;
-import edu.fiuba.algo3.modelo.rondas.Colocacion;
+import edu.fiuba.algo3.modelo.rondas.RondaColocacion;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
@@ -80,9 +80,9 @@ public class MenuLateralDerecho extends VBox implements Observer {
         this.descripcionDeRonda.setText(this.juego.getTurno().obtenerRondaActual().obtenerDescripcion());
         this.descripcionDeTurno.setText("Es el turno de: " + this.juego.getTurno().obtenerJugadorTurnoActual().obtenerNombre());
         campoDeJuego.mostrarPaisesDelJugadorActual();
-        if (juego.getTurno().obtenerRondaActual().obtenerDescripcion().equals("Ronda de colocación")) {
+        if (juego.getTurno().obtenerRondaActual().obtenerDescripcion().contains("Ronda de colocación")) {
             this.labelDeAyuda.setText("Haga click en su pais \n para colocar ejercito \n Queda/n por colocar " +
-                    ((Colocacion) juego.getRonda()).getCantidadEjercitosColocables() + " ejército/s");
+                    ((RondaColocacion) juego.getRonda()).getCantidadEjercitosColocables() + " ejército/s");
         }
     }
 
@@ -90,7 +90,7 @@ public class MenuLateralDerecho extends VBox implements Observer {
         this.getChildren().get(0).setVisible(true);
         this.getChildren().get(1).setVisible(true);
         this.labelDeAyuda.setText("Haga click en su pais \n para colocar ejercito \n Queda/n por colocar " +
-                ((Colocacion) juego.getRonda()).getCantidadEjercitosColocables() + " ejército/s");
+                ((RondaColocacion) juego.getRonda()).getCantidadEjercitosColocables() + " ejército/s");
         this.inputText.setVisible(false);
         this.botonAccion.setVisible(false);
     }

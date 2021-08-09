@@ -3,10 +3,10 @@ package edu.fiuba.algo3.modelo.turnos;
 import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.Jugadores;
 import edu.fiuba.algo3.modelo.observables.Observer;
-import edu.fiuba.algo3.modelo.observables.Subject;
 import edu.fiuba.algo3.modelo.paises.Pais;
 import edu.fiuba.algo3.modelo.batallasDeDados.Resultado;
-import edu.fiuba.algo3.modelo.rondas.Colocacion;
+import edu.fiuba.algo3.modelo.rondas.ColocacionInicial;
+import edu.fiuba.algo3.modelo.rondas.RondaColocacion;
 import edu.fiuba.algo3.modelo.tarjetas.Tarjeta;
 import edu.fiuba.algo3.modelo.excepciones.*;
 import edu.fiuba.algo3.modelo.rondas.Ronda;
@@ -23,7 +23,7 @@ public class ConTurno implements Turno {
 
     public ConTurno(Jugadores jugadores) {
         this.jugadores = jugadores;
-        this.setRonda(new Colocacion(jugadores.getPrimerJugador()));
+        this.setRonda(new ColocacionInicial(jugadores.getPrimerJugador()));
         this.cambiarJugadorActual();
         this.cantidadDeTurnosJugados = 0;
     }

@@ -34,7 +34,7 @@ public class PaisEventHandler implements EventHandler<MouseEvent> {
         VBox formularioDeAccion = (VBox) menuLateral.getChildren().get(1);
         TextField textField = (TextField) formularioDeAccion.getChildren().get(1);
 
-        if (ronda.obtenerDescripcion().equals("Ronda de colocación")) {
+        if (ronda.obtenerDescripcion().contains("Ronda de colocación")) {
             System.out.println("Estamos en Ronda de Colocacion rey");
 
             campoDeJuego.mostrarPaisesDelJugadorActual();

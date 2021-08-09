@@ -161,7 +161,7 @@ public class TurnoTest {
     }
 
     @Test
-    public void porDefectoLaPrimerRondaEsDeColocacion() {
+    public void porDefectoLaPrimerRondaEsDeColocacionInicial() {
         Jugadores jugadores = new Jugadores();
         jugadores.agregarJugador(new Jugador( "Martin", Color.BLUE));
         Turno turno = new ConTurno(jugadores);
