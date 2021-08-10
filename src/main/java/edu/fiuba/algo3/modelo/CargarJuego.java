@@ -100,13 +100,15 @@ public class CargarJuego {
     }
 
     private static Simbolo nuevoSimbolo(String simbolo) {
-
         switch (simbolo) {
-            case "Globo": return new Globo();
-            case "Barco": return new Barco();
-            case "Cañon": return new Canion();
+            case "Globo":
+                return new Globo();
+            case "Barco":
+                return new Barco();
+            case "Cañon":
+                return new Canion();
         }
-        return null;
+        return new Comodin();
     }
 
 }

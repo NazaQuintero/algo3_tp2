@@ -27,10 +27,12 @@ public class Tarjeta {
     }
 
     public String obtenerSimbolo() {
-        return simbolo.obtenerDescripcion();
+        return this.simbolo.obtenerDescripcion();
+        //return "Cañon"; //lo hardcodee porque los simbolos llegan como null desde el json
     }
 
     public boolean coincideSimboloCon(Tarjeta unaTarjeta) {
+        if(unaTarjeta.obtenerSimbolo().equals("Comodin")) return true;
         return this.obtenerSimbolo().equals(unaTarjeta.obtenerSimbolo());
     }
 

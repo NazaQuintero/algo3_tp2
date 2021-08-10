@@ -5,19 +5,23 @@ import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.observables.Observer;
 import edu.fiuba.algo3.modelo.paises.MultitonPaises;
 import edu.fiuba.algo3.modelo.paises.Pais;
+import edu.fiuba.algo3.modelo.tarjetas.Tarjeta;
 import edu.fiuba.algo3.modelo.rondas.Ataque;
 import edu.fiuba.algo3.modelo.rondas.RondaColocacion;
 import edu.fiuba.algo3.modelo.turnos.Turno;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ContentDisplay;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+import javafx.scene.layout.GridPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.scene.layout.BorderPane;
 
 import java.util.ArrayList;
 
@@ -26,6 +30,7 @@ public class CampoDeJuego extends BorderPane {
 
     private final Juego juego;
     private final ArrayList<VistaPais> vistasPaises = new ArrayList<>();
+    private ArrayList<VistaTarjeta> vistasTarjetas = new ArrayList<>();
     private Pais paisSeleccionado;
 
     private MenuLateralDerecho menuLateralDerecho;
@@ -35,6 +40,9 @@ public class CampoDeJuego extends BorderPane {
         this.menuLateralDerecho = new MenuLateralDerecho(this, juego);
         this.getStylesheets().add("styles.css");
 
+        Button botonTarjetas = new Button("Ver tarjetas");
+        botonTarjetas.setOnAction(e -> mostrarTarjetas());
+
         Image imagen = new Image("tablero.png");
         ImageView imageView = new ImageView(imagen);
         imageView.setPreserveRatio(true);
@@ -42,8 +50,9 @@ public class CampoDeJuego extends BorderPane {
         imageView.setFitHeight(800);
 
         Pane stackPane = new Pane();
-        stackPane.getChildren().add(imageView);
+        stackPane.getChildren().addAll(imageView, botonTarjetas);
         crearVistasPaises(stackPane);
+        crearVistasTarjetas();
 
         /*
         Button btnNew = new Button("New");
@@ -69,8 +78,19 @@ public class CampoDeJuego extends BorderPane {
         this.mostrarPaisesDelJugadorActual();
         this.mostrarMenuLateralDerecho();
 
-        stage.setScene(new Scene(this, 1500, 900));
+        stage.setScene(new Scene(this, 1500, 900)); // esto lo voy a poner mas chico por ahora xq en mi pantalla se corta tod0
+        //stage.setScene(new Scene(this, 1000, 600));
         stage.centerOnScreen();
+        this.getChildren().add(stackPane); // a ver ahi mandale npi xddd
+        //stage.setScene(new Scene(this, 1400, 900)); // esto lo voy a poner mas chico por ahora xq en mi pantalla se corta tod0
+        //stage.setScene(new Scene(this, 1000, 600));
+
+    }
+
+    public void crearVistasTarjetas() {
+        vistasTarjetas = new ArrayList<>();
+        Jugador unJugador = this.juego.getTurno().obtenerJugadorTurnoActual();
+        for (Tarjeta t : unJugador.obtenerTarjetas()) vistasTarjetas.add(new VistaTarjeta(t));
     }
 
     private void crearVistasPaises(Pane stackPane) {
@@ -121,6 +141,63 @@ public class CampoDeJuego extends BorderPane {
     public Pais getPaisSeleccionado() {
         return paisSeleccionado;
     }
+
+    public void mostrarTarjetas() {
+
+        Stage ventanaTarjetas = new Stage();
+        ventanaTarjetas.initModality(Modality.APPLICATION_MODAL);
+        ventanaTarjetas.setTitle("a");
+        ventanaTarjetas.setMinWidth(200);
+
+        GridPane layoutTarjetas = new GridPane();
+        layoutTarjetas.setPadding(new Insets(30, 30, 30, 30));
+        layoutTarjetas.setVgap(30);
+        layoutTarjetas.setHgap(20);
+
+        int i = 0;
+        int j = 0;
+
+        for (VistaTarjeta v : vistasTarjetas) {
+            if (j == 4) {
+                j = 0;
+                i++;
+            }
+            Button botonTarjeta = new Button(v.obtenerNombrePais(), v.obtenerImagen());
+            botonTarjeta.setContentDisplay(ContentDisplay.BOTTOM);
+
+            botonTarjeta.setMaxWidth(82);
+            botonTarjeta.setMaxHeight(250);
+
+            GridPane.setConstraints(botonTarjeta, j, i);
+            layoutTarjetas.getChildren().add(botonTarjeta);
+            j++;
+        }
+
+        ScrollPane layoutTarjetasScroll = new ScrollPane();
+        layoutTarjetasScroll.setContent(layoutTarjetas);
+        layoutTarjetasScroll.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+
+        HBox layoutBotones = new HBox();
+        Button botonActivar = new Button("Activar tarjeta");
+        Button botonCanjear = new Button("Canjear tarjetas");
+        Button botonCancelar = new Button("Cancelar");
+
+        HBox.setMargin(botonActivar, new Insets(20,40,20,40));
+        HBox.setMargin(botonCanjear, new Insets(20,40,20,40));
+        HBox.setMargin(botonCancelar, new Insets(20,40,20,40));
+
+        botonCancelar.setOnAction(e -> ventanaTarjetas.close());
+        layoutBotones.getChildren().addAll(botonActivar, botonCanjear, botonCancelar);
+
+        BorderPane layout = new BorderPane();
+        layout.setCenter(layoutTarjetasScroll);
+        layout.setBottom(layoutBotones);
+
+        Scene scene = new Scene(layout, 500, 400);
+        ventanaTarjetas.setScene(scene);
+        ventanaTarjetas.showAndWait();
+    }
+
 
     public Turno getTurno() {
         return this.juego.getTurno();
