@@ -29,7 +29,7 @@ public class ExcepcionesTest {
 
     @Test
     public void alTratarDeCargarTarjetasLanzaExcepcionDeArchivoDeTarjetasNoEncontrado(){
-        assertThrows(ArchivoDeTarjetasNoEncontradoException.class, () -> CargarJuego.cargarTarjetas(new Juego(), "pochoclo"));
+        assertThrows(ArchivoDeTarjetasNoEncontradoException.class, () -> CargarJuego.cargarTarjetas( "pochoclo"));
     }
 
     @Test

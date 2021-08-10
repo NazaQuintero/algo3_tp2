@@ -30,6 +30,7 @@ public class Jugador {
     private final ArrayList<Pais> paisesDominados = new ArrayList<>();
     private final HashMap<Pais, Tarjeta> tarjetas = new HashMap<>();
     private Canje canje;
+    private boolean conquistoPais = false;
 
     public Jugador(String nombre, Color color){
         this.objetivos.add(new General());
@@ -136,10 +137,7 @@ public class Jugador {
     }
 
     boolean comprobarTarjetas(ArrayList<Tarjeta> tarjetas) {
-        for (Tarjeta t: tarjetas){
-            if (!this.tarjetas.containsValue(t)) return false;
-        }
-        return true;
+        return this.tarjetas.values().containsAll(tarjetas);
     }
 
     public void devolverTarjetas(ArrayList<Tarjeta> tarjetasADevolver) throws LaTarjetaYaEstaDesactivadaException {
