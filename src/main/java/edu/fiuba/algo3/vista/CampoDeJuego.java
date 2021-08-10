@@ -114,9 +114,6 @@ public class CampoDeJuego extends BorderPane {
         return paisSeleccionado;
     }
 
-
-
-
     public Turno getTurno() {
         return this.juego.getTurno();
     }

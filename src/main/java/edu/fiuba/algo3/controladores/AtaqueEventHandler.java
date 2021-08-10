@@ -54,7 +54,7 @@ public class AtaqueEventHandler implements EventHandler<Event>  {
                 inputText.clear();
                 inputText.requestFocus();
 
-                menuLateral.mostrarErrorAtaque();
+                menuLateral.mostrarErrorAtaqueYReagrupe(atacante.cantidadEjercitos()-1);
             }
         }
     }

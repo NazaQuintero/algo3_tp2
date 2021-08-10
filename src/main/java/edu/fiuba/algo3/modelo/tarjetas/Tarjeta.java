@@ -34,7 +34,7 @@ public class Tarjeta {
     }
 
     public boolean coincideSimboloCon(Tarjeta unaTarjeta) {
-        if(unaTarjeta.obtenerSimbolo().equals("Comodin")) return true;
+        if (unaTarjeta.obtenerSimbolo().equals("Comodin")) return true;
         return this.obtenerSimbolo().equals(unaTarjeta.obtenerSimbolo());
     }
 
@@ -43,4 +43,5 @@ public class Tarjeta {
             return new CanjeHabilitado();
         return new SinCanje();
     }
+
 }

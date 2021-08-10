@@ -24,6 +24,8 @@ public class VistaTarjeta {
         return this.view;
     }
 
-    public String obtenerNombrePais() { return tarjeta.obtenerPais().getNombre(); }
+    public Tarjeta getTarjeta() {
+        return tarjeta;
+    }
 
 }
