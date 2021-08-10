@@ -22,7 +22,7 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 
 
-public class CampoDeJuego extends BorderPane implements Observer {
+public class CampoDeJuego extends BorderPane {
 
     private final Juego juego;
     private final ArrayList<VistaPais> vistasPaises = new ArrayList<>();
@@ -34,7 +34,6 @@ public class CampoDeJuego extends BorderPane implements Observer {
         this.juego = juego;
         this.menuLateralDerecho = new MenuLateralDerecho(this, juego);
         this.getStylesheets().add("styles.css");
-        this.juego.getTurno().addObserver(this);
 
         Image imagen = new Image("tablero.png");
         ImageView imageView = new ImageView(imagen);

@@ -59,11 +59,12 @@ public class PaisEventHandler implements EventHandler<MouseEvent> {
                 vistaPais.resaltarLimitrofesAdversarios();
                 vistaPais.marcarComoSeleccionada();
                 campoDeJuego.setPaisSeleccionado(pais);
-                menuLateral.setTextoLabelAyuda("Seleccione el Pais al que \n desea atacar.");
+                menuLateral.setTextoLabelAyuda("Seleccione el Pais al que desea atacar.");
             } else {
-                menuLateral.setTextoLabelAyuda("Indique la cantidad de Ejercitos \n con los que desea atacar");
+                menuLateral.setTextoLabelAyuda("Indique la cantidad de Ejercitos con los que desea atacar");
                 menuLateral.setInputTextVisible(true);
                 menuLateral.setBotonAccionVisible(true);
+                menuLateral.setBotonCancelarVisible(true);
                 menuLateral.setAccion(new AtaqueEventHandler(campoDeJuego, pais, textField));
                 textField.requestFocus();
             }
@@ -75,11 +76,12 @@ public class PaisEventHandler implements EventHandler<MouseEvent> {
                 vistaPais.marcarComoSeleccionada();
                 campoDeJuego.setPaisSeleccionado(pais);
                 vistaPais.resaltarLimitrofesPropios();
-                menuLateral.setTextoLabelAyuda("Seleccione el Pais al que \n desea enviar sus tropas.");
+                menuLateral.setTextoLabelAyuda("Seleccione el Pais al que desea enviar sus tropas.");
             } else {
-                menuLateral.setTextoLabelAyuda("Indique la cantidad de Ejercitos \n que desea reagrupar");
+                menuLateral.setTextoLabelAyuda("Indique la cantidad de Ejercitos que desea reagrupar");
                 menuLateral.setInputTextVisible(true);
                 menuLateral.setBotonAccionVisible(true);
+                menuLateral.setBotonCancelarVisible(true);
                 ReagrupeEventHandler reagrupeEventHandler = new ReagrupeEventHandler(campoDeJuego, pais, textField);
                 menuLateral.setAccion(reagrupeEventHandler);
                 textField.requestFocus();

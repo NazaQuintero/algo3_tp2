@@ -117,6 +117,7 @@ public class MenuLateralDerecho extends VBox implements Observer {
     public void mostrarFormularioDeColocacion() {
         this.getChildren().get(0).setVisible(true);
         this.getChildren().get(1).setVisible(true);
+        this.botonCancelar.setVisible(false);
         this.labelDeAyuda.setText("Haga click en su pais para colocar ejercito\nQueda/n por colocar " +
                 ((RondaColocacion) juego.getRonda()).getCantidadEjercitosColocables() + " ejército/s");
         this.inputText.setVisible(false);
@@ -140,6 +141,7 @@ public class MenuLateralDerecho extends VBox implements Observer {
         this.getChildren().get(1).setVisible(true);
         this.inputText.setVisible(false);
         inputText.clear();
+        this.botonCancelar.setVisible(false);
         this.botonAccion.setVisible(false);
         this.botonAccion.setText("Reagrupar!");
         this.labelDeAyuda.setText("Seleccione el Pais desde el que desea reagrupar.");
