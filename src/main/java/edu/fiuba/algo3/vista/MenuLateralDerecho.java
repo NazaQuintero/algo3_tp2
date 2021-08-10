@@ -3,6 +3,8 @@ package edu.fiuba.algo3.vista;
 import edu.fiuba.algo3.controladores.FinalizarRondaEventHandler;
 import edu.fiuba.algo3.modelo.Juego;
 import edu.fiuba.algo3.modelo.observables.Observer;
+import edu.fiuba.algo3.modelo.rondas.Ataque;
+import edu.fiuba.algo3.modelo.rondas.RondaColocacion;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
@@ -25,6 +27,7 @@ public class MenuLateralDerecho extends VBox implements Observer {
     private Label labelDeAyuda;
     private Label labelDeError;
     private VBox resultadoDeAtaque;
+    private Button botonCancelar;
 
     public MenuLateralDerecho(CampoDeJuego campoDeJuego, Juego juego) {
         this.campoDeJuego = campoDeJuego;
@@ -37,12 +40,15 @@ public class MenuLateralDerecho extends VBox implements Observer {
         this.setAlignment(Pos.CENTER);
     }
 
-
     private VBox crearFormularioDeAccion() {
         this.labelDeAyuda = new Label("");
         labelDeAyuda.getStyleClass().add("labelText");
+        labelDeAyuda.getStyleClass().add("labelAyuda");
+        labelDeAyuda.setWrapText(true);
         this.labelDeError = new Label("Cantidad de ejércitos inválida");
         labelDeError.getStyleClass().add("error");
+        labelDeError.getStyleClass().add("labelError");
+        labelDeError.setWrapText(true);
         labelDeError.setVisible(false);
 
         this.inputText = new TextField();
@@ -56,12 +62,25 @@ public class MenuLateralDerecho extends VBox implements Observer {
         this.botonFinalizarRonda.setOnMouseClicked(new FinalizarRondaEventHandler(campoDeJuego));
 
         HBox botones = new HBox(botonAccion, botonFinalizarRonda);
+        botones.setSpacing(10);
 
-        VBox vBox = new VBox(labelDeAyuda, inputText, botones, labelDeError);
+        crearBotonCancelar();
+
+        VBox vBox = new VBox(labelDeAyuda, inputText, botones, botonCancelar, labelDeError);
         vBox.setSpacing(10);
         vBox.setAlignment(Pos.CENTER);
         vBox.setVisible(false);
         return vBox;
+    }
+
+    private void crearBotonCancelar() {
+        botonCancelar = new Button("Cancelar");
+        botonCancelar.getStyleClass().add("cancelButton");
+        botonCancelar.setOnAction(e -> {
+            campoDeJuego.setPaisSeleccionado(null);
+            update();
+        });
+        botonCancelar.setVisible(false);
     }
 
     private VBox crearDescripcionDeRonda() {
@@ -71,9 +90,7 @@ public class MenuLateralDerecho extends VBox implements Observer {
         this.descripcionDeTurno = new Label("Es el turno de: " + this.juego.getTurno().obtenerJugadorTurnoActual().obtenerNombre());
         this.descripcionDeTurno.getStyleClass().add("labelText");
 
-        VBox vBox = new VBox(this.descripcionDeRonda, this.descripcionDeTurno);
-
-        return vBox;
+        return new VBox(this.descripcionDeRonda, this.descripcionDeTurno);
     }
 
     @Override
@@ -81,12 +98,28 @@ public class MenuLateralDerecho extends VBox implements Observer {
         this.descripcionDeRonda.setText(this.juego.getTurno().obtenerRondaActual().obtenerDescripcion());
         this.descripcionDeTurno.setText("Es el turno de: " + this.juego.getTurno().obtenerJugadorTurnoActual().obtenerNombre());
         campoDeJuego.mostrarPaisesDelJugadorActual();
+        ocultarError();
+        this.limpiarResultadoDeBatalla();
+        if(this.juego.getRonda() instanceof RondaColocacion) {
+            this.mostrarFormularioDeColocacion();
+            this.labelDeAyuda.setText("Haga click en su pais para colocar ejercito\nQueda/n por colocar " +
+                    ((RondaColocacion) juego.getRonda()).getCantidadEjercitosColocables() + " ejército/s");
+        }
+        else if (this.juego.getRonda() instanceof Ataque) {
+            this.mostrarFormularioDeAtaque();
+        }
+        else {
+            this.mostrarFormularioDeReagrupe();
+            limpiarResultadoDeBatalla();
+        }
     }
 
     public void mostrarFormularioDeColocacion() {
         this.getChildren().get(0).setVisible(true);
         this.getChildren().get(1).setVisible(true);
-        this.labelDeAyuda.setText("Haga click en su pais \n para colocar ejercito");
+        this.botonCancelar.setVisible(false);
+        this.labelDeAyuda.setText("Haga click en su pais para colocar ejercito\nQueda/n por colocar " +
+                ((RondaColocacion) juego.getRonda()).getCantidadEjercitosColocables() + " ejército/s");
         this.inputText.setVisible(false);
         this.botonAccion.setVisible(false);
     }
@@ -95,9 +128,11 @@ public class MenuLateralDerecho extends VBox implements Observer {
         this.getChildren().get(0).setVisible(true);
         this.getChildren().get(1).setVisible(true);
         this.inputText.setVisible(false);
+        this.inputText.clear();
         this.botonAccion.setVisible(false);
+        this.botonCancelar.setVisible(false);
         this.botonAccion.setText("Atacar!");
-        this.labelDeAyuda.setText("Haga click sobre su pais con \n el que desee atacar");
+        this.labelDeAyuda.setText("Haga click sobre su pais con el que desee atacar");
     }
 
 
@@ -105,9 +140,11 @@ public class MenuLateralDerecho extends VBox implements Observer {
         this.getChildren().get(0).setVisible(true);
         this.getChildren().get(1).setVisible(true);
         this.inputText.setVisible(false);
+        inputText.clear();
+        this.botonCancelar.setVisible(false);
         this.botonAccion.setVisible(false);
         this.botonAccion.setText("Reagrupar!");
-        this.labelDeAyuda.setText("Seleccione el Pais desde el \n que desea reagrupar.");
+        this.labelDeAyuda.setText("Seleccione el Pais desde el que desea reagrupar.");
     }
 
     public void setResultadoDeAtaque(VBox resultadoDeAtaque) {
@@ -116,8 +153,10 @@ public class MenuLateralDerecho extends VBox implements Observer {
     }
 
     public void limpiarResultadoDeBatalla() {
-        if(this.getChildren().get(2) != null) {
+        try {
             this.getChildren().remove(2);
+        } catch (Exception ignored) {
+
         }
     }
 
@@ -136,5 +175,28 @@ public class MenuLateralDerecho extends VBox implements Observer {
 
     public void setBotonAccionVisible(boolean b) {
         this.botonAccion.setVisible(b);
+    }
+
+    public void mostrarErrorColocacion() {
+        labelDeError.setText("No quedan más ejércitos por colocar");
+        labelDeError.setVisible(true);
+    }
+
+    public void mostrarErrorAtaque() {
+        labelDeError.setText("Cantidad de ejércitos inválida");
+        labelDeError.setVisible(true);
+    }
+
+    public void ocultarError() {
+        labelDeError.setVisible(false);
+    }
+
+    public void mostrarErrorReagrupe(int cantidadMaxima){
+        labelDeError.setText("Cantidad inválida. La cantidad debe ser como máximo " + cantidadMaxima + " ejército/s");
+        labelDeError.setVisible(true);
+    }
+
+    public void setBotonCancelarVisible(boolean b) {
+        botonCancelar.setVisible(b);
     }
 }

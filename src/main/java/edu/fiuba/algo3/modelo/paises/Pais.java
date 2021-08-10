@@ -85,11 +85,13 @@ public class Pais implements Subject {
     }
 
 
-    public void reagrupar(Pais destino, int cantidad) throws ElPaisNoEsLimitrofeException {
-        if (this.esLimitrofeCon(destino)) {
-            this.modificarCantidadEjercito(-cantidad);
-            destino.modificarCantidadEjercito(cantidad);
-        } else throw new ElPaisNoEsLimitrofeException();
+    public void reagrupar(Pais destino, int cantidad) throws ElPaisNoEsLimitrofeException, EjercitosInsuficientesException {
+        if (!this.esLimitrofeCon(destino)) throw new ElPaisNoEsLimitrofeException();
+        if (this.cantidadEjercitos() - cantidad <= 0 || cantidad <= 0) throw new EjercitosInsuficientesException();
+
+        this.modificarCantidadEjercito(-cantidad);
+        destino.modificarCantidadEjercito(cantidad);
+
     }
 
     public boolean estaLibre() {

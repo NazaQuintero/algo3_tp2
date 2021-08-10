@@ -100,10 +100,15 @@ public class CargarJuego {
     }
 
     private static Simbolo nuevoSimbolo(String simbolo) {
-        if(simbolo.equals("Globo")) return new Globo();
-        else if(simbolo.equals("Barco")) return new Barco();
-        else if(simbolo.equals("Cañon")) return new Canion();
-        return new Comodin(); // siempre entra a este else porque el "simbolo" que recibe no es nada de lo que esperamos :pogo: claramente esta mal su json salsisisisisisis exceleten
+        switch (simbolo) {
+            case "Globo":
+                return new Globo();
+            case "Barco":
+                return new Barco();
+            case "Cañon":
+                return new Canion();
+        }
+        return new Comodin();
     }
 
 }

@@ -7,6 +7,7 @@ import edu.fiuba.algo3.modelo.fichas.Ejercito;
 import edu.fiuba.algo3.modelo.paises.Pais;
 import edu.fiuba.algo3.modelo.rondas.Ataque;
 import edu.fiuba.algo3.modelo.rondas.Colocacion;
+import edu.fiuba.algo3.modelo.rondas.RondaColocacion;
 import edu.fiuba.algo3.modelo.rondas.Reagrupe;
 import edu.fiuba.algo3.modelo.tarjetas.Globo;
 import edu.fiuba.algo3.modelo.tarjetas.Tarjeta;
@@ -192,7 +193,7 @@ public class RondaTest {
     }
 
     @Test
-    public void seJuegaUnaRondaCon3JugadoresJugador2DominaAsiaNadieAtacaPeroSiColocan() throws ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException, JugadorNoExisteException, PaisOcupadoPorOtroJugadorException {
+    public void seJuegaUnaRondaCon3JugadoresJugador2DominaAsiaNadieAtacaPeroSiColocan() throws ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException, JugadorNoExisteException, PaisOcupadoPorOtroJugadorException, NoQuedanMasEjercitosPorColocarException {
         Jugadores jugadores = new Jugadores();
         Jugador jugador1 = new Jugador( "Martin", Color.RED);
         Jugador jugador2 = new Jugador( "Naza", Color.RED);

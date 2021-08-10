@@ -2,56 +2,36 @@ package edu.fiuba.algo3.modelo.tarjetas;
 
 import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.Jugadores;
+import edu.fiuba.algo3.modelo.observables.Observer;
+import edu.fiuba.algo3.modelo.observables.Subject;
 import edu.fiuba.algo3.modelo.paises.Pais;
 import edu.fiuba.algo3.modelo.excepciones.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Tarjetas {
+public class Tarjetas implements Subject {
 
-    private HashMap<Pais, Tarjeta> tarjetasLocas;
+    private HashMap<Pais, Tarjeta> tarjetas;
+    private ArrayList<Observer> observers = new ArrayList<>();
 
-    public Tarjetas() { tarjetasLocas = new HashMap<>(); }
+    public Tarjetas() { tarjetas = new HashMap<>(); }
 
     public void agregarTarjeta(Tarjeta unaTarjeta) {
-        tarjetasLocas.put(unaTarjeta.obtenerPais(), unaTarjeta);
+        tarjetas.put(unaTarjeta.obtenerPais(), unaTarjeta);
     }
 
-    public Tarjeta obtenerTarjeta(Pais unPais) { return tarjetasLocas.get(unPais); }
+    public Tarjeta obtenerTarjeta(Pais unPais) { return tarjetas.get(unPais); }
 
-    public void repartir(Jugadores jugadores) { // en Tarjetas
+    public void repartir(Jugadores jugadores) {
         int i = 0;
         try {
-            for (Tarjeta t : tarjetasLocas.values()) {
+            for (Tarjeta t : tarjetas.values()) {
                 this.darTarjeta(jugadores.obtenerJugador(i), t.obtenerPais());
                 i++;
                 if (i == jugadores.obtenerCantidad()) i = 0;
             }
-        } catch(JugadorNoExisteException ignored) {
-        }
-    }
-
-    /*public boolean contieneTarjetaDePais(Pais unPais) {
-        return tarjetasLocas.stream().anyMatch(tarjeta -> tarjeta.obtenerPais() == unPais);
-    }*/
-
-    /*public Stream<Tarjeta> obtenerTarjetasConSimbolo(Simbolo unSimboloLoco) {
-        return tarjetasLocas.stream().filter(tarjeta -> tarjeta.obtenerSimbolo() == unSimboloLoco); // esto no va a funcionar :v
-    }*/
-
-    /*public TipoCanje metodoMagico() {
-        if (this.hayTresSimbolosIguales()) return new TresSimbolosIguales();
-        else if (this.hayTresSimbolosDistintos()) return new TresSimbolosDistintos(); // esto nos falto cambiar
-        return new SinCanje(); esto no lo usamos igual
-    }*/
-
-    private boolean hayTresSimbolosDistintos() {
-        return false;
-    }
-
-    private boolean hayTresSimbolosIguales() {
-        return false;
+        } catch (JugadorNoExisteException ignored) {}
     }
 
     public void darTarjeta(Jugador jugador, Pais paisTarjeta) { jugador.recibirTarjeta(obtenerTarjeta(paisTarjeta)); }
@@ -66,5 +46,20 @@ public class Tarjetas {
         tarjetas.add(obtenerTarjeta(paisesTarjetas.get(1)));
         tarjetas.add(obtenerTarjeta(paisesTarjetas.get(2)));
         jugador.canjearTarjetas(tarjetas);
+    }
+
+    @Override
+    public void addObserver(Observer obs) {
+        this.observers.add(obs);
+    }
+
+    @Override
+    public void removeObserver(Observer obs) {
+        this.observers.remove(obs);
+    }
+
+    @Override
+    public void notifyObservers() {
+        for (Observer obs: observers) obs.update();
     }
 }

@@ -18,7 +18,7 @@ public class VistaTarjeta implements Observer {
 
     public VistaTarjeta(Tarjeta tarjeta) {
         this.tarjeta = tarjeta;
-        this.imagenTarjeta = new Image(tarjeta.obtenerSimbolo()+".png"); // aca lanza la excepcion aaa
+        this.imagenTarjeta = new Image(tarjeta.obtenerSimbolo() + ".png");
         this.view = new ImageView(imagenTarjeta);
         view.setPreserveRatio(true);
         view.setFitWidth(82);
@@ -26,7 +26,6 @@ public class VistaTarjeta implements Observer {
     }
 
     public ImageView obtenerImagen() {
-        //return this.imagenTarjeta;
         return this.view;
     }
 

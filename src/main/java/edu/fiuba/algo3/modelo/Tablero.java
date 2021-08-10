@@ -5,7 +5,6 @@ import edu.fiuba.algo3.modelo.batallasDeDados.Resultado;
 import edu.fiuba.algo3.modelo.excepciones.*;
 import edu.fiuba.algo3.modelo.paises.MultitonPaises;
 import edu.fiuba.algo3.modelo.paises.Pais;
-import edu.fiuba.algo3.modelo.tarjetas.Tarjeta;
 
 import java.util.*;
 
@@ -23,7 +22,7 @@ public class Tablero {
                 Jugador jugador = jugadores.obtenerJugador(i % cantidadJugadores);
                 jugador.colocarEjercitos(paises.get(i), 1);
             }
-        } catch (ElJugadorNoTieneTurnoException | NoEsRondaDeColocacionException | JugadorNoExisteException | PaisOcupadoPorOtroJugadorException ignored) {
+        } catch (ElJugadorNoTieneTurnoException | NoEsRondaDeColocacionException | JugadorNoExisteException | PaisOcupadoPorOtroJugadorException | NoQuedanMasEjercitosPorColocarException ignored) {
         }
     }
 
@@ -32,24 +31,12 @@ public class Tablero {
         ProcesadorResultado.obtenerInstancia().procesar(resultado);
     }
 
-    public void colocarEjercitos(Jugador jugador, Pais pais, int cantidadEjercitos) throws ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException, PaisOcupadoPorOtroJugadorException {
+    public void colocarEjercitos(Jugador jugador, Pais pais, int cantidadEjercitos) throws ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException, PaisOcupadoPorOtroJugadorException, NoQuedanMasEjercitosPorColocarException {
         jugador.colocarEjercitos(pais, cantidadEjercitos);
     }
 
-    public int cantidadEjercitosEn(Pais pais) {
-        return pais.cantidadEjercitos();
-    }
-
-    public Jugador paisDominadoPor(Pais pais) {
-        return pais.dominadoPor();
-    }
-
-    public void reagrupar(Jugador jugador, Pais paisOrigen, Pais paisDestino, int cantidadAMover) throws ElPaisNoEsLimitrofeException, NoEsRondaDeReagrupeException, ElJugadorNoTieneTurnoException {
+    public void reagrupar(Jugador jugador, Pais paisOrigen, Pais paisDestino, int cantidadAMover) throws ElPaisNoEsLimitrofeException, NoEsRondaDeReagrupeException, ElJugadorNoTieneTurnoException, EjercitosInsuficientesException {
         jugador.reagrupar(paisOrigen, paisDestino, cantidadAMover);
-    }
-
-    public int cantidadPaisesDominados(Jugador jugador) {
-        return jugador.cantidadPaisesDominados();
     }
 
 }

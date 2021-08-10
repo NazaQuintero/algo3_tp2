@@ -43,6 +43,7 @@ public class AtaqueEventHandler implements EventHandler<Event>  {
                 menuLateral.limpiarResultadoDeBatalla();
                 int cantidadDeEjercitos = Integer.parseInt(inputText.getText());
                 Resultado resultado = atacante.atacarA(defensor, cantidadDeEjercitos);
+                menuLateral.update();
                 mostrarAtaque();
                 ProcesadorResultado.obtenerInstancia().procesar(resultado);
                 campoDeJuego.setPaisSeleccionado(null);
@@ -53,9 +54,7 @@ public class AtaqueEventHandler implements EventHandler<Event>  {
                 inputText.clear();
                 inputText.requestFocus();
 
-                VBox form = (VBox) menuLateral.getChildren().get(1);
-
-                form.getChildren().get(3).setVisible(true);
+                menuLateral.mostrarErrorAtaque();
             }
         }
     }

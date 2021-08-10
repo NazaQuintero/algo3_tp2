@@ -3,8 +3,10 @@ package edu.fiuba.algo3.controladores;
 import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.excepciones.ElJugadorNoTieneTurnoException;
 import edu.fiuba.algo3.vista.CampoDeJuego;
+import edu.fiuba.algo3.vista.MenuLateralDerecho;
 import javafx.event.Event;
 import javafx.event.EventHandler;
+import javafx.scene.control.Label;
 
 public class FinalizarRondaEventHandler implements EventHandler<Event> {
 
@@ -17,9 +19,12 @@ public class FinalizarRondaEventHandler implements EventHandler<Event> {
     @Override
     public void handle(Event event) {
         Jugador jugador = campoDeJuego.getTurno().obtenerJugadorTurnoActual();
+        MenuLateralDerecho menuLateralDerecho = (MenuLateralDerecho) campoDeJuego.getRight();
+        menuLateralDerecho.ocultarError();
+
         try {
             campoDeJuego.getTurno().finalizarRonda(jugador);
-            campoDeJuego.crearVistasTarjetas();
+//            campoDeJuego.crearVistasTarjetas();
         } catch (ElJugadorNoTieneTurnoException e) {
             e.printStackTrace();
         }
