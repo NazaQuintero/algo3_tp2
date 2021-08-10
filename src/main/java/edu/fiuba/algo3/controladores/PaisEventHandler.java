@@ -49,7 +49,7 @@ public class PaisEventHandler implements EventHandler<MouseEvent> {
                 labelDeError.setVisible(true);
             }
 
-        } else if(ronda.obtenerDescripcion().equals("Ronda de ataque")) {
+        } else if (ronda instanceof Ataque) {
             System.out.println("Estamos en Ronda de Ataque papu");
 
             if (campoDeJuego.getPaisSeleccionado() == null) {

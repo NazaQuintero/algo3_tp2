@@ -35,7 +35,7 @@ public class Tablero {
         jugador.colocarEjercitos(pais, cantidadEjercitos);
     }
 
-    public void reagrupar(Jugador jugador, Pais paisOrigen, Pais paisDestino, int cantidadAMover) throws ElPaisNoEsLimitrofeException, NoEsRondaDeReagrupeException, ElJugadorNoTieneTurnoException {
+    public void reagrupar(Jugador jugador, Pais paisOrigen, Pais paisDestino, int cantidadAMover) throws ElPaisNoEsLimitrofeException, NoEsRondaDeReagrupeException, ElJugadorNoTieneTurnoException, EjercitosInsuficientesException {
         jugador.reagrupar(paisOrigen, paisDestino, cantidadAMover);
     }
 

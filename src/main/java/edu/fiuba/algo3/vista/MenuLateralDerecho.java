@@ -3,6 +3,7 @@ package edu.fiuba.algo3.vista;
 import edu.fiuba.algo3.controladores.FinalizarRondaEventHandler;
 import edu.fiuba.algo3.modelo.Juego;
 import edu.fiuba.algo3.modelo.observables.Observer;
+import edu.fiuba.algo3.modelo.rondas.Ataque;
 import edu.fiuba.algo3.modelo.rondas.RondaColocacion;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -109,6 +110,7 @@ public class MenuLateralDerecho extends VBox implements Observer {
         this.getChildren().get(0).setVisible(true);
         this.getChildren().get(1).setVisible(true);
         this.inputText.setVisible(false);
+        inputText.clear();
         this.botonAccion.setVisible(false);
         this.botonAccion.setText("Reagrupar!");
         this.labelDeAyuda.setText("Seleccione el Pais desde el \n que desea reagrupar.");
