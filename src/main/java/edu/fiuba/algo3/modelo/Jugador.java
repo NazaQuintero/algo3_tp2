@@ -94,9 +94,9 @@ public class Jugador {
         tarjetas.put(tarjeta.obtenerPais(), tarjeta);
     }
 
-    public void activarTarjetaPais(Pais unPais) throws TarjetaNoEncontradaException, JugadorNoPoseePaisDeLaTarjetaException, ActivacionTarjetaEnRondaEquivocadaException, ElJugadorNoTieneTurnoException, LaTarjetaYaFueActivadaException {
-        if(!this.paisesDominados.contains(unPais)) throw new JugadorNoPoseePaisDeLaTarjetaException();
-        this.turno.activarTarjeta(this.buscarTarjeta(unPais));
+    public void activarTarjeta(Tarjeta tarjeta) throws JugadorNoPoseePaisDeLaTarjetaException, ActivacionTarjetaEnRondaEquivocadaException, ElJugadorNoTieneTurnoException, LaTarjetaYaFueActivadaException {
+        if (!this.paisesDominados.contains(tarjeta.obtenerPais())) throw new JugadorNoPoseePaisDeLaTarjetaException();
+        this.turno.activarTarjeta(tarjeta);
     }
 
     public Tarjeta buscarTarjeta(Pais unPais) throws TarjetaNoEncontradaException {
@@ -158,4 +158,13 @@ public class Jugador {
     public Collection<Tarjeta> obtenerTarjetas() {
         return this.tarjetas.values();
     }
+
+    public void setConquista(boolean b) {
+        conquistoPais = b;
+    }
+
+    public boolean huboConquista() {
+        return conquistoPais;
+    }
+
 }

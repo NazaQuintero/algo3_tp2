@@ -1,9 +1,7 @@
 package edu.fiuba.algo3.modelo.canjes;
 
 import edu.fiuba.algo3.modelo.excepciones.SinCanjeHabilitadoException;
-import edu.fiuba.algo3.modelo.tarjetas.SinCanje;
 import edu.fiuba.algo3.modelo.tarjetas.Tarjeta;
-import edu.fiuba.algo3.modelo.tarjetas.TipoCanje;
 
 import java.util.ArrayList;
 

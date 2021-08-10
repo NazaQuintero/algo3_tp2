@@ -4,6 +4,7 @@ import edu.fiuba.algo3.modelo.excepciones.*;
 import edu.fiuba.algo3.modelo.fichas.Ejercito;
 import edu.fiuba.algo3.modelo.paises.MultitonPaises;
 import edu.fiuba.algo3.modelo.paises.Pais;
+import edu.fiuba.algo3.modelo.tarjetas.MultitonTarjetas;
 import edu.fiuba.algo3.modelo.tarjetas.Tarjeta;
 import edu.fiuba.algo3.modelo.tarjetas.Globo;
 import javafx.scene.paint.Color;
@@ -40,7 +41,7 @@ public class JuegoTest {
     }
 
     @Test
-    public void canjeFunciona() throws ArchivoDeTarjetasNoEncontradoException, ArchivoDePaisesNoEncontradoException, ElJugadorNoTieneTurnoException, JugadorNoExisteException, ActivacionTarjetaEnRondaEquivocadaException, LaTarjetaYaFueActivadaException, TarjetaNoEncontradaException, JugadorNoPoseePaisDeLaTarjetaException, JugadorSinTarjetasException, LaTarjetaYaEstaDesactivadaException, SinCanjeHabilitadoException, ArchivoDeContinentesNoEncontradoException {
+    public void canjeFunciona() throws ArchivoDeTarjetasNoEncontradoException, ArchivoDePaisesNoEncontradoException, ElJugadorNoTieneTurnoException, ActivacionTarjetaEnRondaEquivocadaException, LaTarjetaYaFueActivadaException, JugadorNoPoseePaisDeLaTarjetaException, JugadorSinTarjetasException, LaTarjetaYaEstaDesactivadaException, SinCanjeHabilitadoException, ArchivoDeContinentesNoEncontradoException {
         Juego juego = new Juego();
         Pais arg = MultitonPaises.obtenerInstanciaDe("Argentina");
         Pais bra = MultitonPaises.obtenerInstanciaDe("Brasil");
@@ -66,19 +67,19 @@ public class JuegoTest {
         bra.colocarEjercito(new Ejercito(jugador));
         chl.colocarEjercito(new Ejercito(jugador));
 
-        juego.recibirTarjeta(jugador, arg);
-        juego.recibirTarjeta(jugador, bra);
-        juego.recibirTarjeta(jugador, chl);
+        jugador.recibirTarjeta(tArg);
+        jugador.recibirTarjeta(tBra);
+        jugador.recibirTarjeta(tChl);
 
-        juego.activarTarjeta(jugador, arg);
-        juego.activarTarjeta(jugador, bra);
-        juego.activarTarjeta(jugador, chl);
+        jugador.activarTarjeta(tArg);
+        jugador.activarTarjeta(tBra);
+        jugador.activarTarjeta(tChl);
 
-        ArrayList<Pais> paisesTarjetas = new ArrayList<>();
-        paisesTarjetas.add(arg);
-        paisesTarjetas.add(bra);
-        paisesTarjetas.add(chl);
-        juego.canjearTarjetas(jugador, paisesTarjetas);
+        ArrayList<Tarjeta> paisesTarjetas = new ArrayList<>();
+        paisesTarjetas.add(tArg);
+        paisesTarjetas.add(tBra);
+        paisesTarjetas.add(tChl);
+        jugador.canjearTarjetas(paisesTarjetas);
 
         assertEquals(4, jugador.obtenerCanjeActual().cantidadEjercitos());
     }

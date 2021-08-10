@@ -2,6 +2,7 @@ package edu.fiuba.algo3.vista;
 
 import edu.fiuba.algo3.modelo.Juego;
 import edu.fiuba.algo3.modelo.Jugador;
+import edu.fiuba.algo3.modelo.observables.Observer;
 import edu.fiuba.algo3.modelo.tarjetas.Tarjeta;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -16,7 +17,7 @@ import javafx.stage.Stage;
 
 import java.util.ArrayList;
 
-public class VentanaTarjetas {
+public class VentanaTarjetas implements Observer {
 
     private final Juego juego;
     private ArrayList<VistaTarjeta> vistasTarjetas = new ArrayList<>();
@@ -88,4 +89,8 @@ public class VentanaTarjetas {
         for (Tarjeta t : unJugador.obtenerTarjetas()) vistasTarjetas.add(new VistaTarjeta(t));
     }
 
+    @Override
+    public void update() {
+
+    }
 }

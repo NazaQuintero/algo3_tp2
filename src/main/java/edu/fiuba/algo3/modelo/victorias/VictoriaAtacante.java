@@ -16,13 +16,14 @@ public class VictoriaAtacante implements Victoria {
     @Override
     public void procesarVictoria() {
 
-        if(defensor.cantidadEjercitos() > 0) {
+        if (defensor.cantidadEjercitos() > 0) {
             defensor.modificarCantidadEjercito(-1);
         }
-        if(defensor.cantidadEjercitos() == 0) {
+        if (defensor.cantidadEjercitos() == 0) {
             defensor.dominadoPor().quitarPais(defensor);
             defensor.colocarEjercito(new Ejercito(atacante.dominadoPor()));
             atacante.modificarCantidadEjercito(-1);
+            atacante.dominadoPor().setConquista(true);
         }
 
     }

@@ -7,7 +7,6 @@ import edu.fiuba.algo3.modelo.fichas.Ejercito;
 import edu.fiuba.algo3.modelo.paises.Pais;
 import edu.fiuba.algo3.modelo.rondas.Ataque;
 import edu.fiuba.algo3.modelo.rondas.Colocacion;
-import edu.fiuba.algo3.modelo.rondas.RondaColocacion;
 import edu.fiuba.algo3.modelo.rondas.Reagrupe;
 import edu.fiuba.algo3.modelo.tarjetas.Globo;
 import edu.fiuba.algo3.modelo.tarjetas.Tarjeta;
@@ -144,7 +143,7 @@ public class RondaTest {
         jugador1.recibirTarjeta(tarjeta);
 
         // Al activar la tarjeta se le suman 2 ejercitos
-        jugador1.activarTarjetaPais(arg);
+        jugador1.activarTarjeta(tarjeta);
 
         assertEquals(3, arg.cantidadEjercitos());
     }
@@ -167,7 +166,7 @@ public class RondaTest {
         Tarjeta tarjeta = new Tarjeta(arg, new Globo());
         jugador1.recibirTarjeta(tarjeta);
 
-        assertThrows(ActivacionTarjetaEnRondaEquivocadaException.class, () -> jugador1.activarTarjetaPais(arg));
+        assertThrows(ActivacionTarjetaEnRondaEquivocadaException.class, () -> jugador1.activarTarjeta(tarjeta));
     }
 
     @Test
@@ -188,7 +187,7 @@ public class RondaTest {
         Tarjeta tarjeta = new Tarjeta(arg, new Globo());
         jugador1.recibirTarjeta(tarjeta);
 
-        assertThrows(ActivacionTarjetaEnRondaEquivocadaException.class, () -> jugador1.activarTarjetaPais(arg));
+        assertThrows(ActivacionTarjetaEnRondaEquivocadaException.class, () -> jugador1.activarTarjeta(tarjeta));
 
     }
 

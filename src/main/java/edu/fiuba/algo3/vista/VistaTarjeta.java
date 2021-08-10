@@ -1,16 +1,11 @@
 package edu.fiuba.algo3.vista;
 
-import edu.fiuba.algo3.modelo.observables.Observer;
 import edu.fiuba.algo3.modelo.tarjetas.Tarjeta;
-import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.StackPane;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 
-public class VistaTarjeta implements Observer {
+
+public class VistaTarjeta {
 
     private final Image imagenTarjeta;
     private final ImageView view;
