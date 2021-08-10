@@ -88,7 +88,6 @@ public class CanjeTest {
         assertEquals(25, unCanje.cantidadEjercitos()); // el sexto canje da 25 ejercitos
     }
 
-    // y asi sucesivamente
 
 
 }

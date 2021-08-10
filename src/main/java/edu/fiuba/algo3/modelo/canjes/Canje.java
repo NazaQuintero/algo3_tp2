@@ -20,12 +20,9 @@ public abstract class Canje {
     public Canje habilitarCanje(ArrayList<Tarjeta> tarjetas) throws SinCanjeHabilitadoException {
 
         TipoCanje tipoAuxiliar = tipo.compararTarjetas(tarjetas);
-        try {
-            Canje nuevoCanje = tipoAuxiliar.canjear(this);
-            tipo = tipoAuxiliar;
-            return nuevoCanje;
-        } catch (SinCanjeHabilitadoException e) {
-            throw new SinCanjeHabilitadoException();
-        }
+        Canje nuevoCanje = tipoAuxiliar.canjear(this);
+        tipo = tipoAuxiliar;
+        return nuevoCanje;
+
     }
 }

@@ -7,17 +7,14 @@ import javafx.scene.input.MouseEvent;
 
 public class TarjetaEventHandler implements EventHandler<MouseEvent> {
 
-    private final VentanaTarjetas ventanaTarjetas;
     private final VistaTarjeta vistaTarjeta;
 
-    public TarjetaEventHandler(VentanaTarjetas ventanaTarjetas, VistaTarjeta vistaTarjeta) {
-        this.ventanaTarjetas = ventanaTarjetas;
+    public TarjetaEventHandler(VistaTarjeta vistaTarjeta) {
         this.vistaTarjeta = vistaTarjeta;
     }
 
     @Override
     public void handle(MouseEvent event) {
-        ventanaTarjetas.setTarjetaSeleccionada(vistaTarjeta.getTarjeta());
-        ventanaTarjetas.update();
+        vistaTarjeta.cambiarSeleccion();
     }
 }

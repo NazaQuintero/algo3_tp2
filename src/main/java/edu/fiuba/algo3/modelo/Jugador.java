@@ -140,9 +140,10 @@ public class Jugador {
         return this.tarjetas.values().containsAll(tarjetas);
     }
 
-    public void devolverTarjetas(ArrayList<Tarjeta> tarjetasADevolver) throws LaTarjetaYaEstaDesactivadaException {
+    public void devolverTarjetas(ArrayList<Tarjeta> tarjetasADevolver) {
         for (Tarjeta tarjeta : tarjetasADevolver) {
-            tarjeta.desactivar();
+            try{ tarjeta.desactivar(); }
+            catch (Exception ignored){ }
             MultitonTarjetas.agregarTarjeta(tarjeta);
             tarjetas.remove(tarjeta.obtenerPais());
         }

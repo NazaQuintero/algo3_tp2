@@ -38,9 +38,19 @@ public class Tarjeta {
         return this.obtenerSimbolo().equals(unaTarjeta.obtenerSimbolo());
     }
 
+    public boolean esComodin(){
+        return this.obtenerSimbolo().equals("Comodin");
+    }
     public TipoCanje compararSimbolos(Tarjeta unaTarjeta, Tarjeta otraTarjeta) {
-        if (this.coincideSimboloCon(unaTarjeta) && this.coincideSimboloCon(otraTarjeta) || !this.coincideSimboloCon(unaTarjeta) && !this.coincideSimboloCon(otraTarjeta))
+        if (this.esComodin() || unaTarjeta.esComodin() || otraTarjeta.esComodin())
             return new CanjeHabilitado();
+
+        if (this.coincideSimboloCon(unaTarjeta) && this.coincideSimboloCon(otraTarjeta))
+            return new CanjeHabilitado();
+
+        if (!this.coincideSimboloCon(unaTarjeta) && !this.coincideSimboloCon(otraTarjeta) && !unaTarjeta.coincideSimboloCon(otraTarjeta))
+            return new CanjeHabilitado();
+
         return new SinCanje();
     }
 

@@ -1,17 +1,15 @@
 package edu.fiuba.algo3.vista;
 
 import edu.fiuba.algo3.controladores.ActivarTarjetaEventHandler;
-import edu.fiuba.algo3.controladores.TarjetaEventHandler;
+import edu.fiuba.algo3.controladores.CanjearTarjetasEventHandler;
 import edu.fiuba.algo3.modelo.Juego;
 import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.observables.Observer;
 import edu.fiuba.algo3.modelo.tarjetas.Tarjeta;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.BorderPane;
@@ -27,14 +25,14 @@ public class VentanaTarjetas implements Observer {
 
     private final Juego juego;
     private ArrayList<VistaTarjeta> vistasTarjetas = new ArrayList<>();
-    private Tarjeta tarjetaSeleccionada;
     private Button botonActivar;
     private Button botonCanjear;
     private Label errorLabel;
+    private ScrollPane layoutTarjetasScroll;
 
     public VentanaTarjetas(Juego juego) {
         this.juego = juego;
-        crearVistasTarjetas();
+        actualizarVistasTarjetas();
     }
 
     public void mostrarTarjetas() {
@@ -47,7 +45,7 @@ public class VentanaTarjetas implements Observer {
         GridPane layoutTarjetas = crearLayoutTarjetas();
         layoutTarjetas.getStylesheets().add("styles.css");
 
-        ScrollPane layoutTarjetasScroll = new ScrollPane();
+        this.layoutTarjetasScroll = new ScrollPane();
         layoutTarjetasScroll.setContent(layoutTarjetas);
         layoutTarjetasScroll.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
 
@@ -55,6 +53,7 @@ public class VentanaTarjetas implements Observer {
         botonActivar = new Button("Activar tarjeta");
         botonActivar.setOnMouseClicked(new ActivarTarjetaEventHandler(juego.getTurno().obtenerJugadorTurnoActual(), this));
         botonCanjear = new Button("Canjear tarjetas");
+        botonCanjear.setOnMouseClicked(new CanjearTarjetasEventHandler(juego.getTurno().obtenerJugadorTurnoActual(), this));
         Button botonCancelar = new Button("Cancelar");
         botonCancelar.setOnAction(e -> ventanaTarjetas.close());
 
@@ -84,14 +83,14 @@ public class VentanaTarjetas implements Observer {
         errorLabel.setVisible(false);
     }
 
-    public void crearVistasTarjetas() {
+    public void actualizarVistasTarjetas() {
         Jugador unJugador = this.juego.getTurno().obtenerJugadorTurnoActual();
         vistasTarjetas.clear();
         for (Tarjeta t : unJugador.obtenerTarjetas()) vistasTarjetas.add(new VistaTarjeta(t));
     }
 
     private GridPane crearLayoutTarjetas(){
-        crearVistasTarjetas();  // Actualiza la lista de Tarjetas
+        actualizarVistasTarjetas();
         GridPane layoutTarjetas = new GridPane();
         layoutTarjetas.setPadding(new Insets(30, 30, 30, 30));
         layoutTarjetas.setVgap(30);
@@ -104,16 +103,9 @@ public class VentanaTarjetas implements Observer {
                 j = 0;
                 i++;
             }
-            String nombrePais = vistaTarjeta.getTarjeta().obtenerPais().getNombre();
-            Button botonTarjeta = new Button(nombrePais, vistaTarjeta.obtenerImagen());
-            botonTarjeta.setContentDisplay(ContentDisplay.BOTTOM);
-            botonTarjeta.setOnMouseClicked(new TarjetaEventHandler(this, vistaTarjeta));
 
-            botonTarjeta.setMaxWidth(82);
-            botonTarjeta.setMaxHeight(250);
-
-            GridPane.setConstraints(botonTarjeta, j, i);
-            layoutTarjetas.getChildren().add(botonTarjeta);
+            GridPane.setConstraints(vistaTarjeta, j, i);
+            layoutTarjetas.getChildren().add(vistaTarjeta);
             j++;
         }
         return layoutTarjetas;
@@ -121,26 +113,32 @@ public class VentanaTarjetas implements Observer {
 
     @Override
     public void update() {
-        crearLayoutTarjetas();
+        updateTarjetas();
         errorLabel.setVisible(false);
         // botonCanjear.setOnMouseClicked(new CanjearTarjetasEventHandler());
     }
 
-    public void setTarjetaSeleccionada(Tarjeta tarjeta) {
-        tarjetaSeleccionada = tarjeta;
+    private void updateTarjetas(){
+        layoutTarjetasScroll.setContent(crearLayoutTarjetas());
     }
 
-    public Tarjeta getTarjetaSeleccionada() {
-        return tarjetaSeleccionada;
-    }
-
-    public void mostrarErrorYaFueActivada(String nombrePais) {
-        errorLabel.setText("La tarjeta de " + nombrePais + " ya fue activada");
+    public void mostrarError(String error){
+        errorLabel.setText(error);
         errorLabel.setVisible(true);
     }
 
-    public void mostrarErrorNingunaTarjetaSeleccionada() {
-        errorLabel.setText("No hay ninguna tarjeta seleccionada");
-        errorLabel.setVisible(true);
+    public ArrayList<Tarjeta> getTarjetasSeleccionadas(){
+        ArrayList<Tarjeta> tarjetas = new ArrayList<>();
+        for (VistaTarjeta vista: vistasTarjetas){
+            if (!vista.estaSeleccionada()) continue;
+            tarjetas.add(vista.getTarjeta());
+        }
+        return tarjetas;
+    }
+
+    public void deseleccionarVistaTarjeta(Tarjeta tarjeta) {
+        for (VistaTarjeta vista: vistasTarjetas){
+            if (vista.getTarjeta() == tarjeta) vista.cambiarSeleccion();
+        }
     }
 }
