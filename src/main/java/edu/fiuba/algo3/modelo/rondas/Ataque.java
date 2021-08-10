@@ -18,6 +18,8 @@ public class Ataque implements Ronda {
     public void finalizarRonda(Turno unTurno) {
         Jugador jugador = unTurno.obtenerJugadorTurnoActual();
         if (jugador.huboConquista()) jugador.recibirTarjeta(MultitonTarjetas.obtenerTarjetaAleatoria());
+        jugador.setConquista(false);
+
         unTurno.setRonda(new Reagrupe());
     }
 
