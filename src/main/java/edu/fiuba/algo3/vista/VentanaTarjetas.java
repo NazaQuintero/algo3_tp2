@@ -35,29 +35,7 @@ public class VentanaTarjetas implements Observer {
         ventanaTarjetas.setTitle("Tarjetas");
         ventanaTarjetas.setMinWidth(200);
 
-        GridPane layoutTarjetas = new GridPane();
-        layoutTarjetas.setPadding(new Insets(30, 30, 30, 30));
-        layoutTarjetas.setVgap(30);
-        layoutTarjetas.setHgap(20);
-
-        int i = 0;
-        int j = 0;
-
-        for (VistaTarjeta v : vistasTarjetas) {
-            if (j == 4) {
-                j = 0;
-                i++;
-            }
-            Button botonTarjeta = new Button(v.obtenerNombrePais(), v.obtenerImagen());
-            botonTarjeta.setContentDisplay(ContentDisplay.BOTTOM);
-
-            botonTarjeta.setMaxWidth(82);
-            botonTarjeta.setMaxHeight(250);
-
-            GridPane.setConstraints(botonTarjeta, j, i);
-            layoutTarjetas.getChildren().add(botonTarjeta);
-            j++;
-        }
+        GridPane layoutTarjetas = crearLayoutTarjetas();
 
         ScrollPane layoutTarjetasScroll = new ScrollPane();
         layoutTarjetasScroll.setContent(layoutTarjetas);
@@ -86,7 +64,35 @@ public class VentanaTarjetas implements Observer {
 
     public void crearVistasTarjetas() {
         Jugador unJugador = this.juego.getTurno().obtenerJugadorTurnoActual();
+        vistasTarjetas.clear();
         for (Tarjeta t : unJugador.obtenerTarjetas()) vistasTarjetas.add(new VistaTarjeta(t));
+    }
+
+    GridPane crearLayoutTarjetas(){
+        crearVistasTarjetas();  // Actualiza la lista de Tarjetas
+        GridPane layoutTarjetas = new GridPane();
+        layoutTarjetas.setPadding(new Insets(30, 30, 30, 30));
+        layoutTarjetas.setVgap(30);
+        layoutTarjetas.setHgap(20);
+
+        int i = 0, j = 0;
+
+        for (VistaTarjeta v : vistasTarjetas) {
+            if (j == 4) {
+                j = 0;
+                i++;
+            }
+            Button botonTarjeta = new Button(v.obtenerNombrePais(), v.obtenerImagen());
+            botonTarjeta.setContentDisplay(ContentDisplay.BOTTOM);
+
+            botonTarjeta.setMaxWidth(82);
+            botonTarjeta.setMaxHeight(250);
+
+            GridPane.setConstraints(botonTarjeta, j, i);
+            layoutTarjetas.getChildren().add(botonTarjeta);
+            j++;
+        }
+        return layoutTarjetas;
     }
 
     @Override
