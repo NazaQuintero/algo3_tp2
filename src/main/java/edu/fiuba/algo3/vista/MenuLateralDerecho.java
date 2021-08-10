@@ -42,8 +42,12 @@ public class MenuLateralDerecho extends VBox implements Observer {
     private VBox crearFormularioDeAccion() {
         this.labelDeAyuda = new Label("");
         labelDeAyuda.getStyleClass().add("labelText");
+        labelDeAyuda.getStyleClass().add("labelAyuda");
+        labelDeAyuda.setWrapText(true);
         this.labelDeError = new Label("Cantidad de ejércitos inválida");
         labelDeError.getStyleClass().add("error");
+        labelDeError.getStyleClass().add("labelError");
+        labelDeError.setWrapText(true);
         labelDeError.setVisible(false);
 
         this.inputText = new TextField();
@@ -81,16 +85,26 @@ public class MenuLateralDerecho extends VBox implements Observer {
         this.descripcionDeRonda.setText(this.juego.getTurno().obtenerRondaActual().obtenerDescripcion());
         this.descripcionDeTurno.setText("Es el turno de: " + this.juego.getTurno().obtenerJugadorTurnoActual().obtenerNombre());
         campoDeJuego.mostrarPaisesDelJugadorActual();
-        if (juego.getTurno().obtenerRondaActual().obtenerDescripcion().contains("Ronda de colocación")) {
-            this.labelDeAyuda.setText("Haga click en su pais \n para colocar ejercito \n Queda/n por colocar " +
+        ocultarError();
+        if(this.juego.getRonda() instanceof RondaColocacion) {
+            this.mostrarFormularioDeColocacion();
+            this.limpiarResultadoDeBatalla();
+            this.labelDeAyuda.setText("Haga click en su pais para colocar ejercito\nQueda/n por colocar " +
                     ((RondaColocacion) juego.getRonda()).getCantidadEjercitosColocables() + " ejército/s");
+        }
+        else if (this.juego.getRonda() instanceof Ataque) {
+            this.mostrarFormularioDeAtaque();
+        }
+        else {
+            this.mostrarFormularioDeReagrupe();
+            limpiarResultadoDeBatalla();
         }
     }
 
     public void mostrarFormularioDeColocacion() {
         this.getChildren().get(0).setVisible(true);
         this.getChildren().get(1).setVisible(true);
-        this.labelDeAyuda.setText("Haga click en su pais \n para colocar ejercito \n Queda/n por colocar " +
+        this.labelDeAyuda.setText("Haga click en su pais para colocar ejercito\nQueda/n por colocar " +
                 ((RondaColocacion) juego.getRonda()).getCantidadEjercitosColocables() + " ejército/s");
         this.inputText.setVisible(false);
         this.botonAccion.setVisible(false);
@@ -102,7 +116,7 @@ public class MenuLateralDerecho extends VBox implements Observer {
         this.inputText.setVisible(false);
         this.botonAccion.setVisible(false);
         this.botonAccion.setText("Atacar!");
-        this.labelDeAyuda.setText("Haga click sobre su pais con \n el que desee atacar");
+        this.labelDeAyuda.setText("Haga click sobre su pais con el que desee atacar");
     }
 
 
@@ -113,7 +127,7 @@ public class MenuLateralDerecho extends VBox implements Observer {
         inputText.clear();
         this.botonAccion.setVisible(false);
         this.botonAccion.setText("Reagrupar!");
-        this.labelDeAyuda.setText("Seleccione el Pais desde el \n que desea reagrupar.");
+        this.labelDeAyuda.setText("Seleccione el Pais desde el que desea reagrupar.");
     }
 
     public void setResultadoDeAtaque(VBox resultadoDeAtaque) {
@@ -158,6 +172,11 @@ public class MenuLateralDerecho extends VBox implements Observer {
 
     public void ocultarError() {
         labelDeError.setVisible(false);
+    }
+
+    public void mostrarErrorReagrupe(int cantidadMaxima){
+        labelDeError.setText("Cantidad inválida. La cantidad debe ser como máximo " + cantidadMaxima + " ejército/s");
+        labelDeError.setVisible(true);
     }
 
 }

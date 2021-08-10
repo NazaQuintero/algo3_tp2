@@ -79,13 +79,13 @@ public class FormJugadoresEventHandler implements EventHandler<Event> {
 
     private Color getColor(int i){
         switch (i) {
-            case 0: return Color.RED;
-            case 1: return Color.BLUE;
-            case 2: return Color.DARKORANGE;
-            case 3: return Color.GREEN;
-            case 4: return Color.BLACK;
-            case 5: return Color.DARKMAGENTA;
+            case 0: return Color.web("cc3311");
+            case 1: return Color.web("077bb0");
+            case 2: return Color.ORANGE;
+            case 3: return Color.web("27e63b");
+            case 4: return Color.web("ee3377");
+            case 5: return Color.web("000000");
         }
-        return Color.RED;
+        return Color.web("cc3311");
     }
 }

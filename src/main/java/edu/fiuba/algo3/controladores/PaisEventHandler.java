@@ -3,7 +3,9 @@ package edu.fiuba.algo3.controladores;
 import edu.fiuba.algo3.modelo.excepciones.NoEsRondaDeColocacionException;
 import edu.fiuba.algo3.modelo.excepciones.NoQuedanMasEjercitosPorColocarException;
 import edu.fiuba.algo3.modelo.paises.Pais;
+import edu.fiuba.algo3.modelo.rondas.Ataque;
 import edu.fiuba.algo3.modelo.rondas.Ronda;
+import edu.fiuba.algo3.modelo.rondas.RondaColocacion;
 import edu.fiuba.algo3.vista.CampoDeJuego;
 import edu.fiuba.algo3.vista.MenuLateralDerecho;
 import edu.fiuba.algo3.vista.VistaPais;
@@ -34,7 +36,7 @@ public class PaisEventHandler implements EventHandler<MouseEvent> {
         VBox formularioDeAccion = (VBox) menuLateral.getChildren().get(1);
         TextField textField = (TextField) formularioDeAccion.getChildren().get(1);
 
-        if (ronda.obtenerDescripcion().contains("Ronda de colocación")) {
+        if (ronda instanceof RondaColocacion) {
             System.out.println("Estamos en Ronda de Colocacion rey");
 
             campoDeJuego.mostrarPaisesDelJugadorActual();

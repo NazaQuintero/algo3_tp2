@@ -14,7 +14,7 @@ public interface Ronda {
 
     Resultado atacarA(Pais atacante, Pais defensor, int cantidadEjercitos) throws NoEsRondaDeAtaqueException, ElPaisNoEsLimitrofeException, EjercitosInsuficientesException;
 
-    void reagrupar(Pais origen, Pais destino, int cantidad) throws NoEsRondaDeReagrupeException, ElPaisNoEsLimitrofeException;
+    void reagrupar(Pais origen, Pais destino, int cantidad) throws NoEsRondaDeReagrupeException, ElPaisNoEsLimitrofeException, EjercitosInsuficientesException;
 
     void colocarEjercitos(Pais unPais, int cantidadEjercitos) throws NoEsRondaDeColocacionException, NoQuedanMasEjercitosPorColocarException;
 

@@ -28,10 +28,6 @@ public class Reagrupe implements Ronda {
        origen.reagrupar(destino, cantidad);
     }
 
-    private boolean puedeReagrupar(Pais pais) {
-        return pais.cantidadEjercitos() > 1;
-    }
-
     public void colocarEjercitos(Pais unPais, int cantidadEjercitos) throws NoEsRondaDeColocacionException {
         throw new NoEsRondaDeColocacionException();
     }

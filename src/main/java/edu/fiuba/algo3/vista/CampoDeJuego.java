@@ -5,6 +5,8 @@ import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.observables.Observer;
 import edu.fiuba.algo3.modelo.paises.MultitonPaises;
 import edu.fiuba.algo3.modelo.paises.Pais;
+import edu.fiuba.algo3.modelo.rondas.Ataque;
+import edu.fiuba.algo3.modelo.rondas.RondaColocacion;
 import edu.fiuba.algo3.modelo.turnos.Turno;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -131,14 +133,6 @@ public class CampoDeJuego extends BorderPane implements Observer {
 
     @Override
     public void update() {
-        if(this.juego.getTurno().obtenerRondaActual().obtenerDescripcion().equals("Ronda de colocación")) {
-            this.menuLateralDerecho.mostrarFormularioDeColocacion();
-            menuLateralDerecho.limpiarResultadoDeBatalla();
-        } else if (this.juego.getTurno().obtenerRondaActual().obtenerDescripcion().equals("Ronda de ataque")) {
-            this.menuLateralDerecho.mostrarFormularioDeAtaque();
-        } else {
-            this.menuLateralDerecho.mostrarFormularioDeReagrupe();
-            menuLateralDerecho.limpiarResultadoDeBatalla();
-        }
+
     }
 }

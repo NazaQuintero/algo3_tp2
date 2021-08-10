@@ -32,6 +32,13 @@
     -fx-background-color: salmon;
 }
 
+.labelAyuda{
+    -fx-max-width: 400px;
+}
+.labelError{
+    -fx-max-width: 450px;
+}
+
 .error {
     -fx-font-size: 25px;
     -fx-font-weight: bold;

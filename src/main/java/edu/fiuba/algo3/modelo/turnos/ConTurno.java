@@ -84,7 +84,7 @@ public class ConTurno implements Turno {
         return this.ronda.atacarA(atacante, defensor, cantidadEjercitos);
     }
 
-    public void reagrupar(Pais origen, Pais destino, int cantidad) throws NoEsRondaDeReagrupeException, ElPaisNoEsLimitrofeException {
+    public void reagrupar(Pais origen, Pais destino, int cantidad) throws NoEsRondaDeReagrupeException, ElPaisNoEsLimitrofeException, EjercitosInsuficientesException {
         this.ronda.reagrupar(origen, destino, cantidad);
     }
 
