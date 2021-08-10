@@ -27,6 +27,7 @@ public class MenuLateralDerecho extends VBox implements Observer {
     private Label labelDeAyuda;
     private Label labelDeError;
     private VBox resultadoDeAtaque;
+    private Button botonCancelar;
 
     public MenuLateralDerecho(CampoDeJuego campoDeJuego, Juego juego) {
         this.campoDeJuego = campoDeJuego;
@@ -63,11 +64,23 @@ public class MenuLateralDerecho extends VBox implements Observer {
         HBox botones = new HBox(botonAccion, botonFinalizarRonda);
         botones.setSpacing(10);
 
-        VBox vBox = new VBox(labelDeAyuda, inputText, botones, labelDeError);
+        crearBotonCancelar();
+
+        VBox vBox = new VBox(labelDeAyuda, inputText, botones, botonCancelar, labelDeError);
         vBox.setSpacing(10);
         vBox.setAlignment(Pos.CENTER);
         vBox.setVisible(false);
         return vBox;
+    }
+
+    private void crearBotonCancelar() {
+        botonCancelar = new Button("Cancelar");
+        botonCancelar.getStyleClass().add("cancelButton");
+        botonCancelar.setOnAction(e -> {
+            campoDeJuego.setPaisSeleccionado(null);
+            update();
+        });
+        botonCancelar.setVisible(false);
     }
 
     private VBox crearDescripcionDeRonda() {
@@ -86,9 +99,9 @@ public class MenuLateralDerecho extends VBox implements Observer {
         this.descripcionDeTurno.setText("Es el turno de: " + this.juego.getTurno().obtenerJugadorTurnoActual().obtenerNombre());
         campoDeJuego.mostrarPaisesDelJugadorActual();
         ocultarError();
+        this.limpiarResultadoDeBatalla();
         if(this.juego.getRonda() instanceof RondaColocacion) {
             this.mostrarFormularioDeColocacion();
-            this.limpiarResultadoDeBatalla();
             this.labelDeAyuda.setText("Haga click en su pais para colocar ejercito\nQueda/n por colocar " +
                     ((RondaColocacion) juego.getRonda()).getCantidadEjercitosColocables() + " ejército/s");
         }
@@ -114,7 +127,9 @@ public class MenuLateralDerecho extends VBox implements Observer {
         this.getChildren().get(0).setVisible(true);
         this.getChildren().get(1).setVisible(true);
         this.inputText.setVisible(false);
+        this.inputText.clear();
         this.botonAccion.setVisible(false);
+        this.botonCancelar.setVisible(false);
         this.botonAccion.setText("Atacar!");
         this.labelDeAyuda.setText("Haga click sobre su pais con el que desee atacar");
     }
@@ -179,4 +194,7 @@ public class MenuLateralDerecho extends VBox implements Observer {
         labelDeError.setVisible(true);
     }
 
+    public void setBotonCancelarVisible(boolean b) {
+        botonCancelar.setVisible(b);
+    }
 }

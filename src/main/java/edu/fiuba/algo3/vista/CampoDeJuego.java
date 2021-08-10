@@ -131,8 +131,4 @@ public class CampoDeJuego extends BorderPane implements Observer {
         this.menuLateralDerecho.mostrarFormularioDeColocacion();
     }
 
-    @Override
-    public void update() {
-
-    }
 }

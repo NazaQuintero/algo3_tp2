@@ -43,6 +43,7 @@ public class AtaqueEventHandler implements EventHandler<Event>  {
                 menuLateral.limpiarResultadoDeBatalla();
                 int cantidadDeEjercitos = Integer.parseInt(inputText.getText());
                 Resultado resultado = atacante.atacarA(defensor, cantidadDeEjercitos);
+                menuLateral.update();
                 mostrarAtaque();
                 ProcesadorResultado.obtenerInstancia().procesar(resultado);
                 campoDeJuego.setPaisSeleccionado(null);

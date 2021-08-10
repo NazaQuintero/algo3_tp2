@@ -10,7 +10,6 @@ import edu.fiuba.algo3.vista.CampoDeJuego;
 import edu.fiuba.algo3.vista.MenuLateralDerecho;
 import edu.fiuba.algo3.vista.VistaPais;
 import javafx.event.EventHandler;
-import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -35,6 +34,7 @@ public class PaisEventHandler implements EventHandler<MouseEvent> {
         MenuLateralDerecho menuLateral = (MenuLateralDerecho) campoDeJuego.getRight();
         VBox formularioDeAccion = (VBox) menuLateral.getChildren().get(1);
         TextField textField = (TextField) formularioDeAccion.getChildren().get(1);
+        menuLateral.update();
 
         if (ronda instanceof RondaColocacion) {
             System.out.println("Estamos en Ronda de Colocacion rey");
@@ -46,7 +46,7 @@ public class PaisEventHandler implements EventHandler<MouseEvent> {
             } catch (NoEsRondaDeColocacionException | NoQuedanMasEjercitosPorColocarException e) {
 
                 menuLateral.mostrarErrorColocacion();
-                Label labelDeError = (Label)(formularioDeAccion.getChildren().get(3));
+                Label labelDeError = (Label)(formularioDeAccion.getChildren().get(4));
                 labelDeError.setText("No quedan más ejércitos por colocar");
                 labelDeError.setVisible(true);
             }
