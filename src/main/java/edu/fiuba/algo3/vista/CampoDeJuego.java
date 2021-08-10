@@ -12,6 +12,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
@@ -85,7 +86,7 @@ public class CampoDeJuego extends BorderPane implements Observer {
 
     }
 
-    private void crearVistasTarjetas() {
+    public void crearVistasTarjetas() {
         vistasTarjetas = new ArrayList<>();
         Jugador unJugador = this.juego.getTurno().obtenerJugadorTurnoActual();
         for (Tarjeta t : unJugador.obtenerTarjetas()) vistasTarjetas.add(new VistaTarjeta(t));
@@ -171,6 +172,10 @@ public class CampoDeJuego extends BorderPane implements Observer {
             j++;
         }
 
+        ScrollPane layoutTarjetasScroll = new ScrollPane();
+        layoutTarjetasScroll.setContent(layoutTarjetas);
+        layoutTarjetasScroll.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+
         HBox layoutBotones = new HBox();
         Button botonActivar = new Button("Activar tarjeta");
         Button botonCanjear = new Button("Canjear tarjetas");
@@ -184,7 +189,7 @@ public class CampoDeJuego extends BorderPane implements Observer {
         layoutBotones.getChildren().addAll(botonActivar, botonCanjear, botonCancelar);
 
         BorderPane layout = new BorderPane();
-        layout.setCenter(layoutTarjetas);
+        layout.setCenter(layoutTarjetasScroll);
         layout.setBottom(layoutBotones);
 
         Scene scene = new Scene(layout, 500, 400);
