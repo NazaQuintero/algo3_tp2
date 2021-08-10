@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.modelo.tarjetas;
 
 import edu.fiuba.algo3.modelo.Jugador;
+import edu.fiuba.algo3.modelo.Jugadores;
 import edu.fiuba.algo3.modelo.paises.Pais;
 import edu.fiuba.algo3.modelo.excepciones.*;
 
@@ -18,6 +19,18 @@ public class Tarjetas {
     }
 
     public Tarjeta obtenerTarjeta(Pais unPais) { return tarjetasLocas.get(unPais); }
+
+    public void repartir(Jugadores jugadores) { // en Tarjetas
+        int i = 0;
+        try {
+            for (Tarjeta t : tarjetasLocas.values()) {
+                this.darTarjeta(jugadores.obtenerJugador(i), t.obtenerPais());
+                i++;
+                if (i == jugadores.obtenerCantidad()) i = 0;
+            }
+        } catch(JugadorNoExisteException ignored) {
+        }
+    }
 
     /*public boolean contieneTarjetaDePais(Pais unPais) {
         return tarjetasLocas.stream().anyMatch(tarjeta -> tarjeta.obtenerPais() == unPais);

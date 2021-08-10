@@ -44,11 +44,13 @@ public class Juego {
         jugadores.agregarJugador(jugador);
     }
 
-    public void comenzar() throws CantidadDeJugadoresInsuficienteException {
+    public void comenzar() throws CantidadDeJugadoresInsuficienteException { // eesto en Juego
         if (jugadores.obtenerCantidad() < 2) throw new CantidadDeJugadoresInsuficienteException();
+        jugadores.setPrimerJugador(0); // despues hacemos que sea uno aleatorio, pero por ahora el 1
         tablero.repartirPaises(jugadores);
         jugadores.mezclar();
         Objetivos.asignarObjetivos(jugadores);
+        tarjetas.repartir(jugadores);
         turno = new ConTurno(jugadores);
     }
 

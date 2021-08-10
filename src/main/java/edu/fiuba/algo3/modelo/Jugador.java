@@ -16,6 +16,7 @@ import edu.fiuba.algo3.modelo.turnos.Turno;
 import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 
 public class Jugador {
@@ -157,5 +158,9 @@ public class Jugador {
 
     public int ordenCanje() {
         return canje.cantidadEjercitos();
+    }
+
+    public Collection<Tarjeta> obtenerTarjetas() {
+        return this.tarjetas.values();
     }
 }

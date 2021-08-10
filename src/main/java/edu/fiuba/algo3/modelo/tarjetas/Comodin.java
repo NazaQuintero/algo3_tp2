@@ -1,8 +1,8 @@
 package edu.fiuba.algo3.modelo.tarjetas;
 
-public class Canion implements Simbolo {
+public class Comodin implements Simbolo {
+    @Override
     public String obtenerDescripcion() {
-        return "Cañon";
+        return "Comodin";
     }
-
 }
