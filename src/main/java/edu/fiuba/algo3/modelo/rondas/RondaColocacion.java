@@ -44,7 +44,7 @@ public abstract class RondaColocacion implements Ronda {
             if (cantidadEjercitos <= this.cantidadEjercitosColocables) {
                 unPais.modificarCantidadEjercito(cantidadEjercitos);
                 this.cantidadEjercitosColocables -= cantidadEjercitos;
-            } // else chequear que ingrese una cantidad valida o que elija no colocar mas
+            }
         }
         else throw new NoQuedanMasEjercitosPorColocarException();
     }
