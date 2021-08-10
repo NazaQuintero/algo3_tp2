@@ -26,9 +26,4 @@ public class VistaTarjeta {
 
     public String obtenerNombrePais() { return tarjeta.obtenerPais().getNombre(); }
 
-    @Override
-    public void update() {
-
-    }
-
 }

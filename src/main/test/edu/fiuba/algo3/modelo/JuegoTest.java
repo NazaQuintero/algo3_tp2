@@ -60,12 +60,15 @@ public class JuegoTest {
         juego.agregarJugador(jugador);
         juego.agregarJugador(otroJugador);
 
-        //juego.comenzar();
         juego.iniciarTurno();
 
         arg.colocarEjercito(new Ejercito(jugador));
         bra.colocarEjercito(new Ejercito(jugador));
         chl.colocarEjercito(new Ejercito(jugador));
+
+        Tarjeta tArg = MultitonTarjetas.obtenerTarjeta(arg);
+        Tarjeta tBra = MultitonTarjetas.obtenerTarjeta(bra);
+        Tarjeta tChl = MultitonTarjetas.obtenerTarjeta(chl);
 
         jugador.recibirTarjeta(tArg);
         jugador.recibirTarjeta(tBra);

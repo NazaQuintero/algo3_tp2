@@ -19,7 +19,9 @@ public class MultitonTarjetas implements Subject {
         tarjetas.put(unaTarjeta.obtenerPais(), unaTarjeta);
     }
 
-    public Tarjeta obtenerTarjeta(Pais unPais) { return tarjetas.get(unPais); }
+    public static Tarjeta obtenerTarjeta(Pais unPais) {
+
+        return tarjetas.get(unPais); }
 
     public static Tarjeta obtenerTarjetaAleatoria() {
         ArrayList<Tarjeta> _tarjetas = new ArrayList<>(tarjetas.values());

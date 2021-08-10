@@ -29,11 +29,11 @@ public class Juego {
 
         CargarJuego.cargarContinentes(ARCHIVO_CONTINENTES);
         CargarJuego.cargarPaisesLimitrofes(ARCHIVO_PAISES);
-        CargarJuego.cargarTarjetas(this, ARCHIVO_TARJETAS);
+        CargarJuego.cargarTarjetas(ARCHIVO_TARJETAS);
     }
 
     public void agregarTarjeta(Tarjeta unaTarjeta) {
-        tarjetas.agregarTarjeta(unaTarjeta);
+        MultitonTarjetas.agregarTarjeta(unaTarjeta);
     }
 
     public void agregarJugador(Jugador jugador){
