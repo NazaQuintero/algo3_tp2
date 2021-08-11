@@ -12,4 +12,8 @@ public class TarjetaActivada implements EstadoTarjeta {
     public EstadoTarjeta desactivar() {
         return new TarjetaDesactivada();
     }
+
+    @Override
+    public boolean estaActivada() { return true; }
+
 }

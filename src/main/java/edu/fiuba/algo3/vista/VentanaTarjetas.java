@@ -43,7 +43,6 @@ public class VentanaTarjetas implements Observer {
         ventanaTarjetas.setMinWidth(200);
 
         GridPane layoutTarjetas = crearLayoutTarjetas();
-        layoutTarjetas.getStylesheets().add("styles.css");
 
         this.layoutTarjetasScroll = new ScrollPane();
         layoutTarjetasScroll.setContent(layoutTarjetas);
@@ -145,4 +144,7 @@ public class VentanaTarjetas implements Observer {
             if (vista.getTarjeta() == tarjeta) vista.cambiarSeleccion();
         }
     }
+
+    public Jugador getJugador(){ return juego.getTurno().obtenerJugadorTurnoActual(); }
+
 }

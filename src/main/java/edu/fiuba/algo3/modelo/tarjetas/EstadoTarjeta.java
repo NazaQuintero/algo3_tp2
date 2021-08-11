@@ -10,4 +10,6 @@ public interface EstadoTarjeta {
 
     EstadoTarjeta desactivar() throws LaTarjetaYaEstaDesactivadaException;
 
+    boolean estaActivada();
+
 }

@@ -35,18 +35,15 @@ public class VistaTarjeta extends StackPane implements Observer {
         view.setFitWidth(82);
         view.setFitHeight(250);
 
-        this.button.setContentDisplay(ContentDisplay.BOTTOM);
-        this.button.setOnMouseClicked(new TarjetaEventHandler(ventanaTarjetas, this));
+        crearBotonTarjeta();
 
-        this.button.setMaxWidth(82);
-        this.button.setMaxHeight(250);
         this.setMaxWidth(82);
         this.setMaxHeight(250);
 
         check.setMouseTransparent(true);
 
         StackPane.setAlignment(check, Pos.TOP_RIGHT);
-        this.getChildren().addAll(button, check);
+        this.getChildren().addAll(this.button, check);
     }
 
     public Tarjeta getTarjeta() {
