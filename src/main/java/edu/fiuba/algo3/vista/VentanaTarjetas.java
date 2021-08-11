@@ -21,6 +21,7 @@ import javafx.stage.Stage;
 
 import java.util.ArrayList;
 
+
 public class VentanaTarjetas implements Observer {
 
     private final Juego juego;
@@ -151,10 +152,7 @@ public class VentanaTarjetas implements Observer {
 
     public ArrayList<Tarjeta> getTarjetasSeleccionadas(){
         ArrayList<Tarjeta> tarjetas = new ArrayList<>();
-        for (VistaTarjeta vista: vistasTarjetas){
-            if (!vista.estaSeleccionada()) continue;
-            tarjetas.add(vista.getTarjeta());
-        }
+        vistasTarjetas.stream().filter(VistaTarjeta::estaSeleccionada).forEach(vTarjeta -> tarjetas.add(vTarjeta.getTarjeta()));
         return tarjetas;
     }
 

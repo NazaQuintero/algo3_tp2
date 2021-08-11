@@ -92,17 +92,15 @@ public class CampoDeJuego extends BorderPane {
     }
 
     public void resaltarLimitrofesAdversarios(VistaPais vistaPais) {
-        ArrayList<VistaPais> vistaLimitrofes = vistaPais.getVistaLimitrofes();
-        for (VistaPais vista : vistasPaises)
-            if (!vistaLimitrofes.contains(vista) || (vistaPais.getPais().dominadoPor() == vista.getPais().dominadoPor()))
-               vista.desactivar();
+        this.vistasPaises.stream().filter( vista -> !vistaPais.getVistaLimitrofes().contains(vista) ||
+                (vistaPais.getPais().dominadoPor() == vista.getPais().dominadoPor())).
+                forEach(VistaPais::desactivar);
     }
 
     public void resaltarLimitrofesPropios(VistaPais vistaPais) {
-        ArrayList<VistaPais> vistaLimitrofes = vistaPais.getVistaLimitrofes();
-        for (VistaPais vista : vistasPaises)
-            if (!vistaLimitrofes.contains(vista) || (vistaPais.getPais().dominadoPor() != vista.getPais().dominadoPor()))
-                vista.desactivar();
+        this.vistasPaises.stream().filter( vista -> !vistaPais.getVistaLimitrofes().contains(vista) ||
+                (vistaPais.getPais().dominadoPor() != vista.getPais().dominadoPor())).
+                forEach(VistaPais::desactivar);
     }
 
     public void mostrarPaises() { for (VistaPais vista : vistasPaises) vista.activar(); }
