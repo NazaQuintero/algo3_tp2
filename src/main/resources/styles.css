@@ -36,7 +36,19 @@
     -fx-max-width: 400px;
 }
 .labelError{
-    -fx-max-width: 450px;
+    -fx-max-width: 500px;
+}
+
+.errorTarjetas{
+    -fx-max-width: 500px;
+    -fx-font-size: 18px;
+    -fx-text-fill: red;
+}
+
+.tarjetasValidas{
+    -fx-max-width: 500px;
+    -fx-font-size: 18px;
+    -fx-text-fill: green;
 }
 
 .error {

@@ -31,10 +31,13 @@ public class ActivarTarjetaEventHandler implements EventHandler<MouseEvent> {
 
     void activarTarjetas(ArrayList<Tarjeta> tarjetas){
         if (tarjetas.size() == 0) ventanaTarjetas.mostrarError("Se debe seleccionar al menos una tarjeta");
+
         for (Tarjeta tarjeta: tarjetas) {
             try {
                 jugador.activarTarjeta(tarjeta);
                 ventanaTarjetas.deseleccionarVistaTarjeta(tarjeta);
+                ventanaTarjetas.update();
+                ventanaTarjetas.mostrarMensajeValido(crearMensajeExito(tarjetas));
             }
             catch (LaTarjetaYaFueActivadaException e) {
                 ventanaTarjetas.mostrarError("La tarjeta de " + tarjeta.obtenerPais().getNombre() +" ya fue activada");
@@ -47,6 +50,13 @@ public class ActivarTarjetaEventHandler implements EventHandler<MouseEvent> {
                 ventanaTarjetas.mostrarError("El jugador no posee el pais " + tarjeta.obtenerPais().getNombre());
             }
         }
-        ventanaTarjetas.update();
     }
+
+    private String crearMensajeExito(ArrayList<Tarjeta> tarjetas){
+        String mensaje = "Tarjetas activadas correctamente";
+        if (tarjetas.size() == 1)
+            mensaje = "Tarjeta " + tarjetas.get(0).obtenerPais().getNombre() +" activada correctamente";
+        return mensaje;
+    }
+
 }
