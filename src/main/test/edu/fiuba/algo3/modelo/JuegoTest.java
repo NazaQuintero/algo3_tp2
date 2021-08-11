@@ -51,9 +51,9 @@ public class JuegoTest {
         Tarjeta otraTarjeta = new Tarjeta(bra, new Globo());
         Tarjeta ootraTarjeta = new Tarjeta(chl, new Globo());
 
-        juego.agregarTarjeta(unaTarjeta);
-        juego.agregarTarjeta(otraTarjeta);
-        juego.agregarTarjeta(ootraTarjeta);
+        MultitonTarjetas.agregarTarjeta(unaTarjeta);
+        MultitonTarjetas.agregarTarjeta(otraTarjeta);
+        MultitonTarjetas.agregarTarjeta(ootraTarjeta);
 
         Jugador jugador = new Jugador("Cami", Color.RED);
         Jugador otroJugador = new Jugador("Frank", Color.PINK);

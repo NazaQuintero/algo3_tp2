@@ -126,7 +126,7 @@ public class Jugador {
     }
 
     public void canjearTarjetas(ArrayList<Tarjeta> tarjetas) throws JugadorSinTarjetasException, SinCanjeHabilitadoException {
-        if (!comprobarTarjetas(tarjetas)) throw new JugadorSinTarjetasException();
+        if (!this.tarjetas.containsAll(tarjetas)) throw new JugadorSinTarjetasException();
         canje = canje.habilitarCanje(tarjetas);
         devolverTarjetas(tarjetas);
     }
@@ -148,8 +148,8 @@ public class Jugador {
         return canje.cantidadEjercitos();
     }
 
-    public Collection<Tarjeta> obtenerTarjetas() {
-        return this.tarjetas.values();
+    public ArrayList<Tarjeta> getTarjetas() {
+        return this.tarjetas;
     }
 
     public void setConquista(boolean b) {
