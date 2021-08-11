@@ -158,4 +158,6 @@ public class Jugador {
     public Collection<Tarjeta> obtenerTarjetas() {
         return this.tarjetas.values();
     }
+
+    public ArrayList<Objetivo> obtenerObjetivos() {  return this.objetivos;  }
 }

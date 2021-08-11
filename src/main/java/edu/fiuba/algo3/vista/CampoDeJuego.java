@@ -28,6 +28,7 @@ public class CampoDeJuego extends BorderPane {
     private final Juego juego;
     private final ArrayList<VistaPais> vistasPaises = new ArrayList<>();
     private final VentanaTarjetas ventanaTarjetas;
+    private final VentanaObjetivos ventanaObjetivos;
     private Pais paisSeleccionado;
 
     private MenuLateralDerecho menuLateralDerecho;
@@ -61,11 +62,18 @@ public class CampoDeJuego extends BorderPane {
         this.ventanaTarjetas = new VentanaTarjetas(juego);
         Button botonTarjetas = new Button("Ver tarjetas");
         botonTarjetas.setOnAction(e -> ventanaTarjetas.mostrarTarjetas());
-        stage.setScene(new Scene(this, 1500, 900));
+
+        this.ventanaObjetivos = new VentanaObjetivos(juego);
+        Button botonObjetivos = new Button("Ver objetivos");
+        botonObjetivos.setOnAction(e -> ventanaObjetivos.mostrarObjetivos());
+
+        //stage.setScene(new Scene(this, 1500, 900));
+        stage.setScene(new Scene(this, 1000, 700));
         stage.centerOnScreen();
 
         this.setCenter(stackPane);
         this.setTop(botonTarjetas);
+        this.setBottom(botonObjetivos);
     }
 
 
