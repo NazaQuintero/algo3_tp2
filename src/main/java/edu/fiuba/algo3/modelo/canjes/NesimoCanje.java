@@ -17,6 +17,8 @@ public class NesimoCanje extends Canje {
 
     @Override
     public int cantidadEjercitos() {
+        if (canjeActivado) return 0;
+        canjeActivado = true;
         return cantidadEjercitos;
     }
 }

@@ -39,10 +39,6 @@ public class CanjearTarjetasEventHandler implements EventHandler<MouseEvent> {
             // Nunca deberia pasar
             ventanaTarjetas.mostrarError("El jugador no posee las tarjetas");
         }
-        catch (LaTarjetaYaEstaDesactivadaException e) {
-            // Porque hay que activarla antes?
-            ventanaTarjetas.mostrarError("La tarjeta ya esta desactivada");
-        }
         catch (SinCanjeHabilitadoException e) {
             // Canje no valido (los simbolos no corresponden)
             ventanaTarjetas.mostrarError("El canje no es válido");

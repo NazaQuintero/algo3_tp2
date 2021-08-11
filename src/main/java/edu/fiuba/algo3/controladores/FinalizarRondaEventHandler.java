@@ -23,6 +23,7 @@ public class FinalizarRondaEventHandler implements EventHandler<Event> {
 
         try {
             campoDeJuego.getTurno().finalizarRonda(jugador);
+            campoDeJuego.setPaisSeleccionado(null);
         } catch (ElJugadorNoTieneTurnoException ignored) { }
     }
 }

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 public abstract class Canje {
 
     private TipoCanje tipo;
+    protected boolean canjeActivado = false;
 
     public Canje() {
         this.tipo = new SinCanje();
@@ -15,7 +16,7 @@ public abstract class Canje {
 
     public abstract Canje siguienteCanje();
 
-    public abstract int cantidadEjercitos();
+    public abstract int cantidadEjercitos(); // Setear canjeActivado como true
 
     public Canje habilitarCanje(ArrayList<Tarjeta> tarjetas) throws SinCanjeHabilitadoException {
 

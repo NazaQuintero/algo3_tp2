@@ -8,9 +8,11 @@ import javafx.scene.input.MouseEvent;
 public class TarjetaEventHandler implements EventHandler<MouseEvent> {
 
     private final VistaTarjeta vistaTarjeta;
+    private final VentanaTarjetas ventanaTarjetas;
 
     public TarjetaEventHandler(VentanaTarjetas ventanaTarjetas, VistaTarjeta vistaTarjeta) {
         this.vistaTarjeta = vistaTarjeta;
+        this.ventanaTarjetas = ventanaTarjetas;
     }
 
     @Override

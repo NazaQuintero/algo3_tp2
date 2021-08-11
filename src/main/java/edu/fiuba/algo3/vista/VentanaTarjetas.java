@@ -86,7 +86,7 @@ public class VentanaTarjetas implements Observer {
     public void actualizarVistasTarjetas() {
         Jugador unJugador = this.juego.getTurno().obtenerJugadorTurnoActual();
         vistasTarjetas.clear();
-        for (Tarjeta t : unJugador.obtenerTarjetas()) vistasTarjetas.add(new VistaTarjeta(t));
+        for (Tarjeta t : unJugador.obtenerTarjetas()) vistasTarjetas.add(new VistaTarjeta(this, t));
     }
 
     private GridPane crearLayoutTarjetas(){
@@ -124,6 +124,10 @@ public class VentanaTarjetas implements Observer {
     public void mostrarError(String error){
         errorLabel.setText(error);
         errorLabel.setVisible(true);
+    }
+
+    public void ocultarError(){
+        errorLabel.setVisible(false);
     }
 
     public ArrayList<Tarjeta> getTarjetasSeleccionadas(){

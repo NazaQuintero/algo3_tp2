@@ -6,5 +6,9 @@ public class TercerCanje extends Canje {
     public Canje siguienteCanje() { return new NesimoCanje(); }
 
     @Override
-    public int cantidadEjercitos() { return 10; }
+    public int cantidadEjercitos() {
+        if (canjeActivado) return 0;
+        canjeActivado = true;
+        return 10;
+    }
 }
