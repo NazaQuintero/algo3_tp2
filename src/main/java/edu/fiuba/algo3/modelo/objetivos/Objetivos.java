@@ -7,15 +7,15 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Objetivos {
+    private static final ArrayList<Objetivo> objetivos = new ArrayList<>();
+
     public static void asignarObjetivos(Jugadores jugadores){
-        ArrayList<Objetivo> objetivos = new ArrayList<>();
-        crearObjetivos(objetivos, jugadores);
-        repartirObjetivos(objetivos, jugadores);
+        crearObjetivos(jugadores);
+        repartirObjetivos(jugadores);
     }
 
-    private static void crearObjetivos(ArrayList<Objetivo> objetivos, Jugadores jugadores){
+    private static void crearObjetivos(Jugadores jugadores){
 
-        // Crea los objetivos de ocupacion
         objetivos.add(new Ocupacion1());
         objetivos.add(new Ocupacion2());
         objetivos.add(new Ocupacion3());
@@ -25,18 +25,16 @@ public class Objetivos {
         objetivos.add(new Ocupacion7());
         objetivos.add(new Ocupacion8());
 
-        // Crea los objetivos de Destruccion
-        for (Jugador jugador : jugadores) {objetivos.add(new Destruccion(jugador));}
+        for (Jugador jugador : jugadores) objetivos.add(new Destruccion(jugador));
     }
 
-    private static void repartirObjetivos(ArrayList<Objetivo> objetivos, Jugadores jugadores){
+    private static void repartirObjetivos(Jugadores jugadores){
         Random r = new Random();
-        for (Jugador j : jugadores) {
+        for (Jugador jugador : jugadores) {
             Objetivo objetivo = objetivos.remove(r.nextInt(objetivos.size()));
 
             // Puede que a un jugador le toque destruirse a si mismo :(
-            j.asignarObjetivo(objetivo);
+            jugador.asignarObjetivo(objetivo);
         }
     }
-
 }

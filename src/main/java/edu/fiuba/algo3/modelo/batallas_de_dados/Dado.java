@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.modelo.batallasDeDados;
+package edu.fiuba.algo3.modelo.batallas_de_dados;
 
 
 public interface Dado extends Comparable<Dado> {

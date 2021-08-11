@@ -86,7 +86,7 @@ public class VentanaTarjetas implements Observer {
     public void actualizarVistasTarjetas() {
         Jugador unJugador = this.juego.getTurno().obtenerJugadorTurnoActual();
         vistasTarjetas.clear();
-        for (Tarjeta tarjeta : unJugador.obtenerTarjetas()) vistasTarjetas.add(new VistaTarjeta(this, tarjeta));
+        for (Tarjeta tarjeta : unJugador.getTarjetas()) vistasTarjetas.add(new VistaTarjeta(this, tarjeta));
     }
 
     private GridPane crearLayoutTarjetas(){

@@ -1,11 +1,9 @@
 package edu.fiuba.algo3.modelo.rondas;
 
 import edu.fiuba.algo3.modelo.Jugador;
-import edu.fiuba.algo3.modelo.continentes.MultitonContinentes;
 import edu.fiuba.algo3.modelo.excepciones.NoQuedanMasEjercitosPorColocarException;
-import edu.fiuba.algo3.modelo.observables.Observer;
 import edu.fiuba.algo3.modelo.paises.Pais;
-import edu.fiuba.algo3.modelo.batallasDeDados.Resultado;
+import edu.fiuba.algo3.modelo.batallas_de_dados.Resultado;
 import edu.fiuba.algo3.modelo.excepciones.LaTarjetaYaFueActivadaException;
 import edu.fiuba.algo3.modelo.tarjetas.Tarjeta;
 import edu.fiuba.algo3.modelo.turnos.Turno;

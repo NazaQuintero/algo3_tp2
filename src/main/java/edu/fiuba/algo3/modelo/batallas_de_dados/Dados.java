@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.modelo.batallasDeDados;
+package edu.fiuba.algo3.modelo.batallas_de_dados;
 
 import java.util.ArrayList;
 import java.util.Collections;

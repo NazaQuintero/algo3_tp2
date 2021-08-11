@@ -1,21 +1,21 @@
-package edu.fiuba.algo3.modelo.batallasDeDados;
+package edu.fiuba.algo3.modelo.batallas_de_dados;
 
-import java.util.Random;
 
-public class DadoRandom implements Dado {
-    private int valorTirada;
+public class DadoPersonalizado implements Dado {
+    private final int valor;
 
-    public DadoRandom() {
-        this.lanzar();
+    public DadoPersonalizado(int valor) {
+        this.valor = valor;
     }
 
+    @Override
     public void lanzar() {
-        Random r = new Random();
-        this.valorTirada = (1 + r.nextInt(6));
+
     }
 
+    @Override
     public int obtenerValor() {
-        return valorTirada;
+        return this.valor;
     }
 
     @Override

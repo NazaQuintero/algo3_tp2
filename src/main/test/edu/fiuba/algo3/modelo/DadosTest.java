@@ -1,8 +1,8 @@
 package edu.fiuba.algo3.modelo;
 
-import edu.fiuba.algo3.modelo.batallasDeDados.DadoPersonalizado;
-import edu.fiuba.algo3.modelo.batallasDeDados.DadoRandom;
-import edu.fiuba.algo3.modelo.batallasDeDados.Dados;
+import edu.fiuba.algo3.modelo.batallas_de_dados.DadoPersonalizado;
+import edu.fiuba.algo3.modelo.batallas_de_dados.DadoRandom;
+import edu.fiuba.algo3.modelo.batallas_de_dados.Dados;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

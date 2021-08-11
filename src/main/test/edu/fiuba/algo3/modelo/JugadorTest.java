@@ -91,13 +91,13 @@ public class JugadorTest {
         tCol.activar();
 
         jugador.canjearTarjetas(tarjetas);
-        assertThrows(TarjetaNoEncontradaException.class, () -> jugador.buscarTarjeta(arg));
-        assertThrows(TarjetaNoEncontradaException.class, () -> jugador.buscarTarjeta(bra));
-        assertThrows(TarjetaNoEncontradaException.class, () -> jugador.buscarTarjeta(col));
+        assertThrows(TarjetaNoEncontradaException.class, () -> jugador.activarTarjeta(tArg));
+        assertThrows(TarjetaNoEncontradaException.class, () -> jugador.activarTarjeta(tBra));
+        assertThrows(TarjetaNoEncontradaException.class, () -> jugador.activarTarjeta(tCol));
     }
 
     @Test
-    public void unJugadorQueNoRealizoCanjesRecibeUnPrimerCanjeAlSolicitarUnoYPuedeColocar4EjercitosExtra() throws LaTarjetaYaFueActivadaException, JugadorSinTarjetasException, LaTarjetaYaEstaDesactivadaException, SinCanjeHabilitadoException {
+    public void unJugadorQueNoRealizoCanjesRecibeUnPrimerCanjeAlSolicitarUnoYPuedeColocar4EjercitosExtra() throws LaTarjetaYaFueActivadaException, JugadorSinTarjetasException, SinCanjeHabilitadoException {
         Jugador jugador = new Jugador( "Martin", Color.RED);
 
         Pais arg = new Pais("Argentina");
@@ -126,7 +126,7 @@ public class JugadorTest {
     }
 
     @Test
-    public void unJugadorQueRealizoUnCanjeRecibeUnSegundoCanjeAlSolicitarOtroYPuedeColocar7EjercitosExtra() throws LaTarjetaYaFueActivadaException, JugadorSinTarjetasException, LaTarjetaYaEstaDesactivadaException, SinCanjeHabilitadoException {
+    public void unJugadorQueRealizoUnCanjeRecibeUnSegundoCanjeAlSolicitarOtroYPuedeColocar7EjercitosExtra() throws LaTarjetaYaFueActivadaException, JugadorSinTarjetasException, SinCanjeHabilitadoException {
         Jugador jugador = new Jugador( "Martin", Color.RED);
 
         Pais arg = new Pais("Argentina");

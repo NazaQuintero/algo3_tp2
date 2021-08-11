@@ -1,8 +1,8 @@
 package edu.fiuba.algo3.controladores;
 
-import edu.fiuba.algo3.modelo.batallasDeDados.Dados;
-import edu.fiuba.algo3.modelo.batallasDeDados.ProcesadorResultado;
-import edu.fiuba.algo3.modelo.batallasDeDados.Resultado;
+import edu.fiuba.algo3.modelo.batallas_de_dados.Dados;
+import edu.fiuba.algo3.modelo.batallas_de_dados.ProcesadorResultado;
+import edu.fiuba.algo3.modelo.batallas_de_dados.Resultado;
 import edu.fiuba.algo3.modelo.excepciones.EjercitosInsuficientesException;
 import edu.fiuba.algo3.modelo.excepciones.ElPaisNoEsLimitrofeException;
 import edu.fiuba.algo3.modelo.paises.Pais;

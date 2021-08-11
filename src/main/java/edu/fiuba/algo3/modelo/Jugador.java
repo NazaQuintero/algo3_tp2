@@ -1,15 +1,14 @@
 package edu.fiuba.algo3.modelo;
 
-import edu.fiuba.algo3.modelo.batallasDeDados.Resultado;
+import edu.fiuba.algo3.modelo.batallas_de_dados.Resultado;
 import edu.fiuba.algo3.modelo.canjes.Canje;
 import edu.fiuba.algo3.modelo.canjes.CanjeNulo;
-import edu.fiuba.algo3.modelo.batallasDeDados.ResultadoBatallaNulo;
+import edu.fiuba.algo3.modelo.batallas_de_dados.ResultadoBatallaNulo;
 import edu.fiuba.algo3.modelo.excepciones.ContinenteInvalidoException;
 import edu.fiuba.algo3.modelo.excepciones.*;
 import edu.fiuba.algo3.modelo.fichas.Ejercito;
 import edu.fiuba.algo3.modelo.objetivos.General;
 import edu.fiuba.algo3.modelo.objetivos.Objetivo;
-import edu.fiuba.algo3.modelo.paises.MultitonPaises;
 import edu.fiuba.algo3.modelo.paises.Pais;
 import edu.fiuba.algo3.modelo.tarjetas.MultitonTarjetas;
 import edu.fiuba.algo3.modelo.tarjetas.Tarjeta;
@@ -23,20 +22,24 @@ import java.util.HashMap;
 
 public class Jugador {
 
-    private Color color;
+    private final Color color;
     private final ArrayList<Objetivo> objetivos = new ArrayList<>();
     private final String nombre;
     private Turno turno = new SinTurno();
     private final ArrayList<Pais> paisesDominados = new ArrayList<>();
-    private final HashMap<Pais, Tarjeta> tarjetas = new HashMap<>();
+    private final ArrayList<Tarjeta> tarjetas = new ArrayList<>();
     private Canje canje;
     private boolean conquistoPais = false;
 
     public Jugador(String nombre, Color color){
-        this.objetivos.add(new General());
-        this.canje = new CanjeNulo();
         this.nombre = nombre;
         this.color = color;
+        this.objetivos.add(new General());
+        this.canje = new CanjeNulo();
+    }
+
+    public String getNombre() {
+        return nombre;
     }
 
     public Color getColor() {
@@ -94,17 +97,13 @@ public class Jugador {
     }
 
     public void recibirTarjeta(Tarjeta tarjeta){
-        tarjetas.put(tarjeta.obtenerPais(), tarjeta);
+        tarjetas.add(tarjeta);
     }
 
-    public void activarTarjeta(Tarjeta tarjeta) throws JugadorNoPoseePaisDeLaTarjetaException, ActivacionTarjetaEnRondaEquivocadaException, ElJugadorNoTieneTurnoException, LaTarjetaYaFueActivadaException {
+    public void activarTarjeta(Tarjeta tarjeta) throws JugadorNoPoseePaisDeLaTarjetaException, ActivacionTarjetaEnRondaEquivocadaException, ElJugadorNoTieneTurnoException, LaTarjetaYaFueActivadaException, TarjetaNoEncontradaException {
+        if (!this.tarjetas.contains(tarjeta)) throw new TarjetaNoEncontradaException();
         if (!this.paisesDominados.contains(tarjeta.obtenerPais())) throw new JugadorNoPoseePaisDeLaTarjetaException();
         this.turno.activarTarjeta(tarjeta);
-    }
-
-    public Tarjeta buscarTarjeta(Pais unPais) throws TarjetaNoEncontradaException {
-        if (tarjetas.containsKey(unPais)) return tarjetas.get(unPais);
-        else throw new TarjetaNoEncontradaException();
     }
 
     public void asignarObjetivo(Objetivo unObjetivo) {
@@ -122,10 +121,6 @@ public class Jugador {
         });
     }
 
-    public String obtenerNombre() {
-        return nombre;
-    }
-
     public boolean poseeLimitrofes(int cantLimitrofes) {
         return paisesDominados.stream().anyMatch(pais -> (int) pais.getPaisesLimitrofes().stream().filter(pais1 -> pais1.dominadoPor() == this).count() >= cantLimitrofes-1);
     }
@@ -136,16 +131,12 @@ public class Jugador {
         devolverTarjetas(tarjetas);
     }
 
-    boolean comprobarTarjetas(ArrayList<Tarjeta> tarjetas) {
-        return this.tarjetas.values().containsAll(tarjetas);
-    }
-
     public void devolverTarjetas(ArrayList<Tarjeta> tarjetasADevolver) {
         for (Tarjeta tarjeta : tarjetasADevolver) {
             try{ tarjeta.desactivar(); }
             catch (Exception ignored){ }
             MultitonTarjetas.agregarTarjeta(tarjeta);
-            tarjetas.remove(tarjeta.obtenerPais());
+            tarjetas.remove(tarjeta);
         }
     }
 

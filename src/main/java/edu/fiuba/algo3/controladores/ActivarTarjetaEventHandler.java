@@ -1,10 +1,7 @@
 package edu.fiuba.algo3.controladores;
 
 import edu.fiuba.algo3.modelo.Jugador;
-import edu.fiuba.algo3.modelo.excepciones.ActivacionTarjetaEnRondaEquivocadaException;
-import edu.fiuba.algo3.modelo.excepciones.ElJugadorNoTieneTurnoException;
-import edu.fiuba.algo3.modelo.excepciones.JugadorNoPoseePaisDeLaTarjetaException;
-import edu.fiuba.algo3.modelo.excepciones.LaTarjetaYaFueActivadaException;
+import edu.fiuba.algo3.modelo.excepciones.*;
 import edu.fiuba.algo3.modelo.paises.Pais;
 import edu.fiuba.algo3.modelo.tarjetas.Tarjeta;
 import edu.fiuba.algo3.vista.VentanaTarjetas;
@@ -42,7 +39,7 @@ public class ActivarTarjetaEventHandler implements EventHandler<MouseEvent> {
             catch (LaTarjetaYaFueActivadaException e) {
                 ventanaTarjetas.mostrarError("La tarjeta de " + tarjeta.obtenerPais().getNombre() +" ya fue activada");
             }
-            catch (ElJugadorNoTieneTurnoException ignored) {
+            catch (ElJugadorNoTieneTurnoException | TarjetaNoEncontradaException ignored) {
 
             } catch (ActivacionTarjetaEnRondaEquivocadaException e) {
                 ventanaTarjetas.mostrarError("No se pueden activar tarjetas en ronda de ataque");
