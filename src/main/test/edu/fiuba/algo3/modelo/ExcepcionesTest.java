@@ -2,16 +2,12 @@ package edu.fiuba.algo3.modelo;
 
 import edu.fiuba.algo3.modelo.excepciones.*;
 import edu.fiuba.algo3.modelo.fichas.Ejercito;
-import edu.fiuba.algo3.modelo.paises.MultitonPaises;
 import edu.fiuba.algo3.modelo.paises.Pais;
 import edu.fiuba.algo3.modelo.rondas.Ataque;
 import edu.fiuba.algo3.modelo.tarjetas.Globo;
-import edu.fiuba.algo3.modelo.tarjetas.MultitonTarjetas;
 import edu.fiuba.algo3.modelo.tarjetas.Tarjeta;
 import javafx.scene.paint.Color;
 import org.junit.jupiter.api.Test;
-
-import javax.sound.midi.SysexMessage;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -19,12 +15,12 @@ public class ExcepcionesTest {
 
     @Test
     public void alTratarDeCargarContinentesLanzaExcepcionDeArchivoDeContinentesNoEncontrado(){
-        assertThrows(ArchivoDeContinentesNoEncontradoException.class, () -> CargarJuego.cargarContinentes("tita"));
+        assertThrows(ArchivoDeContinentesYPaisesNoEncontradoException.class, () -> CargarJuego.cargarContinentesYPaises("tita"));
     }
 
     @Test
     public void alTratarDeCargarPaisesLanzaExcepcionDeArchivoDePaisesNoEncontrado(){
-        assertThrows(ArchivoDePaisesNoEncontradoException.class, () -> CargarJuego.cargarPaisesLimitrofes("alfajor"));
+        assertThrows(ArchivoDePaisesLimitrofesNoEncontradoException.class, () -> CargarJuego.cargarPaisesLimitrofes("alfajor"));
     }
 
     @Test

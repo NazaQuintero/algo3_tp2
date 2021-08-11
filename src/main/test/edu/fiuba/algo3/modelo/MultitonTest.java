@@ -1,7 +1,7 @@
 package edu.fiuba.algo3.modelo;
 
 import edu.fiuba.algo3.modelo.continentes.Continente;
-import edu.fiuba.algo3.modelo.excepciones.ArchivoDeContinentesNoEncontradoException;
+import edu.fiuba.algo3.modelo.excepciones.ArchivoDeContinentesYPaisesNoEncontradoException;
 import edu.fiuba.algo3.modelo.excepciones.ContinenteInvalidoException;
 import edu.fiuba.algo3.modelo.continentes.MultitonContinentes;
 import org.junit.jupiter.api.Test;
@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class MultitonTest {
 
-    private static final String ARCHIVO_CONTINENTES = "continentes.json";
+    private static final String ARCHIVO_CONTINENTES = "continentesYPaises.json";
 
     @Test
     public void laCantidadDeContinentesEsCeroLuegoDeReiniciar() {
@@ -20,8 +20,8 @@ public class MultitonTest {
     }
 
     @Test
-    public void alPedir2VecesElMismoContinenteLaInstanciaObtenidaDeContinenteEsLaMisma() throws ContinenteInvalidoException, ArchivoDeContinentesNoEncontradoException {
-        CargarJuego.cargarContinentes(ARCHIVO_CONTINENTES);
+    public void alPedir2VecesElMismoContinenteLaInstanciaObtenidaDeContinenteEsLaMisma() throws ContinenteInvalidoException, ArchivoDeContinentesYPaisesNoEncontradoException {
+        CargarJuego.cargarContinentesYPaises(ARCHIVO_CONTINENTES);
         Continente continente1 = MultitonContinentes.obtenerInstanciaDe("Africa");
         Continente continente2 = MultitonContinentes.obtenerInstanciaDe("Africa");
 
@@ -35,8 +35,8 @@ public class MultitonTest {
     }
 
     @Test
-    public void alPedirUnContinenteDevuelveCorrectamente() throws ContinenteInvalidoException, ArchivoDeContinentesNoEncontradoException {
-        CargarJuego.cargarContinentes(ARCHIVO_CONTINENTES);
+    public void alPedirUnContinenteDevuelveCorrectamente() throws ContinenteInvalidoException, ArchivoDeContinentesYPaisesNoEncontradoException {
+        CargarJuego.cargarContinentesYPaises(ARCHIVO_CONTINENTES);
         Continente continente1 = MultitonContinentes.obtenerInstanciaDe("Oceania");
 
         assertEquals("Oceania",continente1.getNombre());

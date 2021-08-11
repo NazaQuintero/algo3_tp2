@@ -2,8 +2,8 @@ package edu.fiuba.algo3.vista;
 
 import edu.fiuba.algo3.controladores.FormJugadoresEventHandler;
 import edu.fiuba.algo3.modelo.Juego;
-import edu.fiuba.algo3.modelo.excepciones.ArchivoDeContinentesNoEncontradoException;
-import edu.fiuba.algo3.modelo.excepciones.ArchivoDePaisesNoEncontradoException;
+import edu.fiuba.algo3.modelo.excepciones.ArchivoDeContinentesYPaisesNoEncontradoException;
+import edu.fiuba.algo3.modelo.excepciones.ArchivoDePaisesLimitrofesNoEncontradoException;
 import edu.fiuba.algo3.modelo.excepciones.ArchivoDeTarjetasNoEncontradoException;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
@@ -31,7 +31,7 @@ public class CreacionJugadores extends BorderPane {
         try {
             juego = new Juego();
         }
-        catch (ArchivoDeContinentesNoEncontradoException | ArchivoDePaisesNoEncontradoException | ArchivoDeTarjetasNoEncontradoException e) {
+        catch (ArchivoDeContinentesYPaisesNoEncontradoException | ArchivoDePaisesLimitrofesNoEncontradoException | ArchivoDeTarjetasNoEncontradoException e) {
             e.printStackTrace();
             Platform.exit();
         }

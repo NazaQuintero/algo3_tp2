@@ -8,18 +8,18 @@ import edu.fiuba.algo3.modelo.turnos.Turno;
 
 public class Juego {
 
-    private static final String ARCHIVO_CONTINENTES = "continentes.json";
-    private static final String ARCHIVO_PAISES = "paises.json";
+    private static final String ARCHIVO_CONTINENTES_Y_PAISES = "continentesYPaises.json";
+    private static final String ARCHIVO_PAISES_LIMITROFES = "paisesLimitrofes.json";
     private static final String ARCHIVO_TARJETAS = "tarjetas.json";
 
     private final Jugadores jugadores;
     private Turno turno = new SinTurno();
 
-    public Juego() throws ArchivoDeContinentesNoEncontradoException, ArchivoDePaisesNoEncontradoException, ArchivoDeTarjetasNoEncontradoException {
+    public Juego() throws ArchivoDeContinentesYPaisesNoEncontradoException, ArchivoDePaisesLimitrofesNoEncontradoException, ArchivoDeTarjetasNoEncontradoException {
         jugadores = new Jugadores();
 
-        CargarJuego.cargarContinentes(ARCHIVO_CONTINENTES);
-        CargarJuego.cargarPaisesLimitrofes(ARCHIVO_PAISES);
+        CargarJuego.cargarContinentesYPaises(ARCHIVO_CONTINENTES_Y_PAISES);
+        CargarJuego.cargarPaisesLimitrofes(ARCHIVO_PAISES_LIMITROFES);
         CargarJuego.cargarTarjetas(ARCHIVO_TARJETAS);
     }
 
