@@ -20,7 +20,7 @@ public interface Turno extends Subject {
 
     int obtenerCantidadDeRondasJugadas();
 
-    int obtenerCantidadDeTurnosJugados();
+    int getCantidadDeTurnosJugados();
 
     void setRonda(Ronda unaRonda);
 
@@ -30,12 +30,12 @@ public interface Turno extends Subject {
 
     void finalizarRonda(Jugador jugador) throws ElJugadorNoTieneTurnoException;
 
-    Resultado atacarA(Pais atacante, Pais defensor, int cantidadEjercitos) throws ElJugadorNoTieneTurnoException, NoEsRondaDeAtaqueException, EjercitosInsuficientesException, ElPaisNoEsLimitrofeException;
+    Resultado atacarA(Pais atacante, Pais defensor, int cantidadEjercitos) throws ElJugadorNoTieneTurnoException, NoEsRondaDeAtaqueException, CantidadDeEjercitosInValidaException, ElPaisNoEsLimitrofeException;
 
-    void reagrupar(Pais origen, Pais destino, int cantidad) throws NoEsRondaDeReagrupeException, ElJugadorNoTieneTurnoException, ElPaisNoEsLimitrofeException, EjercitosInsuficientesException;
+    void reagrupar(Pais origen, Pais destino, int cantidadEjercitos) throws NoEsRondaDeReagrupeException, ElJugadorNoTieneTurnoException, ElPaisNoEsLimitrofeException, CantidadDeEjercitosInValidaException;
 
     void colocarEjercitos(Pais pais, int cantidadEjercitos) throws NoEsRondaDeColocacionException, ElJugadorNoTieneTurnoException, NoQuedanMasEjercitosPorColocarException;
 
-    void activarTarjeta(Tarjeta buscarTarjeta) throws ActivacionTarjetaEnRondaEquivocadaException, ElJugadorNoTieneTurnoException, LaTarjetaYaFueActivadaException;
+    void activarTarjeta(Tarjeta tarjeta) throws ActivacionTarjetaEnRondaEquivocadaException, ElJugadorNoTieneTurnoException, LaTarjetaYaFueActivadaException;
 
 }

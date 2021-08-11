@@ -38,7 +38,7 @@ public class SinTurno implements Turno {
     }
 
     @Override
-    public int obtenerCantidadDeTurnosJugados() {
+    public int getCantidadDeTurnosJugados() {
         return 0;
     }
 
@@ -59,7 +59,7 @@ public class SinTurno implements Turno {
     }
 
     @Override
-    public void reagrupar(Pais origen, Pais destino, int cantidad) throws ElJugadorNoTieneTurnoException {
+    public void reagrupar(Pais origen, Pais destino, int cantidadEjercitos) throws ElJugadorNoTieneTurnoException {
         throw new ElJugadorNoTieneTurnoException();
     }
 
@@ -69,7 +69,7 @@ public class SinTurno implements Turno {
     }
 
     @Override
-    public void activarTarjeta(Tarjeta buscarTarjeta) throws ElJugadorNoTieneTurnoException {
+    public void activarTarjeta(Tarjeta tarjeta) throws ElJugadorNoTieneTurnoException {
         throw new ElJugadorNoTieneTurnoException();
     }
 

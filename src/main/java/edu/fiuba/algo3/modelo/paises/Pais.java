@@ -5,7 +5,7 @@ import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.batallas_de_dados.Dados;
 import edu.fiuba.algo3.modelo.batallas_de_dados.Resultado;
 import edu.fiuba.algo3.modelo.batallas_de_dados.ResultadoBatalla;
-import edu.fiuba.algo3.modelo.excepciones.EjercitosInsuficientesException;
+import edu.fiuba.algo3.modelo.excepciones.CantidadDeEjercitosInValidaException;
 import edu.fiuba.algo3.modelo.excepciones.ElPaisNoEsLimitrofeException;
 import edu.fiuba.algo3.modelo.fichas.EjercitoNulo;
 import edu.fiuba.algo3.modelo.fichas.Fichas;
@@ -66,12 +66,12 @@ public class Pais implements Subject {
         paisesLimitrofes.add(otroPais);
     }
 
-    public Resultado atacarA(Pais defensor, int cantidadDeEjercitos) throws ElPaisNoEsLimitrofeException, EjercitosInsuficientesException {
+    public Resultado atacarA(Pais defensor, int cantidadEjercitos) throws ElPaisNoEsLimitrofeException, CantidadDeEjercitosInValidaException {
 
         if (!paisesLimitrofes.contains(defensor)) throw new ElPaisNoEsLimitrofeException();
-        if (cantidadDeEjercitos > cantidadEjercitos()-1 || cantidadDeEjercitos <= 0) throw new EjercitosInsuficientesException();
+        if (cantidadEjercitos > this.cantidadEjercitos()-1 || cantidadEjercitos <= 0) throw new CantidadDeEjercitosInValidaException();
 
-        this.ejercito.asignarRol(new Atacante(cantidadDeEjercitos));
+        this.ejercito.asignarRol(new Atacante(cantidadEjercitos));
         return defensor.recibirAtaque(this);
     }
 
@@ -85,12 +85,12 @@ public class Pais implements Subject {
     }
 
 
-    public void reagrupar(Pais destino, int cantidad) throws ElPaisNoEsLimitrofeException, EjercitosInsuficientesException {
+    public void reagrupar(Pais destino, int cantidadEjercitos) throws ElPaisNoEsLimitrofeException, CantidadDeEjercitosInValidaException {
         if (!this.esLimitrofeCon(destino)) throw new ElPaisNoEsLimitrofeException();
-        if (this.cantidadEjercitos() - cantidad <= 0 || cantidad <= 0) throw new EjercitosInsuficientesException();
+        if (this.cantidadEjercitos() - cantidadEjercitos <= 0 || cantidadEjercitos <= 0) throw new CantidadDeEjercitosInValidaException();
 
-        this.modificarCantidadEjercito(-cantidad);
-        destino.modificarCantidadEjercito(cantidad);
+        this.modificarCantidadEjercito(-cantidadEjercitos);
+        destino.modificarCantidadEjercito(cantidadEjercitos);
 
     }
 

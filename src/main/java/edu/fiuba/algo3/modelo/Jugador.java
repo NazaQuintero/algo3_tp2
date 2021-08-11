@@ -17,8 +17,6 @@ import edu.fiuba.algo3.modelo.turnos.Turno;
 import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
 
 public class Jugador {
 
@@ -62,7 +60,7 @@ public class Jugador {
         this.paisesDominados.remove(pais);
     }
 
-    public Resultado atacarA(Pais paisAtacante, Pais paisDefensor, int cantidadEjercitos) throws ElJugadorNoTieneTurnoException, NoEsRondaDeAtaqueException, EjercitosInsuficientesException, ElPaisNoEsLimitrofeException {
+    public Resultado atacarA(Pais paisAtacante, Pais paisDefensor, int cantidadEjercitos) throws ElJugadorNoTieneTurnoException, NoEsRondaDeAtaqueException, CantidadDeEjercitosInValidaException, ElPaisNoEsLimitrofeException {
         Resultado resultado = new ResultadoBatallaNulo();
 
         if (this.puedeAtacar()) {
@@ -78,7 +76,7 @@ public class Jugador {
         return this.paisesDominados.stream().anyMatch(pais -> pais.cantidadEjercitos() > 1);
     }
 
-    public void reagrupar(Pais origen, Pais destino, int cantidad) throws NoEsRondaDeReagrupeException, ElJugadorNoTieneTurnoException, ElPaisNoEsLimitrofeException, EjercitosInsuficientesException {
+    public void reagrupar(Pais origen, Pais destino, int cantidad) throws NoEsRondaDeReagrupeException, ElJugadorNoTieneTurnoException, ElPaisNoEsLimitrofeException, CantidadDeEjercitosInValidaException {
         this.turno.reagrupar(origen, destino, cantidad);
     }
 

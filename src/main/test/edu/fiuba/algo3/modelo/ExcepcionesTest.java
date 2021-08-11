@@ -35,7 +35,7 @@ public class ExcepcionesTest {
         Pais chl = new Pais("Chile");
         arg.limitaCon(chl);
         chl.limitaCon(arg);
-        assertThrows(EjercitosInsuficientesException.class, () -> ataque.atacarA(arg, chl, 3));
+        assertThrows(CantidadDeEjercitosInValidaException.class, () -> ataque.atacarA(arg, chl, 3));
     }
 
     @Test

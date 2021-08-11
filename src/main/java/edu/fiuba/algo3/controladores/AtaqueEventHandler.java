@@ -3,7 +3,7 @@ package edu.fiuba.algo3.controladores;
 import edu.fiuba.algo3.modelo.batallas_de_dados.Dados;
 import edu.fiuba.algo3.modelo.batallas_de_dados.ProcesadorResultado;
 import edu.fiuba.algo3.modelo.batallas_de_dados.Resultado;
-import edu.fiuba.algo3.modelo.excepciones.EjercitosInsuficientesException;
+import edu.fiuba.algo3.modelo.excepciones.CantidadDeEjercitosInValidaException;
 import edu.fiuba.algo3.modelo.excepciones.ElPaisNoEsLimitrofeException;
 import edu.fiuba.algo3.modelo.paises.Pais;
 import edu.fiuba.algo3.vista.CampoDeJuego;
@@ -50,7 +50,7 @@ public class AtaqueEventHandler implements EventHandler<Event>  {
                 ProcesadorResultado.obtenerInstancia().procesar(resultado);
                 campoDeJuego.setPaisSeleccionado(null);
                 campoDeJuego.mostrarPaisesDelJugadorActual();
-            } catch (ElPaisNoEsLimitrofeException | NumberFormatException | EjercitosInsuficientesException e) {
+            } catch (ElPaisNoEsLimitrofeException | NumberFormatException | CantidadDeEjercitosInValidaException e) {
                 inputText.getStyleClass().add("invalid");
                 inputText.clear();
                 inputText.requestFocus();
