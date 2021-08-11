@@ -28,17 +28,25 @@ public class MenuLateralDerecho extends VBox implements Observer {
     private Label labelDeError;
     private VBox resultadoDeAtaque;
     private Button botonCancelar;
+    private VentanaTarjetas ventanaTarjetas;
+    private VentanaObjetivos ventanaObjetivos;
+    private Label labelObjetivoGeneral;
 
     public MenuLateralDerecho(CampoDeJuego campoDeJuego, Juego juego) {
         this.campoDeJuego = campoDeJuego;
         this.juego = juego;
+        crearLabelObjetivoGeneral();
         juego.getTurno().addObserver(this);
         this.formularioDeAccion = crearFormularioDeAccion();
         this.getChildren().addAll(crearDescripcionDeRonda(), this.formularioDeAccion);
         this.setResultadoDeAtaque(new VBox());
         this.setSpacing(50);
         this.setAlignment(Pos.CENTER);
+        this.ventanaObjetivos = new VentanaObjetivos(juego);
+        this.ventanaTarjetas = new VentanaTarjetas(juego);
+
     }
+
 
     private VBox crearFormularioDeAccion() {
         this.labelDeAyuda = new Label("");
@@ -70,7 +78,48 @@ public class MenuLateralDerecho extends VBox implements Observer {
         vBox.setSpacing(10);
         vBox.setAlignment(Pos.CENTER);
         vBox.setVisible(false);
+
+        Button botonTarjetas = crearBotonTarjetas();
+        botonTarjetas.setAlignment(Pos.BOTTOM_RIGHT);
+        vBox.getChildren().add(botonTarjetas);
+
+        Button botonObjetivos = crearBotonObjetivos();
+        botonObjetivos.setAlignment(Pos.BOTTOM_RIGHT);
+        vBox.getChildren().add(botonObjetivos);
+
+        VBox layoutObjetivoGeneral = crearLabelObjetivoGeneral();
+        vBox.getChildren().add(layoutObjetivoGeneral);
+
         return vBox;
+    }
+
+    private Button crearBotonObjetivos() {
+        Button botonObjetivos = new Button("Ver objetivos");
+        botonObjetivos.setOnAction(e -> ventanaObjetivos.mostrarObjetivos());
+        return botonObjetivos;
+    }
+
+    private Button crearBotonTarjetas() {
+        Button botonTarjetas = new Button("Ver tarjetas");
+        botonTarjetas.setOnAction(e -> ventanaTarjetas.mostrarTarjetas());
+        return botonTarjetas;
+    }
+
+    public void actualizarLabelObjetivoGeneral() {
+        labelObjetivoGeneral.setText("Objetivo general: \n Dominar 30 paises (" + juego.getTurno().obtenerJugadorTurnoActual().cantidadPaisesDominados() + "/30 dominados por " + juego.getTurno().obtenerJugadorTurnoActual().getNombre() + ")" );
+    }
+
+    private VBox crearLabelObjetivoGeneral() {
+        labelObjetivoGeneral = new Label("Objetivo general: \n Dominar 30 paises (" + juego.getTurno().obtenerJugadorTurnoActual().cantidadPaisesDominados() + "/30 dominados por " + juego.getTurno().obtenerJugadorTurnoActual().getNombre() + ")" );
+        labelObjetivoGeneral.setStyle("-fx-border-color: #fd954f;");
+        labelObjetivoGeneral.setAlignment(Pos.CENTER);
+
+        VBox vbox = new VBox();
+        vbox.setSpacing(20);
+        vbox.setAlignment(Pos.CENTER);
+        vbox.getChildren().add(labelObjetivoGeneral);
+
+        return vbox;
     }
 
     private void crearBotonCancelar() {
@@ -100,6 +149,7 @@ public class MenuLateralDerecho extends VBox implements Observer {
         campoDeJuego.mostrarPaisesDelJugadorActual();
         ocultarError();
         this.limpiarResultadoDeBatalla();
+        this.actualizarLabelObjetivoGeneral();
         if (this.juego.getTurno().obtenerRondaActual() instanceof RondaColocacion) {
             this.mostrarFormularioDeColocacion();
         }
