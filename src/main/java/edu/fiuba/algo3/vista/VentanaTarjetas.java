@@ -72,7 +72,7 @@ public class VentanaTarjetas implements Observer {
 
         Scene scene = new Scene(layout, 500, 400);
         ventanaTarjetas.setScene(scene);
-        ventanaTarjetas.showAndWait();
+        ventanaTarjetas.show();
     }
 
     private void crearErrorLabel() {
@@ -86,12 +86,13 @@ public class VentanaTarjetas implements Observer {
     public void actualizarVistasTarjetas() {
         Jugador unJugador = this.juego.getTurno().obtenerJugadorTurnoActual();
         vistasTarjetas.clear();
-        for (Tarjeta t : unJugador.obtenerTarjetas()) vistasTarjetas.add(new VistaTarjeta(this, t));
+        for (Tarjeta tarjeta : unJugador.obtenerTarjetas()) vistasTarjetas.add(new VistaTarjeta(this, tarjeta));
     }
 
     private GridPane crearLayoutTarjetas(){
         actualizarVistasTarjetas();
         GridPane layoutTarjetas = new GridPane();
+        layoutTarjetas.getStylesheets().add("styles.css");
         layoutTarjetas.setPadding(new Insets(30, 30, 30, 30));
         layoutTarjetas.setVgap(30);
         layoutTarjetas.setHgap(20);

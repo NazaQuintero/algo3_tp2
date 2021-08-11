@@ -23,10 +23,12 @@ public class Tarjeta {
 
     public void activar() throws LaTarjetaYaFueActivadaException {
         estadoTarjeta = estadoTarjeta.activar(pais);
+        notifyObservers();
     }
 
     public void desactivar() throws LaTarjetaYaEstaDesactivadaException {
         estadoTarjeta = estadoTarjeta.desactivar();
+        notifyObservers();
     }
 
     public String obtenerSimbolo() {
@@ -41,6 +43,7 @@ public class Tarjeta {
     public boolean esComodin(){
         return this.obtenerSimbolo().equals("Comodin");
     }
+
     public TipoCanje compararSimbolos(Tarjeta unaTarjeta, Tarjeta otraTarjeta) {
         if (this.esComodin() || unaTarjeta.esComodin() || otraTarjeta.esComodin())
             return new CanjeHabilitado();

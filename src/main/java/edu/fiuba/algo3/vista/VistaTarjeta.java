@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.vista;
 
 import edu.fiuba.algo3.controladores.TarjetaEventHandler;
+import edu.fiuba.algo3.modelo.observables.Observer;
 import edu.fiuba.algo3.modelo.tarjetas.Tarjeta;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -12,8 +13,9 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 
 
-public class VistaTarjeta extends StackPane {
+public class VistaTarjeta extends StackPane implements Observer {
 
+    private final VentanaTarjetas ventanaTarjetas;
     private final Image imagenTarjeta;
     private final ImageView view;
     private final Tarjeta tarjeta;
@@ -21,11 +23,13 @@ public class VistaTarjeta extends StackPane {
     private final Button button;
 
     public VistaTarjeta(VentanaTarjetas ventanaTarjetas, Tarjeta tarjeta) {
+        this.ventanaTarjetas = ventanaTarjetas;
         this.tarjeta = tarjeta;
         this.imagenTarjeta = new Image(tarjeta.obtenerSimbolo() + ".png");
         this.view = new ImageView(imagenTarjeta);
         this.check = new CheckBox();
         this.button = new Button(tarjeta.obtenerPais().getNombre(), view);
+        //tarjeta.addObserver(this);
 
         view.setPreserveRatio(true);
         view.setFitWidth(82);
@@ -55,6 +59,28 @@ public class VistaTarjeta extends StackPane {
 
     public boolean estaSeleccionada(){
         return check.isSelected();
+    }
+
+    public void crearBotonTarjeta() {
+        this.button.setContentDisplay(ContentDisplay.BOTTOM);
+        this.button.setOnMouseClicked(new TarjetaEventHandler(ventanaTarjetas, this));
+
+        button.getStyleClass().add("botonTarjeta");
+
+        if (tarjeta.estaActivada()) button.getStyleClass().add("yaActivada");
+
+        else if (tarjeta.obtenerPais().dominadoPor() == ventanaTarjetas.getJugador())
+            button.getStyleClass().add("puedeActivarse");
+
+        else button.getStyleClass().add("noPuedeActivarse");
+
+        this.button.setMaxWidth(82);
+        this.button.setMaxHeight(250);
+    }
+
+    @Override
+    public void update(){
+        ventanaTarjetas.update();
     }
 
 }

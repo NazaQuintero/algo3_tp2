@@ -47,5 +47,6 @@ public class ActivarTarjetaEventHandler implements EventHandler<MouseEvent> {
                 ventanaTarjetas.mostrarError("El jugador no posee el pais " + tarjeta.obtenerPais().getNombre());
             }
         }
+        ventanaTarjetas.update();
     }
 }
