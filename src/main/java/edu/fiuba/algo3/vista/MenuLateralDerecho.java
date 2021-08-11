@@ -149,6 +149,7 @@ public class MenuLateralDerecho extends VBox implements Observer {
         campoDeJuego.mostrarPaisesDelJugadorActual();
         ocultarError();
         this.limpiarResultadoDeBatalla();
+        this.actualizarLabelObjetivoGeneral();
         if(this.juego.getRonda() instanceof RondaColocacion) {
             this.mostrarFormularioDeColocacion();
             this.labelDeAyuda.setText("Haga click en su pais para colocar ejercito\nQueda/n por colocar " +
