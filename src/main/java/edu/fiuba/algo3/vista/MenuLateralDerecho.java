@@ -94,7 +94,7 @@ public class MenuLateralDerecho extends VBox implements Observer {
     }
 
     private Button crearBotonObjetivos() {
-        Button botonObjetivos = new Button("Ver objetivos");
+        Button botonObjetivos = new Button("Ver objetivo secreto");
         botonObjetivos.setOnAction(e -> ventanaObjetivos.mostrarObjetivos());
         return botonObjetivos;
     }
@@ -150,6 +150,7 @@ public class MenuLateralDerecho extends VBox implements Observer {
         ocultarError();
         this.limpiarResultadoDeBatalla();
         this.actualizarLabelObjetivoGeneral();
+        this.ventanaTarjetas.actualizarVistasTarjetas();
         if (this.juego.getTurno().obtenerRondaActual() instanceof RondaColocacion) {
             this.mostrarFormularioDeColocacion();
         }
