@@ -36,7 +36,19 @@
     -fx-max-width: 400px;
 }
 .labelError{
-    -fx-max-width: 450px;
+    -fx-max-width: 500px;
+}
+
+.errorTarjetas{
+    -fx-max-width: 500px;
+    -fx-font-size: 18px;
+    -fx-text-fill: red;
+}
+
+.tarjetasValidas{
+    -fx-max-width: 500px;
+    -fx-font-size: 18px;
+    -fx-text-fill: green;
 }
 
 .error {
@@ -96,6 +108,8 @@
 }
 
 .botonTarjeta {
+    -fx-font-weight: bold;
+    -fx-font-size: 16px;
     -fx-background-color:
             -fx-focus-color,
             -fx-control-inner-background,
@@ -106,18 +120,15 @@
 }
 
 .botonTarjeta.yaActivada{
-    -fx-focus-color: #F6E513;
-    -fx-faint-focus-color: #F6E51322;
+    -fx-background-color: #fbee73;
 }
 
 .botonTarjeta.puedeActivarse{
-    -fx-focus-color: #198754;
-    -fx-faint-focus-color: #19875422;
+    -fx-background-color: #198754;
 }
 
 .botonTarjeta.noPuedeActivarse{
-    -fx-focus-color: #d35244;
-    -fx-faint-focus-color: #d3524422
+    -fx-background-color: #d35244;
 }
 
 .textField.valid {

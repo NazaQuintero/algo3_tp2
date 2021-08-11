@@ -1,8 +1,7 @@
 package edu.fiuba.algo3.modelo.fichas;
 
-import edu.fiuba.algo3.modelo.batallasDeDados.Dados;
+import edu.fiuba.algo3.modelo.batallas_de_dados.Dados;
 import edu.fiuba.algo3.modelo.Jugador;
-import edu.fiuba.algo3.modelo.observables.Observer;
 import edu.fiuba.algo3.modelo.observables.Subject;
 import edu.fiuba.algo3.modelo.paises.Pais;
 import edu.fiuba.algo3.modelo.roles.Rol;

@@ -31,8 +31,8 @@ public class Jugadores implements Iterable<Jugador> {
         if (indice >= jugadores.size()) throw new JugadorNoExisteException();
         return this.jugadores.get(indice);
     }
-    public Jugador obtenerJugador(String nombre) throws JugadorNoExisteException{
-        return (this.jugadores.stream().filter(jugador -> nombre.equals(jugador.obtenerNombre())).findFirst().orElseThrow(JugadorNoExisteException::new));
+    public Jugador obtenerJugador(String nombre) throws JugadorNoExisteException {
+        return (this.jugadores.stream().filter(jugador -> nombre.equals(jugador.getNombre())).findFirst().orElseThrow(JugadorNoExisteException::new));
     }
 
     public void setPrimerJugador(int valor) {
@@ -54,7 +54,8 @@ public class Jugadores implements Iterable<Jugador> {
 
     @Override
     public Iterator<Jugador> iterator() {
-        Iterator<Jugador> it = new Iterator<Jugador>() {
+
+        return new Iterator<>() {
 
             private int indiceActual = primerJugador;
 
@@ -71,7 +72,10 @@ public class Jugadores implements Iterable<Jugador> {
             }
 
         };
-
-        return it;
     }
+
+    public boolean algunoCumpleObjetivo() {
+        return jugadores.stream().anyMatch(Jugador::cumpleObjetivo);
+    }
+
 }

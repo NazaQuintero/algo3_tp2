@@ -87,7 +87,7 @@ public class MenuLateralDerecho extends VBox implements Observer {
         this.descripcionDeRonda = new Label(this.juego.getTurno().obtenerRondaActual().obtenerDescripcion());
         this.descripcionDeRonda.getStyleClass().add("labelText");
 
-        this.descripcionDeTurno = new Label("Es el turno de: " + this.juego.getTurno().obtenerJugadorTurnoActual().obtenerNombre());
+        this.descripcionDeTurno = new Label("Es el turno de: " + this.juego.getTurno().obtenerJugadorTurnoActual().getNombre());
         this.descripcionDeTurno.getStyleClass().add("labelText");
 
         return new VBox(this.descripcionDeRonda, this.descripcionDeTurno);
@@ -96,14 +96,14 @@ public class MenuLateralDerecho extends VBox implements Observer {
     @Override
     public void update() {
         this.descripcionDeRonda.setText(this.juego.getTurno().obtenerRondaActual().obtenerDescripcion());
-        this.descripcionDeTurno.setText("Es el turno de: " + this.juego.getTurno().obtenerJugadorTurnoActual().obtenerNombre());
+        this.descripcionDeTurno.setText("Es el turno de: " + this.juego.getTurno().obtenerJugadorTurnoActual().getNombre());
         campoDeJuego.mostrarPaisesDelJugadorActual();
         ocultarError();
         this.limpiarResultadoDeBatalla();
-        if (this.juego.getRonda() instanceof RondaColocacion) {
+        if (this.juego.getTurno().obtenerRondaActual() instanceof RondaColocacion) {
             this.mostrarFormularioDeColocacion();
         }
-        else if (this.juego.getRonda() instanceof Ataque) {
+        else if (this.juego.getTurno().obtenerRondaActual() instanceof Ataque) {
             this.mostrarFormularioDeAtaque();
         }
         else {
@@ -117,7 +117,7 @@ public class MenuLateralDerecho extends VBox implements Observer {
         this.getChildren().get(1).setVisible(true);
         this.botonCancelar.setVisible(false);
         this.labelDeAyuda.setText("Haga click en su país para colocar ejército\nQueda/n por colocar " +
-                ((RondaColocacion) juego.getRonda()).getCantidadEjercitosColocables() + " ejército/s");
+                ((RondaColocacion) juego.getTurno().obtenerRondaActual()).getCantidadEjercitosColocables() + " ejército/s");
         this.inputText.setVisible(false);
         this.botonAccion.setVisible(false);
     }

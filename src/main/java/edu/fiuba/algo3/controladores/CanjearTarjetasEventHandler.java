@@ -34,6 +34,7 @@ public class CanjearTarjetasEventHandler implements EventHandler<MouseEvent> {
         try {
             jugador.canjearTarjetas(tarjetas);
             ventanaTarjetas.update();
+            ventanaTarjetas.mostrarMensajeValido("Tarjetas canjeadas correctamente!");
         }
         catch (JugadorSinTarjetasException e) {
             // Nunca deberia pasar

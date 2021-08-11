@@ -2,9 +2,9 @@ package edu.fiuba.algo3.modelo.paises;
 
 import com.google.gson.annotations.Expose;
 import edu.fiuba.algo3.modelo.Jugador;
-import edu.fiuba.algo3.modelo.batallasDeDados.Dados;
-import edu.fiuba.algo3.modelo.batallasDeDados.Resultado;
-import edu.fiuba.algo3.modelo.batallasDeDados.ResultadoBatalla;
+import edu.fiuba.algo3.modelo.batallas_de_dados.Dados;
+import edu.fiuba.algo3.modelo.batallas_de_dados.Resultado;
+import edu.fiuba.algo3.modelo.batallas_de_dados.ResultadoBatalla;
 import edu.fiuba.algo3.modelo.excepciones.EjercitosInsuficientesException;
 import edu.fiuba.algo3.modelo.excepciones.ElPaisNoEsLimitrofeException;
 import edu.fiuba.algo3.modelo.fichas.EjercitoNulo;

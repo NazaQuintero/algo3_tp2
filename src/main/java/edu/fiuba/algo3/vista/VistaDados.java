@@ -1,7 +1,7 @@
 package edu.fiuba.algo3.vista;
 
-import edu.fiuba.algo3.modelo.batallasDeDados.Dado;
-import edu.fiuba.algo3.modelo.batallasDeDados.Dados;
+import edu.fiuba.algo3.modelo.batallas_de_dados.Dado;
+import edu.fiuba.algo3.modelo.batallas_de_dados.Dados;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;

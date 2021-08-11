@@ -1,7 +1,6 @@
 package edu.fiuba.algo3.vista;
 
 import edu.fiuba.algo3.modelo.Juego;
-import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.paises.MultitonPaises;
 import edu.fiuba.algo3.modelo.paises.Pais;
 import edu.fiuba.algo3.modelo.turnos.Turno;
@@ -22,88 +21,94 @@ public class CampoDeJuego extends BorderPane {
 
     private final Juego juego;
     private final ArrayList<VistaPais> vistasPaises = new ArrayList<>();
+    private final MenuLateralDerecho menuLateralDerecho;
     private final VentanaTarjetas ventanaTarjetas;
     private Pais paisSeleccionado;
-
-    private MenuLateralDerecho menuLateralDerecho;
 
     public CampoDeJuego(Stage stage, Juego juego) {
         this.juego = juego;
         this.menuLateralDerecho = new MenuLateralDerecho(this, juego);
+        this.ventanaTarjetas = new VentanaTarjetas(juego);
         this.getStylesheets().add("styles.css");
 
-        Image imagen = new Image("tablero.png");
-        ImageView imageView = new ImageView(imagen);
-        imageView.setPreserveRatio(true);
-        imageView.setFitWidth(1000);
-        imageView.setFitHeight(800);
-
-        Pane stackPane = new Pane();
-        stackPane.getChildren().add(imageView);
-        crearVistasPaises(stackPane);
-
-        HBox anHbox = new HBox(stackPane);
-        anHbox.setAlignment(Pos.CENTER);
-        VBox aVbox = new VBox(anHbox);
-        aVbox.setAlignment(Pos.CENTER);
-        setMargin(this, new Insets(50,50,50,50));
-        this.setCenter(aVbox);
+        crearBotonTarjetas();
+        crearTablero();
         this.setRight(this.menuLateralDerecho);
 
         this.mostrarPaisesDelJugadorActual();
         this.mostrarMenuLateralDerecho();
 
-        this.ventanaTarjetas = new VentanaTarjetas(juego);
-        Button botonTarjetas = new Button("Ver tarjetas");
-        botonTarjetas.setOnAction(e -> ventanaTarjetas.mostrarTarjetas());
         stage.setScene(new Scene(this, 1500, 900));
         stage.centerOnScreen();
+    }
 
-        this.setCenter(stackPane);
+    public Juego getJuego() {
+        return juego;
+    }
+
+    private void crearTablero() {
+        Pane pane = new Pane();
+        pane.getChildren().add(crearVistaImagen());
+        crearVistasPaises(pane);
+
+        HBox anHbox = new HBox(pane);
+        anHbox.setAlignment(Pos.CENTER);
+        VBox aVbox = new VBox(anHbox);
+        aVbox.setAlignment(Pos.CENTER);
+        setMargin(this, new Insets(50,50,50,50));
+
+        this.setCenter(aVbox);
+    }
+
+    private void crearBotonTarjetas() {
+        Button botonTarjetas = new Button("Ver tarjetas");
+        botonTarjetas.setOnAction(e -> ventanaTarjetas.mostrarTarjetas());
+
         this.setTop(botonTarjetas);
     }
 
+    private ImageView crearVistaImagen() {
+        Image imagen = new Image("tablero.png");
+        ImageView imageView = new ImageView(imagen);
+        imageView.setPreserveRatio(true);
+        imageView.setFitWidth(1000);
+        imageView.setFitHeight(800);
+        return imageView;
+    }
 
+    private void crearVistasPaises(Pane pane) {
 
-    private void crearVistasPaises(Pane stackPane) {
+        ArrayList<Pais> paises = new ArrayList<>(MultitonPaises.obtenerTodosLosPaises());
 
-        ArrayList<Pais> _paises = new ArrayList<>(MultitonPaises.obtenerTodosLosPaises());
+        paises.forEach(pais -> vistasPaises.add(new VistaPais(pais, this)));
 
-        for (Pais pais : _paises) vistasPaises.add(new VistaPais(pais, this));
+        setVistasPaisesLimitrofes();
+        pane.getChildren().addAll(vistasPaises);
+    }
 
-        for (VistaPais vistaPais : vistasPaises) {
-            for (VistaPais vistaPaisLimitrofe : vistasPaises) {
-                if (vistaPais.getLimitrofes().contains(vistaPaisLimitrofe.getPais()))
-                    vistaPais.setVistaLimitrofe(vistaPaisLimitrofe);
-            }
-        }
-        stackPane.getChildren().addAll(vistasPaises);
+    private void setVistasPaisesLimitrofes() {
+        vistasPaises.forEach(vistaPais -> vistasPaises.stream().filter(vistaPaisLimitrofe -> vistaPais.getLimitrofes().
+            contains(vistaPaisLimitrofe.getPais())).forEach(vistaPais::setVistaLimitrofe));
     }
 
     public void resaltarLimitrofesAdversarios(VistaPais vistaPais) {
-        ArrayList<VistaPais> vistaLimitrofes = vistaPais.getVistaLimitrofes();
-        for (VistaPais vista : vistasPaises)
-            if (!vistaLimitrofes.contains(vista) || (vistaPais.getPais().dominadoPor() == vista.getPais().dominadoPor()))
-               vista.desactivar();
+        this.vistasPaises.stream().filter( vista -> !vistaPais.getVistaLimitrofes().contains(vista) ||
+                (vistaPais.getPais().dominadoPor() == vista.getPais().dominadoPor())).
+                forEach(VistaPais::desactivar);
     }
 
     public void resaltarLimitrofesPropios(VistaPais vistaPais) {
-        ArrayList<VistaPais> vistaLimitrofes = vistaPais.getVistaLimitrofes();
-        for (VistaPais vista : vistasPaises)
-            if (!vistaLimitrofes.contains(vista) || (vistaPais.getPais().dominadoPor() != vista.getPais().dominadoPor()))
-                vista.desactivar();
+        this.vistasPaises.stream().filter( vista -> !vistaPais.getVistaLimitrofes().contains(vista) ||
+                (vistaPais.getPais().dominadoPor() != vista.getPais().dominadoPor())).
+                forEach(VistaPais::desactivar);
     }
 
     public void mostrarPaises() { for (VistaPais vista : vistasPaises) vista.activar(); }
 
     public void mostrarPaisesDelJugadorActual() {
         this.mostrarPaises();
-        Jugador unJugador = this.juego.getTurno().obtenerJugadorTurnoActual();
-        for (VistaPais vista: vistasPaises) {
-            if(vista.getJugadorDominante() != unJugador) {
-                vista.desactivar();
-            }
-        }
+        this.vistasPaises.stream().filter(vista -> vista.getJugadorDominante() != this.juego.getTurno().obtenerJugadorTurnoActual()).
+                forEach(VistaPais::desactivar);
     }
 
     public void setPaisSeleccionado(Pais pais) {
@@ -112,10 +117,6 @@ public class CampoDeJuego extends BorderPane {
 
     public Pais getPaisSeleccionado() {
         return paisSeleccionado;
-    }
-
-    public Turno getTurno() {
-        return this.juego.getTurno();
     }
 
     private void mostrarMenuLateralDerecho() {

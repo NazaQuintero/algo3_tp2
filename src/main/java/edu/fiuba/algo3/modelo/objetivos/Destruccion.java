@@ -18,6 +18,6 @@ public class Destruccion implements Objetivo {
 
     @Override
     public String obtenerDescripcion() {
-        return "Destruir a " + jugadorAEliminar.obtenerNombre();
+        return "Destruir a " + jugadorAEliminar.getNombre();
     }
 }

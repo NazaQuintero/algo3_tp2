@@ -41,7 +41,7 @@ public class JuegoTest {
     }
 
     @Test
-    public void canjeFunciona() throws ArchivoDeTarjetasNoEncontradoException, ArchivoDePaisesNoEncontradoException, ElJugadorNoTieneTurnoException, ActivacionTarjetaEnRondaEquivocadaException, LaTarjetaYaFueActivadaException, JugadorNoPoseePaisDeLaTarjetaException, JugadorSinTarjetasException, LaTarjetaYaEstaDesactivadaException, SinCanjeHabilitadoException, ArchivoDeContinentesNoEncontradoException {
+    public void canjeFunciona() throws ArchivoDeTarjetasNoEncontradoException, ArchivoDePaisesNoEncontradoException, JugadorSinTarjetasException, SinCanjeHabilitadoException, ArchivoDeContinentesNoEncontradoException, CantidadDeJugadoresInsuficienteException {
         Juego juego = new Juego();
         Pais arg = MultitonPaises.obtenerInstanciaDe("Argentina");
         Pais bra = MultitonPaises.obtenerInstanciaDe("Brasil");
@@ -51,16 +51,17 @@ public class JuegoTest {
         Tarjeta otraTarjeta = new Tarjeta(bra, new Globo());
         Tarjeta ootraTarjeta = new Tarjeta(chl, new Globo());
 
-        juego.agregarTarjeta(unaTarjeta);
-        juego.agregarTarjeta(otraTarjeta);
-        juego.agregarTarjeta(ootraTarjeta);
+        MultitonTarjetas.agregarTarjeta(unaTarjeta);
+        MultitonTarjetas.agregarTarjeta(otraTarjeta);
+        MultitonTarjetas.agregarTarjeta(ootraTarjeta);
 
         Jugador jugador = new Jugador("Cami", Color.RED);
         Jugador otroJugador = new Jugador("Frank", Color.PINK);
         juego.agregarJugador(jugador);
         juego.agregarJugador(otroJugador);
 
-        juego.iniciarTurno();
+        juego.comenzar();
+        Jugador jugadorQueLeToca = juego.getTurno().obtenerJugadorTurnoActual();
 
         arg.colocarEjercito(new Ejercito(jugador));
         bra.colocarEjercito(new Ejercito(jugador));
@@ -70,21 +71,17 @@ public class JuegoTest {
         Tarjeta tBra = MultitonTarjetas.obtenerTarjeta(bra);
         Tarjeta tChl = MultitonTarjetas.obtenerTarjeta(chl);
 
-        jugador.recibirTarjeta(tArg);
-        jugador.recibirTarjeta(tBra);
-        jugador.recibirTarjeta(tChl);
-
-        jugador.activarTarjeta(tArg);
-        jugador.activarTarjeta(tBra);
-        jugador.activarTarjeta(tChl);
+        jugadorQueLeToca.recibirTarjeta(tArg);
+        jugadorQueLeToca.recibirTarjeta(tBra);
+        jugadorQueLeToca.recibirTarjeta(tChl);
 
         ArrayList<Tarjeta> paisesTarjetas = new ArrayList<>();
         paisesTarjetas.add(tArg);
         paisesTarjetas.add(tBra);
         paisesTarjetas.add(tChl);
-        jugador.canjearTarjetas(paisesTarjetas);
+        jugadorQueLeToca.canjearTarjetas(paisesTarjetas);
 
-        assertEquals(4, jugador.obtenerCanjeActual().cantidadEjercitos());
+        assertEquals(4, jugadorQueLeToca.obtenerCanjeActual().cantidadEjercitos());
     }
 
 }

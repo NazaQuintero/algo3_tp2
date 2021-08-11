@@ -59,8 +59,9 @@ public class ExcepcionesTest {
     public void seLanzaJugadorNoPoseePaisDeLaTarjetaExceptionSiTrataDeActivarTarjetaDeUnPaisQueNoEstaBajoSuDominio() {
         Jugador jugador = new Jugador("Carlitos", Color.RED);
         Pais pais = new Pais("Peru");
-        MultitonTarjetas.agregarTarjeta(new Tarjeta(pais, new Globo()));
-        assertThrows(JugadorNoPoseePaisDeLaTarjetaException.class, () -> jugador.activarTarjeta(MultitonTarjetas.obtenerTarjeta(pais)));
+        Tarjeta tarjeta = new Tarjeta(pais, new Globo());
+        jugador.recibirTarjeta(tarjeta);
+        assertThrows(JugadorNoPoseePaisDeLaTarjetaException.class, () -> jugador.activarTarjeta(tarjeta));
     }
 
     @Test

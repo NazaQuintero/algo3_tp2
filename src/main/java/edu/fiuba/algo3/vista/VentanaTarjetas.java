@@ -1,12 +1,11 @@
 package edu.fiuba.algo3.vista;
 
-import edu.fiuba.algo3.controladores.ActivarTarjetaEventHandler;
+import edu.fiuba.algo3.controladores.ActivarTarjetasEventHandler;
 import edu.fiuba.algo3.controladores.CanjearTarjetasEventHandler;
 import edu.fiuba.algo3.modelo.Juego;
 import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.observables.Observer;
 import edu.fiuba.algo3.modelo.tarjetas.Tarjeta;
-import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -22,14 +21,14 @@ import javafx.stage.Stage;
 
 import java.util.ArrayList;
 
+
 public class VentanaTarjetas implements Observer {
 
     private final Juego juego;
-    private ArrayList<VistaTarjeta> vistasTarjetas = new ArrayList<>();
-    private Button botonActivar;
-    private Button botonCanjear;
-    private Label errorLabel;
+    private final ArrayList<VistaTarjeta> vistasTarjetas = new ArrayList<>();
     private ScrollPane layoutTarjetasScroll;
+    private HBox layoutBotones;
+    private Label infoLabel;
 
     public VentanaTarjetas(Juego juego) {
         this.juego = juego;
@@ -49,21 +48,13 @@ public class VentanaTarjetas implements Observer {
         layoutTarjetasScroll.setContent(layoutTarjetas);
         layoutTarjetasScroll.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
 
-        HBox layoutBotones = new HBox();
-        botonActivar = new Button("Activar tarjeta");
-        botonActivar.setOnMouseClicked(new ActivarTarjetaEventHandler(juego.getTurno().obtenerJugadorTurnoActual(), this));
-        botonCanjear = new Button("Canjear tarjetas");
-        botonCanjear.setOnMouseClicked(new CanjearTarjetasEventHandler(juego.getTurno().obtenerJugadorTurnoActual(), this));
-        Button botonCancelar = new Button("Cancelar");
-        botonCancelar.setOnAction(e -> ventanaTarjetas.close());
+        layoutBotones = new HBox();
+        crearBotonActivar();
+        crearBotonCanjear();
+        crearBotonCancelar(ventanaTarjetas);
 
-        HBox.setMargin(botonActivar, new Insets(20,40,20,40));
-        HBox.setMargin(botonCanjear, new Insets(20,40,20,40));
-        HBox.setMargin(botonCancelar, new Insets(20,40,20,40));
-
-        layoutBotones.getChildren().addAll(botonActivar, botonCanjear, botonCancelar);
-        crearErrorLabel();
-        VBox vBox = new VBox(layoutBotones, errorLabel);
+        crearInfoLabel();
+        VBox vBox = new VBox(layoutBotones, infoLabel);
         vBox.getStylesheets().add("styles.css");
 
         BorderPane layout = new BorderPane();
@@ -75,18 +66,37 @@ public class VentanaTarjetas implements Observer {
         ventanaTarjetas.show();
     }
 
-    private void crearErrorLabel() {
-        errorLabel = new Label("");
-        errorLabel.getStyleClass().add("error");
-        errorLabel.getStyleClass().add("labelError");
-        errorLabel.setAlignment(Pos.CENTER);
-        errorLabel.setVisible(false);
+    private void crearBotonActivar() {
+        Button botonActivar = new Button("Activar tarjeta/s");
+        botonActivar.setOnMouseClicked(new ActivarTarjetasEventHandler(juego.getTurno().obtenerJugadorTurnoActual(), this));
+        HBox.setMargin(botonActivar, new Insets(20,40,10,40));
+        layoutBotones.getChildren().add(botonActivar);
+    }
+
+    private void crearBotonCanjear() {
+        Button botonCanjear = new Button("Canjear tarjetas");
+        botonCanjear.setOnMouseClicked(new CanjearTarjetasEventHandler(juego.getTurno().obtenerJugadorTurnoActual(), this));
+        HBox.setMargin(botonCanjear, new Insets(20,40,10,40));
+        layoutBotones.getChildren().add(botonCanjear);
+    }
+
+    private void crearBotonCancelar(Stage ventanaTarjetas) {
+        Button botonCancelar = new Button("Cancelar");
+        botonCancelar.setOnAction(e -> ventanaTarjetas.close());
+        HBox.setMargin(botonCancelar, new Insets(20,40,10,40));
+        layoutBotones.getChildren().add(botonCancelar);
+    }
+
+    private void crearInfoLabel() {
+        infoLabel = new Label("");
+        infoLabel.setAlignment(Pos.CENTER);
+        infoLabel.setVisible(false);
     }
 
     public void actualizarVistasTarjetas() {
         Jugador unJugador = this.juego.getTurno().obtenerJugadorTurnoActual();
         vistasTarjetas.clear();
-        for (Tarjeta tarjeta : unJugador.obtenerTarjetas()) vistasTarjetas.add(new VistaTarjeta(this, tarjeta));
+        for (Tarjeta tarjeta : unJugador.getTarjetas()) vistasTarjetas.add(new VistaTarjeta(this, tarjeta));
     }
 
     private GridPane crearLayoutTarjetas(){
@@ -115,7 +125,7 @@ public class VentanaTarjetas implements Observer {
     @Override
     public void update() {
         updateTarjetas();
-        errorLabel.setVisible(false);
+        infoLabel.setVisible(false);
     }
 
     private void updateTarjetas(){
@@ -123,27 +133,32 @@ public class VentanaTarjetas implements Observer {
     }
 
     public void mostrarError(String error){
-        errorLabel.setText(error);
-        errorLabel.setVisible(true);
+        infoLabel.getStyleClass().clear();
+        infoLabel.getStyleClass().add("errorTarjetas");
+        infoLabel.setText(error);
+        infoLabel.setVisible(true);
+    }
+
+    public void mostrarMensajeValido(String mensaje){
+        infoLabel.getStyleClass().clear();
+        infoLabel.getStyleClass().add("tarjetasValidas");
+        infoLabel.setText(mensaje);
+        infoLabel.setVisible(true);
     }
 
     public void ocultarError(){
-        errorLabel.setVisible(false);
+        infoLabel.setVisible(false);
     }
 
     public ArrayList<Tarjeta> getTarjetasSeleccionadas(){
         ArrayList<Tarjeta> tarjetas = new ArrayList<>();
-        for (VistaTarjeta vista: vistasTarjetas){
-            if (!vista.estaSeleccionada()) continue;
-            tarjetas.add(vista.getTarjeta());
-        }
+        vistasTarjetas.stream().filter(VistaTarjeta::estaSeleccionada).forEach(vTarjeta -> tarjetas.add(vTarjeta.getTarjeta()));
         return tarjetas;
     }
 
     public void deseleccionarVistaTarjeta(Tarjeta tarjeta) {
-        for (VistaTarjeta vista: vistasTarjetas){
-            if (vista.getTarjeta() == tarjeta) vista.cambiarSeleccion();
-        }
+        vistasTarjetas.stream().filter(vistaTarjeta -> vistaTarjeta.getTarjeta() == tarjeta).
+                forEach(VistaTarjeta::cambiarSeleccion);
     }
 
     public Jugador getJugador(){ return juego.getTurno().obtenerJugadorTurnoActual(); }

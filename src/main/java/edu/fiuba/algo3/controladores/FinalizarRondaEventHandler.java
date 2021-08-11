@@ -17,12 +17,12 @@ public class FinalizarRondaEventHandler implements EventHandler<Event> {
 
     @Override
     public void handle(Event event) {
-        Jugador jugador = campoDeJuego.getTurno().obtenerJugadorTurnoActual();
+        Jugador jugador = campoDeJuego.getJuego().getTurno().obtenerJugadorTurnoActual();
         MenuLateralDerecho menuLateralDerecho = (MenuLateralDerecho) campoDeJuego.getRight();
         menuLateralDerecho.ocultarError();
 
         try {
-            campoDeJuego.getTurno().finalizarRonda(jugador);
+            campoDeJuego.getJuego().getTurno().finalizarRonda(jugador);
             campoDeJuego.setPaisSeleccionado(null);
         } catch (ElJugadorNoTieneTurnoException ignored) { }
     }
