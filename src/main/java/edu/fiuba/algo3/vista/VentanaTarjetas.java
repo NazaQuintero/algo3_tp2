@@ -157,12 +157,6 @@ public class VentanaTarjetas implements Observer {
     }
 
     public void deseleccionarVistaTarjeta(Tarjeta tarjeta) {
-        /*
-        for (VistaTarjeta vista: vistasTarjetas){
-            if (vista.getTarjeta() == tarjeta) vista.cambiarSeleccion();
-        }
-
-         */
         vistasTarjetas.stream().filter(vistaTarjeta -> vistaTarjeta.getTarjeta() == tarjeta).
                 forEach(VistaTarjeta::cambiarSeleccion);
     }
