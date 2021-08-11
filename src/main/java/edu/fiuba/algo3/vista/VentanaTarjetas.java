@@ -115,7 +115,6 @@ public class VentanaTarjetas implements Observer {
     public void update() {
         updateTarjetas();
         errorLabel.setVisible(false);
-        // botonCanjear.setOnMouseClicked(new CanjearTarjetasEventHandler());
     }
 
     private void updateTarjetas(){

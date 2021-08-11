@@ -20,7 +20,7 @@ public class VistaTarjeta extends StackPane {
     private final CheckBox check;
     private final Button button;
 
-    public VistaTarjeta(Tarjeta tarjeta) {
+    public VistaTarjeta(VentanaTarjetas ventanaTarjetas, Tarjeta tarjeta) {
         this.tarjeta = tarjeta;
         this.imagenTarjeta = new Image(tarjeta.obtenerSimbolo() + ".png");
         this.view = new ImageView(imagenTarjeta);
@@ -32,7 +32,7 @@ public class VistaTarjeta extends StackPane {
         view.setFitHeight(250);
 
         this.button.setContentDisplay(ContentDisplay.BOTTOM);
-        this.button.setOnMouseClicked(new TarjetaEventHandler(this));
+        this.button.setOnMouseClicked(new TarjetaEventHandler(ventanaTarjetas, this));
 
         this.button.setMaxWidth(82);
         this.button.setMaxHeight(250);
@@ -43,10 +43,6 @@ public class VistaTarjeta extends StackPane {
 
         StackPane.setAlignment(check, Pos.TOP_RIGHT);
         this.getChildren().addAll(button, check);
-    }
-
-    public ImageView obtenerImagen() {
-        return this.view;
     }
 
     public Tarjeta getTarjeta() {
@@ -60,6 +56,5 @@ public class VistaTarjeta extends StackPane {
     public boolean estaSeleccionada(){
         return check.isSelected();
     }
-
 
 }

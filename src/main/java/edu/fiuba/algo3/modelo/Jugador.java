@@ -130,7 +130,7 @@ public class Jugador {
         return paisesDominados.stream().anyMatch(pais -> (int) pais.getPaisesLimitrofes().stream().filter(pais1 -> pais1.dominadoPor() == this).count() >= cantLimitrofes-1);
     }
 
-    public void canjearTarjetas(ArrayList<Tarjeta> tarjetas) throws JugadorSinTarjetasException, SinCanjeHabilitadoException, LaTarjetaYaEstaDesactivadaException {
+    public void canjearTarjetas(ArrayList<Tarjeta> tarjetas) throws JugadorSinTarjetasException, SinCanjeHabilitadoException {
         if (!comprobarTarjetas(tarjetas)) throw new JugadorSinTarjetasException();
         canje = canje.habilitarCanje(tarjetas);
         devolverTarjetas(tarjetas);

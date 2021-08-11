@@ -170,7 +170,7 @@ public class RondaTest {
     }
 
     @Test
-    public void noSePuedeActivarUnaTarjetaDePaisEnUnaRondaDeReagrupe() throws Exception{
+    public void sePuedeActivarUnaTarjetaDePaisEnUnaRondaDeReagrupe() throws Exception {
         Jugadores jugadores = new Jugadores();
         Jugador jugador1 = new Jugador( "Martin", Color.RED);
         jugadores.agregarJugador(jugador1);
@@ -187,7 +187,7 @@ public class RondaTest {
         Tarjeta tarjeta = new Tarjeta(arg, new Globo());
         jugador1.recibirTarjeta(tarjeta);
 
-        assertThrows(ActivacionTarjetaEnRondaEquivocadaException.class, () -> jugador1.activarTarjeta(tarjeta));
+        assertDoesNotThrow(() -> jugador1.activarTarjeta(tarjeta));
 
     }
 

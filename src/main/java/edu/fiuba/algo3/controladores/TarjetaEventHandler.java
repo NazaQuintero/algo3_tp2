@@ -9,12 +9,13 @@ public class TarjetaEventHandler implements EventHandler<MouseEvent> {
 
     private final VistaTarjeta vistaTarjeta;
 
-    public TarjetaEventHandler(VistaTarjeta vistaTarjeta) {
+    public TarjetaEventHandler(VentanaTarjetas ventanaTarjetas, VistaTarjeta vistaTarjeta) {
         this.vistaTarjeta = vistaTarjeta;
     }
 
     @Override
     public void handle(MouseEvent event) {
+        ventanaTarjetas.ocultarError();
         vistaTarjeta.cambiarSeleccion();
     }
 }

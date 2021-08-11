@@ -39,10 +39,10 @@ public class ActivarTarjetaEventHandler implements EventHandler<MouseEvent> {
             catch (LaTarjetaYaFueActivadaException e) {
                 ventanaTarjetas.mostrarError("La tarjeta de " + tarjeta.obtenerPais().getNombre() +" ya fue activada");
             }
-            catch (ElJugadorNoTieneTurnoException e) {
-                e.printStackTrace();
+            catch (ElJugadorNoTieneTurnoException ignored) {
+
             } catch (ActivacionTarjetaEnRondaEquivocadaException e) {
-                ventanaTarjetas.mostrarError("No se pueden activar tarjetas en esta ronda");
+                ventanaTarjetas.mostrarError("No se pueden activar tarjetas en ronda de ataque");
             } catch (JugadorNoPoseePaisDeLaTarjetaException e) {
                 ventanaTarjetas.mostrarError("El jugador no posee el pais " + tarjeta.obtenerPais().getNombre());
             }
