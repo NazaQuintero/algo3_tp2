@@ -81,7 +81,7 @@ public class JuegoTest {
         paisesTarjetas.add(tChl);
         jugadorQueLeToca.canjearTarjetas(paisesTarjetas);
 
-        assertEquals(4, jugadorQueLeToca.obtenerCanjeActual().cantidadEjercitos());
+        assertEquals(4, jugadorQueLeToca.getCanjeActual().cantidadEjercitos());
     }
 
 }

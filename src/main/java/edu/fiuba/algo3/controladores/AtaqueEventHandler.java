@@ -24,12 +24,14 @@ import javafx.scene.layout.VBox;
 public class AtaqueEventHandler implements EventHandler<Event>  {
 
     private final CampoDeJuego campoDeJuego;
+    private final MenuLateralDerecho menuLateralDerecho;
     private final Pais atacante;
     private final Pais defensor;
     private final TextField inputText;
 
     public AtaqueEventHandler(CampoDeJuego campoDeJuego, Pais defensor, TextField inputText) {
         this.campoDeJuego = campoDeJuego;
+        this.menuLateralDerecho = (MenuLateralDerecho) campoDeJuego.getRight();
         this.atacante = campoDeJuego.getPaisSeleccionado();
         this.defensor = defensor;
         this.inputText = inputText;
@@ -37,13 +39,13 @@ public class AtaqueEventHandler implements EventHandler<Event>  {
 
     @Override
     public void handle(Event event) {
-        MenuLateralDerecho menuLateral = (MenuLateralDerecho) campoDeJuego.getRight();
+
         if (event.getEventType() == MouseEvent.MOUSE_CLICKED || ((KeyEvent) event).getCode() == KeyCode.ENTER) {
             try {
-                menuLateral.limpiarResultadoDeBatalla();
+                menuLateralDerecho.limpiarResultadoDeBatalla();
                 int cantidadDeEjercitos = Integer.parseInt(inputText.getText());
                 Resultado resultado = atacante.atacarA(defensor, cantidadDeEjercitos);
-                menuLateral.update();
+                menuLateralDerecho.update();
                 mostrarAtaque();
                 ProcesadorResultado.obtenerInstancia().procesar(resultado);
                 campoDeJuego.setPaisSeleccionado(null);
@@ -53,7 +55,7 @@ public class AtaqueEventHandler implements EventHandler<Event>  {
                 inputText.clear();
                 inputText.requestFocus();
 
-                menuLateral.mostrarErrorAtaqueYReagrupe(atacante.cantidadEjercitos()-1);
+                menuLateralDerecho.mostrarErrorAtaqueYReagrupe(atacante.cantidadEjercitos()-1);
             }
         }
     }
@@ -73,7 +75,7 @@ public class AtaqueEventHandler implements EventHandler<Event>  {
         hBox2.setSpacing(20);
         VBox vBox = new VBox(hBox1, hBox2);
         vBox.setSpacing(20);
-        MenuLateralDerecho menuLateralDerecho = (MenuLateralDerecho) campoDeJuego.getRight();
+
         menuLateralDerecho.setResultadoDeAtaque(vBox);
 
         atacante.getEjercito().setDados(null);

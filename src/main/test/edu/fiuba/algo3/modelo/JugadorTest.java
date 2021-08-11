@@ -122,7 +122,7 @@ public class JugadorTest {
         tarjetas.add(tCol);
 
         jugador.canjearTarjetas(tarjetas);
-        assertEquals(4, jugador.obtenerCanjeActual().cantidadEjercitos());
+        assertEquals(4, jugador.getCanjeActual().cantidadEjercitos());
     }
 
     @Test
@@ -176,7 +176,7 @@ public class JugadorTest {
 
         jugador.canjearTarjetas(tarjetas);
 
-        assertEquals(7, jugador.obtenerCanjeActual().cantidadEjercitos());
+        assertEquals(7, jugador.getCanjeActual().cantidadEjercitos());
 
     }
 

@@ -31,7 +31,6 @@ public class Juego {
         if (jugadores.obtenerCantidad() < 2) throw new CantidadDeJugadoresInsuficienteException();
 
         RepartidorDePaises repartidorDePaises = new RepartidorDePaises();
-        jugadores.setPrimerJugador(0); // despues hacemos que sea uno aleatorio, pero por ahora el 1
         repartidorDePaises.repartirPaises(jugadores);
         jugadores.mezclar();
         Objetivos.asignarObjetivos(jugadores);
