@@ -3,6 +3,7 @@ package edu.fiuba.algo3.modelo;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
 import java.util.Objects;
 import com.google.gson.*;
 import edu.fiuba.algo3.App;
@@ -28,13 +29,14 @@ public class CargarJuego {
             throw new ArchivoDeContinentesYPaisesNoEncontradoException();
         }
 
-        Continente[] _continentes  = gson.fromJson(json, Continente[].class);
-        for(Continente continente: _continentes) {
+        Continente[] continentes  = gson.fromJson(json, Continente[].class);
+
+        Arrays.stream(continentes).forEach(continente -> {
             continente.setEjercitosNulos();
             MultitonPaises.cargarPaises(continente.getPaises());
-        }
-        MultitonContinentes.cargarContinentes(_continentes);
+        });
 
+        MultitonContinentes.cargarContinentes(continentes);
     }
 
     public static void cargarPaisesLimitrofes(String archivoPaisesLimitrofes) throws ArchivoDePaisesLimitrofesNoEncontradoException {
@@ -58,8 +60,8 @@ public class CargarJuego {
             String nombresLimitrofes = jsonObject.get("limitrofes").getAsString();
             String[] arrayNombreLimitrofes = nombresLimitrofes.split(",");
 
-            for (String limitrofe : arrayNombreLimitrofes)
-                pais.limitaCon(MultitonPaises.obtenerInstanciaDe(limitrofe));
+            Arrays.stream(arrayNombreLimitrofes).forEach(nombreLimitrofe -> pais.limitaCon(MultitonPaises.
+                    obtenerInstanciaDe(nombreLimitrofe)));
 
             return pais;
         };
@@ -74,11 +76,14 @@ public class CargarJuego {
 
     public static void cargarTarjetas(String archivoTarjetas) throws ArchivoDeTarjetasNoEncontradoException {
         String json;
+
         try {
             InputStream is = CargarJuego.class.getClassLoader().getResourceAsStream(archivoTarjetas);
             json = new String(Objects.requireNonNull(is).readAllBytes(), StandardCharsets.UTF_8);
         }
-        catch (IOException | NullPointerException e) {throw new ArchivoDeTarjetasNoEncontradoException();}
+        catch (IOException | NullPointerException e) {
+            throw new ArchivoDeTarjetasNoEncontradoException();
+        }
         GsonBuilder gsonBuilder = new GsonBuilder();
 
         JsonDeserializer<Tarjeta> deserializer = (jsonElement, type, jsonDeserializationContext) -> {
@@ -95,10 +100,11 @@ public class CargarJuego {
 
         Tarjeta[] tarjetas = gson.fromJson(json, Tarjeta[].class);
 
-        for (Tarjeta t: tarjetas) MultitonTarjetas.agregarTarjeta(t);
+        Arrays.stream(tarjetas).forEach(MultitonTarjetas::agregarTarjeta);
     }
 
     private static Simbolo nuevoSimbolo(String simbolo) {
+
         switch (simbolo) {
             case "Globo":
                 return new Globo();

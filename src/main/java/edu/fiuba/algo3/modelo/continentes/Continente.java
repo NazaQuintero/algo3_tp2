@@ -7,6 +7,7 @@ import edu.fiuba.algo3.modelo.fichas.EjercitoNulo;
 import java.util.ArrayList;
 
 public class Continente {
+
     String nombre;
     ArrayList<Pais> paises;
     int cantidadDeEjercitos;
@@ -46,10 +47,11 @@ public class Continente {
     }
 
     public void setEjercitosNulos() {
-        for(Pais pais: paises) pais.colocarEjercito(new EjercitoNulo());
+        for (Pais pais: paises) pais.colocarEjercito(new EjercitoNulo());
     }
 
     public void agregarPais(Pais unPais) {
         this.paises.add(unPais);
     }
+
 }
