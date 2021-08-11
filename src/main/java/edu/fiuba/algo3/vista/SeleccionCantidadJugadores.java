@@ -16,9 +16,9 @@ import javafx.stage.Stage;
 
 public class SeleccionCantidadJugadores extends BorderPane {
 
-    VBox panel = new VBox();
-    int cantidad = 0;
-    CreacionJugadores creacionJugadores;
+    private final VBox panel = new VBox();
+    private int cantidad = 0;
+    private final CreacionJugadores creacionJugadores;
 
     public SeleccionCantidadJugadores(Stage stage) {
 

@@ -2,6 +2,9 @@ package edu.fiuba.algo3.vista;
 
 import edu.fiuba.algo3.controladores.FormJugadoresEventHandler;
 import edu.fiuba.algo3.modelo.Juego;
+import edu.fiuba.algo3.modelo.excepciones.ArchivoDeContinentesNoEncontradoException;
+import edu.fiuba.algo3.modelo.excepciones.ArchivoDePaisesNoEncontradoException;
+import edu.fiuba.algo3.modelo.excepciones.ArchivoDeTarjetasNoEncontradoException;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -16,20 +19,23 @@ import java.util.ArrayList;
 public class CreacionJugadores extends BorderPane {
 
     private final Stage stage;
-    private VBox panel = new VBox();
-    private HBox botonera;
-    private Label errorLabel;
+    private final VBox panel = new VBox();
+    private final HBox botonera;
+    private final Label errorLabel;
     private Juego juego;
-    private ArrayList<TextField> textFields = new ArrayList<>();
+    private final ArrayList<TextField> textFields = new ArrayList<>();
 
     public CreacionJugadores(Stage stage) {
-
         this.stage = stage;
-        try { juego = new Juego(); }
-        catch (Exception e) {
+
+        try {
+            juego = new Juego();
+        }
+        catch (ArchivoDeContinentesNoEncontradoException | ArchivoDePaisesNoEncontradoException | ArchivoDeTarjetasNoEncontradoException e) {
             e.printStackTrace();
             Platform.exit();
         }
+
         this.getStylesheets().add("styles.css");
         this.getStyleClass().add("body");
 
