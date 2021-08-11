@@ -32,7 +32,6 @@ public class ActivarTarjetaEventHandler implements EventHandler<MouseEvent> {
         for (Tarjeta tarjeta: tarjetas) {
             try {
                 jugador.activarTarjeta(tarjeta);
-                ventanaTarjetas.deseleccionarVistaTarjeta(tarjeta);
                 ventanaTarjetas.update();
                 ventanaTarjetas.mostrarMensajeValido(crearMensajeExito(tarjetas));
             }
@@ -46,6 +45,7 @@ public class ActivarTarjetaEventHandler implements EventHandler<MouseEvent> {
             } catch (JugadorNoPoseePaisDeLaTarjetaException e) {
                 ventanaTarjetas.mostrarError("El jugador no posee el pais " + tarjeta.obtenerPais().getNombre());
             }
+            ventanaTarjetas.deseleccionarVistaTarjeta(tarjeta);
         }
     }
 

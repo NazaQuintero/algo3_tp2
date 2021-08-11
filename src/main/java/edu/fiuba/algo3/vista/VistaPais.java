@@ -13,9 +13,9 @@ import javafx.scene.shape.Rectangle;
 import java.util.ArrayList;
 
 public class VistaPais extends StackPane implements Observer {
-    private CampoDeJuego campoDeJuego;
+    private final CampoDeJuego campoDeJuego;
     private final Pais pais;
-    private ArrayList<VistaPais> vistaLimitrofes = new ArrayList<>();
+    private final ArrayList<VistaPais> vistaLimitrofes = new ArrayList<>();
 
     public VistaPais(Pais pais, CampoDeJuego campoDeJuego) {
         this.getStylesheets().add("styles.css");

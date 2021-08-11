@@ -30,7 +30,7 @@ public class PaisEventHandler implements EventHandler<MouseEvent> {
     @Override
     public void handle(MouseEvent mouseEvent) {
 
-        Ronda ronda = this.campoDeJuego.getTurno().obtenerRondaActual();
+        Ronda ronda = this.campoDeJuego.getJuego().getTurno().obtenerRondaActual();
         MenuLateralDerecho menuLateral = (MenuLateralDerecho) campoDeJuego.getRight();
         VBox formularioDeAccion = (VBox) menuLateral.getChildren().get(1);
         TextField textField = (TextField) formularioDeAccion.getChildren().get(1);
