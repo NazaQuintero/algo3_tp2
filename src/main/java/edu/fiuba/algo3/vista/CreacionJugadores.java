@@ -1,6 +1,6 @@
 package edu.fiuba.algo3.vista;
 
-import edu.fiuba.algo3.controladores.FormJugadoresEventHandler;
+import edu.fiuba.algo3.controladores.FormularioJugadoresEventHandler;
 import edu.fiuba.algo3.modelo.Juego;
 import edu.fiuba.algo3.modelo.excepciones.ArchivoDeContinentesYPaisesNoEncontradoException;
 import edu.fiuba.algo3.modelo.excepciones.ArchivoDePaisesLimitrofesNoEncontradoException;
@@ -73,7 +73,7 @@ public class CreacionJugadores extends BorderPane {
         TextField inputText = new TextField();
         inputText.getStyleClass().add("textField");
         inputText.setAlignment(Pos.CENTER);
-        inputText.setOnKeyPressed(new FormJugadoresEventHandler(errorLabel, juego, textFields, stage));
+        inputText.setOnKeyPressed(new FormularioJugadoresEventHandler(errorLabel, juego, textFields, stage));
         return inputText;
     }
 
@@ -94,7 +94,7 @@ public class CreacionJugadores extends BorderPane {
     private Button crearBotonJugar() {
         Button buttonSubmit = new Button("Jugar");
         buttonSubmit.getStyleClass().add("startButton");
-        buttonSubmit.setOnMouseClicked(new FormJugadoresEventHandler(errorLabel, juego, textFields, stage));
+        buttonSubmit.setOnMouseClicked(new FormularioJugadoresEventHandler(errorLabel, juego, textFields, stage));
         return buttonSubmit;
     }
 

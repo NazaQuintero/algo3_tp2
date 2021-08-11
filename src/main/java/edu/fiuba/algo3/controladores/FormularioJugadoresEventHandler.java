@@ -19,13 +19,13 @@ import javafx.stage.Stage;
 
 import java.util.ArrayList;
 
-public class FormJugadoresEventHandler implements EventHandler<Event> {
+public class FormularioJugadoresEventHandler implements EventHandler<Event> {
     private Juego juego;
     private Label errorLabel;
     private ArrayList<TextField> textFields;
     private Stage stage;
 
-    public FormJugadoresEventHandler(Label errorLabel, Juego juego, ArrayList<TextField> textFields, Stage stage) {
+    public FormularioJugadoresEventHandler(Label errorLabel, Juego juego, ArrayList<TextField> textFields, Stage stage) {
         this.errorLabel = errorLabel;
         this.juego = juego;
         this.textFields = textFields;
@@ -34,14 +34,16 @@ public class FormJugadoresEventHandler implements EventHandler<Event> {
 
     @Override
     public void handle(Event event) {
+
         if (event.getEventType() == MouseEvent.MOUSE_CLICKED || ((KeyEvent) event).getCode() == KeyCode.ENTER) {
             boolean jugadoresCargados = validarTextFields();
+
             if (jugadoresCargados) {
                 try {
                     juego.comenzar();
                     new CampoDeJuego(stage, juego);
                 }
-                catch (CantidadDeJugadoresInsuficienteException ignored){ }
+                catch (CantidadDeJugadoresInsuficienteException ignored) {}
             }
             errorLabel.setVisible(true);
         }
@@ -49,6 +51,7 @@ public class FormJugadoresEventHandler implements EventHandler<Event> {
 
     private boolean validarTextFields(){
         boolean jugadoresCargados = true;
+
         for (int i = 0; i< textFields.size(); i++){
             TextField nombreJugador = textFields.get(i);
             ObservableList<String> styles = nombreJugador.getStyleClass();
@@ -74,6 +77,7 @@ public class FormJugadoresEventHandler implements EventHandler<Event> {
             Jugador jugador = new Jugador(nombreJugador.getText(),getColor(i));
             juego.agregarJugador(jugador);
         }
+
         return jugadoresCargados;
     }
 
