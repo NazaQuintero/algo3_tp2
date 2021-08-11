@@ -13,7 +13,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 
 
-public class VistaTarjeta extends StackPane implements Observer {
+public class VistaTarjeta extends StackPane {
 
     private final VentanaTarjetas ventanaTarjetas;
     private final Image imagenTarjeta;
@@ -29,7 +29,6 @@ public class VistaTarjeta extends StackPane implements Observer {
         this.view = new ImageView(imagenTarjeta);
         this.check = new CheckBox();
         this.button = new Button(tarjeta.obtenerPais().getNombre(), view);
-        //tarjeta.addObserver(this);
 
         view.setPreserveRatio(true);
         view.setFitWidth(82);
@@ -73,11 +72,6 @@ public class VistaTarjeta extends StackPane implements Observer {
 
         this.button.setMaxWidth(82);
         this.button.setMaxHeight(250);
-    }
-
-    @Override
-    public void update(){
-        ventanaTarjetas.update();
     }
 
 }
