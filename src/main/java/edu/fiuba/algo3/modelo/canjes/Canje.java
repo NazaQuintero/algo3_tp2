@@ -1,15 +1,14 @@
 package edu.fiuba.algo3.modelo.canjes;
 
 import edu.fiuba.algo3.modelo.excepciones.SinCanjeHabilitadoException;
-import edu.fiuba.algo3.modelo.tarjetas.SinCanje;
 import edu.fiuba.algo3.modelo.tarjetas.Tarjeta;
-import edu.fiuba.algo3.modelo.tarjetas.TipoCanje;
 
 import java.util.ArrayList;
 
 public abstract class Canje {
 
     private TipoCanje tipo;
+    protected boolean canjeActivado = false;
 
     public Canje() {
         this.tipo = new SinCanje();
@@ -17,17 +16,14 @@ public abstract class Canje {
 
     public abstract Canje siguienteCanje();
 
-    public abstract int cantidadEjercitos();
+    public abstract int cantidadEjercitos(); // Setear canjeActivado como true
 
     public Canje habilitarCanje(ArrayList<Tarjeta> tarjetas) throws SinCanjeHabilitadoException {
 
         TipoCanje tipoAuxiliar = tipo.compararTarjetas(tarjetas);
-        try {
-            Canje nuevoCanje = tipoAuxiliar.canjear(this);
-            tipo = tipoAuxiliar;
-            return nuevoCanje;
-        } catch (SinCanjeHabilitadoException e) {
-            throw new SinCanjeHabilitadoException();
-        }
+        Canje nuevoCanje = tipoAuxiliar.canjear(this);
+        tipo = tipoAuxiliar;
+        return nuevoCanje;
+
     }
 }

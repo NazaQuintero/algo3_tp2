@@ -3,7 +3,6 @@ package edu.fiuba.algo3.modelo;
 import edu.fiuba.algo3.modelo.excepciones.*;
 import edu.fiuba.algo3.modelo.paises.Pais;
 import edu.fiuba.algo3.modelo.rondas.Colocacion;
-import edu.fiuba.algo3.modelo.rondas.RondaColocacion;
 import edu.fiuba.algo3.modelo.tarjetas.*;
 import edu.fiuba.algo3.modelo.turnos.ConTurno;
 import edu.fiuba.algo3.modelo.turnos.Turno;
@@ -61,9 +60,9 @@ public class JugadorTest {
         Simbolo unChirimbolito = new Globo();
         Tarjeta unaTarjeta = new Tarjeta(unPais, unChirimbolito);
         unJugador.recibirTarjeta(unaTarjeta);
-        unJugador.activarTarjetaPais(unPais); // no hace falta testear q se hayan sumado los ejercitos xq eso ya lo probamos y funca
+        unJugador.activarTarjeta(unaTarjeta); // no hace falta testear q se hayan sumado los ejercitos xq eso ya lo probamos y funca
 
-        assertThrows(LaTarjetaYaFueActivadaException.class, () -> unJugador.activarTarjetaPais(unPais));
+        assertThrows(LaTarjetaYaFueActivadaException.class, () -> unJugador.activarTarjeta(unaTarjeta));
     }
 
     @Test

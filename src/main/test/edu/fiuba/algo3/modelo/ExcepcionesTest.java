@@ -2,11 +2,16 @@ package edu.fiuba.algo3.modelo;
 
 import edu.fiuba.algo3.modelo.excepciones.*;
 import edu.fiuba.algo3.modelo.fichas.Ejercito;
+import edu.fiuba.algo3.modelo.paises.MultitonPaises;
 import edu.fiuba.algo3.modelo.paises.Pais;
 import edu.fiuba.algo3.modelo.rondas.Ataque;
-import edu.fiuba.algo3.modelo.rondas.Reagrupe;
+import edu.fiuba.algo3.modelo.tarjetas.Globo;
+import edu.fiuba.algo3.modelo.tarjetas.MultitonTarjetas;
+import edu.fiuba.algo3.modelo.tarjetas.Tarjeta;
 import javafx.scene.paint.Color;
 import org.junit.jupiter.api.Test;
+
+import javax.sound.midi.SysexMessage;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -24,13 +29,17 @@ public class ExcepcionesTest {
 
     @Test
     public void alTratarDeCargarTarjetasLanzaExcepcionDeArchivoDeTarjetasNoEncontrado(){
-        assertThrows(ArchivoDeTarjetasNoEncontradoException.class, () -> CargarJuego.cargarTarjetas(new Juego(), "pochoclo"));
+        assertThrows(ArchivoDeTarjetasNoEncontradoException.class, () -> CargarJuego.cargarTarjetas( "pochoclo"));
     }
 
     @Test
     public void atacarDeAtaqueLanzaExcepcionDeEjercitosInsuficientesSiElPaisAtacanteNoTieneEjercitos() {
         Ataque ataque = new Ataque();
-        assertThrows(EjercitosInsuficientesException.class, () -> ataque.atacarA(new Pais("Argentina"),new Pais("Chile"), 3 ));
+        Pais arg = new Pais("Argentina");
+        Pais chl = new Pais("Chile");
+        arg.limitaCon(chl);
+        chl.limitaCon(arg);
+        assertThrows(EjercitosInsuficientesException.class, () -> ataque.atacarA(arg, chl, 3));
     }
 
     @Test
@@ -49,7 +58,9 @@ public class ExcepcionesTest {
     @Test
     public void seLanzaJugadorNoPoseePaisDeLaTarjetaExceptionSiTrataDeActivarTarjetaDeUnPaisQueNoEstaBajoSuDominio() {
         Jugador jugador = new Jugador("Carlitos", Color.RED);
-        assertThrows(JugadorNoPoseePaisDeLaTarjetaException.class, () -> jugador.activarTarjetaPais(new Pais("Peru")));
+        Pais pais = new Pais("Peru");
+        MultitonTarjetas.agregarTarjeta(new Tarjeta(pais, new Globo()));
+        assertThrows(JugadorNoPoseePaisDeLaTarjetaException.class, () -> jugador.activarTarjeta(MultitonTarjetas.obtenerTarjeta(pais)));
     }
 
     @Test

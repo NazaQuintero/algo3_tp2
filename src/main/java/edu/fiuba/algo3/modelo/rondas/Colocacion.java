@@ -15,7 +15,6 @@ public class Colocacion extends RondaColocacion {
         this.cantidadEjercitosColocables = 3;
         if (unJugador.cantidadPaisesDominados() > 6) this.cantidadEjercitosColocables = unJugador.cantidadPaisesDominados() / 2;
         this.cantidadEjercitosColocables += unJugador.ordenCanje();
-
         MultitonContinentes.obtenerContinentes().stream().filter(continente -> continente.dominadoPor(unJugador))
                 .forEach(continente -> cantidadEjercitosColocables += continente.getCantidadDeEjercitos());
     }

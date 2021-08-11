@@ -32,8 +32,8 @@ public class Reagrupe implements Ronda {
         throw new NoEsRondaDeColocacionException();
     }
 
-    public void activarTarjeta(Tarjeta unaTarjeta) throws ActivacionTarjetaEnRondaEquivocadaException {
-        throw new ActivacionTarjetaEnRondaEquivocadaException();
+    public void activarTarjeta(Tarjeta unaTarjeta) throws LaTarjetaYaFueActivadaException {
+        unaTarjeta.activar();
     }
 
 }

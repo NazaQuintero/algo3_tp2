@@ -1,6 +1,8 @@
-package edu.fiuba.algo3.modelo.tarjetas;
+package edu.fiuba.algo3.modelo.canjes;
 import java.util.ArrayList;
 import edu.fiuba.algo3.modelo.canjes.Canje;
+import edu.fiuba.algo3.modelo.canjes.TipoCanje;
+import edu.fiuba.algo3.modelo.tarjetas.Tarjeta;
 
 public class CanjeHabilitado implements TipoCanje {
 
@@ -13,4 +15,5 @@ public class CanjeHabilitado implements TipoCanje {
     public Canje canjear(Canje canje) {
        return canje.siguienteCanje();
     }
+
 }

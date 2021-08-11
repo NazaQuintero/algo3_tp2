@@ -6,7 +6,6 @@ import edu.fiuba.algo3.vista.CampoDeJuego;
 import edu.fiuba.algo3.vista.MenuLateralDerecho;
 import javafx.event.Event;
 import javafx.event.EventHandler;
-import javafx.scene.control.Label;
 
 public class FinalizarRondaEventHandler implements EventHandler<Event> {
 
@@ -24,9 +23,7 @@ public class FinalizarRondaEventHandler implements EventHandler<Event> {
 
         try {
             campoDeJuego.getTurno().finalizarRonda(jugador);
-//            campoDeJuego.crearVistasTarjetas();
-        } catch (ElJugadorNoTieneTurnoException e) {
-            e.printStackTrace();
-        }
+            campoDeJuego.setPaisSeleccionado(null);
+        } catch (ElJugadorNoTieneTurnoException ignored) { }
     }
 }

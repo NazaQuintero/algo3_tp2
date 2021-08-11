@@ -37,7 +37,7 @@ public class ReagrupeEventHandler implements EventHandler<Event> {
                 menuLateralDerecho.update();
 
             } catch (ElPaisNoEsLimitrofeException | EjercitosInsuficientesException e) {
-               menuLateralDerecho.mostrarErrorReagrupe(desde.cantidadEjercitos()-1);
+               menuLateralDerecho.mostrarErrorAtaqueYReagrupe(desde.cantidadEjercitos()-1);
             }
         }
     }

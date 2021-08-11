@@ -14,4 +14,7 @@ public class TarjetaDesactivada implements EstadoTarjeta {
         throw new LaTarjetaYaEstaDesactivadaException();
     }
 
+    @Override
+    public boolean estaActivada() { return false; }
+
 }

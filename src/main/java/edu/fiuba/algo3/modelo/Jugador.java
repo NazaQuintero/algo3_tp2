@@ -9,7 +9,9 @@ import edu.fiuba.algo3.modelo.excepciones.*;
 import edu.fiuba.algo3.modelo.fichas.Ejercito;
 import edu.fiuba.algo3.modelo.objetivos.General;
 import edu.fiuba.algo3.modelo.objetivos.Objetivo;
+import edu.fiuba.algo3.modelo.paises.MultitonPaises;
 import edu.fiuba.algo3.modelo.paises.Pais;
+import edu.fiuba.algo3.modelo.tarjetas.MultitonTarjetas;
 import edu.fiuba.algo3.modelo.tarjetas.Tarjeta;
 import edu.fiuba.algo3.modelo.turnos.SinTurno;
 import edu.fiuba.algo3.modelo.turnos.Turno;
@@ -28,6 +30,7 @@ public class Jugador {
     private final ArrayList<Pais> paisesDominados = new ArrayList<>();
     private final HashMap<Pais, Tarjeta> tarjetas = new HashMap<>();
     private Canje canje;
+    private boolean conquistoPais = false;
 
     public Jugador(String nombre, Color color){
         this.objetivos.add(new General());
@@ -94,9 +97,9 @@ public class Jugador {
         tarjetas.put(tarjeta.obtenerPais(), tarjeta);
     }
 
-    public void activarTarjetaPais(Pais unPais) throws TarjetaNoEncontradaException, JugadorNoPoseePaisDeLaTarjetaException, ActivacionTarjetaEnRondaEquivocadaException, ElJugadorNoTieneTurnoException, LaTarjetaYaFueActivadaException {
-        if(!this.paisesDominados.contains(unPais)) throw new JugadorNoPoseePaisDeLaTarjetaException();
-        this.turno.activarTarjeta(this.buscarTarjeta(unPais));
+    public void activarTarjeta(Tarjeta tarjeta) throws JugadorNoPoseePaisDeLaTarjetaException, ActivacionTarjetaEnRondaEquivocadaException, ElJugadorNoTieneTurnoException, LaTarjetaYaFueActivadaException {
+        if (!this.paisesDominados.contains(tarjeta.obtenerPais())) throw new JugadorNoPoseePaisDeLaTarjetaException();
+        this.turno.activarTarjeta(tarjeta);
     }
 
     public Tarjeta buscarTarjeta(Pais unPais) throws TarjetaNoEncontradaException {
@@ -127,22 +130,21 @@ public class Jugador {
         return paisesDominados.stream().anyMatch(pais -> (int) pais.getPaisesLimitrofes().stream().filter(pais1 -> pais1.dominadoPor() == this).count() >= cantLimitrofes-1);
     }
 
-    public void canjearTarjetas(ArrayList<Tarjeta> tarjetas) throws JugadorSinTarjetasException, SinCanjeHabilitadoException, LaTarjetaYaEstaDesactivadaException {
+    public void canjearTarjetas(ArrayList<Tarjeta> tarjetas) throws JugadorSinTarjetasException, SinCanjeHabilitadoException {
         if (!comprobarTarjetas(tarjetas)) throw new JugadorSinTarjetasException();
         canje = canje.habilitarCanje(tarjetas);
         devolverTarjetas(tarjetas);
     }
 
     boolean comprobarTarjetas(ArrayList<Tarjeta> tarjetas) {
-        for (Tarjeta t: tarjetas){
-            if (!this.tarjetas.containsValue(t)) return false;
-        }
-        return true;
+        return this.tarjetas.values().containsAll(tarjetas);
     }
 
-    public void devolverTarjetas(ArrayList<Tarjeta> tarjetasADevolver) throws LaTarjetaYaEstaDesactivadaException {
+    public void devolverTarjetas(ArrayList<Tarjeta> tarjetasADevolver) {
         for (Tarjeta tarjeta : tarjetasADevolver) {
-            tarjeta.desactivar();
+            try{ tarjeta.desactivar(); }
+            catch (Exception ignored){ }
+            MultitonTarjetas.agregarTarjeta(tarjeta);
             tarjetas.remove(tarjeta.obtenerPais());
         }
     }
@@ -158,4 +160,13 @@ public class Jugador {
     public Collection<Tarjeta> obtenerTarjetas() {
         return this.tarjetas.values();
     }
+
+    public void setConquista(boolean b) {
+        conquistoPais = b;
+    }
+
+    public boolean huboConquista() {
+        return conquistoPais;
+    }
+
 }

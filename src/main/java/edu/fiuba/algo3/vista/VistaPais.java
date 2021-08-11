@@ -55,8 +55,6 @@ public class VistaPais extends StackPane implements Observer {
         ((Circle) this.getChildren().get(0)).setFill(pais.dominadoPor().getColor());
         l.setText(Integer.toString(pais.cantidadEjercitos()));
 
-        System.out.println("Hay "+ this.pais.cantidadEjercitos() + " ejercito/s en " + this.pais.getNombre() +
-                " que pertenece a " + pais.dominadoPor().obtenerNombre());
     }
 
     public ArrayList<Pais> getLimitrofes() {

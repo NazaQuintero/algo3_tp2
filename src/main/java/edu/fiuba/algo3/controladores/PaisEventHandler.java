@@ -37,7 +37,6 @@ public class PaisEventHandler implements EventHandler<MouseEvent> {
         menuLateral.update();
 
         if (ronda instanceof RondaColocacion) {
-            System.out.println("Estamos en Ronda de Colocacion rey");
 
             campoDeJuego.mostrarPaisesDelJugadorActual();
             try {
@@ -52,7 +51,6 @@ public class PaisEventHandler implements EventHandler<MouseEvent> {
             }
 
         } else if (ronda instanceof Ataque) {
-            System.out.println("Estamos en Ronda de Ataque papu");
 
             if (campoDeJuego.getPaisSeleccionado() == null) {
                 campoDeJuego.mostrarPaises();
@@ -60,6 +58,7 @@ public class PaisEventHandler implements EventHandler<MouseEvent> {
                 vistaPais.marcarComoSeleccionada();
                 campoDeJuego.setPaisSeleccionado(pais);
                 menuLateral.setTextoLabelAyuda("Seleccione el Pais al que desea atacar.");
+                menuLateral.setBotonCancelarVisible(true);
             } else {
                 menuLateral.setTextoLabelAyuda("Indique la cantidad de Ejercitos con los que desea atacar");
                 menuLateral.setInputTextVisible(true);
@@ -70,13 +69,14 @@ public class PaisEventHandler implements EventHandler<MouseEvent> {
             }
 
         } else {
-            System.out.println("No queda otra que reagrupar mi ciela");
+            // Reagrupe
             campoDeJuego.mostrarPaisesDelJugadorActual();
             if (campoDeJuego.getPaisSeleccionado() == null) {
                 vistaPais.marcarComoSeleccionada();
                 campoDeJuego.setPaisSeleccionado(pais);
                 vistaPais.resaltarLimitrofesPropios();
                 menuLateral.setTextoLabelAyuda("Seleccione el Pais al que desea enviar sus tropas.");
+                menuLateral.setBotonCancelarVisible(true);
             } else {
                 menuLateral.setTextoLabelAyuda("Indique la cantidad de Ejercitos que desea reagrupar");
                 menuLateral.setInputTextVisible(true);

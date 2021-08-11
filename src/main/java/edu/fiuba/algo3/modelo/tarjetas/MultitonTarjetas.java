@@ -1,43 +1,32 @@
 package edu.fiuba.algo3.modelo.tarjetas;
 
 import edu.fiuba.algo3.modelo.Jugador;
-import edu.fiuba.algo3.modelo.Jugadores;
 import edu.fiuba.algo3.modelo.observables.Observer;
 import edu.fiuba.algo3.modelo.observables.Subject;
 import edu.fiuba.algo3.modelo.paises.Pais;
 import edu.fiuba.algo3.modelo.excepciones.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.*;
 
-public class Tarjetas implements Subject {
+public class MultitonTarjetas implements Subject {
 
-    private HashMap<Pais, Tarjeta> tarjetas;
+    private static HashMap<Pais, Tarjeta> tarjetas = new HashMap<>();
     private ArrayList<Observer> observers = new ArrayList<>();
 
-    public Tarjetas() { tarjetas = new HashMap<>(); }
+    private MultitonTarjetas() {}
 
-    public void agregarTarjeta(Tarjeta unaTarjeta) {
+    public static void agregarTarjeta(Tarjeta unaTarjeta) {
         tarjetas.put(unaTarjeta.obtenerPais(), unaTarjeta);
     }
 
-    public Tarjeta obtenerTarjeta(Pais unPais) { return tarjetas.get(unPais); }
+    public static Tarjeta obtenerTarjeta(Pais unPais) {
 
-    public void repartir(Jugadores jugadores) {
-        int i = 0;
-        try {
-            for (Tarjeta t : tarjetas.values()) {
-                this.darTarjeta(jugadores.obtenerJugador(i), t.obtenerPais());
-                i++;
-                if (i == jugadores.obtenerCantidad()) i = 0;
-            }
-        } catch (JugadorNoExisteException ignored) {}
-    }
+        return tarjetas.get(unPais); }
 
-    public void darTarjeta(Jugador jugador, Pais paisTarjeta) { jugador.recibirTarjeta(obtenerTarjeta(paisTarjeta)); }
-
-    public void activarTarjeta(Jugador jugador, Pais pais) throws ElJugadorNoTieneTurnoException, ActivacionTarjetaEnRondaEquivocadaException, LaTarjetaYaFueActivadaException, TarjetaNoEncontradaException, JugadorNoPoseePaisDeLaTarjetaException {
-        jugador.activarTarjetaPais(pais);
+    public static Tarjeta obtenerTarjetaAleatoria() {
+        ArrayList<Tarjeta> _tarjetas = new ArrayList<>(tarjetas.values());
+        Collections.shuffle(_tarjetas);
+        return tarjetas.remove(_tarjetas.get(0).obtenerPais());
     }
 
     public void canjearTarjetas(Jugador jugador, ArrayList<Pais> paisesTarjetas) throws JugadorSinTarjetasException, LaTarjetaYaEstaDesactivadaException, SinCanjeHabilitadoException {

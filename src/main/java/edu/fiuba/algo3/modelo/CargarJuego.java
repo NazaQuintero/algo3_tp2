@@ -73,7 +73,7 @@ public class CargarJuego {
         //MultitonPaises.cargarPaises(new ArrayList<>(Arrays.asList(paises)));
     }
 
-    public static void cargarTarjetas(Juego juego, String archivoTarjetas) throws ArchivoDeTarjetasNoEncontradoException {
+    public static void cargarTarjetas(String archivoTarjetas) throws ArchivoDeTarjetasNoEncontradoException {
         String json;
         try {
             InputStream is = CargarJuego.class.getClassLoader().getResourceAsStream(archivoTarjetas);
@@ -96,7 +96,7 @@ public class CargarJuego {
 
         Tarjeta[] tarjetas = gson.fromJson(json, Tarjeta[].class);
 
-        for (Tarjeta t: tarjetas) juego.agregarTarjeta(t);
+        for (Tarjeta t: tarjetas) MultitonTarjetas.agregarTarjeta(t);
     }
 
     private static Simbolo nuevoSimbolo(String simbolo) {

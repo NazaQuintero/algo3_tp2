@@ -6,5 +6,9 @@ public class PrimerCanje extends Canje {
     public Canje siguienteCanje() { return new SegundoCanje(); }
 
     @Override
-    public int cantidadEjercitos() { return 4; }
+    public int cantidadEjercitos() {
+        if (canjeActivado) return 0;
+        canjeActivado = true;
+        return 4;
+    }
 }
