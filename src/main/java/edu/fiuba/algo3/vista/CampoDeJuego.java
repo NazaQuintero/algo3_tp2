@@ -42,6 +42,7 @@ public class CampoDeJuego extends BorderPane {
         stage.centerOnScreen();
     }
 
+
     public Juego getJuego() {
         return juego;
     }
@@ -66,6 +67,7 @@ public class CampoDeJuego extends BorderPane {
 
         this.setTop(botonTarjetas);
     }
+
 
     private ImageView crearVistaImagen() {
         Image imagen = new Image("tablero.png");
@@ -119,8 +121,16 @@ public class CampoDeJuego extends BorderPane {
         return paisSeleccionado;
     }
 
+
+    public Turno getTurno() {
+        return this.juego.getTurno();
+    }
+
     private void mostrarMenuLateralDerecho() {
         this.menuLateralDerecho.mostrarFormularioDeColocacion();
     }
 
+    public void actualizarObjetivoGeneral() {
+        menuLateralDerecho.actualizarLabelObjetivoGeneral();
+    }
 }

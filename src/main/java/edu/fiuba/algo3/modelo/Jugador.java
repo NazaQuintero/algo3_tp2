@@ -163,4 +163,7 @@ public class Jugador {
         return conquistoPais;
     }
 
+    public ArrayList<Objetivo> obtenerObjetivos() {  return this.objetivos;
+    }
+
 }
