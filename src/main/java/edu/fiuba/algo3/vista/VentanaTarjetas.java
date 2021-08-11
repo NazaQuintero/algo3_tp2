@@ -10,6 +10,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.BorderPane;
@@ -25,7 +26,7 @@ import java.util.ArrayList;
 public class VentanaTarjetas implements Observer {
 
     private final Juego juego;
-    private final ArrayList<VistaTarjeta> vistasTarjetas = new ArrayList<>();
+    private ArrayList<VistaTarjeta> vistasTarjetas = new ArrayList<>();
     private ScrollPane layoutTarjetasScroll;
     private HBox layoutBotones;
     private Label infoLabel;
