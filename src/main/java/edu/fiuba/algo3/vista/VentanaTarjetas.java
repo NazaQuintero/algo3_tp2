@@ -47,7 +47,6 @@ public class VentanaTarjetas implements Observer {
         this.layoutTarjetasScroll = new ScrollPane();
         layoutTarjetasScroll.setContent(layoutTarjetas);
         layoutTarjetasScroll.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        layoutTarjetasScroll.setMouseTransparent(true);
 
 
         botonActivar = new Button("Activar tarjeta");
