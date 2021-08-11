@@ -24,7 +24,8 @@ public class FinalizarRondaEventHandler implements EventHandler<Event> {
 
         try {
             campoDeJuego.getTurno().finalizarRonda(jugador);
-//            campoDeJuego.crearVistasTarjetas();
+            campoDeJuego.actualizarObjetivoGeneral();
+
         } catch (ElJugadorNoTieneTurnoException e) {
             e.printStackTrace();
         }
