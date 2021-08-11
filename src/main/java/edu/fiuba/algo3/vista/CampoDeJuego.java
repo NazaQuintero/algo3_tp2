@@ -27,8 +27,8 @@ public class CampoDeJuego extends BorderPane {
 
     private final Juego juego;
     private final ArrayList<VistaPais> vistasPaises = new ArrayList<>();
-    private final VentanaTarjetas ventanaTarjetas;
-    private final VentanaObjetivos ventanaObjetivos;
+   // private final VentanaTarjetas ventanaTarjetas;
+   // private final VentanaObjetivos ventanaObjetivos;
     private Pais paisSeleccionado;
 
     private MenuLateralDerecho menuLateralDerecho;
@@ -56,24 +56,25 @@ public class CampoDeJuego extends BorderPane {
         this.setCenter(aVbox);
         this.setRight(this.menuLateralDerecho);
 
+
         this.mostrarPaisesDelJugadorActual();
         this.mostrarMenuLateralDerecho();
 
-        this.ventanaTarjetas = new VentanaTarjetas(juego);
+        /*this.ventanaTarjetas = new VentanaTarjetas(juego);
         Button botonTarjetas = new Button("Ver tarjetas");
-        botonTarjetas.setOnAction(e -> ventanaTarjetas.mostrarTarjetas());
+        botonTarjetas.setOnAction(e -> ventanaTarjetas.mostrarTarjetas());*/
 
-        this.ventanaObjetivos = new VentanaObjetivos(juego);
+        /*this.ventanaObjetivos = new VentanaObjetivos(juego);
         Button botonObjetivos = new Button("Ver objetivos");
-        botonObjetivos.setOnAction(e -> ventanaObjetivos.mostrarObjetivos());
+        botonObjetivos.setOnAction(e -> ventanaObjetivos.mostrarObjetivos());*/
 
         //stage.setScene(new Scene(this, 1500, 900));
         stage.setScene(new Scene(this, 1000, 700));
         stage.centerOnScreen();
 
         this.setCenter(stackPane);
-        this.setTop(botonTarjetas);
-        this.setBottom(botonObjetivos);
+        //this.setTop(botonTarjetas);
+        //this.setBottom(botonObjetivos);
     }
 
 
@@ -128,8 +129,6 @@ public class CampoDeJuego extends BorderPane {
     }
 
 
-
-
     public Turno getTurno() {
         return this.juego.getTurno();
     }
@@ -138,4 +137,7 @@ public class CampoDeJuego extends BorderPane {
         this.menuLateralDerecho.mostrarFormularioDeColocacion();
     }
 
+    public void actualizarObjetivoGeneral() {
+        menuLateralDerecho.actualizarLabelObjetivoGeneral();
+    }
 }
