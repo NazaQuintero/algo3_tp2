@@ -46,12 +46,6 @@ public class ExcepcionesTest {
     }
 
     @Test
-    public void alTratarDeObtenerUnJugadorPorNombreDeJugadoresSeLanzaJugadorNoExisteExceptionDeNoExistir() {
-        Jugadores jugadores = new Jugadores();
-        assertThrows(JugadorNoExisteException.class, () -> jugadores.obtenerJugador("Nestor"));
-    }
-
-    @Test
     public void seLanzaJugadorNoPoseePaisDeLaTarjetaExceptionSiTrataDeActivarTarjetaDeUnPaisQueNoEstaBajoSuDominio() {
         Jugador jugador = new Jugador("Carlitos", Color.RED);
         Pais pais = new Pais("Peru");
@@ -67,5 +61,6 @@ public class ExcepcionesTest {
         unPais.colocarEjercito(new Ejercito(new Jugador("Roque", Color.BLUE)));
         assertThrows(PaisOcupadoPorOtroJugadorException.class, () -> unJugador.colocarEjercitos(unPais, 3));
     }
+
 }
 

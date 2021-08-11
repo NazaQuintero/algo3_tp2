@@ -68,7 +68,7 @@ public class Pais implements Subject {
 
     public Resultado atacarA(Pais defensor, int cantidadEjercitos) throws ElPaisNoEsLimitrofeException, CantidadDeEjercitosInValidaException {
 
-        if (!paisesLimitrofes.contains(defensor)) throw new ElPaisNoEsLimitrofeException();
+        if (!this.esLimitrofeCon(defensor)) throw new ElPaisNoEsLimitrofeException();
         if (cantidadEjercitos > this.cantidadEjercitos()-1 || cantidadEjercitos <= 0) throw new CantidadDeEjercitosInValidaException();
 
         this.ejercito.asignarRol(new Atacante(cantidadEjercitos));
