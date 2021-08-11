@@ -29,6 +29,8 @@ public class VentanaTarjetas {
 
     public void mostrarTarjetas() {
 
+        crearVistasTarjetas();
+
         Stage ventanaTarjetas = new Stage();
         ventanaTarjetas.initModality(Modality.APPLICATION_MODAL);
         ventanaTarjetas.setTitle("Tarjetas");
@@ -84,6 +86,7 @@ public class VentanaTarjetas {
     }
 
     public void crearVistasTarjetas() {
+        vistasTarjetas = new ArrayList<>();
         Jugador unJugador = this.juego.getTurno().obtenerJugadorTurnoActual();
         for (Tarjeta t : unJugador.obtenerTarjetas()) vistasTarjetas.add(new VistaTarjeta(t));
     }
