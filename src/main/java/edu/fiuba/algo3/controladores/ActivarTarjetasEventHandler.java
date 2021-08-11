@@ -10,12 +10,12 @@ import javafx.scene.input.MouseEvent;
 
 import java.util.ArrayList;
 
-public class ActivarTarjetaEventHandler implements EventHandler<MouseEvent> {
+public class ActivarTarjetasEventHandler implements EventHandler<MouseEvent> {
 
     private final Jugador jugador;
     private final VentanaTarjetas ventanaTarjetas;
 
-    public ActivarTarjetaEventHandler(Jugador jugador, VentanaTarjetas ventanaTarjetas) {
+    public ActivarTarjetasEventHandler(Jugador jugador, VentanaTarjetas ventanaTarjetas) {
         this.jugador = jugador;
         this.ventanaTarjetas = ventanaTarjetas;
     }
@@ -26,7 +26,7 @@ public class ActivarTarjetaEventHandler implements EventHandler<MouseEvent> {
         activarTarjetas(tarjetas);
     }
 
-    void activarTarjetas(ArrayList<Tarjeta> tarjetas){
+    void activarTarjetas(ArrayList<Tarjeta> tarjetas) {
         if (tarjetas.size() == 0) ventanaTarjetas.mostrarError("Se debe seleccionar al menos una tarjeta");
 
         for (Tarjeta tarjeta: tarjetas) {

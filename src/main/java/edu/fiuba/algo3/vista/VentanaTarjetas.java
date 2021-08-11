@@ -1,6 +1,6 @@
 package edu.fiuba.algo3.vista;
 
-import edu.fiuba.algo3.controladores.ActivarTarjetaEventHandler;
+import edu.fiuba.algo3.controladores.ActivarTarjetasEventHandler;
 import edu.fiuba.algo3.controladores.CanjearTarjetasEventHandler;
 import edu.fiuba.algo3.modelo.Juego;
 import edu.fiuba.algo3.modelo.Jugador;
@@ -67,8 +67,8 @@ public class VentanaTarjetas implements Observer {
     }
 
     private void crearBotonActivar() {
-        Button botonActivar = new Button("Activar tarjeta");
-        botonActivar.setOnMouseClicked(new ActivarTarjetaEventHandler(juego.getTurno().obtenerJugadorTurnoActual(), this));
+        Button botonActivar = new Button("Activar tarjeta/s");
+        botonActivar.setOnMouseClicked(new ActivarTarjetasEventHandler(juego.getTurno().obtenerJugadorTurnoActual(), this));
         HBox.setMargin(botonActivar, new Insets(20,40,10,40));
         layoutBotones.getChildren().add(botonActivar);
     }
