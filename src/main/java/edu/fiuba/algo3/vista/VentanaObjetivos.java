@@ -8,6 +8,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -29,6 +30,7 @@ public class VentanaObjetivos {
         crearVistasObjetivos();
 
         Stage ventanaObjetivos = new Stage();
+        ventanaObjetivos.getIcons().add(new Image("icono.png"));
         ventanaObjetivos.initModality(Modality.APPLICATION_MODAL);
         ventanaObjetivos.setTitle("Objetivo Secreto");
 

@@ -6,6 +6,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -18,6 +19,8 @@ public class MenuInicial extends VBox {
 
     public MenuInicial(Stage stage) {
         this.stage = stage;
+        this.stage.getIcons().add(new Image("icono.png"));
+
         this.setAlignment(Pos.CENTER);
         this.setSpacing(20);
         stage.centerOnScreen();
