@@ -14,7 +14,7 @@ public class MultitonTarjetas implements Subject {
     private MultitonTarjetas() {}
 
     public static void agregarTarjeta(Tarjeta unaTarjeta) {
-        tarjetas.put(unaTarjeta.obtenerPais(), unaTarjeta);
+        tarjetas.put(unaTarjeta.getPais(), unaTarjeta);
     }
 
     public static Tarjeta obtenerTarjeta(Pais unPais) {
@@ -24,7 +24,7 @@ public class MultitonTarjetas implements Subject {
     public static Tarjeta obtenerTarjetaAleatoria() {
         ArrayList<Tarjeta> _tarjetas = new ArrayList<>(tarjetas.values());
         Collections.shuffle(_tarjetas);
-        return tarjetas.remove(_tarjetas.get(0).obtenerPais());
+        return tarjetas.remove(_tarjetas.get(0).getPais());
     }
 
     @Override

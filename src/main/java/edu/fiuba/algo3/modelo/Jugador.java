@@ -86,7 +86,7 @@ public class Jugador {
 
     public void activarTarjeta(Tarjeta tarjeta) throws JugadorNoPoseePaisDeLaTarjetaException, ActivacionTarjetaEnRondaEquivocadaException, ElJugadorNoTieneTurnoException, LaTarjetaYaFueActivadaException, TarjetaNoEncontradaException {
         if (!this.tarjetas.contains(tarjeta)) throw new TarjetaNoEncontradaException();
-        if (!this.paisesDominados.contains(tarjeta.obtenerPais())) throw new JugadorNoPoseePaisDeLaTarjetaException();
+        if (!this.paisesDominados.contains(tarjeta.getPais())) throw new JugadorNoPoseePaisDeLaTarjetaException();
         this.turno.activarTarjeta(tarjeta);
     }
 
@@ -135,9 +135,7 @@ public class Jugador {
     public void devolverTarjetas(ArrayList<Tarjeta> tarjetasADevolver) {
 
         tarjetasADevolver.forEach(tarjeta -> {
-            try {
-                tarjeta.desactivar();
-            } catch (LaTarjetaYaEstaDesactivadaException ignored) {}
+            tarjeta.desactivar();
             MultitonTarjetas.agregarTarjeta(tarjeta);
             tarjetas.remove(tarjeta);
         });

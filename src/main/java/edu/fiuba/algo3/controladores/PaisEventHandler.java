@@ -30,8 +30,6 @@ public class PaisEventHandler implements EventHandler<MouseEvent> {
     @Override
     public void handle(MouseEvent mouseEvent) {
 
-
-
         Ronda ronda = this.campoDeJuego.getJuego().getTurno().obtenerRondaActual();
         MenuLateralDerecho menuLateral = (MenuLateralDerecho) campoDeJuego.getRight();
         VBox formularioDeAccion = (VBox) menuLateral.getChildren().get(1);
@@ -45,8 +43,9 @@ public class PaisEventHandler implements EventHandler<MouseEvent> {
                 ronda.colocarEjercitos(pais,1);
                 ReproductorDeSonido.getInstance().playClick();
                 menuLateral.update();
-            } catch (NoEsRondaDeColocacionException | NoQuedanMasEjercitosPorColocarException e) {
+            } catch (NoEsRondaDeColocacionException ignored) {}
 
+            catch (NoQuedanMasEjercitosPorColocarException e) {
                 ReproductorDeSonido.getInstance().playError();
                 menuLateral.mostrarErrorColocacion();
                 Label labelDeError = (Label)(formularioDeAccion.getChildren().get(4));

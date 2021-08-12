@@ -38,6 +38,7 @@ public abstract class RondaColocacion implements Ronda {
     }
 
     public void colocarEjercitos(Pais unPais, int cantidadEjercitos) throws NoQuedanMasEjercitosPorColocarException {
+
         if (this.cantidadEjercitosColocables > 0) {
             if (cantidadEjercitos <= this.cantidadEjercitosColocables) {
                 unPais.modificarCantidadEjercito(cantidadEjercitos);
@@ -45,6 +46,7 @@ public abstract class RondaColocacion implements Ronda {
             }
         }
         else throw new NoQuedanMasEjercitosPorColocarException();
+
     }
 
     public void activarTarjeta(Tarjeta unaTarjeta) throws LaTarjetaYaFueActivadaException {
