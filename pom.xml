@@ -11,7 +11,7 @@
         <junit.jupiter.version>5.4.0</junit.jupiter.version>
         <mockito-mockito-core-version>3.3.0</mockito-mockito-core-version>
         <maven-surefire-version>3.0.0-M3</maven-surefire-version>
-        <javafx-version>16</javafx-version>
+        <javafx-version>15.0.1</javafx-version>
         <main-class>edu.fiuba.algo3.Main</main-class>
     </properties>
     <dependencies>
@@ -40,7 +40,7 @@
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-media</artifactId>
-            <version>16</version>
+            <version>13</version>
         </dependency>
     </dependencies>
     <profiles>
