@@ -11,4 +11,5 @@ public class TercerCanje extends Canje {
         canjeActivado = true;
         return 10;
     }
+
 }

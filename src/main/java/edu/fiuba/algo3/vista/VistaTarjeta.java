@@ -1,7 +1,6 @@
 package edu.fiuba.algo3.vista;
 
 import edu.fiuba.algo3.controladores.TarjetaEventHandler;
-import edu.fiuba.algo3.modelo.observables.Observer;
 import edu.fiuba.algo3.modelo.tarjetas.Tarjeta;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -9,7 +8,6 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 
 
@@ -25,10 +23,10 @@ public class VistaTarjeta extends StackPane {
     public VistaTarjeta(VentanaTarjetas ventanaTarjetas, Tarjeta tarjeta) {
         this.ventanaTarjetas = ventanaTarjetas;
         this.tarjeta = tarjeta;
-        this.imagenTarjeta = new Image(tarjeta.obtenerSimbolo() + ".png");
+        this.imagenTarjeta = new Image(tarjeta.getSimbolo() + ".png");
         this.view = new ImageView(imagenTarjeta);
         this.check = new CheckBox();
-        this.button = new Button(tarjeta.obtenerPais().getNombre(), view);
+        this.button = new Button(tarjeta.getPais().getNombre(), view);
 
         view.setPreserveRatio(true);
         view.setFitWidth(82);
@@ -65,7 +63,7 @@ public class VistaTarjeta extends StackPane {
 
         if (tarjeta.estaActivada()) button.getStyleClass().add("yaActivada");
 
-        else if (tarjeta.obtenerPais().dominadoPor() == ventanaTarjetas.getJugador())
+        else if (tarjeta.getPais().dominadoPor() == ventanaTarjetas.getJugador())
             button.getStyleClass().add("puedeActivarse");
 
         else button.getStyleClass().add("noPuedeActivarse");

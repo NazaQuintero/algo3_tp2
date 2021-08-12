@@ -4,6 +4,8 @@ import edu.fiuba.algo3.modelo.paises.Pais;
 import edu.fiuba.algo3.modelo.excepciones.LaTarjetaYaEstaDesactivadaException;
 
 public class TarjetaDesactivada implements EstadoTarjeta {
+
+    @Override
     public EstadoTarjeta activar(Pais unPais) {
         unPais.modificarCantidadEjercito(2);
         return new TarjetaActivada();

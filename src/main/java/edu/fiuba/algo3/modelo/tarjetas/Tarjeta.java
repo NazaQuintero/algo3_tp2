@@ -3,13 +3,9 @@ package edu.fiuba.algo3.modelo.tarjetas;
 import edu.fiuba.algo3.modelo.canjes.CanjeHabilitado;
 import edu.fiuba.algo3.modelo.canjes.SinCanje;
 import edu.fiuba.algo3.modelo.canjes.TipoCanje;
-import edu.fiuba.algo3.modelo.observables.Observer;
-import edu.fiuba.algo3.modelo.observables.Subject;
 import edu.fiuba.algo3.modelo.paises.Pais;
 import edu.fiuba.algo3.modelo.excepciones.LaTarjetaYaEstaDesactivadaException;
 import edu.fiuba.algo3.modelo.excepciones.LaTarjetaYaFueActivadaException;
-
-import java.util.ArrayList;
 
 public class Tarjeta {
 
@@ -23,27 +19,34 @@ public class Tarjeta {
         this.estadoTarjeta = new TarjetaDesactivada();
     }
 
-    public Pais obtenerPais(){ return pais; }
+    public Pais getPais(){ return pais; }
+
+    public String getSimbolo() {
+        return this.simbolo.obtenerDescripcion();
+    }
+
+    public boolean estaActivada(){
+        return estadoTarjeta.estaActivada();
+    }
 
     public void activar() throws LaTarjetaYaFueActivadaException {
         estadoTarjeta = estadoTarjeta.activar(pais);
     }
 
-    public void desactivar() throws LaTarjetaYaEstaDesactivadaException {
-        estadoTarjeta = estadoTarjeta.desactivar();
-    }
+    public void desactivar() {
+        try {
+            estadoTarjeta = estadoTarjeta.desactivar();
+        } catch (LaTarjetaYaEstaDesactivadaException ignored) {}
 
-    public String obtenerSimbolo() {
-        return this.simbolo.obtenerDescripcion();
     }
 
     public boolean coincideSimboloCon(Tarjeta unaTarjeta) {
-        if (unaTarjeta.obtenerSimbolo().equals("Comodin")) return true;
-        return this.obtenerSimbolo().equals(unaTarjeta.obtenerSimbolo());
+        if (unaTarjeta.getSimbolo().equals("Comodin")) return true;
+        return this.getSimbolo().equals(unaTarjeta.getSimbolo());
     }
 
     public boolean esComodin(){
-        return this.obtenerSimbolo().equals("Comodin");
+        return this.getSimbolo().equals("Comodin");
     }
 
     public TipoCanje compararSimbolos(Tarjeta unaTarjeta, Tarjeta otraTarjeta) {
@@ -57,10 +60,6 @@ public class Tarjeta {
             return new CanjeHabilitado();
 
         return new SinCanje();
-    }
-
-    public boolean estaActivada(){
-        return estadoTarjeta.estaActivada();
     }
 
 }

@@ -1,4 +1,4 @@
 package edu.fiuba.algo3.modelo.excepciones;
 
-public class PaisOcupadoPorOtroJugadorException extends Exception{
+public class PaisOcupadoPorOtroJugadorException extends Exception {
 }

@@ -9,19 +9,20 @@ import edu.fiuba.algo3.modelo.turnos.Turno;
 
 public class Juego {
 
-    private static final String ARCHIVO_CONTINENTES_Y_PAISES = "continentesYPaises.json";
-    private static final String ARCHIVO_PAISES_LIMITROFES = "paisesLimitrofes.json";
-    private static final String ARCHIVO_TARJETAS = "tarjetas.json";
-
     private final Jugadores jugadores;
     private Turno turno = new SinTurno();
 
     public Juego() throws ArchivoDeContinentesYPaisesNoEncontradoException, ArchivoDePaisesLimitrofesNoEncontradoException, ArchivoDeTarjetasNoEncontradoException {
         jugadores = new Jugadores();
 
-        CargarJuego.cargarContinentesYPaises(ARCHIVO_CONTINENTES_Y_PAISES);
-        CargarJuego.cargarPaisesLimitrofes(ARCHIVO_PAISES_LIMITROFES);
-        CargarJuego.cargarTarjetas(ARCHIVO_TARJETAS);
+        CargarJuego.cargarContinentesYPaises();
+        CargarJuego.cargarPaisesLimitrofes();
+        CargarJuego.cargarTarjetas();
+
+    }
+
+    public Turno getTurno() {
+        return turno;
     }
 
     public void agregarJugador(Jugador jugador){
@@ -31,15 +32,11 @@ public class Juego {
     public void comenzar() throws CantidadDeJugadoresInsuficienteException {
         if (jugadores.obtenerCantidad() < 2) throw new CantidadDeJugadoresInsuficienteException();
 
-        RepartidorDePaises repartidorDePaises = new RepartidorDePaises();
-        repartidorDePaises.repartirPaises(jugadores);
+        RepartidorDePaises.repartirPaises(jugadores);
         jugadores.mezclar();
         Objetivos.asignarObjetivos(jugadores);
         turno = new ConTurno(jugadores);
-    }
 
-    public Turno getTurno() {
-        return turno;
     }
 
     public boolean estaTerminado() {

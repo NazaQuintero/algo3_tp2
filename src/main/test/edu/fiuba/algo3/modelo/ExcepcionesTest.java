@@ -9,23 +9,26 @@ import edu.fiuba.algo3.modelo.tarjetas.Tarjeta;
 import javafx.scene.paint.Color;
 import org.junit.jupiter.api.Test;
 
+import java.util.function.Supplier;
+
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class ExcepcionesTest {
 
     @Test
-    public void alTratarDeCargarContinentesLanzaExcepcionDeArchivoDeContinentesNoEncontrado(){
-        assertThrows(ArchivoDeContinentesYPaisesNoEncontradoException.class, () -> CargarJuego.cargarContinentesYPaises("tita"));
+    public void alTratarDeCargarContinentesYPaisesNoSeLanzaNingunaExcepcion() {
+        assertDoesNotThrow(CargarJuego::cargarContinentesYPaises);
     }
 
     @Test
-    public void alTratarDeCargarPaisesLanzaExcepcionDeArchivoDePaisesNoEncontrado(){
-        assertThrows(ArchivoDePaisesLimitrofesNoEncontradoException.class, () -> CargarJuego.cargarPaisesLimitrofes("alfajor"));
+    public void alTratarDeCargarPaisesLimitrofesNoSeLanzaNingunaExcepcion() {
+        assertDoesNotThrow(CargarJuego::cargarPaisesLimitrofes);
     }
 
     @Test
-    public void alTratarDeCargarTarjetasLanzaExcepcionDeArchivoDeTarjetasNoEncontrado(){
-        assertThrows(ArchivoDeTarjetasNoEncontradoException.class, () -> CargarJuego.cargarTarjetas( "pochoclo"));
+    public void alTratarDeCargarTarjetasNoSeLanzaNingunaExcepcion() {
+        assertDoesNotThrow(CargarJuego::cargarTarjetas);
     }
 
     @Test

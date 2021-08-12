@@ -16,4 +16,5 @@ public class SinCanje implements TipoCanje {
     public Canje canjear(Canje canje) throws SinCanjeHabilitadoException {
         throw new SinCanjeHabilitadoException();
     }
+
 }

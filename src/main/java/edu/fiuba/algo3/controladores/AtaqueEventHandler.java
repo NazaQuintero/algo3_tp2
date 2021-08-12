@@ -46,7 +46,6 @@ public class AtaqueEventHandler implements EventHandler<Event>  {
                 int cantidadDeEjercitos = Integer.parseInt(inputText.getText());
                 Resultado resultado = atacante.atacarA(defensor, cantidadDeEjercitos);
 
-
                 menuLateralDerecho.update();
                 mostrarAtaque();
                 ProcesadorResultado.obtenerInstancia().procesar(resultado);
