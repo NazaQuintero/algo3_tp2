@@ -16,7 +16,7 @@ public abstract class Canje {
 
     public abstract Canje siguienteCanje();
 
-    public abstract int cantidadEjercitos(); // Setear canjeActivado como true
+    public abstract int cantidadEjercitos();
 
     public Canje habilitarCanje(ArrayList<Tarjeta> tarjetas) throws SinCanjeHabilitadoException {
 
@@ -26,4 +26,5 @@ public abstract class Canje {
         return nuevoCanje;
 
     }
+
 }

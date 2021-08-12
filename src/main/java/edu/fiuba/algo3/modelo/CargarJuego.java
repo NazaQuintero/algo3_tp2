@@ -17,12 +17,16 @@ import edu.fiuba.algo3.modelo.tarjetas.*;
 
 public class CargarJuego {
 
-    public static void cargarContinentesYPaises(String archivoContinentesYPaises) throws ArchivoDeContinentesYPaisesNoEncontradoException {
+    private static final String ARCHIVO_CONTINENTES_Y_PAISES = "continentesYPaises.json";
+    private static final String ARCHIVO_PAISES_LIMITROFES = "paisesLimitrofes.json";
+    private static final String ARCHIVO_TARJETAS = "tarjetas.json";
+
+    public static void cargarContinentesYPaises() throws ArchivoDeContinentesYPaisesNoEncontradoException {
         String json;
         Gson gson = new Gson();
 
         try {
-            InputStream is = App.class.getClassLoader().getResourceAsStream(archivoContinentesYPaises);
+            InputStream is = App.class.getClassLoader().getResourceAsStream(ARCHIVO_CONTINENTES_Y_PAISES);
             json = new String(Objects.requireNonNull(is).readAllBytes(), StandardCharsets.UTF_8);
         }
         catch (IOException | NullPointerException e) {
@@ -39,11 +43,11 @@ public class CargarJuego {
         MultitonContinentes.cargarContinentes(continentes);
     }
 
-    public static void cargarPaisesLimitrofes(String archivoPaisesLimitrofes) throws ArchivoDePaisesLimitrofesNoEncontradoException {
+    public static void cargarPaisesLimitrofes() throws ArchivoDePaisesLimitrofesNoEncontradoException {
         String json;
 
         try {
-            InputStream is = App.class.getClassLoader().getResourceAsStream(archivoPaisesLimitrofes);
+            InputStream is = App.class.getClassLoader().getResourceAsStream(ARCHIVO_PAISES_LIMITROFES);
             json = new String(Objects.requireNonNull(is).readAllBytes(), StandardCharsets.UTF_8);
         } catch (IOException | NullPointerException e) {
             throw new ArchivoDePaisesLimitrofesNoEncontradoException();
@@ -74,11 +78,11 @@ public class CargarJuego {
 
     }
 
-    public static void cargarTarjetas(String archivoTarjetas) throws ArchivoDeTarjetasNoEncontradoException {
+    public static void cargarTarjetas() throws ArchivoDeTarjetasNoEncontradoException {
         String json;
 
         try {
-            InputStream is = CargarJuego.class.getClassLoader().getResourceAsStream(archivoTarjetas);
+            InputStream is = CargarJuego.class.getClassLoader().getResourceAsStream(ARCHIVO_TARJETAS);
             json = new String(Objects.requireNonNull(is).readAllBytes(), StandardCharsets.UTF_8);
         }
         catch (IOException | NullPointerException e) {

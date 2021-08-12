@@ -11,7 +11,8 @@ import java.util.*;
 
 public class RepartidorDePaises {
 
-    public void repartirPaises(Jugadores jugadores) {
+    public static void repartirPaises(Jugadores jugadores) {
+
         int cantidadJugadores = jugadores.obtenerCantidad();
         ArrayList<Pais> paises = new ArrayList<>(MultitonPaises.obtenerTodosLosPaises());
 

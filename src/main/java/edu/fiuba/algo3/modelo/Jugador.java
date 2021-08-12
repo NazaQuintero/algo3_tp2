@@ -85,21 +85,25 @@ public class Jugador {
     }
 
     public void activarTarjeta(Tarjeta tarjeta) throws JugadorNoPoseePaisDeLaTarjetaException, ActivacionTarjetaEnRondaEquivocadaException, ElJugadorNoTieneTurnoException, LaTarjetaYaFueActivadaException, TarjetaNoEncontradaException {
+
         if (!this.tarjetas.contains(tarjeta)) throw new TarjetaNoEncontradaException();
         if (!this.paisesDominados.contains(tarjeta.getPais())) throw new JugadorNoPoseePaisDeLaTarjetaException();
+
         this.turno.activarTarjeta(tarjeta);
+
     }
 
     public void colocarEjercitos(Pais pais, int cantidadEjercitos) throws ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException, PaisOcupadoPorOtroJugadorException, NoQuedanMasEjercitosPorColocarException {
+
         if (paisesDominados.contains(pais)) {
             this.turno.colocarEjercitos(pais, cantidadEjercitos);
         }
-
-        else if (pais.estaLibre()){
+        else if (pais.estaLibre()) {
             pais.colocarEjercito(new Ejercito(this));
             pais.modificarCantidadEjercito(cantidadEjercitos-1);
         }
         else throw new PaisOcupadoPorOtroJugadorException();
+
     }
 
     public void finalizarRonda() throws ElJugadorNoTieneTurnoException{

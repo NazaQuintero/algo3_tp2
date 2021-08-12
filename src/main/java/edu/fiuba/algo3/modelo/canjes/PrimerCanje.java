@@ -11,4 +11,5 @@ public class PrimerCanje extends Canje {
         canjeActivado = true;
         return 4;
     }
+
 }

@@ -4,6 +4,7 @@ import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.turnos.Turno;
 
 public class ColocacionInicial extends RondaColocacion {
+
     public ColocacionInicial(Jugador unJugador){
         super(unJugador);
     }
@@ -21,7 +22,9 @@ public class ColocacionInicial extends RondaColocacion {
     @Override
     public void finalizarRonda(Turno unTurno) {
         unTurno.finalizarTurnoActual();
+
         if (unTurno.leTocaALPrimerJugador()) unTurno.setRonda(new ColocacionSecundaria(unTurno.obtenerJugadorTurnoActual()));
         else calcularEjercitosColocables(unTurno.obtenerJugadorTurnoActual());
     }
+
 }

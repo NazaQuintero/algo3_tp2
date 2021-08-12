@@ -21,7 +21,7 @@ public class MultitonTest {
 
     @Test
     public void alPedir2VecesElMismoContinenteLaInstanciaObtenidaDeContinenteEsLaMisma() throws ContinenteInvalidoException, ArchivoDeContinentesYPaisesNoEncontradoException {
-        CargarJuego.cargarContinentesYPaises(ARCHIVO_CONTINENTES);
+        CargarJuego.cargarContinentesYPaises();
         Continente continente1 = MultitonContinentes.obtenerInstanciaDe("Africa");
         Continente continente2 = MultitonContinentes.obtenerInstanciaDe("Africa");
 
@@ -36,7 +36,7 @@ public class MultitonTest {
 
     @Test
     public void alPedirUnContinenteDevuelveCorrectamente() throws ContinenteInvalidoException, ArchivoDeContinentesYPaisesNoEncontradoException {
-        CargarJuego.cargarContinentesYPaises(ARCHIVO_CONTINENTES);
+        CargarJuego.cargarContinentesYPaises();
         Continente continente1 = MultitonContinentes.obtenerInstanciaDe("Oceania");
 
         assertEquals("Oceania",continente1.getNombre());

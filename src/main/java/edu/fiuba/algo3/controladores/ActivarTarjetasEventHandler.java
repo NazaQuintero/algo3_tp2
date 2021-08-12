@@ -26,7 +26,6 @@ public class ActivarTarjetasEventHandler implements EventHandler<MouseEvent> {
     }
 
     void activarTarjetas(ArrayList<Tarjeta> tarjetas) {
-        // Usado para no repetir el reproducir sonido en todos los catchs
         boolean error = true;
 
         if (tarjetas.size() == 0) ventanaTarjetas.mostrarError("Se debe seleccionar al menos una tarjeta");
