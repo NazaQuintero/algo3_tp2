@@ -32,12 +32,14 @@ public class ReagrupeEventHandler implements EventHandler<Event> {
             int cantidadDeEjercitos = Integer.parseInt(inputText.getText());
             try {
                 this.desde.reagrupar(hasta, cantidadDeEjercitos);
+                ReproductorDeSonido.playClick();
                 campoDeJuego.setPaisSeleccionado(null);
                 campoDeJuego.mostrarPaisesDelJugadorActual();
                 menuLateralDerecho.update();
 
             } catch (ElPaisNoEsLimitrofeException | CantidadDeEjercitosInValidaException e) {
-               menuLateralDerecho.mostrarErrorAtaqueYReagrupe(desde.cantidadEjercitos()-1);
+                ReproductorDeSonido.playError();
+                menuLateralDerecho.mostrarErrorAtaqueYReagrupe(desde.cantidadEjercitos()-1);
             }
         }
     }

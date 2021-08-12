@@ -27,13 +27,18 @@ public class ActivarTarjetasEventHandler implements EventHandler<MouseEvent> {
     }
 
     void activarTarjetas(ArrayList<Tarjeta> tarjetas) {
+        // Usado para no repetir el reproducir sonido en todos los catchs
+        boolean error = true;
+
         if (tarjetas.size() == 0) ventanaTarjetas.mostrarError("Se debe seleccionar al menos una tarjeta");
+
 
         for (Tarjeta tarjeta: tarjetas) {
             try {
                 jugador.activarTarjeta(tarjeta);
                 ventanaTarjetas.update();
                 ventanaTarjetas.mostrarMensajeValido(crearMensajeExito(tarjetas));
+                error = false;
             } catch (ElJugadorNoTieneTurnoException | TarjetaNoEncontradaException ignored) {}
 
             catch (LaTarjetaYaFueActivadaException e) {
@@ -48,6 +53,8 @@ public class ActivarTarjetasEventHandler implements EventHandler<MouseEvent> {
 
             ventanaTarjetas.deseleccionarVistaTarjeta(tarjeta);
         }
+        if (error) ReproductorDeSonido.playError();
+        else ReproductorDeSonido.playClick();
     }
 
     private String crearMensajeExito(ArrayList<Tarjeta> tarjetas){

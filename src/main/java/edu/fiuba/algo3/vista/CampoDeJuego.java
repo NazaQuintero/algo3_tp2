@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.vista;
 
+import edu.fiuba.algo3.controladores.ReproductorDeSonido;
 import edu.fiuba.algo3.modelo.Juego;
 import edu.fiuba.algo3.modelo.paises.MultitonPaises;
 import edu.fiuba.algo3.modelo.paises.Pais;
@@ -22,16 +23,13 @@ public class CampoDeJuego extends BorderPane {
     private final Juego juego;
     private final ArrayList<VistaPais> vistasPaises = new ArrayList<>();
     private final MenuLateralDerecho menuLateralDerecho;
-    private final VentanaTarjetas ventanaTarjetas;
     private Pais paisSeleccionado;
 
     public CampoDeJuego(Stage stage, Juego juego) {
         this.juego = juego;
         this.menuLateralDerecho = new MenuLateralDerecho(this, juego);
-        this.ventanaTarjetas = new VentanaTarjetas(juego);
         this.getStylesheets().add("styles.css");
 
-        crearBotonTarjetas();
         crearTablero();
         this.setRight(this.menuLateralDerecho);
 
@@ -60,14 +58,6 @@ public class CampoDeJuego extends BorderPane {
 
         this.setCenter(aVbox);
     }
-
-    private void crearBotonTarjetas() {
-        Button botonTarjetas = new Button("Ver tarjetas");
-        botonTarjetas.setOnAction(e -> ventanaTarjetas.mostrarTarjetas());
-
-        this.setTop(botonTarjetas);
-    }
-
 
     private ImageView crearVistaImagen() {
         Image imagen = new Image("tablero.png");

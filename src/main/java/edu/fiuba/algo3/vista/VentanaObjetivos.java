@@ -50,7 +50,7 @@ public class VentanaObjetivos {
 
         Scene scene = new Scene(layoutObjetivos, 600, 200);
         ventanaObjetivos.setScene(scene);
-        ventanaObjetivos.showAndWait();
+        ventanaObjetivos.show();
     }
 
     public void crearVistasObjetivos() {

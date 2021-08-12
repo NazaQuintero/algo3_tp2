@@ -45,15 +45,22 @@ public class AtaqueEventHandler implements EventHandler<Event>  {
                 menuLateralDerecho.limpiarResultadoDeBatalla();
                 int cantidadDeEjercitos = Integer.parseInt(inputText.getText());
                 Resultado resultado = atacante.atacarA(defensor, cantidadDeEjercitos);
+
+
                 menuLateralDerecho.update();
                 mostrarAtaque();
                 ProcesadorResultado.obtenerInstancia().procesar(resultado);
+
+                if (atacante.dominadoPor() == defensor.dominadoPor()) ReproductorDeSonido.playVictoria();
+                else ReproductorDeSonido.playAtaque();
+
                 campoDeJuego.setPaisSeleccionado(null);
                 campoDeJuego.mostrarPaisesDelJugadorActual();
                 campoDeJuego.actualizarObjetivoGeneral();
             } catch (ElPaisNoEsLimitrofeException ignored) {}
 
             catch (NumberFormatException | CantidadDeEjercitosInValidaException e) {
+                ReproductorDeSonido.playClick();
                 inputText.getStyleClass().add("invalid");
                 inputText.clear();
                 inputText.requestFocus();

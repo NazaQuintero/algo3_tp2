@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.vista;
 
+import edu.fiuba.algo3.controladores.ReproductorDeSonido;
 import javafx.application.Platform;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -43,7 +44,10 @@ public class MenuInicial extends VBox {
         Button exitButton = new Button();
         exitButton.setText("Salir");
         exitButton.getStyleClass().add("exitButton");
-        exitButton.setOnAction(e -> Platform.exit());
+        exitButton.setOnAction(e -> {
+            ReproductorDeSonido.playClick();
+            Platform.exit();
+        });
         return exitButton;
     }
 
@@ -52,6 +56,7 @@ public class MenuInicial extends VBox {
         startButton.setText("Jugar");
         startButton.getStyleClass().add("startButton");
         startButton.setOnAction(e -> {
+            ReproductorDeSonido.playClick();
             Scene nuevaEscena = new Scene(new SeleccionCantidadJugadores(stage), ANCHO, ALTO);
             stage.setScene(nuevaEscena);
         });

@@ -17,6 +17,8 @@ public class TarjetaEventHandler implements EventHandler<MouseEvent> {
 
     @Override
     public void handle(MouseEvent event) {
+        ReproductorDeSonido.playClick();
+
         ventanaTarjetas.ocultarError();
         vistaTarjeta.cambiarSeleccion();
     }

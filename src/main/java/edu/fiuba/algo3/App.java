@@ -17,7 +17,7 @@ public class App extends Application {
     @Override
     public void start(Stage stage) {
 
-        //ReproductorDeSonido.playPrincipal();
+        ReproductorDeSonido.playPrincipal();
 
         MenuInicial menuInicial = new MenuInicial(stage);
         Scene presentacion = new Scene(menuInicial, ANCHO, ALTO);

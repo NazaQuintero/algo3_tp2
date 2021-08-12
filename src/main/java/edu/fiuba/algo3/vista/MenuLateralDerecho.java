@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.vista;
 
 import edu.fiuba.algo3.controladores.FinalizarRondaEventHandler;
+import edu.fiuba.algo3.controladores.ReproductorDeSonido;
 import edu.fiuba.algo3.modelo.Juego;
 import edu.fiuba.algo3.modelo.observables.Observer;
 import edu.fiuba.algo3.modelo.rondas.Ataque;
@@ -95,13 +96,19 @@ public class MenuLateralDerecho extends VBox implements Observer {
 
     private Button crearBotonObjetivos() {
         Button botonObjetivos = new Button("Ver objetivo secreto");
-        botonObjetivos.setOnAction(e -> ventanaObjetivos.mostrarObjetivos());
+        botonObjetivos.setOnAction(e -> {
+            ventanaObjetivos.mostrarObjetivos();
+            ReproductorDeSonido.playClick();
+        });
         return botonObjetivos;
     }
 
     private Button crearBotonTarjetas() {
         Button botonTarjetas = new Button("Ver tarjetas");
-        botonTarjetas.setOnAction(e -> ventanaTarjetas.mostrarTarjetas());
+        botonTarjetas.setOnAction(e -> {
+            ventanaTarjetas.mostrarTarjetas();
+            ReproductorDeSonido.playClick();
+        });
         return botonTarjetas;
     }
 
@@ -127,6 +134,7 @@ public class MenuLateralDerecho extends VBox implements Observer {
         botonCancelar.getStyleClass().add("cancelButton");
         botonCancelar.setOnAction(e -> {
             campoDeJuego.setPaisSeleccionado(null);
+            ReproductorDeSonido.playClick();
             update();
         });
         botonCancelar.setVisible(false);

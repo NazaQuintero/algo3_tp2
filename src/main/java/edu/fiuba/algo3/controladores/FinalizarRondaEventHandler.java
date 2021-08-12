@@ -22,6 +22,7 @@ public class FinalizarRondaEventHandler implements EventHandler<Event> {
         menuLateralDerecho.ocultarError();
 
         try {
+            ReproductorDeSonido.playClick();
             campoDeJuego.getJuego().getTurno().finalizarRonda(jugador);
             campoDeJuego.actualizarObjetivoGeneral();
             campoDeJuego.setPaisSeleccionado(null);

@@ -39,13 +39,17 @@ public class FormularioJugadoresEventHandler implements EventHandler<Event> {
             boolean jugadoresCargados = validarTextFields();
 
             if (jugadoresCargados) {
+                ReproductorDeSonido.playClick();
                 try {
                     juego.comenzar();
                     new CampoDeJuego(stage, juego);
                 }
                 catch (CantidadDeJugadoresInsuficienteException ignored) {}
             }
-            errorLabel.setVisible(true);
+            else {
+                errorLabel.setVisible(true);
+                ReproductorDeSonido.playError();
+            }
         }
     }
 
