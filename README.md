@@ -19,7 +19,7 @@ Corrector: **Pablo Suárez**
 La versión más reciente de la aplicación puede encontrarse en la pestaña [releases](https://github.com/NazaQuintero/algo3_tp2/releases/latest) y ejecutarse en Linux, Windows o Mac de esta forma:
 
 ```bash
-$ java -jar <archivo.jar>
+$ java -jar <archivo.jar> 
 ```
 
 ## Desarrollo
