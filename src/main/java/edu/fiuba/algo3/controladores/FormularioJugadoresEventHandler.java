@@ -39,7 +39,7 @@ public class FormularioJugadoresEventHandler implements EventHandler<Event> {
             boolean jugadoresCargados = validarTextFields();
 
             if (jugadoresCargados) {
-                ReproductorDeSonido.playClick();
+                ReproductorDeSonido.getInstance().playClick();
                 try {
                     juego.comenzar();
                     new CampoDeJuego(stage, juego);
@@ -48,7 +48,7 @@ public class FormularioJugadoresEventHandler implements EventHandler<Event> {
             }
             else {
                 errorLabel.setVisible(true);
-                ReproductorDeSonido.playError();
+                ReproductorDeSonido.getInstance().playError();
             }
         }
     }

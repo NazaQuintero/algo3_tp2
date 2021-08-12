@@ -53,8 +53,8 @@ public class ActivarTarjetasEventHandler implements EventHandler<MouseEvent> {
 
             ventanaTarjetas.deseleccionarVistaTarjeta(tarjeta);
         }
-        if (error) ReproductorDeSonido.playError();
-        else ReproductorDeSonido.playClick();
+        if (error) ReproductorDeSonido.getInstance().playError();
+        else ReproductorDeSonido.getInstance().playClick();
     }
 
     private String crearMensajeExito(ArrayList<Tarjeta> tarjetas){

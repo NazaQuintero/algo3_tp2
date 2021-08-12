@@ -43,11 +43,11 @@ public class PaisEventHandler implements EventHandler<MouseEvent> {
             campoDeJuego.mostrarPaisesDelJugadorActual();
             try {
                 ronda.colocarEjercitos(pais,1);
-                ReproductorDeSonido.playClick();
+                ReproductorDeSonido.getInstance().playClick();
                 menuLateral.update();
             } catch (NoEsRondaDeColocacionException | NoQuedanMasEjercitosPorColocarException e) {
 
-                ReproductorDeSonido.playError();
+                ReproductorDeSonido.getInstance().playError();
                 menuLateral.mostrarErrorColocacion();
                 Label labelDeError = (Label)(formularioDeAccion.getChildren().get(4));
                 labelDeError.setText("No quedan más ejércitos por colocar");
@@ -55,7 +55,7 @@ public class PaisEventHandler implements EventHandler<MouseEvent> {
             }
 
         } else if (ronda instanceof Ataque) {
-            ReproductorDeSonido.playClick();
+            ReproductorDeSonido.getInstance().playClick();
 
             if (campoDeJuego.getPaisSeleccionado() == null) {
                 campoDeJuego.mostrarPaises();
@@ -75,7 +75,7 @@ public class PaisEventHandler implements EventHandler<MouseEvent> {
 
         } else {
             // Reagrupe
-            ReproductorDeSonido.playClick();
+            ReproductorDeSonido.getInstance().playClick();
 
             campoDeJuego.mostrarPaisesDelJugadorActual();
             if (campoDeJuego.getPaisSeleccionado() == null) {

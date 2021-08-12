@@ -48,7 +48,7 @@ public class MenuInicial extends VBox {
         exitButton.setText("Salir");
         exitButton.getStyleClass().add("exitButton");
         exitButton.setOnAction(e -> {
-            ReproductorDeSonido.playClick();
+            ReproductorDeSonido.getInstance().playClick();
             Platform.exit();
         });
         return exitButton;
@@ -59,7 +59,7 @@ public class MenuInicial extends VBox {
         startButton.setText("Jugar");
         startButton.getStyleClass().add("startButton");
         startButton.setOnAction(e -> {
-            ReproductorDeSonido.playClick();
+            ReproductorDeSonido.getInstance().playClick();
             Scene nuevaEscena = new Scene(new SeleccionCantidadJugadores(stage), ANCHO, ALTO);
             stage.setScene(nuevaEscena);
         });

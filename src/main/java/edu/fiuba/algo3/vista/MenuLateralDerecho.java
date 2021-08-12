@@ -98,7 +98,7 @@ public class MenuLateralDerecho extends VBox implements Observer {
         Button botonObjetivos = new Button("Ver objetivo secreto");
         botonObjetivos.setOnAction(e -> {
             ventanaObjetivos.mostrarObjetivos();
-            ReproductorDeSonido.playClick();
+            ReproductorDeSonido.getInstance().playClick();
         });
         return botonObjetivos;
     }
@@ -107,7 +107,7 @@ public class MenuLateralDerecho extends VBox implements Observer {
         Button botonTarjetas = new Button("Ver tarjetas");
         botonTarjetas.setOnAction(e -> {
             ventanaTarjetas.mostrarTarjetas();
-            ReproductorDeSonido.playClick();
+            ReproductorDeSonido.getInstance().playClick();
         });
         return botonTarjetas;
     }
@@ -134,7 +134,7 @@ public class MenuLateralDerecho extends VBox implements Observer {
         botonCancelar.getStyleClass().add("cancelButton");
         botonCancelar.setOnAction(e -> {
             campoDeJuego.setPaisSeleccionado(null);
-            ReproductorDeSonido.playClick();
+            ReproductorDeSonido.getInstance().playClick();
             update();
         });
         botonCancelar.setVisible(false);

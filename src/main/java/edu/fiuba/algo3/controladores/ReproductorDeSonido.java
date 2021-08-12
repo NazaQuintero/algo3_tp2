@@ -5,35 +5,53 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
 import java.io.File;
+import java.util.Objects;
 
 public class ReproductorDeSonido {
 
-    private static final String fAudioPrincipal = "src/main/resources/sounds/main.mp3";
-    private static final String fAudioClick = "src/main/resources/sounds/buttonClick.mp3";
-    private static final String fAudioAtaque = "src/main/resources/sounds/ataque.mp3";
-    private static final String fAudioCanje = "src/main/resources/sounds/canje.mp3";
-    private static final String fAudioError = "src/main/resources/sounds/error.mp3";
-    private static final String fAudioVictoria = "src/main/resources/sounds/victoria.mp3";
+    private final String fAudioPrincipal = "/sounds/main.mp3";
+    private final String fAudioClick = "/sounds/buttonClick.mp3";
+    private final String fAudioAtaque = "/sounds/ataque.mp3";
+    private final String fAudioCanje = "/sounds/canje.mp3";
+    private final String fAudioError = "/sounds/error.mp3";
+    private final String fAudioVictoria = "/sounds/victoria.mp3";
 
-    private static final MediaPlayer reproductorPrincipal = new MediaPlayer(new Media(new File(fAudioPrincipal).toURI().toString()));
-    private static final AudioClip reproductorClick = new AudioClip(new File(fAudioClick).toURI().toString());
-    private static final AudioClip reproductorAtaque = new AudioClip(new File(fAudioAtaque).toURI().toString());
-    private static final AudioClip reproductorCanje = new AudioClip(new File(fAudioCanje).toURI().toString());
-    private static final AudioClip reproductorError = new AudioClip(new File(fAudioError).toURI().toString());
-    private static final AudioClip reproductorVictoria = new AudioClip(new File(fAudioVictoria).toURI().toString());
+    private final MediaPlayer reproductorPrincipal;
+    private final AudioClip reproductorClick;
+    private final AudioClip reproductorAtaque;
+    private final AudioClip reproductorCanje;
+    private final AudioClip reproductorError;
+    private final AudioClip reproductorVictoria;
 
-    public static void playPrincipal(){
+    private static ReproductorDeSonido instance;
+
+    private ReproductorDeSonido() {
+        this.reproductorPrincipal = new MediaPlayer(new Media(Objects.requireNonNull(getClass().getResource(fAudioPrincipal)).toString()));
+        this.reproductorClick = new AudioClip(Objects.requireNonNull(getClass().getResource(fAudioClick)).toString());
+        this.reproductorAtaque = new AudioClip(Objects.requireNonNull(getClass().getResource(fAudioAtaque)).toString());
+        this.reproductorCanje = new AudioClip(Objects.requireNonNull(getClass().getResource(fAudioCanje)).toString());
+        this.reproductorError = new AudioClip(Objects.requireNonNull(getClass().getResource(fAudioError)).toString());
+        this.reproductorVictoria = new AudioClip(Objects.requireNonNull(getClass().getResource(fAudioVictoria)).toString());
+    }
+
+    public static ReproductorDeSonido getInstance() {
+        if(instance == null)
+            instance = new ReproductorDeSonido();
+        return instance;
+    }
+
+    public void playPrincipal(){
         reproductorPrincipal.setVolume(0.35);
         reproductorPrincipal.setCycleCount(MediaPlayer.INDEFINITE);
         reproductorPrincipal.play();
     }
 
-    public static void playClick(){
+    public void playClick(){
         reproductorClick.play();
     }
-    public static void playAtaque() { reproductorAtaque.play(); }
-    public static void playCanje() { reproductorCanje.play(); }
-    public static void playError() { reproductorError.play(); }
-    public static void playVictoria() { reproductorVictoria.play(); }
+    public void playAtaque() { reproductorAtaque.play(); }
+    public void playCanje() { reproductorCanje.play(); }
+    public void playError() { reproductorError.play(); }
+    public void playVictoria() { reproductorVictoria.play(); }
 
 }

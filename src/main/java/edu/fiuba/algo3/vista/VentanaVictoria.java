@@ -61,7 +61,7 @@ public class VentanaVictoria {
         exitButton.setText("Salir");
         exitButton.getStyleClass().add("exitButton");
         exitButton.setOnAction(e -> {
-            ReproductorDeSonido.playClick();
+            ReproductorDeSonido.getInstance().playClick();
             Platform.exit();
         });
 

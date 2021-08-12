@@ -28,20 +28,20 @@ public class CanjearTarjetasEventHandler implements EventHandler<MouseEvent> {
 
         if (tarjetas.size() != 3){
             ventanaTarjetas.mostrarError("Se deben seleccionar 3 tarjetas");
-            ReproductorDeSonido.playError();
+            ReproductorDeSonido.getInstance().playError();
             return;
         }
 
         try {
             jugador.canjearTarjetas(tarjetas);
-            ReproductorDeSonido.playCanje();
+            ReproductorDeSonido.getInstance().playCanje();
             ventanaTarjetas.update();
             ventanaTarjetas.mostrarMensajeValido("Tarjetas canjeadas correctamente!");
         }
         catch (JugadorNoTieneTodasLasTarjetasException ignored) {}
 
         catch (SinCanjeHabilitadoException e) {
-            ReproductorDeSonido.playError();
+            ReproductorDeSonido.getInstance().playError();
             ventanaTarjetas.mostrarError("El canje no es válido");
         }
     }

@@ -62,12 +62,12 @@ public class SeleccionCantidadJugadores extends BorderPane {
         startButton.getStyleClass().add("startButton");
         startButton.setOnAction(e -> {
             if (cantidad == 0) {
-                ReproductorDeSonido.playError();
+                ReproductorDeSonido.getInstance().playError();
                 if(!panel.getChildren().contains(labelError)) {
                     panel.getChildren().add(labelError);
                 }
             } else {
-                ReproductorDeSonido.playClick();
+                ReproductorDeSonido.getInstance().playClick();
                 this.creacionJugadores.setCantidadDeJugadores(cantidad);
                 Scene nuevaEscena = new Scene(this.creacionJugadores);
                 stage.setScene(nuevaEscena);
@@ -80,7 +80,7 @@ public class SeleccionCantidadJugadores extends BorderPane {
         Button exitButton = new Button("Salir");
         exitButton.getStyleClass().add("exitButton");
         exitButton.setOnAction(e -> {
-            ReproductorDeSonido.playClick();
+            ReproductorDeSonido.getInstance().playClick();
             Platform.exit();
         });
         return exitButton;
@@ -94,7 +94,7 @@ public class SeleccionCantidadJugadores extends BorderPane {
         comboBox.getStyleClass().add("comboBox");
 
         comboBox.setOnAction(e -> {
-            ReproductorDeSonido.playClick();
+            ReproductorDeSonido.getInstance().playClick();
             this.cantidad = comboBox.getSelectionModel().getSelectedIndex() + 2;
         });
 

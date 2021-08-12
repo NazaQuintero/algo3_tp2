@@ -51,8 +51,8 @@ public class AtaqueEventHandler implements EventHandler<Event>  {
                 mostrarAtaque();
                 ProcesadorResultado.obtenerInstancia().procesar(resultado);
 
-                if (atacante.dominadoPor() == defensor.dominadoPor()) ReproductorDeSonido.playVictoria();
-                else ReproductorDeSonido.playAtaque();
+                if (atacante.dominadoPor() == defensor.dominadoPor()) ReproductorDeSonido.getInstance().playVictoria();
+                else ReproductorDeSonido.getInstance().playAtaque();
 
                 campoDeJuego.setPaisSeleccionado(null);
                 campoDeJuego.mostrarPaisesDelJugadorActual();
@@ -61,7 +61,7 @@ public class AtaqueEventHandler implements EventHandler<Event>  {
             } catch (ElPaisNoEsLimitrofeException ignored) {}
 
             catch (NumberFormatException | CantidadDeEjercitosInValidaException e) {
-                ReproductorDeSonido.playClick();
+                ReproductorDeSonido.getInstance().playClick();
                 inputText.getStyleClass().add("invalid");
                 inputText.clear();
                 inputText.requestFocus();
