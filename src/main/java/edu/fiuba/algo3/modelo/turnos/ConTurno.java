@@ -18,7 +18,7 @@ public class ConTurno implements Turno {
     private Jugador actual;
     private Ronda ronda;
     private int cantidadDeTurnosJugados;
-    private ArrayList<Observer> observers = new ArrayList<>();
+    private final ArrayList<Observer> observers = new ArrayList<>();
 
     public ConTurno(Jugadores jugadores) {
         this.jugadores = jugadores;
@@ -35,7 +35,7 @@ public class ConTurno implements Turno {
         return this.actual;
     }
 
-    public void seleccionarPrimerJugador(int valor) throws JugadorNoExisteException{
+    public void seleccionarPrimerJugador(int valor) throws JugadorNoExisteException {
         this.jugadores.setPrimerJugador(valor);
         this.jugadores.obtenerJugador(valor).setTurno(this);
         this.cambiarJugadorActual();
@@ -56,7 +56,7 @@ public class ConTurno implements Turno {
         this.cantidadDeTurnosJugados++;
     }
 
-    public int obtenerCantidadDeTurnosJugados() {
+    public int getCantidadDeTurnosJugados() {
         return this.cantidadDeTurnosJugados;
     }
 
@@ -79,20 +79,20 @@ public class ConTurno implements Turno {
         this.notifyObservers();
     }
 
-    public Resultado atacarA(Pais atacante, Pais defensor, int cantidadEjercitos) throws NoEsRondaDeAtaqueException, EjercitosInsuficientesException, ElPaisNoEsLimitrofeException {
+    public Resultado atacarA(Pais atacante, Pais defensor, int cantidadEjercitos) throws NoEsRondaDeAtaqueException, CantidadDeEjercitosInValidaException, ElPaisNoEsLimitrofeException {
         return this.ronda.atacarA(atacante, defensor, cantidadEjercitos);
     }
 
-    public void reagrupar(Pais origen, Pais destino, int cantidad) throws NoEsRondaDeReagrupeException, ElPaisNoEsLimitrofeException, EjercitosInsuficientesException {
-        this.ronda.reagrupar(origen, destino, cantidad);
+    public void reagrupar(Pais origen, Pais destino, int cantidadEjercitos) throws NoEsRondaDeReagrupeException, ElPaisNoEsLimitrofeException, CantidadDeEjercitosInValidaException {
+        this.ronda.reagrupar(origen, destino, cantidadEjercitos);
     }
 
     public void colocarEjercitos(Pais unPais, int cantidadEjercitos) throws NoEsRondaDeColocacionException, NoQuedanMasEjercitosPorColocarException {
         this.ronda.colocarEjercitos(unPais, cantidadEjercitos);
     }
 
-    public void activarTarjeta(Tarjeta unaTarjeta) throws ActivacionTarjetaEnRondaEquivocadaException, LaTarjetaYaFueActivadaException {
-        this.ronda.activarTarjeta(unaTarjeta);
+    public void activarTarjeta(Tarjeta tarjeta) throws ActivacionTarjetaEnRondaEquivocadaException, LaTarjetaYaFueActivadaException {
+        this.ronda.activarTarjeta(tarjeta);
     }
 
     @Override

@@ -2,16 +2,12 @@ package edu.fiuba.algo3.modelo;
 
 import edu.fiuba.algo3.modelo.excepciones.*;
 import edu.fiuba.algo3.modelo.fichas.Ejercito;
-import edu.fiuba.algo3.modelo.paises.MultitonPaises;
 import edu.fiuba.algo3.modelo.paises.Pais;
 import edu.fiuba.algo3.modelo.rondas.Ataque;
 import edu.fiuba.algo3.modelo.tarjetas.Globo;
-import edu.fiuba.algo3.modelo.tarjetas.MultitonTarjetas;
 import edu.fiuba.algo3.modelo.tarjetas.Tarjeta;
 import javafx.scene.paint.Color;
 import org.junit.jupiter.api.Test;
-
-import javax.sound.midi.SysexMessage;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -19,12 +15,12 @@ public class ExcepcionesTest {
 
     @Test
     public void alTratarDeCargarContinentesLanzaExcepcionDeArchivoDeContinentesNoEncontrado(){
-        assertThrows(ArchivoDeContinentesNoEncontradoException.class, () -> CargarJuego.cargarContinentes("tita"));
+        assertThrows(ArchivoDeContinentesYPaisesNoEncontradoException.class, () -> CargarJuego.cargarContinentesYPaises("tita"));
     }
 
     @Test
     public void alTratarDeCargarPaisesLanzaExcepcionDeArchivoDePaisesNoEncontrado(){
-        assertThrows(ArchivoDePaisesNoEncontradoException.class, () -> CargarJuego.cargarPaisesLimitrofes("alfajor"));
+        assertThrows(ArchivoDePaisesLimitrofesNoEncontradoException.class, () -> CargarJuego.cargarPaisesLimitrofes("alfajor"));
     }
 
     @Test
@@ -39,7 +35,7 @@ public class ExcepcionesTest {
         Pais chl = new Pais("Chile");
         arg.limitaCon(chl);
         chl.limitaCon(arg);
-        assertThrows(EjercitosInsuficientesException.class, () -> ataque.atacarA(arg, chl, 3));
+        assertThrows(CantidadDeEjercitosInValidaException.class, () -> ataque.atacarA(arg, chl, 3));
     }
 
     @Test
@@ -47,12 +43,6 @@ public class ExcepcionesTest {
         Pais argentina = new Pais("Argentina");
         Pais mexico = new Pais("Mexico");
         assertThrows(ElPaisNoEsLimitrofeException.class, () -> argentina.reagrupar(mexico, 3));
-    }
-
-    @Test
-    public void alTratarDeObtenerUnJugadorPorNombreDeJugadoresSeLanzaJugadorNoExisteExceptionDeNoExistir() {
-        Jugadores jugadores = new Jugadores();
-        assertThrows(JugadorNoExisteException.class, () -> jugadores.obtenerJugador("Nestor"));
     }
 
     @Test
@@ -71,5 +61,6 @@ public class ExcepcionesTest {
         unPais.colocarEjercito(new Ejercito(new Jugador("Roque", Color.BLUE)));
         assertThrows(PaisOcupadoPorOtroJugadorException.class, () -> unJugador.colocarEjercitos(unPais, 3));
     }
+
 }
 

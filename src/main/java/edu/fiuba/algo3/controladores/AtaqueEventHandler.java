@@ -3,7 +3,7 @@ package edu.fiuba.algo3.controladores;
 import edu.fiuba.algo3.modelo.batallas_de_dados.Dados;
 import edu.fiuba.algo3.modelo.batallas_de_dados.ProcesadorResultado;
 import edu.fiuba.algo3.modelo.batallas_de_dados.Resultado;
-import edu.fiuba.algo3.modelo.excepciones.EjercitosInsuficientesException;
+import edu.fiuba.algo3.modelo.excepciones.CantidadDeEjercitosInValidaException;
 import edu.fiuba.algo3.modelo.excepciones.ElPaisNoEsLimitrofeException;
 import edu.fiuba.algo3.modelo.paises.Pais;
 import edu.fiuba.algo3.vista.CampoDeJuego;
@@ -24,12 +24,14 @@ import javafx.scene.layout.VBox;
 public class AtaqueEventHandler implements EventHandler<Event>  {
 
     private final CampoDeJuego campoDeJuego;
+    private final MenuLateralDerecho menuLateralDerecho;
     private final Pais atacante;
     private final Pais defensor;
     private final TextField inputText;
 
     public AtaqueEventHandler(CampoDeJuego campoDeJuego, Pais defensor, TextField inputText) {
         this.campoDeJuego = campoDeJuego;
+        this.menuLateralDerecho = (MenuLateralDerecho) campoDeJuego.getRight();
         this.atacante = campoDeJuego.getPaisSeleccionado();
         this.defensor = defensor;
         this.inputText = inputText;
@@ -37,24 +39,34 @@ public class AtaqueEventHandler implements EventHandler<Event>  {
 
     @Override
     public void handle(Event event) {
-        MenuLateralDerecho menuLateral = (MenuLateralDerecho) campoDeJuego.getRight();
+
         if (event.getEventType() == MouseEvent.MOUSE_CLICKED || ((KeyEvent) event).getCode() == KeyCode.ENTER) {
             try {
-                menuLateral.limpiarResultadoDeBatalla();
+                menuLateralDerecho.limpiarResultadoDeBatalla();
                 int cantidadDeEjercitos = Integer.parseInt(inputText.getText());
                 Resultado resultado = atacante.atacarA(defensor, cantidadDeEjercitos);
-                menuLateral.update();
+
+
+                menuLateralDerecho.update();
                 mostrarAtaque();
                 ProcesadorResultado.obtenerInstancia().procesar(resultado);
+
+                if (atacante.dominadoPor() == defensor.dominadoPor()) ReproductorDeSonido.playVictoria();
+                else ReproductorDeSonido.playAtaque();
+
                 campoDeJuego.setPaisSeleccionado(null);
                 campoDeJuego.mostrarPaisesDelJugadorActual();
                 campoDeJuego.actualizarObjetivoGeneral();
-            } catch (ElPaisNoEsLimitrofeException | NumberFormatException | EjercitosInsuficientesException e) {
+                campoDeJuego.checkearGanador();
+            } catch (ElPaisNoEsLimitrofeException ignored) {}
+
+            catch (NumberFormatException | CantidadDeEjercitosInValidaException e) {
+                ReproductorDeSonido.playClick();
                 inputText.getStyleClass().add("invalid");
                 inputText.clear();
                 inputText.requestFocus();
 
-                menuLateral.mostrarErrorAtaqueYReagrupe(atacante.cantidadEjercitos()-1);
+                menuLateralDerecho.mostrarErrorAtaqueYReagrupe(atacante.cantidadEjercitos()-1);
             }
         }
     }
@@ -74,7 +86,7 @@ public class AtaqueEventHandler implements EventHandler<Event>  {
         hBox2.setSpacing(20);
         VBox vBox = new VBox(hBox1, hBox2);
         vBox.setSpacing(20);
-        MenuLateralDerecho menuLateralDerecho = (MenuLateralDerecho) campoDeJuego.getRight();
+
         menuLateralDerecho.setResultadoDeAtaque(vBox);
 
         atacante.getEjercito().setDados(null);

@@ -24,7 +24,7 @@ public class Reagrupe implements Ronda {
         throw new NoEsRondaDeAtaqueException();
     }
 
-    public void reagrupar(Pais origen, Pais destino, int cantidad) throws ElPaisNoEsLimitrofeException, EjercitosInsuficientesException {
+    public void reagrupar(Pais origen, Pais destino, int cantidad) throws ElPaisNoEsLimitrofeException, CantidadDeEjercitosInValidaException {
        origen.reagrupar(destino, cantidad);
     }
 

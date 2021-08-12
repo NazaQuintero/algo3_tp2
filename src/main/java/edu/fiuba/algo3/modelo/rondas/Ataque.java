@@ -23,7 +23,7 @@ public class Ataque implements Ronda {
         unTurno.setRonda(new Reagrupe());
     }
 
-    public Resultado atacarA(Pais atacante, Pais defensor, int cantidadEjercitos) throws ElPaisNoEsLimitrofeException, EjercitosInsuficientesException {
+    public Resultado atacarA(Pais atacante, Pais defensor, int cantidadEjercitos) throws ElPaisNoEsLimitrofeException, CantidadDeEjercitosInValidaException {
         return atacante.atacarA(defensor, cantidadEjercitos);
     }
 

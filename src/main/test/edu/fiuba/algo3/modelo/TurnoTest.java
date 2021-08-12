@@ -96,7 +96,7 @@ public class TurnoTest {
         Jugadores jugadores = new Jugadores();
         jugadores.agregarJugador(new Jugador( "Martin", Color.RED));
         Turno turno = new ConTurno(jugadores);
-        assertEquals(0, turno.obtenerCantidadDeTurnosJugados());
+        assertEquals(0, turno.getCantidadDeTurnosJugados());
     }
 
     @Test
@@ -157,7 +157,7 @@ public class TurnoTest {
         turno.finalizarRonda(jugador2);
         turno.finalizarRonda(jugador3);
 
-        assertEquals(3, turno.obtenerCantidadDeTurnosJugados());
+        assertEquals(3, turno.getCantidadDeTurnosJugados());
     }
 
     @Test

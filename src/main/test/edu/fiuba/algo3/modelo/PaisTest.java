@@ -82,7 +82,7 @@ public class PaisTest {
 
         assertFalse(unPais.esLimitrofeCon(otroPais));
 
-        unPais.limitaCon(otroPais); // aca establecemos que son limitrofes
+        unPais.limitaCon(otroPais);
 
         assertTrue(unPais.esLimitrofeCon(otroPais));
 

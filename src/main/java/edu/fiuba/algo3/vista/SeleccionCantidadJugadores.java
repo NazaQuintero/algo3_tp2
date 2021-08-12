@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.vista;
 
+import edu.fiuba.algo3.controladores.ReproductorDeSonido;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -61,10 +62,12 @@ public class SeleccionCantidadJugadores extends BorderPane {
         startButton.getStyleClass().add("startButton");
         startButton.setOnAction(e -> {
             if (cantidad == 0) {
+                ReproductorDeSonido.playError();
                 if(!panel.getChildren().contains(labelError)) {
                     panel.getChildren().add(labelError);
                 }
             } else {
+                ReproductorDeSonido.playClick();
                 this.creacionJugadores.setCantidadDeJugadores(cantidad);
                 Scene nuevaEscena = new Scene(this.creacionJugadores);
                 stage.setScene(nuevaEscena);
@@ -76,7 +79,10 @@ public class SeleccionCantidadJugadores extends BorderPane {
     private Button createExitButton() {
         Button exitButton = new Button("Salir");
         exitButton.getStyleClass().add("exitButton");
-        exitButton.setOnAction(e -> Platform.exit());
+        exitButton.setOnAction(e -> {
+            ReproductorDeSonido.playClick();
+            Platform.exit();
+        });
         return exitButton;
     }
 
@@ -87,7 +93,10 @@ public class SeleccionCantidadJugadores extends BorderPane {
         ComboBox<String> comboBox = new ComboBox<>(options);
         comboBox.getStyleClass().add("comboBox");
 
-        comboBox.setOnAction(e -> this.cantidad = comboBox.getSelectionModel().getSelectedIndex() + 2);
+        comboBox.setOnAction(e -> {
+            ReproductorDeSonido.playClick();
+            this.cantidad = comboBox.getSelectionModel().getSelectedIndex() + 2;
+        });
 
         return comboBox;
     }

@@ -8,10 +8,10 @@ import java.util.Iterator;
 
 public class Jugadores implements Iterable<Jugador> {
 
-    private ArrayList<Jugador> jugadores = new ArrayList<>();
+    private final ArrayList<Jugador> jugadores = new ArrayList<>();
     private int tamanio;
     private int primerJugador;
-    Iterator<Jugador> it = this.iterator();
+    Iterator<Jugador> iterator = this.iterator();
 
     public Jugadores() {
         this.tamanio = 0;
@@ -31,13 +31,10 @@ public class Jugadores implements Iterable<Jugador> {
         if (indice >= jugadores.size()) throw new JugadorNoExisteException();
         return this.jugadores.get(indice);
     }
-    public Jugador obtenerJugador(String nombre) throws JugadorNoExisteException {
-        return (this.jugadores.stream().filter(jugador -> nombre.equals(jugador.getNombre())).findFirst().orElseThrow(JugadorNoExisteException::new));
-    }
 
     public void setPrimerJugador(int valor) {
         this.primerJugador = valor;
-        this.it = this.iterator();
+        this.iterator = this.iterator();
     }
 
     public Jugador getPrimerJugador() {
@@ -45,7 +42,7 @@ public class Jugadores implements Iterable<Jugador> {
     }
 
     public Jugador obtenerSiguiente() {
-        return this.it.next();
+        return this.iterator.next();
     }
 
     public void mezclar(){
@@ -70,8 +67,8 @@ public class Jugadores implements Iterable<Jugador> {
                 if(!hasNext()) indiceActual = 0;
                 return jugadores.get(indiceActual++);
             }
-
         };
+
     }
 
     public boolean algunoCumpleObjetivo() {

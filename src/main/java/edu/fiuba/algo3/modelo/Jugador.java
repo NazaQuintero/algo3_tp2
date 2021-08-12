@@ -17,8 +17,6 @@ import edu.fiuba.algo3.modelo.turnos.Turno;
 import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
 
 public class Jugador {
 
@@ -46,8 +44,50 @@ public class Jugador {
         return color;
     }
 
+    public void setTurno(Turno unTurno) {
+        this.turno = unTurno;
+    }
+
     public int cantidadPaisesDominados() {
         return paisesDominados.size();
+    }
+
+    public void agregarPais(Pais pais) {
+        if (!paisesDominados.contains(pais)) this.paisesDominados.add(pais);
+    }
+
+    public void quitarPais(Pais pais) {
+        this.paisesDominados.remove(pais);
+    }
+
+    public Resultado atacarA(Pais paisAtacante, Pais paisDefensor, int cantidadEjercitos) throws ElJugadorNoTieneTurnoException, NoEsRondaDeAtaqueException, CantidadDeEjercitosInValidaException, ElPaisNoEsLimitrofeException {
+        Resultado resultado = new ResultadoBatallaNulo();
+
+        if (this.puedeAtacar()) {
+            resultado = turno.atacarA(paisAtacante, paisDefensor, cantidadEjercitos);
+        } else {
+            turno.finalizarRonda(this);
+        }
+
+        return resultado;
+    }
+
+    private boolean puedeAtacar() {
+        return this.paisesDominados.stream().anyMatch(pais -> pais.cantidadEjercitos() > 1);
+    }
+
+    public void reagrupar(Pais origen, Pais destino, int cantidad) throws NoEsRondaDeReagrupeException, ElJugadorNoTieneTurnoException, ElPaisNoEsLimitrofeException, CantidadDeEjercitosInValidaException {
+        this.turno.reagrupar(origen, destino, cantidad);
+    }
+
+    public void recibirTarjeta(Tarjeta tarjeta){
+        tarjetas.add(tarjeta);
+    }
+
+    public void activarTarjeta(Tarjeta tarjeta) throws JugadorNoPoseePaisDeLaTarjetaException, ActivacionTarjetaEnRondaEquivocadaException, ElJugadorNoTieneTurnoException, LaTarjetaYaFueActivadaException, TarjetaNoEncontradaException {
+        if (!this.tarjetas.contains(tarjeta)) throw new TarjetaNoEncontradaException();
+        if (!this.paisesDominados.contains(tarjeta.obtenerPais())) throw new JugadorNoPoseePaisDeLaTarjetaException();
+        this.turno.activarTarjeta(tarjeta);
     }
 
     public void colocarEjercitos(Pais pais, int cantidadEjercitos) throws ElJugadorNoTieneTurnoException, NoEsRondaDeColocacionException, PaisOcupadoPorOtroJugadorException, NoQuedanMasEjercitosPorColocarException {
@@ -62,48 +102,8 @@ public class Jugador {
         else throw new PaisOcupadoPorOtroJugadorException();
     }
 
-    public void setTurno(Turno unTurno) {
-        this.turno = unTurno;
-    }
-
     public void finalizarRonda() throws ElJugadorNoTieneTurnoException{
         this.turno.finalizarRonda(this);
-    }
-
-    public Resultado atacarA(Pais paisAtacante, Pais paisDefensor, int cantidadEjercitos) throws ElJugadorNoTieneTurnoException, NoEsRondaDeAtaqueException, EjercitosInsuficientesException, ElPaisNoEsLimitrofeException {
-        Resultado resultado = new ResultadoBatallaNulo();
-        if (this.puedeAtacar()){
-            resultado = turno.atacarA(paisAtacante, paisDefensor, cantidadEjercitos);
-        } else {
-            turno.finalizarRonda(this);
-        }
-            return resultado;
-    }
-
-    private boolean puedeAtacar() {
-        return this.paisesDominados.stream().anyMatch(pais -> pais.cantidadEjercitos() > 1);
-    }
-
-    public void reagrupar(Pais origen, Pais destino, int cantidad) throws NoEsRondaDeReagrupeException, ElJugadorNoTieneTurnoException, ElPaisNoEsLimitrofeException, EjercitosInsuficientesException {
-        this.turno.reagrupar(origen, destino, cantidad);
-    }
-
-    public void agregarPais(Pais pais) {
-        if (!paisesDominados.contains(pais)) this.paisesDominados.add(pais);
-    }
-
-    public void quitarPais(Pais defensor) {
-        this.paisesDominados.remove(defensor);
-    }
-
-    public void recibirTarjeta(Tarjeta tarjeta){
-        tarjetas.add(tarjeta);
-    }
-
-    public void activarTarjeta(Tarjeta tarjeta) throws JugadorNoPoseePaisDeLaTarjetaException, ActivacionTarjetaEnRondaEquivocadaException, ElJugadorNoTieneTurnoException, LaTarjetaYaFueActivadaException, TarjetaNoEncontradaException {
-        if (!this.tarjetas.contains(tarjeta)) throw new TarjetaNoEncontradaException();
-        if (!this.paisesDominados.contains(tarjeta.obtenerPais())) throw new JugadorNoPoseePaisDeLaTarjetaException();
-        this.turno.activarTarjeta(tarjeta);
     }
 
     public void asignarObjetivo(Objetivo unObjetivo) {
@@ -122,25 +122,28 @@ public class Jugador {
     }
 
     public boolean poseeLimitrofes(int cantLimitrofes) {
-        return paisesDominados.stream().anyMatch(pais -> (int) pais.getPaisesLimitrofes().stream().filter(pais1 -> pais1.dominadoPor() == this).count() >= cantLimitrofes-1);
+        return paisesDominados.stream().anyMatch(pais -> (int) pais.getPaisesLimitrofes().stream().
+                filter(pais1 -> pais1.dominadoPor() == this).count() >= cantLimitrofes-1);
     }
 
-    public void canjearTarjetas(ArrayList<Tarjeta> tarjetas) throws JugadorSinTarjetasException, SinCanjeHabilitadoException {
-        if (!this.tarjetas.containsAll(tarjetas)) throw new JugadorSinTarjetasException();
+    public void canjearTarjetas(ArrayList<Tarjeta> tarjetas) throws JugadorNoTieneTodasLasTarjetasException, SinCanjeHabilitadoException {
+        if (!this.tarjetas.containsAll(tarjetas)) throw new JugadorNoTieneTodasLasTarjetasException();
         canje = canje.habilitarCanje(tarjetas);
         devolverTarjetas(tarjetas);
     }
 
     public void devolverTarjetas(ArrayList<Tarjeta> tarjetasADevolver) {
-        for (Tarjeta tarjeta : tarjetasADevolver) {
-            try{ tarjeta.desactivar(); }
-            catch (Exception ignored){ }
+
+        tarjetasADevolver.forEach(tarjeta -> {
+            try {
+                tarjeta.desactivar();
+            } catch (LaTarjetaYaEstaDesactivadaException ignored) {}
             MultitonTarjetas.agregarTarjeta(tarjeta);
             tarjetas.remove(tarjeta);
-        }
+        });
     }
 
-    public Canje obtenerCanjeActual() {
+    public Canje getCanjeActual() {
         return canje;
     }
 
@@ -160,7 +163,8 @@ public class Jugador {
         return conquistoPais;
     }
 
-    public ArrayList<Objetivo> obtenerObjetivos() {  return this.objetivos;
+    public ArrayList<Objetivo> obtenerObjetivos() {
+        return this.objetivos;
     }
 
 }

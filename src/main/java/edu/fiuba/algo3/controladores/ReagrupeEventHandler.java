@@ -1,6 +1,6 @@
 package edu.fiuba.algo3.controladores;
 
-import edu.fiuba.algo3.modelo.excepciones.EjercitosInsuficientesException;
+import edu.fiuba.algo3.modelo.excepciones.CantidadDeEjercitosInValidaException;
 import edu.fiuba.algo3.modelo.excepciones.ElPaisNoEsLimitrofeException;
 import edu.fiuba.algo3.modelo.paises.Pais;
 import edu.fiuba.algo3.vista.CampoDeJuego;
@@ -32,12 +32,14 @@ public class ReagrupeEventHandler implements EventHandler<Event> {
             int cantidadDeEjercitos = Integer.parseInt(inputText.getText());
             try {
                 this.desde.reagrupar(hasta, cantidadDeEjercitos);
+                ReproductorDeSonido.playClick();
                 campoDeJuego.setPaisSeleccionado(null);
                 campoDeJuego.mostrarPaisesDelJugadorActual();
                 menuLateralDerecho.update();
 
-            } catch (ElPaisNoEsLimitrofeException | EjercitosInsuficientesException e) {
-               menuLateralDerecho.mostrarErrorAtaqueYReagrupe(desde.cantidadEjercitos()-1);
+            } catch (ElPaisNoEsLimitrofeException | CantidadDeEjercitosInValidaException e) {
+                ReproductorDeSonido.playError();
+                menuLateralDerecho.mostrarErrorAtaqueYReagrupe(desde.cantidadEjercitos()-1);
             }
         }
     }

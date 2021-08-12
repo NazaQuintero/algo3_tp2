@@ -39,6 +39,11 @@
     -fx-max-width: 500px;
 }
 
+.labelGanador{
+    -fx-font-size: 32px;
+    -fx-font-weight: bold;
+    -fx-background-color: #fbee73;
+}
 .errorTarjetas{
     -fx-max-width: 500px;
     -fx-font-size: 18px;

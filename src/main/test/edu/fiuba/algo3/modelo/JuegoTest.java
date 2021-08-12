@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class JuegoTest {
 
     @Test
-    public void elJuegoNoComienzaSinUnMinimoDe2Jugadores() throws ArchivoDeTarjetasNoEncontradoException, ArchivoDePaisesNoEncontradoException, ArchivoDeContinentesNoEncontradoException {
+    public void elJuegoNoComienzaSinUnMinimoDe2Jugadores() throws ArchivoDeTarjetasNoEncontradoException, ArchivoDePaisesLimitrofesNoEncontradoException, ArchivoDeContinentesYPaisesNoEncontradoException {
 
         Juego juego = new Juego();
         Jugador jugador = new Jugador("Juani", Color.AQUA);
@@ -27,7 +27,7 @@ public class JuegoTest {
     }
 
     @Test
-    public void seRepartenEquitativamente25PaisesEntreDosJugadores() throws CantidadDeJugadoresInsuficienteException, ArchivoDeTarjetasNoEncontradoException, ArchivoDePaisesNoEncontradoException, ArchivoDeContinentesNoEncontradoException {
+    public void seRepartenEquitativamente25PaisesEntreDosJugadores() throws CantidadDeJugadoresInsuficienteException, ArchivoDeTarjetasNoEncontradoException, ArchivoDePaisesLimitrofesNoEncontradoException, ArchivoDeContinentesYPaisesNoEncontradoException {
         Juego juego = new Juego();
         Jugador jugador1 = new Jugador("Martin", Color.BLUE);
         Jugador jugador2 = new Jugador("Juani", Color.RED);
@@ -41,7 +41,7 @@ public class JuegoTest {
     }
 
     @Test
-    public void canjeFunciona() throws ArchivoDeTarjetasNoEncontradoException, ArchivoDePaisesNoEncontradoException, JugadorSinTarjetasException, SinCanjeHabilitadoException, ArchivoDeContinentesNoEncontradoException, CantidadDeJugadoresInsuficienteException {
+    public void canjeFunciona() throws ArchivoDeTarjetasNoEncontradoException, ArchivoDePaisesLimitrofesNoEncontradoException, JugadorNoTieneTodasLasTarjetasException, SinCanjeHabilitadoException, ArchivoDeContinentesYPaisesNoEncontradoException, CantidadDeJugadoresInsuficienteException {
         Juego juego = new Juego();
         Pais arg = MultitonPaises.obtenerInstanciaDe("Argentina");
         Pais bra = MultitonPaises.obtenerInstanciaDe("Brasil");
@@ -81,7 +81,7 @@ public class JuegoTest {
         paisesTarjetas.add(tChl);
         jugadorQueLeToca.canjearTarjetas(paisesTarjetas);
 
-        assertEquals(4, jugadorQueLeToca.obtenerCanjeActual().cantidadEjercitos());
+        assertEquals(4, jugadorQueLeToca.getCanjeActual().cantidadEjercitos());
     }
 
 }

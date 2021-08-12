@@ -1,22 +1,26 @@
 package edu.fiuba.algo3.vista;
 
+import edu.fiuba.algo3.controladores.ReproductorDeSonido;
 import javafx.application.Platform;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class MenuInicial extends VBox {
 
-    private Stage stage;
+    private final Stage stage;
     private static final int ANCHO = 800;
     private static final int ALTO = 550;
 
     public MenuInicial(Stage stage) {
         this.stage = stage;
+        this.stage.getIcons().add(new Image("icono.png"));
+
         this.setAlignment(Pos.CENTER);
         this.setSpacing(20);
         stage.centerOnScreen();
@@ -43,7 +47,10 @@ public class MenuInicial extends VBox {
         Button exitButton = new Button();
         exitButton.setText("Salir");
         exitButton.getStyleClass().add("exitButton");
-        exitButton.setOnAction(e -> Platform.exit());
+        exitButton.setOnAction(e -> {
+            ReproductorDeSonido.playClick();
+            Platform.exit();
+        });
         return exitButton;
     }
 
@@ -52,6 +59,7 @@ public class MenuInicial extends VBox {
         startButton.setText("Jugar");
         startButton.getStyleClass().add("startButton");
         startButton.setOnAction(e -> {
+            ReproductorDeSonido.playClick();
             Scene nuevaEscena = new Scene(new SeleccionCantidadJugadores(stage), ANCHO, ALTO);
             stage.setScene(nuevaEscena);
         });

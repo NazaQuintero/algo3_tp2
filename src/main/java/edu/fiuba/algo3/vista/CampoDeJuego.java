@@ -7,7 +7,6 @@ import edu.fiuba.algo3.modelo.turnos.Turno;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
@@ -22,21 +21,20 @@ public class CampoDeJuego extends BorderPane {
     private final Juego juego;
     private final ArrayList<VistaPais> vistasPaises = new ArrayList<>();
     private final MenuLateralDerecho menuLateralDerecho;
-    private final VentanaTarjetas ventanaTarjetas;
     private Pais paisSeleccionado;
+    private VentanaVictoria ventanaVictoria;
 
     public CampoDeJuego(Stage stage, Juego juego) {
         this.juego = juego;
         this.menuLateralDerecho = new MenuLateralDerecho(this, juego);
-        this.ventanaTarjetas = new VentanaTarjetas(juego);
         this.getStylesheets().add("styles.css");
 
-        crearBotonTarjetas();
         crearTablero();
         this.setRight(this.menuLateralDerecho);
 
         this.mostrarPaisesDelJugadorActual();
         this.mostrarMenuLateralDerecho();
+        this.ventanaVictoria = new VentanaVictoria();
 
         stage.setScene(new Scene(this, 1500, 900));
         stage.centerOnScreen();
@@ -60,14 +58,6 @@ public class CampoDeJuego extends BorderPane {
 
         this.setCenter(aVbox);
     }
-
-    private void crearBotonTarjetas() {
-        Button botonTarjetas = new Button("Ver tarjetas");
-        botonTarjetas.setOnAction(e -> ventanaTarjetas.mostrarTarjetas());
-
-        this.setTop(botonTarjetas);
-    }
-
 
     private ImageView crearVistaImagen() {
         Image imagen = new Image("tablero.png");
@@ -132,5 +122,12 @@ public class CampoDeJuego extends BorderPane {
 
     public void actualizarObjetivoGeneral() {
         menuLateralDerecho.actualizarLabelObjetivoGeneral();
+    }
+
+    public void checkearGanador() {
+        if (this.juego.estaTerminado()) {
+            ventanaVictoria.setGanador(this.getTurno().obtenerJugadorTurnoActual());
+            ventanaVictoria.mostrar();
+        }
     }
 }

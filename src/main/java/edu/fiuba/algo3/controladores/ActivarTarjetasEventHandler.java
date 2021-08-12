@@ -27,26 +27,34 @@ public class ActivarTarjetasEventHandler implements EventHandler<MouseEvent> {
     }
 
     void activarTarjetas(ArrayList<Tarjeta> tarjetas) {
+        // Usado para no repetir el reproducir sonido en todos los catchs
+        boolean error = true;
+
         if (tarjetas.size() == 0) ventanaTarjetas.mostrarError("Se debe seleccionar al menos una tarjeta");
+
 
         for (Tarjeta tarjeta: tarjetas) {
             try {
                 jugador.activarTarjeta(tarjeta);
                 ventanaTarjetas.update();
                 ventanaTarjetas.mostrarMensajeValido(crearMensajeExito(tarjetas));
-            }
+                error = false;
+            } catch (ElJugadorNoTieneTurnoException | TarjetaNoEncontradaException ignored) {}
+
             catch (LaTarjetaYaFueActivadaException e) {
                 ventanaTarjetas.mostrarError("La tarjeta de " + tarjeta.obtenerPais().getNombre() +" ya fue activada");
             }
-            catch (ElJugadorNoTieneTurnoException | TarjetaNoEncontradaException ignored) {
-
-            } catch (ActivacionTarjetaEnRondaEquivocadaException e) {
+            catch (ActivacionTarjetaEnRondaEquivocadaException e) {
                 ventanaTarjetas.mostrarError("No se pueden activar tarjetas en ronda de ataque");
-            } catch (JugadorNoPoseePaisDeLaTarjetaException e) {
+            }
+            catch (JugadorNoPoseePaisDeLaTarjetaException e) {
                 ventanaTarjetas.mostrarError("El jugador no posee el pais " + tarjeta.obtenerPais().getNombre());
             }
+
             ventanaTarjetas.deseleccionarVistaTarjeta(tarjeta);
         }
+        if (error) ReproductorDeSonido.playError();
+        else ReproductorDeSonido.playClick();
     }
 
     private String crearMensajeExito(ArrayList<Tarjeta> tarjetas){

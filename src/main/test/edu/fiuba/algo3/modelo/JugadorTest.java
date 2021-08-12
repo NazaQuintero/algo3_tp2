@@ -97,7 +97,7 @@ public class JugadorTest {
     }
 
     @Test
-    public void unJugadorQueNoRealizoCanjesRecibeUnPrimerCanjeAlSolicitarUnoYPuedeColocar4EjercitosExtra() throws LaTarjetaYaFueActivadaException, JugadorSinTarjetasException, SinCanjeHabilitadoException {
+    public void unJugadorQueNoRealizoCanjesRecibeUnPrimerCanjeAlSolicitarUnoYPuedeColocar4EjercitosExtra() throws LaTarjetaYaFueActivadaException, JugadorNoTieneTodasLasTarjetasException, SinCanjeHabilitadoException {
         Jugador jugador = new Jugador( "Martin", Color.RED);
 
         Pais arg = new Pais("Argentina");
@@ -122,11 +122,11 @@ public class JugadorTest {
         tarjetas.add(tCol);
 
         jugador.canjearTarjetas(tarjetas);
-        assertEquals(4, jugador.obtenerCanjeActual().cantidadEjercitos());
+        assertEquals(4, jugador.getCanjeActual().cantidadEjercitos());
     }
 
     @Test
-    public void unJugadorQueRealizoUnCanjeRecibeUnSegundoCanjeAlSolicitarOtroYPuedeColocar7EjercitosExtra() throws LaTarjetaYaFueActivadaException, JugadorSinTarjetasException, SinCanjeHabilitadoException {
+    public void unJugadorQueRealizoUnCanjeRecibeUnSegundoCanjeAlSolicitarOtroYPuedeColocar7EjercitosExtra() throws LaTarjetaYaFueActivadaException, JugadorNoTieneTodasLasTarjetasException, SinCanjeHabilitadoException {
         Jugador jugador = new Jugador( "Martin", Color.RED);
 
         Pais arg = new Pais("Argentina");
@@ -176,7 +176,7 @@ public class JugadorTest {
 
         jugador.canjearTarjetas(tarjetas);
 
-        assertEquals(7, jugador.obtenerCanjeActual().cantidadEjercitos());
+        assertEquals(7, jugador.getCanjeActual().cantidadEjercitos());
 
     }
 
