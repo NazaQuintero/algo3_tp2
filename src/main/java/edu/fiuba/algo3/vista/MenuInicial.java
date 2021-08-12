@@ -13,7 +13,7 @@ import javafx.stage.Stage;
 
 public class MenuInicial extends VBox {
 
-    private Stage stage;
+    private final Stage stage;
     private static final int ANCHO = 800;
     private static final int ALTO = 550;
 

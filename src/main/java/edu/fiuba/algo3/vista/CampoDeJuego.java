@@ -125,11 +125,9 @@ public class CampoDeJuego extends BorderPane {
     }
 
     public void checkearGanador() {
-//        if (this.juego.estaTerminado()) {
-        if(true) {
+        if (this.juego.estaTerminado()) {
             ventanaVictoria.setGanador(this.getTurno().obtenerJugadorTurnoActual());
             ventanaVictoria.mostrar();
-
         }
     }
 }

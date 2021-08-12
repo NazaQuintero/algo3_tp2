@@ -13,9 +13,10 @@ public class VistaDados extends VBox {
     }
 
     private ImageView vistaDado(Dado dado) {
-        Image imagenDado = new Image("dado" + dado.obtenerValor() + ".PNG");
+        Image imagenDado = new Image("dado" + dado.obtenerValor() + ".png");
         ImageView imageView = new ImageView(imagenDado);
         imageView.setPreserveRatio(true);
         return imageView;
     }
+
 }

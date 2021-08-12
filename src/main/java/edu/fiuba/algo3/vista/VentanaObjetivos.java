@@ -3,7 +3,6 @@ package edu.fiuba.algo3.vista;
 import edu.fiuba.algo3.modelo.Juego;
 import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.objetivos.Objetivo;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.ContentDisplay;
