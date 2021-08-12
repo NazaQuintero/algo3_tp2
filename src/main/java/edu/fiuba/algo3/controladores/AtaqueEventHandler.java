@@ -57,6 +57,7 @@ public class AtaqueEventHandler implements EventHandler<Event>  {
                 campoDeJuego.setPaisSeleccionado(null);
                 campoDeJuego.mostrarPaisesDelJugadorActual();
                 campoDeJuego.actualizarObjetivoGeneral();
+                campoDeJuego.checkearGanador();
             } catch (ElPaisNoEsLimitrofeException ignored) {}
 
             catch (NumberFormatException | CantidadDeEjercitosInValidaException e) {

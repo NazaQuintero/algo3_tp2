@@ -5,15 +5,21 @@ import edu.fiuba.algo3.modelo.Juego;
 import edu.fiuba.algo3.modelo.paises.MultitonPaises;
 import edu.fiuba.algo3.modelo.paises.Pais;
 import edu.fiuba.algo3.modelo.turnos.Turno;
+import javafx.animation.Animation;
+import javafx.animation.ScaleTransition;
+import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.scene.layout.BorderPane;
+import javafx.util.Duration;
 
 import java.util.ArrayList;
 
@@ -122,5 +128,57 @@ public class CampoDeJuego extends BorderPane {
 
     public void actualizarObjetivoGeneral() {
         menuLateralDerecho.actualizarLabelObjetivoGeneral();
+    }
+
+    public void checkearGanador() {
+        if (this.juego.estaTerminado()) {
+//        if (true) {
+            Stage ventanaDeLaVictoria = new Stage();
+            ventanaDeLaVictoria.initModality(Modality.APPLICATION_MODAL);
+            ventanaDeLaVictoria.setTitle("Juego Finalizado");
+            ventanaDeLaVictoria.setMinWidth(200);
+
+            VBox vBox = new VBox();
+            vBox.getStylesheets().add("styles.css");
+
+
+            Label labelGanador = new Label();
+            labelGanador.getStyleClass().add("labelGanador");
+
+            labelGanador.setPadding(new Insets(10,0,0,0));
+
+
+            Image img = new Image("winner.png");
+            ImageView view = new ImageView(img);
+
+            ScaleTransition anim = new ScaleTransition();
+            anim.setDuration(Duration.seconds(2));
+            anim.setNode(view);
+            anim.setByX(1.5);
+            anim.setByY(1.5);
+            anim.setCycleCount(Animation.INDEFINITE);
+            anim.setAutoReverse(true);
+            anim.play();
+
+            view.setPreserveRatio(true);
+            view.setFitWidth(ventanaDeLaVictoria.getWidth());
+            view.setFitHeight(ventanaDeLaVictoria.getHeight());
+            labelGanador.setText(this.getTurno().obtenerJugadorTurnoActual().getNombre() + " ha ganado!!!");;
+            vBox.setAlignment(Pos.CENTER);
+            vBox.setSpacing(30);
+
+            Button exitButton = new Button();
+            exitButton.setText("Salir");
+            exitButton.getStyleClass().add("exitButton");
+            exitButton.setOnAction(e -> {
+                ReproductorDeSonido.playClick();
+                Platform.exit();
+            });
+
+            vBox.getChildren().addAll(view, labelGanador, exitButton);
+            Scene scene = new Scene(vBox, 800, 800);
+            ventanaDeLaVictoria.setScene(scene);
+            ventanaDeLaVictoria.show();
+        }
     }
 }
