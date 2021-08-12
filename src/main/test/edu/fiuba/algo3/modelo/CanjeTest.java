@@ -3,7 +3,7 @@ package edu.fiuba.algo3.modelo;
 import edu.fiuba.algo3.modelo.canjes.Canje;
 import edu.fiuba.algo3.modelo.canjes.CanjeNulo;
 import edu.fiuba.algo3.modelo.canjes.NesimoCanje;
-import edu.fiuba.algo3.modelo.excepciones.JugadorSinTarjetasException;
+import edu.fiuba.algo3.modelo.excepciones.JugadorNoTieneTodasLasTarjetasException;
 import edu.fiuba.algo3.modelo.paises.Pais;
 import edu.fiuba.algo3.modelo.tarjetas.Globo;
 import edu.fiuba.algo3.modelo.tarjetas.Tarjeta;
@@ -23,7 +23,7 @@ public class CanjeTest {
         Tarjeta tarjeta = new Tarjeta(new Pais("Japon"), new Globo());
         ArrayList<Tarjeta> tarjetas = new ArrayList<>();
         tarjetas.add(tarjeta);
-        assertThrows(JugadorSinTarjetasException.class, () -> jugador.canjearTarjetas(tarjetas));
+        assertThrows(JugadorNoTieneTodasLasTarjetasException.class, () -> jugador.canjearTarjetas(tarjetas));
     }
 
     @Test

@@ -41,7 +41,7 @@ public class JuegoTest {
     }
 
     @Test
-    public void canjeFunciona() throws ArchivoDeTarjetasNoEncontradoException, ArchivoDePaisesLimitrofesNoEncontradoException, JugadorSinTarjetasException, SinCanjeHabilitadoException, ArchivoDeContinentesYPaisesNoEncontradoException, CantidadDeJugadoresInsuficienteException {
+    public void canjeFunciona() throws ArchivoDeTarjetasNoEncontradoException, ArchivoDePaisesLimitrofesNoEncontradoException, JugadorNoTieneTodasLasTarjetasException, SinCanjeHabilitadoException, ArchivoDeContinentesYPaisesNoEncontradoException, CantidadDeJugadoresInsuficienteException {
         Juego juego = new Juego();
         Pais arg = MultitonPaises.obtenerInstanciaDe("Argentina");
         Pais bra = MultitonPaises.obtenerInstanciaDe("Brasil");

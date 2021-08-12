@@ -126,8 +126,8 @@ public class Jugador {
                 filter(pais1 -> pais1.dominadoPor() == this).count() >= cantLimitrofes-1);
     }
 
-    public void canjearTarjetas(ArrayList<Tarjeta> tarjetas) throws JugadorSinTarjetasException, SinCanjeHabilitadoException {
-        if (!this.tarjetas.containsAll(tarjetas)) throw new JugadorSinTarjetasException();
+    public void canjearTarjetas(ArrayList<Tarjeta> tarjetas) throws JugadorNoTieneTodasLasTarjetasException, SinCanjeHabilitadoException {
+        if (!this.tarjetas.containsAll(tarjetas)) throw new JugadorNoTieneTodasLasTarjetasException();
         canje = canje.habilitarCanje(tarjetas);
         devolverTarjetas(tarjetas);
     }
@@ -163,7 +163,8 @@ public class Jugador {
         return conquistoPais;
     }
 
-    public ArrayList<Objetivo> obtenerObjetivos() {  return this.objetivos;
+    public ArrayList<Objetivo> obtenerObjetivos() {
+        return this.objetivos;
     }
 
 }

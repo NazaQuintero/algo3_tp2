@@ -97,7 +97,7 @@ public class JugadorTest {
     }
 
     @Test
-    public void unJugadorQueNoRealizoCanjesRecibeUnPrimerCanjeAlSolicitarUnoYPuedeColocar4EjercitosExtra() throws LaTarjetaYaFueActivadaException, JugadorSinTarjetasException, SinCanjeHabilitadoException {
+    public void unJugadorQueNoRealizoCanjesRecibeUnPrimerCanjeAlSolicitarUnoYPuedeColocar4EjercitosExtra() throws LaTarjetaYaFueActivadaException, JugadorNoTieneTodasLasTarjetasException, SinCanjeHabilitadoException {
         Jugador jugador = new Jugador( "Martin", Color.RED);
 
         Pais arg = new Pais("Argentina");
@@ -126,7 +126,7 @@ public class JugadorTest {
     }
 
     @Test
-    public void unJugadorQueRealizoUnCanjeRecibeUnSegundoCanjeAlSolicitarOtroYPuedeColocar7EjercitosExtra() throws LaTarjetaYaFueActivadaException, JugadorSinTarjetasException, SinCanjeHabilitadoException {
+    public void unJugadorQueRealizoUnCanjeRecibeUnSegundoCanjeAlSolicitarOtroYPuedeColocar7EjercitosExtra() throws LaTarjetaYaFueActivadaException, JugadorNoTieneTodasLasTarjetasException, SinCanjeHabilitadoException {
         Jugador jugador = new Jugador( "Martin", Color.RED);
 
         Pais arg = new Pais("Argentina");

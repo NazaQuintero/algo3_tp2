@@ -2,7 +2,6 @@ package edu.fiuba.algo3.controladores;
 
 import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.excepciones.*;
-import edu.fiuba.algo3.modelo.paises.Pais;
 import edu.fiuba.algo3.modelo.tarjetas.Tarjeta;
 import edu.fiuba.algo3.vista.VentanaTarjetas;
 import javafx.event.EventHandler;
@@ -36,12 +35,9 @@ public class CanjearTarjetasEventHandler implements EventHandler<MouseEvent> {
             ventanaTarjetas.update();
             ventanaTarjetas.mostrarMensajeValido("Tarjetas canjeadas correctamente!");
         }
-        catch (JugadorSinTarjetasException e) {
-            // Nunca deberia pasar
-            ventanaTarjetas.mostrarError("El jugador no posee las tarjetas");
-        }
+        catch (JugadorNoTieneTodasLasTarjetasException ignored) {}
+
         catch (SinCanjeHabilitadoException e) {
-            // Canje no valido (los simbolos no corresponden)
             ventanaTarjetas.mostrarError("El canje no es válido");
         }
     }
