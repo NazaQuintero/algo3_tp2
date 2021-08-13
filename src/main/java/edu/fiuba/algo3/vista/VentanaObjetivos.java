@@ -19,7 +19,6 @@ public class VentanaObjetivos {
     private final Juego juego;
     private ArrayList<VistaObjetivo> vistasObjetivos = new ArrayList<>();
 
-
     public VentanaObjetivos(Juego juego) {
         this.juego = juego;
         crearVistasObjetivos();
@@ -32,8 +31,6 @@ public class VentanaObjetivos {
         ventanaObjetivos.getIcons().add(new Image("icono.png"));
         ventanaObjetivos.initModality(Modality.APPLICATION_MODAL);
         ventanaObjetivos.setTitle("Objetivo Secreto");
-
-        // todo: hacer una clase madre Ventana o interface en su defecto
 
         HBox layoutObjetivos = new HBox();
         layoutObjetivos.setSpacing(50);
@@ -52,11 +49,15 @@ public class VentanaObjetivos {
         Scene scene = new Scene(layoutObjetivos, 600, 200);
         ventanaObjetivos.setScene(scene);
         ventanaObjetivos.show();
+
     }
 
     public void crearVistasObjetivos() {
         vistasObjetivos = new ArrayList<>();
         Jugador unJugador = this.juego.getTurno().obtenerJugadorTurnoActual();
-        for (Objetivo o : unJugador.obtenerObjetivos()) vistasObjetivos.add(new VistaObjetivo(o));
+
+        unJugador.obtenerObjetivos().forEach(objetivo -> vistasObjetivos.add(new VistaObjetivo(objetivo)));
+
     }
+
 }

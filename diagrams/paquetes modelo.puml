@@ -1,0 +1,25 @@
+@startuml
+
+allowmixing
+
+package modelo {
+    package batallas_de_dados
+    package canjes
+    package continentes
+    package excepciones
+    package fichas
+    package objetivos
+    package observables
+    package paises
+    package roles
+    package rondas
+    package tarjetas
+    package turnos
+    package victorias
+    class CargarJuego
+    class Juego
+    class Jugador
+    class Jugadores
+}
+
+@enduml

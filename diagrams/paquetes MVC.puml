@@ -1,0 +1,13 @@
+@startuml
+
+package edu.fiuba.algo3 {
+    package modelo
+    package vista
+    package controladores
+}
+
+vista <.left.> controladores
+vista .up.> modelo
+controladores .up.> modelo
+
+@enduml
