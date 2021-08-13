@@ -1,11 +1,13 @@
 package edu.fiuba.algo3.modelo;
 
+import edu.fiuba.algo3.modelo.excepciones.JugadorNoExisteException;
 import javafx.scene.paint.Color;
 import org.junit.jupiter.api.Test;
 
 import java.util.Iterator;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class JugadoresTest {
 

@@ -9,7 +9,7 @@ public class Defensor implements Rol {
         this.cantidadEjercitos = cantidadEjercitos;
     }
 
-    public Dados tirarDados(Pais pais) {
+    public Dados tirarDados() {
         return new Dados(Math.min(cantidadEjercitos, 3));
     }
 

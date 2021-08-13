@@ -10,10 +10,6 @@ public class MultitonPaises {
 
     private MultitonPaises() {}
 
-    public static void reiniciar() {
-        _paises = new HashMap<>();
-    }
-
     public static Pais obtenerInstanciaDe(String nombreDePais) {
         return _paises.get(nombreDePais);
     }

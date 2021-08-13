@@ -1,10 +1,9 @@
 package edu.fiuba.algo3.modelo;
 
-import edu.fiuba.algo3.modelo.canjes.Canje;
-import edu.fiuba.algo3.modelo.canjes.CanjeNulo;
-import edu.fiuba.algo3.modelo.canjes.NesimoCanje;
+import edu.fiuba.algo3.modelo.canjes.*;
 import edu.fiuba.algo3.modelo.excepciones.JugadorNoTieneTodasLasTarjetasException;
 import edu.fiuba.algo3.modelo.paises.Pais;
+import edu.fiuba.algo3.modelo.tarjetas.Canion;
 import edu.fiuba.algo3.modelo.tarjetas.Globo;
 import edu.fiuba.algo3.modelo.tarjetas.Tarjeta;
 import javafx.scene.paint.Color;
@@ -12,8 +11,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 
 public class CanjeTest {
@@ -86,6 +84,23 @@ public class CanjeTest {
         unCanje = unCanje.siguienteCanje(); // hacemos el sexto canje
 
         assertEquals(25, unCanje.cantidadEjercitos()); // el sexto canje da 25 ejercitos
+    }
+
+    @Test
+    public void tarjetasInvalidasDaSinCanje(){
+        Pais pais = new Pais("Argentina");
+        Tarjeta t1 = new Tarjeta(pais, new Globo());
+        Tarjeta t2 = new Tarjeta(pais, new Canion());
+        Tarjeta t3 = new Tarjeta(pais, new Globo());
+
+        ArrayList<Tarjeta> taretas = new ArrayList<>();
+        taretas.add(t1);
+        taretas.add(t2);
+        taretas.add(t3);
+
+        CanjeHabilitado canje = new CanjeHabilitado();
+        TipoCanje tipoCanje = canje.compararTarjetas(taretas);
+        assertTrue(tipoCanje instanceof SinCanje);
     }
 
 

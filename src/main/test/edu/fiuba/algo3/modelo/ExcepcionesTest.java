@@ -4,10 +4,14 @@ import edu.fiuba.algo3.modelo.excepciones.*;
 import edu.fiuba.algo3.modelo.fichas.Ejercito;
 import edu.fiuba.algo3.modelo.paises.Pais;
 import edu.fiuba.algo3.modelo.rondas.Ataque;
+import edu.fiuba.algo3.modelo.rondas.Colocacion;
 import edu.fiuba.algo3.modelo.tarjetas.Globo;
 import edu.fiuba.algo3.modelo.tarjetas.Tarjeta;
 import javafx.scene.paint.Color;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.function.Executable;
+import org.mockito.Mock;
+import org.mockito.Mockito;
 
 import java.util.function.Supplier;
 
@@ -65,5 +69,23 @@ public class ExcepcionesTest {
         assertThrows(PaisOcupadoPorOtroJugadorException.class, () -> unJugador.colocarEjercitos(unPais, 3));
     }
 
+    @Test
+    public void jugadorNoExisteException(){
+        Jugadores jugadores = new Jugadores();
+        jugadores.agregarJugador(new Jugador("Martin", Color.RED));
+
+        assertThrows(JugadorNoExisteException.class, () -> jugadores.obtenerJugador(5));
+    }
+
+    @Test
+    public void colocarCantidadNoPermitidaDeEjercitos(){
+        Jugador jugador = Mockito.mock(Jugador.class);
+        Pais pais = new Pais("Argentina");
+        Mockito.when(jugador.cantidadPaisesDominados()).thenReturn(10);
+        Colocacion ronda = new Colocacion(jugador);
+
+        assertDoesNotThrow(() -> ronda.colocarEjercitos(pais, 5));
+        assertThrows(NoQuedanMasEjercitosPorColocarException.class, () -> ronda.colocarEjercitos(pais, 1));
+    }
 }
 

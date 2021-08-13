@@ -101,9 +101,7 @@ public class ConTurno implements Turno {
     }
 
     @Override
-    public void removeObserver(Observer obs) {
-
-    }
+    public void removeObserver(Observer obs) { this.observers.remove(obs); }
 
     @Override
     public void notifyObservers() {

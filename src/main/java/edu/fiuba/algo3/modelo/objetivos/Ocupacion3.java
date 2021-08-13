@@ -7,8 +7,7 @@ import edu.fiuba.algo3.modelo.continentes.MultitonContinentes;
 public class Ocupacion3 implements Objetivo {
     @Override
     public boolean estaCumplido(Jugador jugador) throws ContinenteInvalidoException {
-        return MultitonContinentes.obtenerInstanciaDe("Asia").dominadoPor(jugador) &&
-                MultitonContinentes.obtenerInstanciaDe("America del Sur").dominaCantidadDePaises(jugador, 2);
+        return MultitonContinentes.obtenerInstanciaDe("Asia").dominadoPor(jugador) && MultitonContinentes.obtenerInstanciaDe("America del Sur").dominaCantidadDePaises(jugador, 2);
     }
 
     @Override

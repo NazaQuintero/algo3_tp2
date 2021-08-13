@@ -10,7 +10,7 @@ public class Atacante implements Rol {
         this.cantidadEjercitos = Math.min(cantidadEjercitos, 3);
     }
 
-    public Dados tirarDados(Pais pais) {
+    public Dados tirarDados() {
         return new Dados(this.cantidadEjercitos);
     }
 

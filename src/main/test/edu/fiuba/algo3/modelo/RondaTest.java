@@ -8,12 +8,17 @@ import edu.fiuba.algo3.modelo.paises.Pais;
 import edu.fiuba.algo3.modelo.rondas.Ataque;
 import edu.fiuba.algo3.modelo.rondas.Colocacion;
 import edu.fiuba.algo3.modelo.rondas.Reagrupe;
+import edu.fiuba.algo3.modelo.rondas.RondaColocacion;
 import edu.fiuba.algo3.modelo.tarjetas.Globo;
 import edu.fiuba.algo3.modelo.tarjetas.Tarjeta;
 import edu.fiuba.algo3.modelo.turnos.ConTurno;
 import edu.fiuba.algo3.modelo.turnos.Turno;
 import javafx.scene.paint.Color;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+
+import java.util.concurrent.locks.ReadWriteLock;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -280,6 +285,58 @@ public class RondaTest {
         resultadoBatalla = jugador1.atacarA(arg, jpn, 4);
         ProcesadorResultado.obtenerInstancia().procesar(resultadoBatalla);
         assertEquals(jugador1, jpn.dominadoPor());
+    }
+
+    @Test
+    public void reagruparEnRondaDeAtaqueLanzaException(){
+        Ataque ataque = new Ataque();
+        assertThrows(NoEsRondaDeReagrupeException.class, () -> ataque.reagrupar(new Pais("Argentina"), new Pais("Brasil"), 5));
+    }
+
+    @Test
+    public void laDescripcionDeReagrupeEsCorrecta(){
+        Reagrupe reagrupe = new Reagrupe();
+        assertEquals("Ronda de reagrupe", reagrupe.obtenerDescripcion());
+    }
+
+    @Test
+    public void atacarEnRondaDeReagrupeLanzaExcepcion(){
+        Reagrupe reagrupe = new Reagrupe();
+        assertThrows(NoEsRondaDeAtaqueException.class, () -> reagrupe.atacarA(new Pais("Argentina"), new Pais("Brasil"), 5));
+    }
+
+    @Test
+    public void sePuedeReagrupar(){
+        Reagrupe reagrupe = new Reagrupe();
+        Pais pais = new Pais("Argentina");
+        Pais pais2 = new Pais("Brasil");
+        Jugador jugador = new Jugador("Martin", Color.RED);
+        Ejercito ej = new Ejercito(jugador);
+        Ejercito ej2 = new Ejercito(jugador);
+
+        pais.colocarEjercito(ej);
+        pais2.colocarEjercito(ej2);
+        pais.limitaCon(pais2);
+
+        pais.modificarCantidadEjercito(9);
+        try{ reagrupe.reagrupar(pais, pais2, 6); }
+        catch (Exception ignored) { }
+        assertEquals(4, pais.cantidadEjercitos());
+        assertEquals(7, pais2.cantidadEjercitos());
+    }
+
+    @Test
+    public void noSePuedeColocarEjercitosEnReagrupe(){
+        Reagrupe reagrupe = new Reagrupe();
+        assertThrows(NoEsRondaDeColocacionException.class, () -> reagrupe.colocarEjercitos(new Pais("Argentina"), 5));
+    }
+
+    @Test
+    public void laCantidadDeEjercitosColocablesEsCorrecta(){
+        Jugador jugador = Mockito.mock(Jugador.class);
+        Mockito.when(jugador.cantidadPaisesDominados()).thenReturn(10);
+        RondaColocacion colocacion = new Colocacion(jugador);
+        assertEquals(5, colocacion.getCantidadEjercitosColocables());
     }
 
 }
