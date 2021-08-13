@@ -137,4 +137,52 @@ public class ObjetivosTest {
         }
     }
 
+    @Test
+    public void objetivoDeDestruccionDaLaDescripcionCorrecta(){
+        Jugador j1 = new Jugador("Jugador 1", Color.RED);
+        Destruccion destruccion = new Destruccion(j1);
+        assertEquals("Destruir a Jugador 1", destruccion.obtenerDescripcion());
+    }
+
+    @Test
+    public void laDescripcionDelObjetivoGeneralEsCorrecta(){
+        General gen = new General();
+        assertEquals("Ocupar 30 países", gen.obtenerDescripcion());
+    }
+
+    @Test
+    public void laDescripcionDeOcupacion1EsCorrecta(){
+        assertEquals("Ocupar África, 5 países de América del Norte y 4 países de Europa.", new Ocupacion1().obtenerDescripcion());
+    }
+    @Test
+    public void laDescripcionDeOcupacion2EsCorrecta(){
+        assertEquals("Ocupar América del Sur, 7 países de Europa y 3 países limítrofes entre sí en cualquier lugar del mapa.", new Ocupacion2().obtenerDescripcion());
+    }
+    @Test
+    public void laDescripcionDeOcupacion3EsCorrecta(){
+        assertEquals("Ocupar Asia y 2 países de América del Sur.", new Ocupacion3().obtenerDescripcion());
+    }
+    @Test
+    public void laDescripcionDeOcupacion4EsCorrecta(){
+        assertEquals("Ocupar Europa, 4 países de Asia y 2 países de América de Sur.", new Ocupacion4().obtenerDescripcion());
+    }
+    @Test
+    public void laDescripcionDeOcupacion5EsCorrecta(){
+        assertEquals("Ocupar América del Norte, 2 países de Oceanía y 4 de Asia.", new Ocupacion5().obtenerDescripcion());
+    }
+    @Test
+    public void laDescripcionDeOcupacion6EsCorrecta(){
+        assertEquals("Ocupar 2 países de Oceanía, 2 países de África, 2 países de América del Sur, 3 países de Europa, 4 de América del Norte y 3 de Asia.", new Ocupacion6().obtenerDescripcion());
+    }
+
+    @Test
+    public void laDescripcionDeOcupacion7EsCorrecta(){
+        assertEquals("Ocupar Oceanía, América del Norte y 2 países de Europa.", new Ocupacion7().obtenerDescripcion());
+    }
+
+    @Test
+    public void laDescripcionDeOcupacion8EsCorrecta(){
+        assertEquals("Ocupar América del Sur, África y 5 países de América del Norte.", new Ocupacion8().obtenerDescripcion());
+    }
+
 }

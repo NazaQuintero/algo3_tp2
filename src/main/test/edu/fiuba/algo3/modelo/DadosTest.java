@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.modelo;
 
+import edu.fiuba.algo3.modelo.batallas_de_dados.Dado;
 import edu.fiuba.algo3.modelo.batallas_de_dados.DadoPersonalizado;
 import edu.fiuba.algo3.modelo.batallas_de_dados.DadoRandom;
 import edu.fiuba.algo3.modelo.batallas_de_dados.Dados;
@@ -63,6 +64,27 @@ public class DadosTest {
         assertEquals(4, dados.obtenerDado(0).obtenerValor());
         assertEquals(2, dados.obtenerDado(1).obtenerValor());
         assertEquals(1, dados.obtenerDado(2).obtenerValor());
+    }
+    @Test
+    public void losDadosSeIteranEnOrden(){
+        Dados dados = new Dados(5);
+
+        boolean iteracionEnOrden = true;
+        int valor = 10;
+        for(Dado dado : dados){
+            if (dado.obtenerValor() > valor) iteracionEnOrden = false;
+            valor = dado.obtenerValor();
+        }
+        assertTrue(iteracionEnOrden);
+    }
+
+    @Test
+    public void seIteranTodosLosDados(){
+        int cantidad = 3;
+        int i = 0;
+        Dados dados = new Dados(cantidad);
+        for (Dado _dado : dados){ i++; }
+        assertEquals(cantidad, i);
     }
 
 

@@ -1,10 +1,15 @@
 package edu.fiuba.algo3.modelo;
 
 import edu.fiuba.algo3.modelo.batallas_de_dados.*;
+import edu.fiuba.algo3.modelo.excepciones.ArchivoDeContinentesYPaisesNoEncontradoException;
 import edu.fiuba.algo3.modelo.fichas.Ejercito;
+import edu.fiuba.algo3.modelo.observables.Observer;
+import edu.fiuba.algo3.modelo.paises.MultitonPaises;
 import edu.fiuba.algo3.modelo.paises.Pais;
 import javafx.scene.paint.Color;
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -61,19 +66,6 @@ public class PaisTest {
         assertEquals(4, unPais.cantidadEjercitos());
     }
 
-    /*@Test
-    public void noSePuedeColocarEjercitoEnUnPaisQueEstaDominadoPorOtroJugador() throws PaisOcupadoPorOtroJugadorException {
-
-        Jugador unJugador = new Jugador();
-        Jugador otroJugador = new Jugador();
-        Pais unPais = new Pais("Argentina");
-        unPais.colocarEjercito(new Ejercito(1, unJugador));
-
-
-        assertThrows(PaisOcupadoPorOtroJugadorException.class, () -> unPais.colocarEjercito(3, otroJugador));
-    }
-    */
-
 
     @Test
     public void dosPaisesPorDefectoNoSonLimitrofes() {
@@ -87,24 +79,6 @@ public class PaisTest {
         assertTrue(unPais.esLimitrofeCon(otroPais));
 
     }
-
-    /*@Test
-    public void ataqueEntrePaisesGanaDefensor() throws PaisOcupadoPorOtroJugadorException {
-
-        Pais paisAtacante = new Pais("Argentina");
-        paisAtacante.colocarEjercito(new Ejercito(new Jugador(), 3));
-
-        Pais paisDefensor = new Pais("Brasil");
-        paisDefensor.colocarEjercito(new Ejercito(new Jugador(), 3));
-
-        //ArrayList<Integer> dadosAtacante = new ArrayList<>(Arrays.asList(2, 2, 2));
-
-        paisAtacante.atacarA(paisDefensor, new Dados(2,2,2));
-
-        assertEquals(0, paisAtacante.cantidadEjercitos());
-
-    }*/
-
 
     @Test
     public void ataqueEntrePaisesGanaAtacanteYColocaUnEjercitoEnElPaisDerrotado() throws Exception {
@@ -177,5 +151,88 @@ public class PaisTest {
 
         assertEquals(3, paisDefensor.cantidadEjercitos());
         assertEquals(1, paisAtacante.cantidadEjercitos());
+    }
+
+    @Test
+    public void reagrupeEntrePaises() {
+        Ejercito e1 = new Ejercito(new Jugador("Martin", Color.RED));
+        Ejercito e2 = new Ejercito(new Jugador("Martin", Color.BLUE));
+        Pais pais1 = new Pais("Argentina");
+        Pais pais2 = new Pais("Brasil");
+
+        pais1.colocarEjercito(e1);
+        pais2.colocarEjercito(e2);
+        pais1.modificarCantidadEjercito(9);
+
+        pais1.limitaCon(pais2);
+
+        // pais1 va a quedar con 6 y pais2 con 5
+        try {
+            pais1.reagrupar(pais2, 4);
+        } catch (Exception ignored) {
+        }
+
+        assertEquals(6, pais1.cantidadEjercitos());
+        assertEquals(5, pais2.cantidadEjercitos());
+    }
+
+    @Test
+    public void getLimitrofesFunciona(){
+        Pais pais = new Pais("Argentina");
+        Pais bra = new Pais("Brasil");
+        Pais uru = new Pais("Uruguay");
+
+        pais.limitaCon(bra);
+        pais.limitaCon(uru);
+        ArrayList<Pais> limitrofes = pais.getPaisesLimitrofes();
+        assertEquals(bra, limitrofes.get(0));
+        assertEquals(uru, limitrofes.get(1));
+    }
+
+    @Test
+    public void andanLosObserver(){
+        Pais pais = new Pais("Argentina");
+
+        class ObsPersonalizado implements Observer {
+            private int cantidad = 1;
+
+            @Override
+            public void update() {
+                cantidad += 1;
+            }
+        }
+
+        ObsPersonalizado obs = new ObsPersonalizado();
+
+        pais.addObserver(obs);
+        assertEquals(1, obs.cantidad);
+        pais.notifyObservers();
+        assertEquals(2, obs.cantidad);
+        pais.removeObserver(obs);
+        pais.notifyObservers();
+        assertEquals(2, obs.cantidad);
+
+    }
+
+    @Test
+    public void getEjercitoDevuelveElEjercito(){
+        Ejercito ej = new Ejercito(new Jugador("Martin", Color.RED));
+        Pais pais = new Pais("Argentina");
+        pais.colocarEjercito(ej);
+        assertEquals(ej, pais.getEjercito());
+    }
+
+    @Test
+    public void getPosX(){
+        try{ CargarJuego.cargarContinentesYPaises(); }
+        catch (ArchivoDeContinentesYPaisesNoEncontradoException ignored){ }
+        assertEquals(320, MultitonPaises.obtenerInstanciaDe("Argentina").getPosX());
+    }
+
+    @Test
+    public void getPosY(){
+        try{ CargarJuego.cargarContinentesYPaises(); }
+        catch (ArchivoDeContinentesYPaisesNoEncontradoException ignored){ }
+        assertEquals(510, MultitonPaises.obtenerInstanciaDe("Argentina").getPosY());
     }
 }

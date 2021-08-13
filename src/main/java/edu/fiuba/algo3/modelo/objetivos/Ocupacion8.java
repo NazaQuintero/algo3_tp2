@@ -8,9 +8,7 @@ public class Ocupacion8 implements Objetivo {
     @Override
     public boolean estaCumplido(Jugador jugador) throws ContinenteInvalidoException {
 
-        return MultitonContinentes.obtenerInstanciaDe("America del Sur").dominadoPor(jugador) &&
-                MultitonContinentes.obtenerInstanciaDe("Africa").dominadoPor(jugador) &&
-                MultitonContinentes.obtenerInstanciaDe("America del Norte").dominaCantidadDePaises(jugador, 5);
+        return MultitonContinentes.obtenerInstanciaDe("America del Sur").dominadoPor(jugador) && MultitonContinentes.obtenerInstanciaDe("Africa").dominadoPor(jugador) && MultitonContinentes.obtenerInstanciaDe("America del Norte").dominaCantidadDePaises(jugador, 5);
     }
 
     @Override

@@ -20,9 +20,9 @@ public class Pais implements Subject {
     @Expose
     private final String nombre;
     @Expose
-    private int posX;
+    private int posX = 0;
     @Expose
-    private int posY;
+    private int posY = 0;
 
     private final ArrayList<Observer> observers = new ArrayList<>();
 
@@ -81,7 +81,7 @@ public class Pais implements Subject {
     }
 
     public Dados tirarDados() {
-        return this.ejercito.tirarDados(this);
+        return this.ejercito.tirarDados();
     }
 
 

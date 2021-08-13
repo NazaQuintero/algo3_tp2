@@ -14,7 +14,7 @@ public interface Fichas extends Subject {
 
     void modificarCantidad(int unaCantidad);
 
-    Dados tirarDados(Pais pais);
+    Dados tirarDados();
 
     void asignarRol(Rol unRol);
 
