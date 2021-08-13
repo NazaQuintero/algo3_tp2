@@ -1,0 +1,17 @@
+@startuml
+
+allowmixing
+
+package canjes {
+    abstract class Canje
+    interface TipoCanje
+    class CanjeHabilitado
+    class SinCanje
+    class CanjeNulo
+    class PrimerCanje
+    class SegundoCanje
+    class TercerCanje
+    class NesimoCanje
+}
+
+@enduml
