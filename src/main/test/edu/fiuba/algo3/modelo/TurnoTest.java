@@ -2,6 +2,7 @@ package edu.fiuba.algo3.modelo;
 
 import edu.fiuba.algo3.modelo.excepciones.ElJugadorNoTieneTurnoException;
 import edu.fiuba.algo3.modelo.excepciones.JugadorNoExisteException;
+import edu.fiuba.algo3.modelo.observables.Observer;
 import edu.fiuba.algo3.modelo.rondas.Ataque;
 import edu.fiuba.algo3.modelo.rondas.Ronda;
 import edu.fiuba.algo3.modelo.turnos.ConTurno;
@@ -228,4 +229,35 @@ public class TurnoTest {
         assertEquals("Ronda de colocación secundaria", unaRonda.obtenerDescripcion());
     }
 
+    @Test
+    public void andanLosObservers() {
+        Jugadores jugadores = new Jugadores();
+        jugadores.agregarJugador(new Jugador("Martin", Color.RED));
+        jugadores.agregarJugador(new Jugador("Naza", Color.BLUE));
+        jugadores.agregarJugador(new Jugador("Juani", Color.YELLOW));
+        jugadores.agregarJugador(new Jugador("Cami", Color.LIGHTCYAN));
+        jugadores.agregarJugador(new Jugador("Fran", Color.GREEN));
+
+        ConTurno turno = new ConTurno(jugadores);
+
+        class ObsPersonalizado implements Observer {
+            private int cantidad = 1;
+
+            @Override
+            public void update() {
+                cantidad += 1;
+            }
+        }
+
+        ObsPersonalizado obs = new ObsPersonalizado();
+
+        turno.addObserver(obs);
+
+        assertEquals(1, obs.cantidad);
+        turno.notifyObservers();
+        assertEquals(2, obs.cantidad);
+        turno.removeObserver(obs);
+        turno.notifyObservers();
+        assertEquals(2, obs.cantidad);
+    }
 }

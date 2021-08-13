@@ -4,10 +4,13 @@ import edu.fiuba.algo3.modelo.continentes.Continente;
 import edu.fiuba.algo3.modelo.excepciones.ArchivoDeContinentesYPaisesNoEncontradoException;
 import edu.fiuba.algo3.modelo.excepciones.ContinenteInvalidoException;
 import edu.fiuba.algo3.modelo.continentes.MultitonContinentes;
+import edu.fiuba.algo3.modelo.observables.Observer;
+import edu.fiuba.algo3.modelo.paises.Pais;
+import edu.fiuba.algo3.modelo.tarjetas.MultitonTarjetas;
+import edu.fiuba.algo3.modelo.tarjetas.Tarjeta;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class MultitonTest {
 
@@ -41,4 +44,13 @@ public class MultitonTest {
 
         assertEquals("Oceania",continente1.getNombre());
     }
+
+    @Test
+    public void elMultitonDeTarjetasDevuelveUnaAleatoriaSiempre(){
+        try { CargarJuego.cargarTarjetas(); }
+        catch (Exception ignored) {}
+        assertNotNull(MultitonTarjetas.obtenerTarjetaAleatoria());
+    }
+
+
 }

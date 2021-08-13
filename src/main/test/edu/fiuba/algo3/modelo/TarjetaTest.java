@@ -1,14 +1,12 @@
 package edu.fiuba.algo3.modelo;
 
+import edu.fiuba.algo3.modelo.canjes.CanjeHabilitado;
 import edu.fiuba.algo3.modelo.excepciones.LaTarjetaYaFueActivadaException;
 import edu.fiuba.algo3.modelo.paises.Pais;
-import edu.fiuba.algo3.modelo.tarjetas.Globo;
-import edu.fiuba.algo3.modelo.tarjetas.Barco;
-import edu.fiuba.algo3.modelo.tarjetas.Tarjeta;
+import edu.fiuba.algo3.modelo.tarjetas.*;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class TarjetaTest {
 
@@ -38,6 +36,36 @@ public class TarjetaTest {
         Tarjeta otraTarjeta = new Tarjeta(otroPais, new Barco());
 
         assertFalse(unaTarjeta.coincideSimboloCon(otraTarjeta));
+    }
+
+    @Test
+    public void elComodinTieneDescripcionCorrecta(){
+        Comodin comodin = new Comodin();
+        assertEquals("Comodin", comodin.obtenerDescripcion());
+    }
+
+    @Test
+    public void tarjetaActivadaEstaActivada(){
+        TarjetaActivada tarjetaActivada = new TarjetaActivada();
+        assertTrue(tarjetaActivada.estaActivada());
+    }
+
+    @Test
+    public void compararSimbolosConUnComodinEsCanjeHabilitado(){
+        Tarjeta tarjeta = new Tarjeta(new Pais("Argentina"), new Globo());
+        Tarjeta tarjeta2 = new Tarjeta(new Pais("Israel"), new Comodin());
+        Tarjeta tarjeta3 = new Tarjeta(new Pais("Francia"), new Canion());
+
+        assertTrue(tarjeta.compararSimbolos(tarjeta2, tarjeta3) instanceof CanjeHabilitado);
+    }
+
+    @Test
+    public void compararTresSimbolosDistintosSinComodinHabilitaElCanje(){
+        Tarjeta tarjeta = new Tarjeta(new Pais("Argentina"), new Globo());
+        Tarjeta tarjeta2 = new Tarjeta(new Pais("Israel"), new Barco());
+        Tarjeta tarjeta3 = new Tarjeta(new Pais("Francia"), new Canion());
+
+        assertTrue(tarjeta.compararSimbolos(tarjeta2, tarjeta3) instanceof CanjeHabilitado);
     }
 
 }
