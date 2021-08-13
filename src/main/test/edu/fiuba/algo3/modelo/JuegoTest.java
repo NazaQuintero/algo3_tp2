@@ -9,11 +9,12 @@ import edu.fiuba.algo3.modelo.tarjetas.Tarjeta;
 import edu.fiuba.algo3.modelo.tarjetas.Globo;
 import javafx.scene.paint.Color;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+import org.mockito.Mockito;
 
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class JuegoTest {
 
@@ -82,6 +83,20 @@ public class JuegoTest {
         jugadorQueLeToca.canjearTarjetas(paisesTarjetas);
 
         assertEquals(4, jugadorQueLeToca.getCanjeActual().cantidadEjercitos());
+    }
+
+    @Test
+    public void terminadoSiJugadorCumpleObjetivo(){
+        Jugador jugador = Mockito.mock(Jugador.class);
+        Mockito.when(jugador.cumpleObjetivo()).thenReturn(true);
+        Juego juego = null;
+
+        try{ juego = new Juego(); }
+        catch (Exception ignored) {}
+
+        assert juego != null;
+        juego.agregarJugador(jugador);
+        assertTrue(juego.estaTerminado());
     }
 
 }

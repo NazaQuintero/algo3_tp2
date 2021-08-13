@@ -3,14 +3,16 @@ package edu.fiuba.algo3.modelo;
 import edu.fiuba.algo3.modelo.excepciones.ElJugadorNoTieneTurnoException;
 import edu.fiuba.algo3.modelo.excepciones.JugadorNoExisteException;
 import edu.fiuba.algo3.modelo.observables.Observer;
+import edu.fiuba.algo3.modelo.paises.Pais;
 import edu.fiuba.algo3.modelo.rondas.Ataque;
 import edu.fiuba.algo3.modelo.rondas.Ronda;
 import edu.fiuba.algo3.modelo.turnos.ConTurno;
+import edu.fiuba.algo3.modelo.turnos.SinTurno;
 import edu.fiuba.algo3.modelo.turnos.Turno;
 import javafx.scene.paint.Color;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 public class TurnoTest {
@@ -259,5 +261,50 @@ public class TurnoTest {
         turno.removeObserver(obs);
         turno.notifyObservers();
         assertEquals(2, obs.cantidad);
+    }
+
+    @Test
+    public void sinTurnoTieneCeroTurnosPorRonda(){
+        SinTurno turno = new SinTurno();
+        assertEquals(0, turno.obtenerCantidadDeTurnosPorRonda());
+    }
+
+    @Test
+    public void sinTurnoObtenerJugadorEsNull(){
+        SinTurno turno = new SinTurno();
+        assertNull(turno.obtenerJugadorTurnoActual());
+    }
+
+    @Test
+    public void sinTurnoObtenerRondasJugadasEsCero(){
+        SinTurno turno = new SinTurno();
+        assertEquals(0, turno.obtenerCantidadDeRondasJugadas());
+    }
+
+    @Test
+    public void sinTurnoObteneTurnosJugadosEsCero(){
+        SinTurno turno = new SinTurno();
+        assertEquals(0, turno.getCantidadDeTurnosJugados());
+    }
+
+    @Test
+    public void sinTurnoObtenerRondaEsNull(){
+        SinTurno turno = new SinTurno();
+        assertNull(turno.obtenerRondaActual());
+    }
+
+    @Test
+    public void sinTurnoLeTocaAlPrimerJugadorEsFalse(){
+        SinTurno turno = new SinTurno();
+        assertFalse(turno.leTocaALPrimerJugador());
+    }
+
+    @Test
+    public void sinTurnoLanzaElJugadorNoTieneTurnoExceptionConCualquierAccion(){
+        SinTurno turno = new SinTurno();
+        assertThrows(ElJugadorNoTieneTurnoException.class, () -> turno.reagrupar(null, null, 5));
+        assertThrows(ElJugadorNoTieneTurnoException.class, () -> turno.atacarA(null, null, 5));
+        assertThrows(ElJugadorNoTieneTurnoException.class, () -> turno.colocarEjercitos(null, 5));
+        assertThrows(ElJugadorNoTieneTurnoException.class, () -> turno.activarTarjeta(null));
     }
 }

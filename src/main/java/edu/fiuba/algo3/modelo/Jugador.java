@@ -116,12 +116,8 @@ public class Jugador {
 
     public boolean cumpleObjetivo() {
         return this.objetivos.stream().anyMatch(objetivo -> {
-            try {
-                return objetivo.estaCumplido(this);
-            } catch (ContinenteInvalidoException e) {
-                e.printStackTrace();
-            }
-            return false;
+            try { return objetivo.estaCumplido(this); }
+            catch (ContinenteInvalidoException ignored) { return false; }
         });
     }
 
