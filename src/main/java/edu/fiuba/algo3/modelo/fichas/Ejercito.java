@@ -43,9 +43,9 @@ public class Ejercito implements Fichas {
     }
 
     @Override
-    public Dados tirarDados(Pais pais) {
+    public Dados tirarDados() {
         if (dados != null) return dados;
-        dados = this.rol.tirarDados(pais);
+        dados = this.rol.tirarDados();
         return dados;
     }
 

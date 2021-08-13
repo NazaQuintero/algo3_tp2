@@ -34,4 +34,17 @@ public class DadoTest {
         assertTrue(dado1.esMayorQue(dado2));
         assertFalse(dado1.esMayorQue(dado3));
     }
+
+    @Test
+    public void esMayorQueFuncionaCorrectamente(){
+        DadoRandom dado = new DadoRandom();
+        DadoPersonalizado dadoPersonalizado = new DadoPersonalizado(10);
+
+        // Como DadoRandom va entre 1 y 6 siempre va a ser menor a un dado con valor 10
+        assertFalse(dado.esMayorQue(dadoPersonalizado));
+
+        dadoPersonalizado = new DadoPersonalizado(0);
+        // Como DadoRandom va entre 1 y 6 siempre va a ser mayor a un dado con valor 0
+        assertTrue(dado.esMayorQue(dadoPersonalizado));
+    }
 }

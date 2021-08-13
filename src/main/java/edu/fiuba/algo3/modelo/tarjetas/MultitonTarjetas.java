@@ -6,10 +6,9 @@ import edu.fiuba.algo3.modelo.paises.Pais;
 
 import java.util.*;
 
-public class MultitonTarjetas implements Subject {
+public class MultitonTarjetas {
 
     private static final HashMap<Pais, Tarjeta> tarjetas = new HashMap<>();
-    private final ArrayList<Observer> observers = new ArrayList<>();
 
     private MultitonTarjetas() {}
 
@@ -26,20 +25,4 @@ public class MultitonTarjetas implements Subject {
         Collections.shuffle(_tarjetas);
         return tarjetas.remove(_tarjetas.get(0).getPais());
     }
-
-    @Override
-    public void addObserver(Observer obs) {
-        this.observers.add(obs);
-    }
-
-    @Override
-    public void removeObserver(Observer obs) {
-        this.observers.remove(obs);
-    }
-
-    @Override
-    public void notifyObservers() {
-        for (Observer obs: observers) obs.update();
-    }
-
 }

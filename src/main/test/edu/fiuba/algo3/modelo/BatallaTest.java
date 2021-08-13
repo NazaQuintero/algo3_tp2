@@ -7,6 +7,7 @@ import javafx.scene.paint.Color;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 public class BatallaTest {
 
@@ -112,6 +113,12 @@ public class BatallaTest {
         assertEquals(1, paisAtacante.cantidadEjercitos());
         assertEquals(jDefensor, paisDefensor.dominadoPor());
         assertEquals(jAtacante, paisAtacante.dominadoPor());
+    }
+
+    @Test
+    public void resultadoBatallaNuloDevuelveNull(){
+        ResultadoBatallaNulo nulo = new ResultadoBatallaNulo();
+        assertNull(nulo.obtenerResultados());
     }
 
 }

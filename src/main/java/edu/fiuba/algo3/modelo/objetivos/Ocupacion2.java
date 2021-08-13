@@ -9,9 +9,7 @@ public class Ocupacion2 implements Objetivo {
     @Override
     public boolean estaCumplido(Jugador jugador) throws ContinenteInvalidoException {
         // falta chequear limitrofes
-        return MultitonContinentes.obtenerInstanciaDe("America del Sur").dominadoPor(jugador) &&
-                MultitonContinentes.obtenerInstanciaDe("Europa").dominaCantidadDePaises(jugador, 7) &&
-                jugador.poseeLimitrofes(3);
+        return MultitonContinentes.obtenerInstanciaDe("America del Sur").dominadoPor(jugador) && MultitonContinentes.obtenerInstanciaDe("Europa").dominaCantidadDePaises(jugador, 7) && jugador.poseeLimitrofes(3);
     }
 
     @Override

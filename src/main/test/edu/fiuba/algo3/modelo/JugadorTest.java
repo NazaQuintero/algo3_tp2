@@ -1,13 +1,20 @@
 package edu.fiuba.algo3.modelo;
 
 import edu.fiuba.algo3.modelo.excepciones.*;
+import edu.fiuba.algo3.modelo.fichas.Ejercito;
+import edu.fiuba.algo3.modelo.objetivos.General;
+import edu.fiuba.algo3.modelo.objetivos.Objetivo;
+import edu.fiuba.algo3.modelo.objetivos.Ocupacion1;
 import edu.fiuba.algo3.modelo.paises.Pais;
 import edu.fiuba.algo3.modelo.rondas.Colocacion;
+import edu.fiuba.algo3.modelo.rondas.Reagrupe;
 import edu.fiuba.algo3.modelo.tarjetas.*;
 import edu.fiuba.algo3.modelo.turnos.ConTurno;
 import edu.fiuba.algo3.modelo.turnos.Turno;
 import javafx.scene.paint.Color;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+import org.mockito.Mockito;
 
 import java.util.ArrayList;
 
@@ -25,16 +32,6 @@ public class JugadorTest {
         assertEquals(jugador.getColor(), Color.PINK);
 
     }
-
-    /*
-    @Test
-    public void porDefectoUnJugadorNoTieneColorAsignado() {
-
-        Jugador jugador = new Jugador( "Cami", Color.RED);
-
-        assertEquals(jugador.color(), "");
-    }
-    */
 
     @Test
     public void porDefectoUnJugadorNoTienePaises() {
@@ -207,6 +204,89 @@ public class JugadorTest {
 
         assertThrows(SinCanjeHabilitadoException.class, () -> unJugador.canjearTarjetas(tarjetasElegidas1Canje));
 
+    }
+
+    @Test
+    public void terminaElTurnoSiNoPuedeAtacar(){
+        Jugador jugador = new Jugador("Martin", Color.RED);
+        Jugadores jugadores = new Jugadores();
+        jugadores.agregarJugador(jugador);
+        jugadores.agregarJugador(new Jugador("Cami", Color.LIGHTCYAN));
+
+        ConTurno turno = new ConTurno(jugadores);
+        turno.setRonda(new Reagrupe());
+
+        jugador.setTurno(turno);
+
+        try { jugador.atacarA(null, null, 5); }
+        catch (Exception ignored) {}
+
+        assertThrows(ElJugadorNoTieneTurnoException.class, () -> jugador.reagrupar(null, null, 5));
+
+    }
+
+    @Test
+    public void objetivoCumplidoException(){
+        Jugador jugador = new Jugador("Martin", Color.RED);
+        Ocupacion1 ocup = Mockito.mock(Ocupacion1.class);
+        try{ Mockito.when(ocup.estaCumplido(jugador)).thenThrow(new ContinenteInvalidoException()); }
+        catch (Exception ignored) { }
+        jugador.asignarObjetivo(ocup);
+
+        assertFalse(jugador.cumpleObjetivo());
+    }
+
+    @Test
+    public void jugadorPoseeNLimitrofes(){
+        Pais arg = new Pais("Argentina");
+        Pais bra = new Pais("Brasil");
+        Pais chl = new Pais("Chile");
+
+        arg.limitaCon(bra);
+        arg.limitaCon(chl);
+        bra.limitaCon(arg);
+        bra.limitaCon(chl);
+        chl.limitaCon(bra);
+        chl.limitaCon(arg);
+
+        Jugador jugador = new Jugador("Martin", Color.RED);
+        Ejercito ej = new Ejercito(jugador);
+        arg.colocarEjercito(ej);
+        bra.colocarEjercito(ej);
+        chl.colocarEjercito(ej);
+
+        jugador.agregarPais(arg);
+        jugador.agregarPais(bra);
+        jugador.agregarPais(chl);
+
+        assertTrue(jugador.poseeLimitrofes(1));
+        assertTrue(jugador.poseeLimitrofes(2));
+        assertTrue(jugador.poseeLimitrofes(3));
+    }
+
+    @Test
+    public void getObjetivosDaLosObjetivos(){
+        Jugador jugador = new Jugador("Martin", Color.RED);
+        Ocupacion1 ocup = new Ocupacion1();
+        jugador.asignarObjetivo(ocup);
+
+        ArrayList<Objetivo> objetivos = jugador.obtenerObjetivos();
+        assertTrue(objetivos.get(0) instanceof General);
+        assertEquals(ocup, objetivos.get(1));
+    }
+
+    @Test
+    public void getTarjetasDaLasTarjetas(){
+        Jugador jugador = new Jugador("Martin", Color.RED);
+        Tarjeta tarjeta = new Tarjeta(new Pais("Argentina"), new Comodin());
+        Tarjeta tarjeta2 = new Tarjeta(new Pais("Brasil"), new Globo());
+
+        jugador.recibirTarjeta(tarjeta);
+        jugador.recibirTarjeta(tarjeta2);
+        ArrayList<Tarjeta> tarjetas = jugador.getTarjetas();
+
+        assertEquals(tarjeta, tarjetas.get(0));
+        assertEquals(tarjeta2, tarjetas.get(1));
     }
 
 
