@@ -23,8 +23,7 @@ public class RepartidorDePaises {
                 Jugador jugador = jugadores.obtenerJugador(i % cantidadJugadores);
                 jugador.colocarEjercitos(paises.get(i), 1);
             }
-        } catch (ElJugadorNoTieneTurnoException | NoEsRondaDeColocacionException | JugadorNoExisteException |
-                PaisOcupadoPorOtroJugadorException | NoQuedanMasEjercitosPorColocarException ignored) {}
+        } catch (Exception ignored) {}
     }
 
 }
